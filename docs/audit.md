@@ -227,10 +227,12 @@ The repository uses two implementations:
 - SymPy independently expands the determinant and evaluates the points using
   exact rationals.
 
-The SymPy tests also check two hostile fixtures:
+The SymPy tests also check three hostile fixtures:
 
 - replacing the coefficient `4` by `5` makes the determinant nonconstant; and
-- replacing the last point's `13/2` by `15/2` breaks the common fiber.
+- replacing the last point's `13/2` by `15/2` breaks the common fiber; and
+- duplicating one valid point is rejected as a three-distinct-preimage
+  certificate even though all listed images still equal the target.
 
 These tests are not extra mathematical evidence once the Lean theorem is
 trusted. Their role is engineering assurance that the transcription and the

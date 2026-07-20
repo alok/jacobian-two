@@ -36,6 +36,7 @@ Status: complete.
 - Added a positive determinant-and-fiber test.
 - Added a coefficient perturbation that destroys the constant determinant.
 - Added a point perturbation that destroys the common fiber.
+- Added a duplicate-input fixture that rejects a vacuous three-point claim.
 - Checked the Python under strict mypy settings.
 
 ## 2026-07-20: structural factorization
