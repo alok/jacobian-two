@@ -14,9 +14,9 @@ import Mathlib.Tactic.Ring
 # The announced three-dimensional counterexample
 
 This file transcribes the polynomial map announced by Levent Alpöge on
-2026-07-20 and proves the two finite certificates that matter: its formal
-Jacobian determinant is the nonzero constant `-2`, and three distinct points
-of `ℂ³` have the same image.
+2026-07-20 UTC (2026-07-19 Pacific) and proves the two finite certificates that
+matter: its formal Jacobian determinant is the nonzero constant `-2`, and three
+distinct points of `ℂ³` have the same image.
 
 The coordinate polynomials are defined over `ℤ`, exactly as announced. They are
 then evaluated in an arbitrary commutative ring through `Int.castRingHom`.

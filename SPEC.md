@@ -6,8 +6,8 @@ Build a public, Lean-first research repository that does two things without
 conflating them:
 
 1. independently certify the polynomial map announced by Levent Alpöge on
-   2026-07-20 as a counterexample to the complex Jacobian conjecture in
-   dimension three; and
+   2026-07-20 UTC (2026-07-19 Pacific) as a counterexample to the complex
+   Jacobian conjecture in dimension three; and
 2. use the structure of that example to pursue a concrete obstruction theorem
    for the still-separate two-dimensional case.
 
