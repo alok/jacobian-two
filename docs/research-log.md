@@ -41,7 +41,7 @@ Status: complete.
 
 ## 2026-07-20: structural factorization
 
-Status: exact derivation recorded; not yet formalized in Lean.
+Status: algebraic core Lean-certified.
 
 - Introduced `u=1+xy`, `H=u^2 z+y^2(4+3xy)`, and `s=x/u`.
 - Reduced fibers on the `u != 0` chart to
@@ -50,9 +50,49 @@ Status: exact derivation recorded; not yet formalized in Lean.
   `Phi'(s)=2*(1-b*s+3*a*s^2)`.
 - Factored the displayed fiber as `-s*(s-2)*(s+2)/2`.
 - Exhibited the escaping curve `(s,-1/s,5/s^2)`, whose image is `(0,2/s,0)`.
+- Added the reciprocal `T=1/s` cubic, derivative, reconstruction, and
+  large-`T` cancellation identities to `JacobianTwo/CubicFiber.lean`.
 
 The chart restriction matters. These formulas illuminate the example but do
 not replace the global polynomial determinant proof.
+
+## 2026-07-20: Galois misconception and first open sheet degree
+
+Status: source-audited.
+
+- Checked the classical Galois-case theorem against Campbell, Razar, and
+  Bass–Connell–Wright.
+- Isolated the missing hypothesis: a Keller extension is finite separable but
+  need not be normal.
+- Kept generic fiber degree separate from ordinary coordinate degree.
+- Located the accepted low-sheet boundary: Orevkov excludes degree three and
+  Żołądek excludes through degree five, so degree six is the first unresolved
+  generic fiber degree.
+- Rejected the withdrawn/corrected Bartenwerfer plane proof as a dependency.
+- Treated a 2024 prime-degree preprint as unconfirmed rather than silently
+  promoting it to an accepted theorem.
+
+## 2026-07-20: complete fibers, image, and nonproper set
+
+Status: exact algebra machine-checked; projective/topological proof derived.
+
+- Proved that the standard universal cubic discriminant coefficient
+  expression is `-4Q` and added an explicit integral-coefficient Bézout
+  certificate.
+- Proved finite simple-root reconstruction and all cancellations needed at
+  the projective root at infinity.
+- Identified the singular/triple-root curve
+  `Gamma={3*b*c=4, b^2=12*a}`.
+- Derived fiber counts `3/1/0` on the three target strata and the exact image
+  `C^3 \ Gamma`.
+- Constructed an exact escaping family through every point of `V(Q)`.
+- Proved conversely, by projective-root compactness and reconstruction, that
+  targets outside `V(Q)` are not asymptotic values.
+- Concluded `S_F=V(Q)`.
+
+The full fiber/nonproper theorem is labeled “derived here; historical priority
+not established.” Same-day comparison sources already contain the cubic,
+reconstruction, discriminant, and generic `S_3` computation.
 
 ## 2026-07-20: first plane obstruction
 
@@ -68,8 +108,33 @@ A nonzero constant determinant makes `A` and `C` coprime and gives them a
 vanishing Wronskian. Lean proves `A'=C'=0`; in characteristic zero both slopes
 are constant. A second Lean theorem combines the outputs to recover `x` and
 then `y`, proving that the whole map is injective. This is a meaningful
-noncollision result toward `JC(2)`, but it is far from the full conjecture and
-does not yet package an explicit polynomial inverse.
+noncollision result toward `JC(2)`, but it is far from the full conjecture.
+The later quadratic-in-one-variable module contains this affine class and
+packages it inside an explicit two-sided-inverse theorem.
+
+## 2026-07-20: quadratic-in-one-variable plane fragment
+
+Status: Lean-certified formalization of a known positive class.
+
+For maps
+
+```text
+(x,y) |-> (a(x)*y^2+b(x)*y+c(x), e(x)*y+f(x)),
+```
+
+the three constant-Jacobian coefficient equations force a triangular normal
+form.  On `e != 0`, writing `r=eps*y+f(x)` gives
+
+```text
+F(x,y) = (lam*r^2+mu*r+alpha*x+beta, r),
+alpha*eps = k.
+```
+
+The Lean module supplies the displayed inverse and proves both inverse laws.
+The complementary `e=0` case is triangular after the equations force `a=0`,
+`b` constant nonzero, and `f` affine with nonzero slope.  The final theorem
+combines the two branches.  This narrows a known class; it does not reach the
+generic-degree-six frontier.
 
 ## Negative results and guarded boundaries
 
@@ -77,16 +142,19 @@ does not yet package an explicit polynomial inverse.
   Jacobian. There is no direct dimensional descent.
 - A low-degree brute-force search would not address the known plane frontier.
 - The three-dimensional example does not justify saying that `JC(2)` is false.
+- Finite separability does not justify calling the plane function-field
+  extension Galois; normality is a separate condition.
+- The degree-six frontier has been identified, not solved.
 - Same-day social posts are not enough to settle historical attribution, even
   though the displayed finite certificate is fully checkable.
 
 ## Next research obligations
 
-1. Prove an explicit inverse formula for the whole affine-in-one-variable
-   plane class under a nonzero constant determinant.
-2. Formalize the cubic-fiber reconstruction and its denominator/derivative
-   identity.
-3. Connect any broader plane ansatz to the known degree-pair restrictions,
+1. Relate the quadratic-in-one-variable normal form to degree-six geometry at
+   infinity without mistaking a bounded-degree theorem for the full problem.
+2. Formalize more of the projective simple-root/fiber correspondence if a
+   useful reusable algebraic-geometry interface is available in mathlib.
+3. Connect broader plane ansätze to the known degree-pair restrictions,
    especially the residual `(72,108)` and `(108,72)` cases.
 4. Keep every claim tagged as certified, derived, announced, experimental, or
    open.

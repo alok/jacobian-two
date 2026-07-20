@@ -1,28 +1,59 @@
 # Jacobian Two
 
-An exact, Lean-first audit of the newly announced three-dimensional
-counterexample to the Jacobian conjecture, followed by a deliberately separate
-attack on the still-open two-dimensional case.
+An exact, Lean-first audit of the new three-dimensional Jacobian
+counterexample, together with a deliberately honest attack on the surviving
+plane conjecture.
 
-## Verdict on the screenshot
+## Short answer: the plane case is still open
 
-**The algebra in the screenshot is true.** For
+Galois theory proves a conditional theorem: a Keller map whose induced
+function-field extension is **already Galois** is a polynomial automorphism.
+For a plane map `F=(P,Q)`, a nonzero constant Jacobian makes
+
+\[
+  k(P,Q)\subset k(x,y)
+\]
+
+finite and separable, but it does not make the extension normal.  That missing
+normality hypothesis is the gap in the tempting “Galois theory solves the
+plane” argument.
+
+Here “degree” means generic fiber size, or equivalently the degree of this
+function-field extension.  Degrees through five are excluded for a
+hypothetical plane counterexample; degree six is the first unresolved
+small-sheet case in the accepted literature.  The detailed audit and primary
+sources are in [`docs/galois-frontier.md`](docs/galois-frontier.md).
+
+The resulting dimensional boundary is now:
+
+\[
+  \mathrm{JC}(1)\text{ is true},\qquad
+  \mathrm{JC}(2)\text{ remains open},\qquad
+  \mathrm{JC}(n)\text{ is false for }n\ge 3.
+\]
+
+This repository does **not** claim to solve `JC(2)` or its degree-six frontier.
+It records exactly what was proved, what was derived, and what remains open.
+
+## The screenshot is exactly correct
+
+For
 
 \[
 \begin{aligned}
-P&=(1+xy)^3z+y^2(1+xy)(4+3xy),\\
-Q&=y+3x(1+xy)^2z+3xy^2(4+3xy),\\
-R&=2x-3x^2y-x^3z,
+A&=(1+xy)^3z+y^2(1+xy)(4+3xy),\\
+B&=y+3x(1+xy)^2z+3xy^2(4+3xy),\\
+C&=2x-3x^2y-x^3z,
 \end{aligned}
 \]
 
-the map \(F=(P,Q,R):\mathbb C^3\to\mathbb C^3\) satisfies
+the map `F=(A,B,C)` satisfies the polynomial identity
 
 \[
-\det JF=-2
+  \det JF=-2.
 \]
 
-as a polynomial identity. The three distinct points
+The three distinct rational points
 
 \[
 \left(0,0,-\tfrac14\right),\quad
@@ -30,108 +61,162 @@ as a polynomial identity. The three distinct points
 \left(-1,\tfrac32,\tfrac{13}{2}\right)
 \]
 
-all map exactly to \((-\tfrac14,0,0)\).
+all map exactly to `(-1/4,0,0)`.  This is a complete finite certificate of a
+counterexample in dimension three.  Appending identity coordinates gives the
+same conclusion in every higher dimension.
 
-This is a counterexample in **dimension three**. Appending identity coordinates
-gives counterexamples in every dimension at least three. It does **not** settle
-the plane conjecture: `JC(2)` remains open.
+[`JacobianTwo/Counterexample.lean`](JacobianTwo/Counterexample.lean) constructs
+the formal Jacobian from actual `MvPolynomial.pderiv` entries, proves its
+determinant, proves the three-point collision and pairwise distinctness, and
+derives noninjectivity over `ℂ`.  The independent typed SymPy checker
+[`scripts/verify.py`](scripts/verify.py) recomputes both identities using exact
+rational arithmetic and includes hostile transcription fixtures.
 
-The public announcement is extremely recent. Historical priority and the
-discovery narrative should therefore be treated as announced rather than as a
-settled scholarly record. The finite identities above do not depend on that
-narrative: they are independently certified in this repository.
+## A solved follow-on problem: every fiber and every escaping value
 
-## What is machine checked
-
-[`JacobianTwo/Counterexample.lean`](JacobianTwo/Counterexample.lean) represents
-the coordinates as integer-coefficient multivariate polynomials and proves:
-
-- `formalJacobian_det`: the determinant formed from actual
-  `MvPolynomial.pderiv` entries is the constant polynomial `-2`;
-- `jacobianAt_det`: after evaluation in any commutative ring, the determinant
-  is still `-2` at every point;
-- `three_distinct_preimages`: the three exact complex points are pairwise
-  distinct and have the displayed common image; and
-- `complex_not_injective`: the induced map on `ℂ³` is not injective.
-
-There are no `sorry`, `admit`, or custom axioms in these proofs. A separately
-implemented typed SymPy checker in [`scripts/verify.py`](scripts/verify.py)
-recomputes the determinant and fiber using exact rational arithmetic. Its test
-suite deliberately perturbs both a coefficient and a collision point to make
-sure transcription errors are detected.
-
-## A genuine result toward the two-dimensional case
-
-The three-dimensional example is affine in `z`, suggesting the plane ansatz
+For a target `(a,b,c)`, introduce the reciprocal fiber coordinate
 
 \[
-G(x,y)=\bigl(A(x)y+B(x),\ C(x)y+D(x)\bigr).
+  T=y+\frac1x
 \]
 
-Its Jacobian determinant is
+on `x != 0`.  It satisfies
 
 \[
-(A'C-AC')y+(B'C-AD').
+  p(T)=cT^3-2T^2+bT-2a=0,
+  \qquad
+  p'(T)=\frac2x.
 \]
 
+Define
+
+\[
+  Q(a,b,c)=27a^2c^2-18abc+16a+b^3c-b^2
+\]
+
+and
+
+\[
+  \Gamma=\{3bc=4,\ b^2=12a\}.
+\]
+
+The exact fiber calculation gives
+
+| Target stratum | Number of source points |
+|---|---:|
+| `Q != 0` | 3 |
+| `Q = 0` and target not in `Gamma` | 1 |
+| target in `Gamma` | 0 |
+
+Consequently,
+
+\[
+  F(\mathbb C^3)=\mathbb C^3\setminus\Gamma.
+\]
+
+Moreover, the complete nonproper-value set—the targets approached by images
+of source sequences escaping to infinity—is
+
+\[
+  S_F=V(Q).
+\]
+
+The proof includes both directions.  Every point of `V(Q)` has an explicit
+escaping family, while projective-root compactness plus exact reconstruction
+shows that no point outside `V(Q)` can be an asymptotic value.  See
+[`docs/nonproper-set.md`](docs/nonproper-set.md) for the complete argument.
+
+[`JacobianTwo/CubicFiber.lean`](JacobianTwo/CubicFiber.lean) certifies the
+fiber cubic, its derivative, the standard universal cubic discriminant
+coefficient expression `-4Q`, an explicit Bézout common-root certificate,
+finite-root reconstruction, and all large-`T` cancellation identities.
+[`scripts/nonproper.py`](scripts/nonproper.py)
+independently checks the remaining exact algebra: the infinity chart,
+repeated- and triple-root parameterizations, singular-locus elimination, and
+the escaping family.  The compactness argument is written explicitly in the
+mathematical note rather than being mislabeled as kernel-checked topology.
+
+These consequences are labeled **derived here; historical priority not
+established**.  Same-day sources already contained the cubic, reconstruction,
+discriminant, and generic `S_3` calculation; this repository makes no
+literature-priority claim for the fuller stratification.
+
+## Certified positive fragments in the plane
+
+Two bounded one-variable ansätze are formalized.
+
+First,
+
+\[
+  (x,y)\longmapsto(A(x)y+B(x),\ C(x)y+D(x))
+\]
+
+cannot be a noninjective Keller map.  A nonzero constant determinant forces
+the variable slopes `A` and `C` to be constant, after which a linear
+combination of the outputs recovers `x` and then `y`.
 [`JacobianTwo/AffineInOneVariable.lean`](JacobianTwo/AffineInOneVariable.lean)
-proves that, over a characteristic-zero field, a nonzero constant determinant
-forces both \(A\) and \(C\) to be constant. The proof extracts a Bezout identity
-from the constant term, obtains coprimality of \(A,C\), and combines it with
-the vanishing Wronskian. The same module then proves that the resulting plane
-map is injective. Thus the most direct affine-in-one-variable shadow of the
-three-dimensional construction cannot reproduce its noninjective mechanism.
+contains the proof.
 
-This is a narrow positive noncollision result toward `JC(2)`, not a proof of
-`JC(2)`. Packaging the reconstruction as an explicit polynomial inverse is a
-separate next step.
+Second, the larger class
 
-## Reproduce everything
+\[
+  (x,y)\longmapsto
+  (a(x)y^2+b(x)y+c(x),\ e(x)y+f(x))
+\]
 
-The Lean toolchain and mathlib revision are pinned. Python dependencies are
+is reduced by its constant-Jacobian coefficient equations to an explicit
+triangular normal form in the nonzero-`e` chart, with a displayed polynomial
+inverse.  The complementary `e=0` chart is handled separately in the final
+theorem.  See
+[`JacobianTwo/QuadraticInOneVariable.lean`](JacobianTwo/QuadraticInOneVariable.lean).
+This is a formalization and explicit reconstruction of a mathematically known
+special case, not a novelty claim and not a proof of general `JC(2)`.
+
+## Reproduce the certificates
+
+The Lean toolchain and mathlib revision are pinned.  Python dependencies are
 locked by `uv.lock`.
 
 ```bash
 lake build
 uv run --frozen python -m scripts.verify
+uv run --frozen python -m scripts.nonproper
 uv run --frozen pytest
 uv run --frozen mypy
 ```
 
-The exact checker prints:
+The Lean source contains no `sorry`, `admit`, or custom axiom.  CI runs all of
+the commands above and rejects unfinished proof declarations.
 
-```text
-det JF = -2
-F(0, 0, -1/4) = (-1/4, 0, 0)
-F(1, -3/2, 13/2) = (-1/4, 0, 0)
-F(-1, 3/2, 13/2) = (-1/4, 0, 0)
-determinant verified: True
-collision verified: True
-distinct inputs verified: True
-```
+## Reading map
 
-## Read the argument
-
-- [`docs/audit.md`](docs/audit.md) gives a hand-checkable structural
-  derivation, the cubic fiber equation, and the exact claim boundary.
-- [`docs/research-log.md`](docs/research-log.md) records completed work,
-  negative results, and the next plane target.
 - [`SPEC.md`](SPEC.md) is the research specification and claim-status ledger.
+- [`docs/galois-frontier.md`](docs/galois-frontier.md) explains the Galois
+  misconception and identifies generic degree six as the first open frontier.
+- [`docs/nonproper-set.md`](docs/nonproper-set.md) proves the complete fiber,
+  image, and nonproper-set theorem.
+- [`docs/audit.md`](docs/audit.md) gives a hand-checkable structural derivation
+  of the original screenshot.
+- [`docs/research-log.md`](docs/research-log.md) records completed work,
+  negative results, and remaining obligations.
 
 ## Sources and provenance
 
 - Levent Alpöge's [original public announcement on X][announcement]
+- L. Andrew Campbell's [Galois-case theorem][campbell]
+- S. Yu. Orevkov's [three-sheet theorem][orevkov]
+- Henryk Żołądek's [result through generic degree five][zoladek]
 - Zihan Zhang's [direct-consequences note][consequences]
-- Guccione, Guccione, Horruitiner, and Valqui's
-  [degree-bound paper for the plane problem][degree-bound]
 
-The announcement and expository note are provenance sources. The Lean proof
-and exact SymPy checker are the evidence for the two algebraic assertions made
-by the screenshot.
+The announcement and expository note establish provenance.  The finite
+claims made here are supported by the repository's reproducible Lean and exact
+symbolic certificates.
 
 [announcement]: https://x.com/__alpoge__/status/2079028340955197566
+[campbell]: https://doi.org/10.1007/BF01349234
+[orevkov]: https://doi.org/10.1070/IM1987v029n03ABEH000984
+[zoladek]: https://doi.org/10.1016/j.top.2008.04.001
 [consequences]: https://zzhang-iu.github.io/papers/direct-consequences-jacobian/index.html
-[degree-bound]: https://arxiv.org/abs/2204.14178
 
 ## License
 

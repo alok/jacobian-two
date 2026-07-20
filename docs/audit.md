@@ -204,21 +204,49 @@ derivative into constant slopes and complete the injectivity argument.
 ## 8. Current plane frontier
 
 The result above treats one rigid ansatz, not arbitrary plane polynomial maps.
-A useful external baseline is the 2022 analysis by Guccione, Guccione,
-Horruitiner, and Valqui: among hypothetical degree pairs with maximum degree
-below `125`, all are excluded except `(72,108)` and `(108,72)`. Equivalently, a
-plane counterexample must either have one of those exceptional degree pairs or
-have maximum degree at least `125`.
+There are also two different degrees in the surrounding literature, and they
+must not be conflated.
 
-That makes the next honest targets structural rather than brute-force:
+The **generic fiber degree** is the function-field degree
+`[k(x,y):k(P,Q)]`.  Galois theory settles the degree-two case because every
+separable quadratic extension is normal.  Results of Orevkov and Żołądek
+exclude generic degrees three through five, making degree six the first
+unresolved small-sheet case.
 
-1. finish an explicit inverse theorem for the affine-in-one-variable class;
-2. determine which part of the three-dimensional cubic-fiber mechanism
-   fundamentally requires a third variable; and
-3. study the residual `(72,108)` Newton-polygon regime without claiming that a
-   low-degree search addresses the full plane problem.
+The **coordinate degree pair** records the ordinary total degrees of `P` and
+`Q`.  A separate 2022 analysis by Guccione, Guccione, Horruitiner, and Valqui
+shows that among hypothetical degree pairs with maximum degree below `125`,
+only `(72,108)` and `(108,72)` survive their reductions.
 
-## 9. Independent and adversarial verification
+These are complementary restrictions, not two descriptions of the same
+number.  The Galois misconception, exact source statements, and accepted
+status boundary are documented in
+[`galois-frontier.md`](galois-frontier.md).
+
+## 9. Complete cubic-fiber follow-on
+
+The reciprocal coordinate `T=1/s=y+1/x` gives the fiber equation
+
+\[
+  cT^3-2T^2+bT-2a=0.
+\]
+
+Its derivative is `2/x`, and its universal binary-cubic discriminant is
+`-4Q`, where
+
+\[
+  Q=27a^2c^2-18abc+16a+b^3c-b^2.
+\]
+
+Including the projective root at infinity produces an exact bijection between
+source points and simple projective roots.  This yields the full `3/1/0`
+fiber stratification, identifies the omitted curve, and proves that the
+nonproper-value set is exactly `V(Q)`.  The finite algebraic core is certified
+in `JacobianTwo/CubicFiber.lean` and independently checked in
+`scripts/nonproper.py`; the complete argument, including topology, is in
+[`nonproper-set.md`](nonproper-set.md).
+
+## 10. Independent and adversarial verification
 
 The repository uses two implementations:
 
@@ -238,8 +266,11 @@ These tests are not extra mathematical evidence once the Lean theorem is
 trusted. Their role is engineering assurance that the transcription and the
 independent checker are not vacuous.
 
-## 10. Sources
+## 11. Sources
 
 - [Original announcement by Levent Alpöge](https://x.com/__alpoge__/status/2079028340955197566)
 - [Direct consequences of the three-dimensional counterexample](https://zzhang-iu.github.io/papers/direct-consequences-jacobian/index.html)
 - [Increasing the degree of a possible counterexample from 100 to 108](https://arxiv.org/abs/2204.14178)
+- [Campbell's Galois-case theorem](https://doi.org/10.1007/BF01349234)
+- [Orevkov's three-sheet theorem](https://doi.org/10.1070/IM1987v029n03ABEH000984)
+- [Żołądek's result through generic degree five](https://doi.org/10.1016/j.top.2008.04.001)
