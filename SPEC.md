@@ -48,9 +48,10 @@ from floating-point samples or from the authority of the announcement.
 
 ## Milestone 1: kernel-checked screenshot certificate
 
-Implement the announced coordinates as `MvPolynomial (Fin 3) R` over a
-commutative ring. Define the formal Jacobian matrix with
-`MvPolynomial.pderiv`, and prove its determinant equals the constant `-2`.
+Implement the announced coordinates as integer-coefficient
+`MvPolynomial (Fin 3) ℤ`. Define the formal Jacobian matrix with
+`MvPolynomial.pderiv`, prove its determinant equals the constant `-2`, and
+base-change the pointwise certificate through `Int.castRingHom`.
 
 Separately evaluate the map at the three rational points, prove their images
 are equal, prove the inputs are pairwise distinct, and derive that the induced
