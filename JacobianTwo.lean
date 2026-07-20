@@ -6,10 +6,13 @@ Authors: Alok Singh
 import JacobianTwo.Basic
 import JacobianTwo.AffineInOneVariable
 import JacobianTwo.Counterexample
+import JacobianTwo.CubicFiber
+import JacobianTwo.QuadraticInOneVariable
 
 /-!
 # Jacobian Two
 
-Kernel-checked certificates around the three-dimensional Jacobian counterexample
-and focused positive fragments of the two-dimensional conjecture.
+Kernel-checked certificates around the three-dimensional Jacobian counterexample,
+its cubic fibers, and focused positive fragments of the two-dimensional
+conjecture.
 -/

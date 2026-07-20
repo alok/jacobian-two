@@ -35,6 +35,8 @@ jobs:
           enable-cache: true
       - name: Run exact verification
         run: uv run --frozen python -m scripts.verify
+      - name: Check cubic fibers and the nonproper-set algebra
+        run: uv run --frozen python -m scripts.nonproper
       - name: Run adversarial tests
         run: uv run --frozen pytest
       - name: Check Python types
