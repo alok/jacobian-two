@@ -13,6 +13,8 @@ conflating them:
 
 The repository is tracked by Linear issue
 [ALOK-792](https://linear.app/aloksingh/issue/ALOK-792/formalize-the-3d-counterexample-and-establish-the-jc2-research).
+The Galois/frontier continuation is tracked by
+[ALOK-794](https://linear.app/aloksingh/issue/ALOK-794/audit-the-galois-frontier-and-determine-the-3d-maps-nonproper-value).
 
 ## Exact input claim
 
@@ -44,6 +46,13 @@ from floating-point samples or from the authority of the announcement.
 | The universal-in-dimension formulation is false | `DERIVED` | the certified dimension-three counterexample suffices |
 | Counterexamples exist in every dimension `n >= 3` | `DERIVED` | append identity coordinates |
 | Whether the two-dimensional conjecture is false | `OPEN` | no implication from the dimension-three example is known or assumed here |
+| The Galois-case theorem settles every plane Keller map | `FALSE` | constant Jacobian gives finite separable, not normal/Galois |
+| Generic degree six is the first unresolved plane sheet degree | `SOURCE-CHECKED` | Campbell, Orevkov, Żołądek, and Borisov literature audit |
+| The universal cubic discriminant coefficient expression is `-4*Q` | `LEAN-CERTIFIED` | explicit standard formula; semantic SymPy discriminant checked independently |
+| The announced map has fiber counts `3/1/0` on the three stated strata | `DERIVED` | simple projective-root/source bijection plus exact symbolic checks |
+| Its image is `C^3 \ Gamma` | `DERIVED` | complete fiber stratification |
+| Its nonproper-value set is exactly `V(Q)` | `DERIVED` | explicit escaping family and projective compactness argument |
+| Historical novelty of the full fiber/nonproper theorem | `UNKNOWN` | derived here; same-day sources compared, priority not established |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
 ## Milestone 1: kernel-checked screenshot certificate
@@ -98,9 +107,123 @@ The completed extension proves that the resulting plane map is injective: a
 linear combination of the outputs recovers an affine polynomial in `x` with
 nonzero slope, after which either nonzero constant `y`-slope recovers `y`.
 
-The next target is to construct an explicit polynomial inverse for this entire
-ansatz and thereby package the obstruction as a full positive fragment of
-`JC(2)`.
+The explicit reconstruction is now completed for this ansatz.  The broader
+quadratic-in-one-variable class is treated separately in Milestone 4.
+
+## Milestone 3: Galois audit and the exact nonproper-value set
+
+The classical Galois-case theorem has a one-way hypothesis:
+
+> A Keller map whose induced function-field extension is Galois is a
+> polynomial automorphism.
+
+It does **not** say that every two-dimensional Keller extension is Galois.
+Consequently it does not settle `JC(2)`.  The literature audit must distinguish
+the field-extension degree from the ordinary total degree of the coordinate
+polynomials, and it must record the accepted result that a hypothetical plane
+counterexample has topological (generic-fiber) degree at least six.
+
+For the announced three-dimensional map, write a target as `(a,b,c)` and put
+
+```text
+p(T) = c*T^3 - 2*T^2 + b*T - 2*a
+r(T) = p'(T) = 3*c*T^2 - 4*T + b
+Q(a,b,c) = 27*a^2*c^2 - 18*a*b*c + 16*a + b^3*c - b^2.
+```
+
+On the chart `x != 0`, the fiber coordinate `T = y + 1/x` satisfies
+`p(T)=0`, `r(T)=2/x`, and the source is reconstructed by
+
+```text
+x = 2/r,
+y = T - r/2,
+z = 5*r^2/4 - 3*T*r/2 - c*r^3/8.
+```
+
+The research target is the following complete determination of the Jelonek
+set (the nonproper-value set) of the announced map:
+
+> A target `(a,b,c)` is a nonproper value if and only if `Q(a,b,c)=0`.
+
+The two directions must be checked separately.
+
+1. If a bounded target sequence has an unbounded source sequence and `T`
+   stays bounded, reconstruction forces `r -> 0`; the limiting polynomial has
+   a repeated root, hence `Q=0`.  If `T -> infinity`, eliminate `c` using
+   `p(T)=0`; the exact identities
+
+   ```text
+   x = T / (T^2 - b*T + 3*a),
+   y = b - 3*a/T
+   ```
+
+   and an inverse-power expansion for `z` show that the source instead tends
+   to the finite point `(0,b,a-4*b^2)`, a contradiction.
+2. If `Q=0`, the cubic (or its nonzero quadratic specialization at `c=0`)
+   has a repeated finite root `T0`.  Perturb `T0`, define `a` from `p(T)=0`,
+   and use reconstruction.  Then `r(T) -> 0`, so `x=2/r` escapes to infinity
+   while the targets converge to `(a,b,c)`.
+
+Acceptance gate:
+
+- Lean certifies the cubic, derivative, discriminant, reconstruction, and
+  large-`T` cancellation identities with no `sorry`, `admit`, or custom axiom;
+- an independent typed SymPy checker verifies those identities and hostile
+  perturbations exactly;
+- the readable proof handles the `x=0`, bounded-`T`, and unbounded-`T` cases
+  explicitly; and
+- no historical-priority claim is made without a literature review.
+
+The complete set-theoretic consequence to be recorded is stronger than the
+initial target.  Let
+
+```text
+Gamma = { (a,b,c) : 3*b*c = 4 and b^2 = 12*a }.
+```
+
+Simple projective roots of the homogenized cubic correspond bijectively to
+source points.  Therefore the target strata have fiber cardinalities `3`,
+`1`, and `0` according as `Q != 0`, `Q = 0` off `Gamma`, or the target lies on
+`Gamma`.  In particular the exact image is `C^3 \ Gamma`.  The algebraic
+identities are machine checked; the projective root count and compactness
+argument remain explicitly identified as derived mathematical prose.
+
+## Milestone 4: a quadratic-in-one-variable plane fragment
+
+For a characteristic-zero field, consider
+
+```text
+(x,y) |-> (a(x)*y^2 + b(x)*y + c(x), e(x)*y + f(x)).
+```
+
+Equating the coefficients of a nonzero constant Jacobian gives
+
+```text
+a'*e - 2*a*e' = 0,
+b'*e - b*e' = 2*a*f',
+c'*e - b*f' = k.
+```
+
+On the chart `e != 0`, the target normal form is
+
+```text
+r = eps*y + f(x),
+F(x,y) = (lam*r^2 + mu*r + alpha*x + beta, r),
+alpha*eps = k.
+```
+
+This has a displayed polynomial inverse.  The `e=0` chart must be handled
+separately: the equations force `a=0`, `b` to be a nonzero constant, and `f`
+to be affine with nonzero slope, which is again triangular and invertible.
+
+Acceptance gate:
+
+- Lean derives the normal form from the coefficient identities;
+- Lean proves both inverse identities and the full bijectivity theorem,
+  including the `e=0` branch;
+- no theorem is described as the full plane Jacobian conjecture; and
+- prior mathematical coverage of this bounded-degree class is cited, so the
+  result is presented as formalization rather than novelty.
 
 ## Repository shape
 
@@ -108,13 +231,19 @@ ansatz and thereby package the obstruction as a full positive fragment of
 JacobianTwo/
   Counterexample.lean       # formal polynomial and collision certificate
   AffineInOneVariable.lean  # JC(2) obstruction theorem
+  QuadraticInOneVariable.lean # quadratic-in-y normal form and inverse
+  CubicFiber.lean           # cubic, discriminant, reconstruction, infinity algebra
   Basic.lean                # shared definitions
 scripts/
   verify.py                 # independent exact symbolic checker
+  nonproper.py              # exact cubic-fiber/nonproper algebra
 tests/
   test_verify.py            # positive and adversarial fixtures
+  test_nonproper.py         # discriminant, strata, and hostile fixtures
 docs/
   audit.md                  # readable derivation, provenance, claim boundary
+  galois-frontier.md        # Galois theorem and first open sheet degree
+  nonproper-set.md          # complete fiber/image/nonproper proof
   research-log.md           # dated attempts and open obligations
 ```
 
