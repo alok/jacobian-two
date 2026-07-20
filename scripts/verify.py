@@ -33,6 +33,7 @@ class ExactCertificate:
     """The exact outputs produced by a symbolic verification run."""
 
     determinant: Expr
+    points: tuple[Point, ...]
     images: tuple[Point, ...]
     target: Point
 
@@ -49,10 +50,20 @@ class ExactCertificate:
         return all(image == self.target for image in self.images)
 
     @property
+    def distinct_inputs_verified(self) -> bool:
+        """Whether the supplied preimages are pairwise distinct."""
+
+        return len(set(self.points)) == len(self.points)
+
+    @property
     def verified(self) -> bool:
         """Whether both parts of the screenshot certificate hold."""
 
-        return self.determinant_verified and self.collision_verified
+        return (
+            self.determinant_verified
+            and self.collision_verified
+            and self.distinct_inputs_verified
+        )
 
 
 def announced_map(*, displayed_four: int = 4) -> PolynomialMap:
@@ -89,7 +100,12 @@ def exact_certificate(
     matrix = Matrix(polynomial_map)
     determinant = factor(matrix.jacobian(VARIABLES).det())
     images = tuple(evaluate(polynomial_map, point) for point in points)
-    return ExactCertificate(determinant=determinant, images=images, target=TARGET)
+    return ExactCertificate(
+        determinant=determinant,
+        points=points,
+        images=images,
+        target=TARGET,
+    )
 
 
 def main() -> int:
@@ -101,6 +117,7 @@ def main() -> int:
         print(f"F{point} = {image}")
     print(f"determinant verified: {certificate.determinant_verified}")
     print(f"collision verified: {certificate.collision_verified}")
+    print(f"distinct inputs verified: {certificate.distinct_inputs_verified}")
     return 0 if certificate.verified else 1
 
 
