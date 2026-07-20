@@ -41,9 +41,9 @@ from floating-point samples or from the authority of the announcement.
 | The screenshot is transcribed correctly | `SOURCE-CHECKED` | screenshot, original post, and two independent transcriptions agree |
 | `det JF = -2` identically | `LEAN-CERTIFIED` | formal partial derivatives of multivariate polynomials and a determinant identity |
 | The displayed fiber has three distinct points | `LEAN-CERTIFIED` | exact rational evaluation and pairwise inequality |
-| The all-dimensional Jacobian conjecture is false | `DERIVED` | the certified dimension-three counterexample suffices |
+| The universal-in-dimension formulation is false | `DERIVED` | the certified dimension-three counterexample suffices |
 | Counterexamples exist in every dimension `n >= 3` | `DERIVED` | append identity coordinates |
-| The two-dimensional conjecture is false | `OPEN` | no implication from the dimension-three example is known or assumed here |
+| Whether the two-dimensional conjecture is false | `OPEN` | no implication from the dimension-three example is known or assumed here |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
 ## Milestone 1: kernel-checked screenshot certificate
