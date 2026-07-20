@@ -17,8 +17,11 @@ jobs:
         with:
           build: true
           build-args: --wfail
-          nanoda: true
-          nanoda-allow-sorry: false
+      - name: Reject unfinished or custom-axiom proofs
+        run: |
+          if rg -n '\b(sorry|admit|axiom)\b' JacobianTwo.lean JacobianTwo -g '*.lean'; then
+            exit 1
+          fi
 
   python:
     name: Independent exact checker
