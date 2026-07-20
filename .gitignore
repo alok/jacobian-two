@@ -1,6 +1,7 @@
 /.lake/
 /.venv/
 /__pycache__/
+/.mypy_cache/
 /.pytest_cache/
 *.pyc
 .DS_Store
