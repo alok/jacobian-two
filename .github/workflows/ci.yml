@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    name: Lean certificate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: leanprover/lean-action@v1
+        with:
+          build: true
+          build-args: --wfail
+          nanoda: true
+          nanoda-allow-sorry: false
+
+  python:
+    name: Independent exact checker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - name: Run exact verification
+        run: uv run --frozen python -m scripts.verify
+      - name: Run adversarial tests
+        run: uv run --frozen pytest
+      - name: Check Python types
+        run: uv run --frozen mypy

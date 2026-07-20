@@ -94,9 +94,13 @@ Wronskian. Mathlib's coprime-Wronskian theorem then forces both derivatives to
 vanish. This rules out a direct two-dimensional analogue in which both
 coordinates are affine in one source variable.
 
-The next target, after the slope theorem, is to construct an explicit
-polynomial inverse for this entire ansatz and thereby package the obstruction
-as a genuine positive fragment of `JC(2)`.
+The completed extension proves that the resulting plane map is injective: a
+linear combination of the outputs recovers an affine polynomial in `x` with
+nonzero slope, after which either nonzero constant `y`-slope recovers `y`.
+
+The next target is to construct an explicit polynomial inverse for this entire
+ansatz and thereby package the obstruction as a full positive fragment of
+`JC(2)`.
 
 ## Repository shape
 
