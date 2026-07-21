@@ -71,7 +71,9 @@ hypothesis.  More precisely, the unrestricted ramified profiles are now:
   profile at least one zero-jump branch curve must self-collide.  In the
   saturated transposition-plus-3-cycle profile both curves self-collide, with
   exact fiber rows `3+3`, `2+2+1+1` or `2+2+2`, and `2+3+1` at a
-  cross-intersection.
+  cross-intersection.  Its two minimal constant chains are also impossible:
+  the finite normalization is smooth and finite flat, with disjoint boundary
+  `D2,D3=A1`, `Pic(W)=Z[D2]+Z[D3]`, and `K_W=D2+2D3`.
 
 Under the additional assumption of exactly one dicritical component, global
 branch-curve topology gives the same two groups and narrows the local types:
@@ -104,7 +106,8 @@ and `S6`.  The refined identity and universal elimination are proved in the
 geometric setup in the
 [six-sheet monodromy note](docs/six-sheet-monodromy.md).  The universal
 two-curve `S6` collision theorem is in the
-[two-curve collision note](docs/s6-two-curve-collisions.md), and the
+[two-curve collision note](docs/s6-two-curve-collisions.md), which also proves
+the saturated smooth-normalization package.  The
 contracted-source obstruction and finite-flat consequences are in the
 [smooth-normalization note](docs/one-dicritical-source-smoothness.md).  The dependency-free
 [Python certificate](scripts/six_sheet_monodromy.py) rebuilds the exact groups,
@@ -400,6 +403,9 @@ optional Sage/GAP replay is an additional independent local cross-check.
 - [`docs/s6-one-dicritical-local.md`](docs/s6-one-dicritical-local.md)
   gives the complete `S6` fiber census, symmetric local blocks, jump
   trichotomy, torus-knot types, and hostile analytic models.
+- [`docs/s6-two-curve-collisions.md`](docs/s6-two-curve-collisions.md)
+  proves the unrestricted collision rows and the saturated two-boundary
+  smooth finite-flat normalization.
 - [`docs/newton-72-108-sparse.md`](docs/newton-72-108-sparse.md) gives the
   exact sparse-support obstruction in the separate residual coordinate-degree
   configurations.

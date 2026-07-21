@@ -349,6 +349,9 @@ the saturated transposition-plus-3-cycle profile both branch curves
 self-collide, and constant multiplicity gives the exact rows `3+3`,
 `2+2+1+1` or `2+2+2`, and `2+3+1` at cross-intersections.  See
 [`s6-two-curve-collisions.md`](s6-two-curve-collisions.md).
+In that saturated profile, componentwise zero excess and the cyclic endpoint
+obstruction also eliminate both minimal constant chains.  Its affine finite
+normalization is therefore smooth and finite flat of rank six.
 
 ## 7. Why this still does not finish degree six
 

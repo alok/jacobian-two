@@ -14,6 +14,7 @@ from scripts.six_sheet_monodromy import (
     OneDicriticalContractedSourceEndpoint,
     S6_TWO_CURVE_COLLISION_GENERATORS,
     S6_CONTRACTED_SOURCE_ENDPOINTS,
+    S6_SATURATED_CONTRACTED_SOURCE_ENDPOINTS,
     S6_TWO_CURVE_FIBER_PROFILES,
     TRANSITIVE_GROUPS,
     branch_inertia_realizations,
@@ -338,6 +339,20 @@ def test_contracted_source_endpoint_preserves_its_exact_boundary() -> None:
             ramification_index=3,
             local_degree=0,
         )
+
+
+def test_saturated_s6_contracts_neither_boundary_chain() -> None:
+    assert tuple(
+        (
+            endpoint.ramification_index,
+            endpoint.local_degree,
+            endpoint.eliminates_contracted_source,
+        )
+        for endpoint in S6_SATURATED_CONTRACTED_SOURCE_ENDPOINTS
+    ) == (
+        (2, 2, True),
+        (3, 3, True),
+    )
 
 
 def test_one_dicritical_s6_fiber_census_is_exhaustive() -> None:

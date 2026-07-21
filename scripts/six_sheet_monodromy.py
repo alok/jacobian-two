@@ -832,6 +832,16 @@ S6_CONTRACTED_SOURCE_ENDPOINTS: Final = tuple(
     )
     for local_degree in range(2, 6)
 )
+S6_SATURATED_CONTRACTED_SOURCE_ENDPOINTS: Final = (
+    OneDicriticalContractedSourceEndpoint(
+        ramification_index=2,
+        local_degree=2,
+    ),
+    OneDicriticalContractedSourceEndpoint(
+        ramification_index=3,
+        local_degree=3,
+    ),
+)
 
 # Backwards-compatible name for the original degree-five A6 endpoint.
 A6_EXCEPTIONAL_PARITY_ENDPOINT: Final = A6_CONTRACTED_SOURCE_ENDPOINTS[-1]

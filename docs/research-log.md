@@ -480,6 +480,36 @@ all of `S6`.  This hostile fixture proves that the new collision census stops
 at the global braid/splice/canonical realization problem rather than at a
 permutation contradiction.
 
+## 2026-07-21: the saturated `S6` finite normalization is smooth
+
+Status: derived here and independently hostile-audited; sharpens the
+transposition-plus-3-cycle passport without eliminating it.
+
+The saturated `(e,d)=(2,1)+(3,1)` profile spends all five refined defect
+units, so both componentwise excesses vanish and there are no other
+dicriticals.  Tangential degree one then makes every finite local degree on
+the two boundary primes exactly two and three, respectively.  Orevkov's two
+separate minimal `L_C-E` chains satisfy the sole-local-ramification hypotheses
+of the cyclic endpoint theorem.  Index two is impossible outright; index
+three would force its local degree three to be even.  Hence both minimal
+constant chains are empty.
+
+Writing `D2,D3` for the disjoint source boundary primes, the finite
+normalization now satisfies
+
+```text
+W - (D2 union D3) = A2,
+D2 = D3 = A1,
+Pic(W) = Z[D2] + Z[D3],
+K_W = D2 + 2*D3.
+```
+
+It is smooth and finite flat of rank six, and its pushforward algebra is free
+as a target module.  Target self-collisions and cross-intersections remain:
+they identify images of distinct source points, not the disjoint source
+divisors.  The remaining obstruction lies in the rank-six algebra
+multiplication, trace form, and compactification, not in module freeness.
+
 ## 2026-07-21: the exceptional one-dicritical `A6` source is impossible
 
 Status: derived here and independently hostile-audited; eliminates one local

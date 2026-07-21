@@ -208,13 +208,118 @@ polynomially parametrized immersed rational curves, each with normalization
 omitted `3+3` values; the transposition collisions have the two rows (3.5);
 and every cross-intersection has the row (3.6).
 
-## 4. Exact hostile permutation fixture
+## 4. The saturated finite normalization is smooth
+
+The saturated passport has a second consequence, now on the source rather
+than the target curves.  Orevkov's Lemma 2.1 gives two separate finite-boundary
+components
+
+\[
+L_{C,2}-E_2,
+\qquad
+L_{C,3}-E_3,
+\tag{4.1}
+\]
+
+ending in the index-two and index-three dicriticals.  Section 5 of Orevkov's
+paper makes this model relatively minimal: a point obtained by contracting a
+nonempty constant chain may be assumed singular, since otherwise the
+corresponding blowups were unnecessary.
+
+For `d_i=1`, every tangential local degree on `E_i` is one.  The definition
+
+\[
+\delta_{E_i}
+=\sum_{c\in E_i^\circ}
+\bigl(\mu_{\pi(c)}-e_i a_c\bigr)
+\tag{4.2}
+\]
+
+and (3.2) therefore give
+
+\[
+\mu_x=e_i
+\quad\text{at every finite point of }D_i.
+\tag{4.3}
+\]
+
+Suppose `L_{C,2}` were nonempty.  Its contraction would be a nonsmooth
+Hirzebruch--Jung cyclic endpoint germ whose only local ramification prime is
+`D_2`.  Pulling to the universal quasi-etale cover makes both invariant
+coordinate functions start in degree at least two, but the index-two
+Jacobian has order one.  This is impossible.
+
+If `L_{C,3}` were nonempty, the same cyclic lift has index three and local
+degree `mu=3`.  The quadratic-jet and deck-parity calculation forces every
+such contracted endpoint to have even local degree, again a contradiction.
+The complete local argument is proved in
+[`one-dicritical-source-smoothness.md`](one-dicritical-source-smoothness.md);
+only its local endpoint theorem, not its one-dicritical application, is used
+here.
+
+Thus, in Orevkov's relatively minimal model,
+
+\[
+\boxed{L_{C,2}=L_{C,3}=\varnothing.} \tag{4.4}
+\]
+
+The two components in (4.1) are distinct, so their affine images `D_2,D_3`
+in the finite normalization are disjoint source curves.  They remain distinct
+even when the target curves self-intersect or meet one another: those events
+identify target values, not normalization points.  Since (3.2) also rules out
+every other dicritical, these are the only codimension-one boundary primes.
+The complement of a dense affine open in a separated Noetherian scheme has
+no isolated boundary components, so the normalization
+
+\[
+\rho:W\longrightarrow\mathbb A^2
+\]
+
+has the exact structure
+
+\[
+W\setminus(D_2\cup D_3)\cong\mathbb A^2,
+\qquad
+D_2\cong D_3\cong\mathbb A^1,
+\qquad
+W\text{ smooth affine}. \tag{4.5}
+\]
+
+Miracle flatness makes `rho` finite flat of rank six, and Quillen--Suslin
+makes `rho_* O_W` free as a module over the target polynomial ring.  Divisor
+localization gives
+
+\[
+\boxed{
+\operatorname{Pic}(W)
+\cong\mathbb Z[D_2]\oplus\mathbb Z[D_3].
+}
+\tag{4.6}
+\]
+
+Indeed, the two boundary classes generate because their complement is `A2`.
+A relation would be the divisor of a rational function that restricts to a
+unit on `A2`, hence to a constant, so both coefficients must vanish.  Finally,
+finite-map Riemann--Hurwitz gives
+
+\[
+\boxed{
+\omega_W\cong\mathcal O_W(D_2+2D_3).
+}
+\tag{4.7}
+\]
+
+This smooth finite-flat package is a new restriction, not a contradiction.
+Module freeness does not split the rank-six algebra.  The missing datum is its
+multiplication and trace form, together with the prescribed branch divisor.
+
+## 5. Exact hostile permutation fixture
 
 The collision census does not contradict abstract monodromy.  In `S6` take
 
 \[
 a=(123),\qquad b=(456),\qquad c=(14),\qquad d=(25).
-\tag{4.1}
+\tag{5.1}
 \]
 
 The pair `a,b` consists of disjoint 3-cycles, as required at a `B_3`
@@ -230,14 +335,14 @@ the disjoint supports, orbit blocks, and group order.  Therefore conjugacy
 classes, local products, transitivity, primitivity, and normal generation
 cannot eliminate (3.1).
 
-## 5. The remaining global realization problem
+## 6. The remaining global realization problem
 
 The sharp remaining question for this passport is whether two immersed
 polynomial `A1` curves can realize (3.4)--(3.6), admit the required complement
 monodromy onto `S6`, and simultaneously satisfy the Keller compactification's
 canonical and determinant equations.
 
-The exact fixture (4.1) shows that a contradiction must use data absent from
+The exact fixture (5.1) shows that a contradiction must use data absent from
 the bare permutation representation.  Candidate inputs are:
 
 - a braid-monodromy presentation coupling all finite singular values;
@@ -258,8 +363,15 @@ claimed here.
   component of the deficient-fiber set has a singularity.
 - S. Yu. Orevkov,
   [“On three-sheeted polynomial mappings of `C^2`”](https://www.math.univ-toulouse.fr/~orevkov/jc86.pdf),
-  *Mathematics of the USSR-Izvestiya* 29 (1987), 587--596.  Lemma 4.2 gives
-  the defect budget and Lemma 5.2 gives the zero-jump local embedding.
+  *Mathematics of the USSR-Izvestiya* 29 (1987), 587--596.  Lemma 2.1 gives
+  the separate endpoint chains, Lemma 4.2 gives the defect budget, Section 5
+  supplies the relatively minimal contraction, and Lemma 5.2 gives the
+  zero-jump local embedding.
+- [Stacks Project, Lemma 31.17.5](https://stacks.math.columbia.edu/tag/0BCQ)
+  supplies the purity of the complement of the dense affine source, and
+  [Lemma 10.128.1](https://stacks.math.columbia.edu/tag/00R4) is the
+  miracle-flatness criterion.
 
-The collision consequences, exact fiber rows, and `S6` stopping fixture are
-derived in this repository.  No claim of historical priority is made.
+The collision consequences, exact fiber rows, cyclic endpoint application,
+smooth finite-flat package, and `S6` stopping fixture are derived in this
+repository.  No claim of historical priority is made.
