@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Alok Singh
 -/
 import JacobianTwo.AffineCoordinate
+import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
 import Mathlib.Tactic.Ring
 
 /-!
@@ -57,6 +58,76 @@ leading-coefficient identity.  Establishing this predicate from that identity
 is a separate factorization step. -/
 def IsNonzeroScalarTimesSquare (a : K[X]) : Prop :=
   ∃ eps : K, ∃ h : K[X], eps ≠ 0 ∧ a = C eps * h ^ 2
+
+/-- In `K[x]`, if a square is a nonzero scalar times an odd power, then the
+base is a nonzero scalar times a square.  The same square root also describes
+the original square root up to a nonzero scalar. -/
+theorem scalar_times_square_and_odd_root_of_sq_eq_scalar_mul_pow
+    {p a : K[X]} {c : K} {n : ℕ}
+    (hc : c ≠ 0) (ha : a ≠ 0) (hodd : Odd n)
+    (hsq : p ^ 2 = C c * a ^ n) :
+    ∃ eps : K, ∃ h : K[X], ∃ lam : K,
+      eps ≠ 0 ∧ lam ≠ 0 ∧
+      a = C eps * h ^ 2 ∧ p = C lam * h ^ n := by
+  rcases hodd with ⟨m, hn⟩
+  have hpowDvd : (a ^ m) ^ 2 ∣ p ^ 2 := by
+    rw [hsq]
+    refine ⟨C c * a, ?_⟩
+    rw [hn, show 2 * m + 1 = m + m + 1 by omega, pow_succ, pow_add,
+      pow_two]
+    ring
+  have hdvd : a ^ m ∣ p :=
+    (UniqueFactorizationMonoid.pow_dvd_pow_iff_dvd (by omega : 2 ≠ 0)).mp
+      hpowDvd
+  obtain ⟨h, hpresentation⟩ := hdvd
+  have hpresentation' : p = a ^ m * h := hpresentation
+  have hcancel :
+      a ^ (m + m) * h ^ 2 = a ^ (m + m) * (C c * a) := by
+    calc
+      a ^ (m + m) * h ^ 2 = (a ^ m * h) ^ 2 := by
+        rw [pow_add, pow_two, pow_two]
+        ring
+      _ = p ^ 2 := by rw [← hpresentation']
+      _ = C c * a ^ n := hsq
+      _ = a ^ (m + m) * (C c * a) := by
+        rw [hn, pow_succ, pow_add]
+        ring
+  have hahpow : a ^ (m + m) ≠ 0 := pow_ne_zero _ ha
+  have hhsq : h ^ 2 = C c * a := mul_left_cancel₀ hahpow hcancel
+  let eps : K := c⁻¹
+  let lam : K := c⁻¹ ^ m
+  have heps : eps ≠ 0 := by
+    dsimp [eps]
+    exact inv_ne_zero hc
+  have hlam : lam ≠ 0 := by
+    dsimp [lam]
+    exact pow_ne_zero _ (inv_ne_zero hc)
+  have haSquare : a = C eps * h ^ 2 := by
+    rw [hhsq]
+    symm
+    calc
+      C eps * (C c * a) = (C eps * C c) * a := by ring
+      _ = C (eps * c) * a := by rw [C_mul]
+      _ = a := by
+        dsimp [eps]
+        rw [inv_mul_cancel₀ hc, C_1, one_mul]
+  have hpRoot : p = C lam * h ^ n := by
+    rw [hpresentation', haSquare, hn]
+    dsimp [lam, eps]
+    rw [mul_pow, ← C_pow, pow_succ, pow_add]
+    ring
+  exact ⟨eps, h, lam, heps, hlam, haSquare, hpRoot⟩
+
+/-- The square-shape projection of
+`scalar_times_square_and_odd_root_of_sq_eq_scalar_mul_pow`. -/
+theorem isNonzeroScalarTimesSquare_of_sq_eq_scalar_mul_odd_pow
+    {p a : K[X]} {c : K} {n : ℕ}
+    (hc : c ≠ 0) (ha : a ≠ 0) (hodd : Odd n)
+    (hsq : p ^ 2 = C c * a ^ n) :
+    IsNonzeroScalarTimesSquare a := by
+  obtain ⟨eps, h, _lam, heps, _hlam, haSquare, _hpRoot⟩ :=
+    scalar_times_square_and_odd_root_of_sq_eq_scalar_mul_pow hc ha hodd hsq
+  exact ⟨eps, h, heps, haSquare⟩
 
 @[simp]
 theorem yDerivative_variableQuadraticCoordinate (a g f : K[X]) :
@@ -210,6 +281,23 @@ theorem leadingCoeff_sq_eq_C_mul_pow_of_odd_natDegree [CharZero K]
       simpa [hzero] using hc
     exact (pow_ne_zero 2 hlead) hsquareZero
   exact ⟨c, hcne, hc⟩
+
+/-- The UFD consequence of the odd-degree leading-coefficient identity.  The
+quadratic coefficient is a nonzero scalar times a square, and the leading
+coefficient of `P` is a nonzero scalar times the matching odd power of the
+same square root. -/
+theorem odd_natDegree_quadraticCoeff_and_leadingCoeff_shape [CharZero K]
+    {P : K[X][Y]} {a g f : K[X]} {k : K}
+    (ha : a ≠ 0) (hodd : Odd P.natDegree)
+    (hjac : jacobian P (variableQuadraticCoordinate a g f) = CC k) :
+    ∃ eps : K, ∃ h : K[X], ∃ lam : K,
+      eps ≠ 0 ∧ lam ≠ 0 ∧
+      a = C eps * h ^ 2 ∧
+      P.leadingCoeff = C lam * h ^ P.natDegree := by
+  obtain ⟨c, hc, hsq⟩ :=
+    leadingCoeff_sq_eq_C_mul_pow_of_odd_natDegree ha hodd hjac
+  exact scalar_times_square_and_odd_root_of_sq_eq_scalar_mul_pow
+    hc ha hodd hsq
 
 /-- Repeated target shears remove every positive even `y`-degree from the
 first coordinate.  A nonzero constant Jacobian excludes degree zero, so the
