@@ -5,6 +5,7 @@ Authors: Alok Singh
 -/
 import JacobianTwo.QuadraticParityExtraction
 import JacobianTwo.QuadraticTransportJacobian
+import Mathlib.Algebra.Polynomial.Eval.Subring
 
 /-!
 # End-to-end reduction for a variable-leading quadratic coordinate
@@ -95,5 +96,22 @@ theorem coeff_mem_base_of_coefficientwiseDerivative_eq_zero
     (fun S : (FractionRing K[X])[X] ↦ S.coeff j)
     hH
   simpa only [coeff_coefficientwiseDerivative, coeff_zero] using hcoeff
+
+/-- Vanishing coefficientwise derivative assembles to a single polynomial
+over the constant field, not merely a coefficient-by-coefficient statement. -/
+theorem exists_map_eq_of_coefficientwiseDerivative_eq_zero
+    (H : (FractionRing K[X])[X])
+    (hH : coefficientwiseDerivative fractionRingDerivative H = 0) :
+    ∃ H₀ : K[X],
+      H = H₀.map (algebraMap K (FractionRing K[X])) := by
+  have hmem :
+      H ∈ (mapRingHom (algebraMap K (FractionRing K[X]))).range := by
+    rw [mem_map_range]
+    intro j
+    obtain ⟨c, hc⟩ :=
+      coeff_mem_base_of_coefficientwiseDerivative_eq_zero H hH j
+    exact ⟨c, hc.symm⟩
+  obtain ⟨H₀, hH₀⟩ := hmem
+  exact ⟨H₀, hH₀.symm⟩
 
 end JacobianTwo.QuadraticReduction
