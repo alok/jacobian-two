@@ -564,7 +564,12 @@ def main() -> int:
     print("nondegenerate open values alpha,L,C,T,G:", certificate.clean_open_values)
     print(f"generic delta-seven certificate: {certificate.verified}")
     print("excluded conditionally: the nondegenerate (3,10) open stratum")
-    print("remaining: collision-degeneration walls and unrestricted passports")
+    print("scope of this module: collision-degeneration walls are deferred")
+    print("follow-up wall audit: conditional delta seven is fully excluded")
+    print(
+        "current conditional frontier: delta at least ten; "
+        "unrestricted passports remain"
+    )
     print("claim boundary: conditional/computer-assisted; JC(2) remains open")
     return 0 if certificate.verified else 1
 
