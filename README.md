@@ -183,6 +183,16 @@ obstruction must use the cubic trace tensor, integrality, and associativity,
 not just the quadratic trace form.  See the
 [hostile-matrix note](docs/trace-hostile-matrices.md).
 
+The first cubic-cover obstruction also survives an exact lift test.  In the
+natural spin double cover `2.A6`, the canonical order-three lifts of the
+forced `T(2,5)` cusp meridians satisfy the five-braid relation exactly, and
+the two disjoint degree-three collision meridians still commute.  These lifts
+generate all of `2.A6`.  More decisively, the forced prefix has transitive
+product-one completions made entirely of 3-cycles with both Fried--Serre spin
+signs.  Thus finite local monodromy does not determine a spin obstruction;
+one must derive an infinity word and framing from the Keller compactification.
+See the [spin-lift note](docs/a6-spin-lift.md).
+
 ## A separate sparse obstruction at coordinate degree `(72,108)`
 
 Generic sheet degree and coordinate degree are different invariants.  On the

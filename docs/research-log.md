@@ -791,6 +791,34 @@ commutative associative rank-six multiplication whose regular trace is the
 displayed matrix.  The next algebraic attack is therefore the integral
 symmetric cubic trace tensor, not another quadratic determinant invariant.
 
+## 2026-07-21: the forced `A6` relations survive the spin cover
+
+Status: exact hostile lift; no compactification or Keller map.
+
+The natural six-sheet action lifts through the spin double cover `2.A6`.
+Using exact rational Clifford arithmetic, the canonical order-three lifts of
+
+```text
+r=(345), s=(123), b=(456)
+```
+
+satisfy both forced finite relations: the `T(2,5)` five-braid relation lifts
+with no central error, and the disjoint `3+3` collision meridians commute.
+The lifts generate all `720` elements of `2.A6`; in particular this is not a
+splitting of `A6`.
+
+The cusp preferred longitude does retain a central minus sign.  That sign is
+not yet obstructive because an even-order infinity lift can absorb it.  A
+stronger hostile certificate removes even that parity loophole: two explicit
+transitive product-one six-tuples made only of 3-cycles extend the same forced
+prefix, one with Fried--Serre spin `+1` and the other with spin `-1`.
+
+Therefore the finite cusp/collision data do not determine a spin component.
+Any renewed spin attack must first derive the actual infinity word and its
+peripheral framing from the Keller compactification.  The checker enumerates
+the upstairs and downstairs groups and replays every Clifford identity; a
+sign-flipped order-six lift is an adversarial failure fixture.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.
