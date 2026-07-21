@@ -71,6 +71,16 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_five_residual
       - name: Exclude the generic conditional A6 delta-seven stratum
         run: uv run --frozen python -m scripts.a6_delta_seven_generic
+      - name: Exclude the conditional A6 delta-seven triple wall
+        run: uv run --frozen python -m scripts.a6_delta_seven_triple_wall
+      - name: Exclude the first conditional A6 delta-seven collision strata
+        run: uv run --frozen python -m scripts.a6_delta_seven_discriminant_wall
+      - name: Exclude the one-dimensional conditional A6 delta-seven walls
+        run: uv run --frozen python -m scripts.a6_delta_seven_deeper_wall
+      - name: Check the finite conditional A6 delta-seven endpoints
+        run: uv run --frozen python -m scripts.a6_delta_seven_finite_wall
+      - name: Check the conditional A6 frontier through delta ten
+        run: uv run --frozen python -m scripts.a6_post_delta_seven_frontier
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts
