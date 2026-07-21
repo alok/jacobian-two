@@ -22,6 +22,8 @@ def test_combined_incidence_has_one_dominant_cramer_component() -> None:
     assert certificate.coefficient_image_codimension == 2
     assert certificate.projection_quasi_finite_on_cramer_open
     assert certificate.projection_generically_finite_onto_image
+    assert certificate.sage_residual_rank_two_saturation == (1, 9, True)
+    assert certificate.residual_rank_threefold_excluded
     assert not certificate.residual_rank_intersections_classified
     assert not certificate.split_boundary_intersections_classified
     assert certificate.topology_propagation_dependencies == (

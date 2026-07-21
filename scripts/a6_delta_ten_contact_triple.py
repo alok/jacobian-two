@@ -21,10 +21,13 @@ the five-dimensional coefficient space is quasi-finite on this open, hence
 generically finite onto its image; the image closure is one irreducible
 codimension-two component.  The sole non-boundary rank factor is irreducible
 and does not divide a selected augmented minor, as witnessed by an exact
-univariate specialization.  Thus it supports no additional component
-dominating that divisor.  Compatible lower-dimensional
-intersections of the rank divisor and deeper intersections in the split
-fibers are not classified here.
+univariate specialization.  An independent Sage determinantal saturation
+now proves that the coefficient matrix has rank exactly three everywhere on
+the valid part of that residual divisor.  Compatibility is therefore confined
+to a base of dimension at most one, with a one-dimensional coefficient-solution
+fiber, so the residual divisor supports no hidden three-dimensional incidence
+component.  Its lower-dimensional compatible intersections are not
+decomposed here, and deeper intersections in the split fibers remain separate.
 
 The rational member
 
@@ -328,6 +331,13 @@ EXPECTED_SPECIALIZED_AUGMENTED_MINOR: Final = (
     )
 )
 
+# Independent Sage 10.8 output from
+# ``tools/check_a6_delta_ten_contact_triple_residual.sage``.  The raw ideal
+# consisting of the residual determinant and eight selected 3 x 3 coefficient
+# minors has dimension one.  Saturation by the complete valid-chart localizer
+# is the unit ideal with exponent nine.
+SAGE_RESIDUAL_RANK_TWO_SATURATION: Final = (1, 9, True)
+
 SAMPLE_BASE: Final = {
     TRIPLE_PAIR_SUM: 2,
     TRIPLE_PRODUCT: -1,
@@ -548,6 +558,7 @@ class DeltaTenContactTripleCertificate:
     coefficient_image_codimension: int
     projection_quasi_finite_on_cramer_open: bool
     projection_generically_finite_onto_image: bool
+    sage_residual_rank_two_saturation: tuple[int, int, bool]
     residual_rank_intersections_classified: bool
     split_boundary_intersections_classified: bool
     topology_propagation_dependencies: tuple[str, str]
@@ -604,6 +615,24 @@ class DeltaTenContactTripleCertificate:
         )
 
     @property
+    def residual_rank_threefold_excluded(self) -> bool:
+        """Whether the residual determinant cannot support a threefold.
+
+        Irreducibility and the augmented-minor gcd make the compatible base a
+        proper subset of the residual surface.  The Sage saturation makes the
+        coefficient rank exactly three on the valid residual chart.  Hence
+        the compatible base has dimension at most one, its solution fibers
+        are affine lines, and the total incidence dimension is at most two.
+        """
+
+        return bool(
+            self.rank_factor_irreducible
+            and self.specialized_augmented_gcd == 1
+            and self.sage_residual_rank_two_saturation
+            == SAGE_RESIDUAL_RANK_TWO_SATURATION
+        )
+
+    @property
     def verified(self) -> bool:
         """Whether every exact dominant-chart and sample check agrees."""
 
@@ -619,6 +648,7 @@ class DeltaTenContactTripleCertificate:
             and self.coefficient_image_codimension == 2
             and self.projection_quasi_finite_on_cramer_open
             and self.projection_generically_finite_onto_image
+            and self.residual_rank_threefold_excluded
             and not self.residual_rank_intersections_classified
             and not self.split_boundary_intersections_classified
             and self.topology_propagation_dependencies
@@ -835,6 +865,7 @@ def exact_delta_ten_contact_triple_certificate() -> DeltaTenContactTripleCertifi
         coefficient_image_codimension=2,
         projection_quasi_finite_on_cramer_open=True,
         projection_generically_finite_onto_image=True,
+        sage_residual_rank_two_saturation=SAGE_RESIDUAL_RANK_TWO_SATURATION,
         residual_rank_intersections_classified=False,
         split_boundary_intersections_classified=False,
         topology_propagation_dependencies=(
