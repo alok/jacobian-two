@@ -16,6 +16,7 @@ def test_quadruple_incidence_has_rank_three_on_every_nonzero_fiber() -> None:
     assert certificate.coefficient_minor_gcd == FIBER_VALUE**2
     assert certificate.localized_minor_basis == (1,)
     assert certificate.generic_solution_residuals == (0, 0, 0)
+    assert certificate.fiber_recovery_identity == 0
     assert certificate.sample_projection_derivatives == (
         Rational(-3, 2),
         Rational(-1, 2),

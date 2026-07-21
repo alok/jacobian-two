@@ -11,7 +11,10 @@ modulo that quartic is constant.  The latter condition gives three equations
 which are affine-linear in ``(a,b,c,d)``.  This module proves exactly that the
 coefficient matrix has rank three on ``h != 0``.  Hence, after also removing
 the critical-fiber discriminant, the incidence is an affine-line bundle over
-an irreducible open of the ``(k,h)`` plane.
+an irreducible open of the ``(k,h)`` plane.  The first remainder equation is
+``h`` times a monic linear equation in ``h``; on the valid open it recovers
+the fiber value uniquely from ``(k,a,b,c,d)``.  Thus projection has one
+irreducible three-dimensional codimension-two image.
 
 An exact rational member is then checked to have one ordinary quadruple fiber
 and four residual nodes, in addition to the forced ``T(2,5)`` cusp and the
@@ -79,6 +82,17 @@ FIBER_POLYNOMIAL: Final = expand(FAMILY_P - FIBER_VALUE)
 Q_FIBER_REMAINDER: Final = expand(rem(FAMILY_Q, FIBER_POLYNOMIAL, T))
 NONCONSTANT_REMAINDERS: Final = tuple(
     Poly(Q_FIBER_REMAINDER, T).coeff_monomial(T**degree) for degree in (1, 2, 3)
+)
+FIBER_RECOVERY: Final = -(
+    ALPHA
+    - BETA * KAPPA
+    + GAMMA * KAPPA**2
+    - GAMMA
+    - DELTA * KAPPA**3
+    + 2 * DELTA * KAPPA
+    + KAPPA**4
+    - 3 * KAPPA**2
+    + 1
 )
 COEFFICIENT_MATRIX: Final = Matrix(
     [
@@ -239,6 +253,7 @@ class DeltaTenQuadrupleCertificate:
     coefficient_minor_gcd: Expr
     localized_minor_basis: tuple[Expr, ...]
     generic_solution_residuals: tuple[Expr, ...]
+    fiber_recovery_identity: Expr
     sample_projection_derivatives: tuple[Expr, Expr, Expr]
     sample_remainder: Expr
     sample_fiber_discriminant: Expr
@@ -269,6 +284,7 @@ class DeltaTenQuadrupleCertificate:
             and self.coefficient_minor_gcd == FIBER_VALUE**2
             and self.localized_minor_basis == (1,)
             and self.generic_solution_residuals == (0, 0, 0)
+            and self.fiber_recovery_identity == 0
             and self.sample_projection_derivatives
             == (Rational(-3, 2), Rational(-1, 2), Rational(-1, 4))
             and self.sample_remainder == Rational(-1, 2)
@@ -340,6 +356,9 @@ def exact_delta_ten_quadruple_certificate() -> DeltaTenQuadrupleCertificate:
         generic_solution_residuals=tuple(
             cancel(equation.subs(GENERIC_SOLUTION))
             for equation in NONCONSTANT_REMAINDERS
+        ),
+        fiber_recovery_identity=expand(
+            NONCONSTANT_REMAINDERS[0] - FIBER_VALUE * (FIBER_VALUE - FIBER_RECOVERY)
         ),
         sample_projection_derivatives=tuple(
             cancel(diff(expression, FIBER_VALUE).subs(sample_solution_point))
