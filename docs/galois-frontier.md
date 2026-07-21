@@ -14,13 +14,17 @@ For a plane map `F=(P,Q)`, the relevant extension is
   k(P,Q)\subset k(x,y).
 \]
 
-The nonzero constant Jacobian makes this a finite separable extension.  Here
-“finite” is field-theoretic: it does not assert that `k[x,y]` is finite as a
-`k[P,Q]`-module or that the polynomial map is proper.  The Keller condition
-also does not make the field extension normal.  “Finite and separable” gives
-a Galois closure; it does not say that the original extension is itself
-Galois.  That missing normality hypothesis is exactly why the classical
-theorem does not settle `JC(2)`.
+The nonzero constant Jacobian makes this a finite separable **field**
+extension, so the associated polynomial morphism is dominant and generically
+finite.  It need not be a finite morphism: that stronger statement would
+require `k[x,y]` to be a finite `k[P,Q]`-module (equivalently, integral over
+`k[P,Q]`) and would imply properness.  The Keller condition supplies none of
+those global finiteness conclusions.  It also does not make the function-field
+extension normal.  “Finite and separable” gives a finite Galois closure of the
+function field; it does not say that the original extension is itself Galois
+or by itself specify a global finite normal-cover model.  That missing
+normality hypothesis is exactly why the classical theorem does not settle
+`JC(2)`.
 
 Campbell proved the complex Galois case, and Razar and Wright supplied
 algebraic treatments.  The result is also recorded among the equivalent

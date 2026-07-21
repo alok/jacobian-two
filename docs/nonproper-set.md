@@ -107,12 +107,20 @@ where
  Q=27a^2c^2-18abc+16a+b^3c-b^2.
 \]
 
-When `c=0`, the dehomogenized polynomial has degree two.  Its ordinary
-quadratic discriminant is `b^2-16a`, whereas the specialized binary-cubic
-discriminant above is `4(b^2-16a)`.  The factor comes from the additional
-simple projective root at infinity; the vanishing locus is the same.  Over the
-generic function field `c` is nonzero, so the displayed formula is also the
-ordinary cubic discriminant there.
+When `c=0`, the dehomogenized polynomial has degree two, so its ordinary
+quadratic discriminant is `b^2-16a`; it no longer has an ordinary cubic
+discriminant.  The specialization of the **binary-cubic** discriminant is
+instead `4(b^2-16a)`.  Indeed, the specialized binary form is
+
+\[
+ U(-2T^2+bTU-2aU^2),
+\]
+
+and the extra factor is the squared resultant of its linear and quadratic
+factors, `Res(U,-2T^2+bTU-2aU^2)^2=(-2)^2=4`.  Thus the two discriminants have
+the same vanishing locus, but differ by convention after the affine degree
+drops.  Over the generic function field `c` is nonzero, so the displayed
+formula is also the ordinary cubic discriminant there.
 
 ### Generic field extension and Galois closure
 
@@ -147,6 +155,13 @@ that `Q` is an irreducible polynomial.  Hence `-4Q` is not a square in `K`.
 An irreducible cubic with nonsquare discriminant has Galois group `S_3`, so
 the splitting field has degree six while the cubic source extension `L/K` is
 nonnormal and has no nontrivial `K`-automorphism.
+
+This finite normal closure is, at this point, only a finite extension of the
+generic function field.  Turning it into a global finite cover requires taking
+the normalization of a specified base model in the splitting field.  The
+support of ramification for that normalization, including what happens along
+the degree-drop divisor `c=0`, is not determined here from the discriminant
+identity alone.
 
 This is the precise Galois-theoretic behavior of the example.  It does not
 contradict the classical Galois-case theorem: the source extension is not
@@ -187,17 +202,18 @@ gives `b^2=12a`.  Conversely, substitution of these two equations makes
 `Q,Q_a,Q_b,Q_c` all zero.
 
 As an independent exact check, let
-`J=(Q,Q_a,Q_b,Q_c)` in `Q[a,b,c]` and use lexicographic order `a>b>c`.
+`J_Q=(Q,Q_a,Q_b,Q_c)` in `Q[a,b,c]` and use lexicographic order `a>b>c`.
 The test suite computes the following Gröbner basis, up to unit scaling:
 
 \[
  \left(16a-b^3c,\ (3bc-4)^2\right)
 \]
 
-This basis is deliberately nonradical.  Over `C`,
+This is a basis for `J_Q` itself, not for its radical.  After extending scalars
+to `C`,
 
 \[
-  \sqrt J=(12a-b^2,\ 3bc-4),
+ \sqrt{J_Q\,\mathbb C[a,b,c]}=(12a-b^2,\ 3bc-4),
 \]
 
 which is the ideal of `Gamma`.
@@ -294,6 +310,10 @@ while
 
 with `Q(a,b,c) != 0`.
 
+Because escape is expressed by convergence of the norms to infinity, every
+subsequence is still escaping.  This is what makes a bounded subsequence a
+contradiction in the cases below.
+
 If `x_n=0` along an infinite subsequence, then
 
 \[
@@ -304,7 +324,7 @@ If `x_n=0` along an infinite subsequence, then
 
 so that source subsequence is bounded, contradicting escape to infinity.
 
-Otherwise pass to a subsequence with `x_n != 0`, and put
+It follows that `x_n=0` only finitely often.  Discard those terms and put
 
 \[
  t_n=y_n+\frac1{x_n}.
@@ -325,13 +345,20 @@ If the limiting root is infinity, then `t_n != 0` eventually.  Moreover,
   s_n=\frac1{t_n}=\frac{x_n}{1+x_ny_n}\longrightarrow0.
 \]
 
-With
+Define
 
 \[
  D_n=1-b_ns_n+3a_ns_n^2,
 \]
 
-the reciprocal reconstruction identities are
+The root equation gives
+
+\[
+ p'_n(t_n)=\frac{2D_n}{s_n}.
+\]
+
+Together with `p'_n(t_n)=2/x_n`, this yields `D_n=s_n/x_n != 0`.
+Consequently the reciprocal reconstruction identities are
 
 \[
  x_n=\frac{s_n}{D_n},
@@ -358,10 +385,12 @@ sequence can escape over a target outside `V(Q)`, and
 
 The hypersurface `V(Q)` is not a critical-value locus for `F`: the polynomial
 Jacobian of `F` is the everywhere nonzero constant `-2`.  It is the universal
-cubic discriminant locus and, for this nonfinite polynomial map, exactly where
-sheets escape to infinity.  This note does not separately prove a
-scheme-theoretic branch-divisor statement for the normalization or Galois
-closure.
+binary-cubic discriminant locus and exactly where sheets of this polynomial
+map escape to infinity.  Although the induced extension of function fields is
+finite, `F` is not a finite morphism: finite morphisms are proper, whereas the
+escaping families above witness nonproperness.  No scheme-theoretic
+branch-support statement for a finite normalization model of the Galois
+closure is asserted here.
 
 ## Reproduction
 
