@@ -917,6 +917,53 @@ transposition branch must have affine projection width at least five.  The
 next target is the smallest width-five curve compatible with the forced cusp
 and normalization-collision budget.
 
+## 2026-07-21: a one-pair `A6` branch needs collision delta at least five
+
+Status: conditional, computer-assisted exclusion; not a solution of `JC(2)`.
+
+Assume polynomial normalization degrees `a<d`, one genuine projective pair
+`(d-a,d)` at infinity, the forced finite `T(2,5)` cusp, and otherwise only
+smooth normalization collisions of total delta `Delta`.  Rational genus gives
+
+```text
+(d-1)*(a-1)=2*(Delta+2).
+```
+
+For `Delta=1`, the sole singular-infinity candidate is `(a,d)=(2,7)`.
+The large affine link is `T(2,7)`, not the small projective `T(5,7)` knot;
+an exact `A6` quotient census finds no generating pair with a single-3-cycle
+meridian.  For `Delta=2`, `(2,9)` fails the same census, while `(3,5)` has
+`720` coarse link quotients and requires a global complement calculation.
+
+Every remaining `(3,5)` parametrization is affine-equivalent to
+
+```text
+(P,Q)=(t^2+t^3,c*t^4+t^5).
+```
+
+Exact collision elimination finds the only exceptional parameters
+`1/2,5/6,1,5`.  The first three violate the forced singularity/fiber
+hypotheses; `c=5` is the sole valid contact-two fiber.  Over the complement of
+those values, the properly compactified family is Whitney equisingular, so
+Thom isotopy transports the complement group from `c=0`, where an exact
+van Kamp presentation collapses to `Z`.  At `c=5`, all `40^3` assignments of
+the three geometric meridians to 3-cycles give only `40` cyclic and `720`
+`A5` images, never `A6`.
+
+The same genus and large-link census then excludes `Delta=3`: its only degree
+pair is `(2,11)`.  At `Delta=4`, both `(2,13)` and `(3,7)` fail.  At
+`Delta=5`, `(2,15)` has `2880` `A6`-generating torus pairs but none with the
+required single-3-cycle meridian; `(3,8)` has exactly `720` correct pairs and
+is the first coarse survivor.  Therefore `Delta>=5`, with `(3,8)` forced at
+equality, under the stated hypotheses.
+
+This also kills
+the explicit hostile `A6` trace curve globally while preserving its original
+purpose as a quadratic trace-lattice consistency model.  What remains open is
+to force the one-pair/finite-singularity hypotheses from the Keller
+compactification, or to attack the degree-`(3,8)` and multi-pair infinity
+frontiers directly.
+
 ## 2026-07-21: the forced `A6` relations survive the spin cover
 
 Status: exact hostile lift; no compactification or Keller map.

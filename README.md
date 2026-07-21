@@ -220,6 +220,22 @@ explicit trace curve, but not of the `S6` passport: any replacement branch
 curve must have projection width at least five.  See the
 [trace-curve topology note](docs/s6-trace-curve-topology.md).
 
+The explicit `A6` trace curve is globally dead as well: its affine complement
+group is `Z`, so single-3-cycle meridians cannot generate `A6`.  More broadly,
+under the additional hypotheses that the branch has one genuine Puiseux pair
+at infinity and no intrinsic finite singularities beyond the forced
+`T(2,5)` cusp, genus and link-at-infinity arithmetic reduce collision delta
+`Delta<=2` to three degree pairs.  Two fail exact torus-group censuses.  The
+third has the exhaustive family `(t^2+t^3,c*t^4+t^5)`; proper equisingular
+isotopy reduces its generic part to the cyclic curve, while the only valid
+exceptional fiber has only `C3` and `A5` three-cycle images.  Therefore this
+conditional stratum excludes `Delta=2`.  Continuing the exact genus and
+large-link census excludes `Delta=3,4` as well; at `Delta=5`, only affine
+degrees `(3,8)` survive.  Thus `Delta>=5` under the stated hypotheses.  The
+extra infinity and singularity hypotheses remain unproved for arbitrary
+Keller branches.  See the
+[A6 one-pair note](docs/a6-one-pair-infinity.md).
+
 The first cubic-cover obstruction also survives an exact lift test.  In the
 natural spin double cover `2.A6`, the canonical order-three lifts of the
 forced `T(2,5)` cusp meridians satisfy the five-braid relation exactly, and

@@ -16,11 +16,13 @@ exact polynomial matrices realizing all of those quadratic constraints for:
 These are hostile trace-lattice models.  They are not rank-six commutative
 algebras, finite covers, or Keller maps.  Their purpose is to prove that the
 listed quadratic data alone are insufficient.  A later complement-group audit
-now excludes the particular `S6` curve globally: its four-meridian projection
-cannot generate a transitive six-sheet group using transpositions.  This does
-not invalidate the matrix calculation, but it shows that connected monodromy
-is another essential datum alongside multiplication, associativity, the
-regular representation, and compactification data.
+now excludes both particular curves globally.  The `S6` curve's four-meridian
+projection cannot generate a transitive six-sheet group using transpositions.
+The `A6` curve has affine complement group `Z`, so its 3-cycle meridians have
+only cyclic image.  These facts do not invalidate either matrix calculation,
+but they show that connected monodromy is another essential datum alongside
+multiplication, associativity, the regular representation, and
+compactification data.
 
 ## 1. A square-discriminant `A6` model
 
@@ -316,7 +318,11 @@ entry perturbation breaks the `A6` certificate.  The independent
 [`S6` topology checker](../scripts/s6_trace_curve_topology.py) exhausts all
 transposition-valued representations of the explicit curve's affine
 complement and proves that none is transitive; see the
-[topology note](s6-trace-curve-topology.md).
+[topology note](s6-trace-curve-topology.md).  The
+[`A6` one-pair checker](../scripts/a6_one_pair_infinity.py) proves that the
+explicit `A6` curve's complement is cyclic and, under additional infinity
+hypotheses, excludes its entire collision-delta-at-most-two family; see the
+[one-pair note](a6-one-pair-infinity.md).
 
 ## Primary sources
 
