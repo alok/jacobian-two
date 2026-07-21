@@ -1280,10 +1280,49 @@ extractions remain trusted computer-assisted inputs.  Family-wide transport
 also depends on proper Whitney--Thom triviality, and the endpoint argument on
 Riemann existence and tame-inertia compatibility.
 
-No curve, cover, or Keller map is constructed at `(4,9)`.  The four standing
-hypotheses are not derived for an arbitrary Keller branch, and the
-unrestricted `A6` passport, the `S6` passport, and therefore `JC(2)` remain
-open.
+No cover or Keller map is constructed at `(4,9)`.  The next checkpoint below
+constructs and excludes the clean branch-curve family, but its degeneration
+walls remain.  The four standing hypotheses are not derived for an arbitrary
+Keller branch, and the unrestricted `A6` passport, the `S6` passport, and
+therefore `JC(2)` remain open.
+
+## 2026-07-21: the clean conditional `A6` delta-ten family is excluded
+
+Status: exact family algebra, exhaustive finite-group replay, and
+computer-assisted topology under the same four standing hypotheses; not a
+proof of the plane Jacobian conjecture.
+
+Every degree-`(4,9)` normalization is polynomially equivalent over `C` to
+
+```text
+P = t^2 + k*t^3 + t^4,
+Q = a*t^5 + b*t^6 + c*t^7 + d*t^8 + t^9,  a != 0,
+```
+
+with residual involution `(k,a,b,c,d) -> (-k,a,-b,c,-d)`.  Exact unordered-pair
+elimination gives a monic collision decic.  The apparent denominator fibers
+`k=0,+2,-2` are legitimate reducible incidence fibers with degree splits
+`2+8`, `4+6`, and `4+6`; they are not silently discarded.
+
+For `(k,a,b,c,d)=(1,1,0,0,0)`, the curve has one `T(2,5)` cusp, ten reduced
+nodes, one `T(5,9)` branch at infinity, and genus balance `28=2+10+16`.
+Sage regenerates its four-generator affine van Kamp presentation and
+simplifies it to `Z`.  The dependency-free replay checks all
+`40^4=2,560,000` single-three-cycle assignments: exactly 40 survive, all
+diagonal with image `C3`, and none generates `A6`.  The clean parameter locus
+is a nonempty Zariski-open subset of irreducible affine five-space, hence
+connected;
+proper projective Whitney--Thom triviality propagates the complement result
+through that locus.  Thus every remaining conditional delta-ten candidate
+lies on a degeneration wall.
+
+An independent hostile census prevents a false shortcut.  There are exactly
+720 qualifying `T(4,9) -> A6` pairs, forming two inner orbits of 360 fused by
+odd sheet relabeling.  Every pair has a unique compatible forced
+`T(2,5)`-cusp plus collision decomposition, and all 720 admit exact compatible
+spin lifts in `2.A6`.  Therefore the local, peripheral, orientation, and spin
+constraints do not eliminate the frontier; global complement topology is
+essential.
 
 ## Negative results and guarded boundaries
 

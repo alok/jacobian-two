@@ -359,10 +359,15 @@ exact link scan then excludes `Delta=8,9` and, at `Delta=10`, leaves only
   (a,d)=(4,9),\qquad(d-a,d)=(5,9).
 \]
 
-Thus the current combined frontier is `Delta>=10`, with `(4,9)` only a coarse
-equality candidate.  No `A6` cover or Keller map is constructed.  Multi-pair
-infinity and branches violating the finite-singularity hypotheses remain
-outside this theorem.
+Thus the coarse combined frontier is `Delta>=10`, with `(4,9)` the only
+equality candidate.  The follow-up
+[generic delta-ten audit](a6-delta-ten-generic.md) derives the complete
+five-parameter normalization family and excludes its connected clean stratum:
+an exact member with ten nodes has cyclic affine complement, and its exhaustive
+`40^4` single-three-cycle replay has no `A6` image.  Consequently any remaining
+conditional equality case lies on a valid degeneration wall.  No `A6` cover
+or Keller map is constructed.  Multi-pair infinity and branches violating the
+finite-singularity hypotheses remain outside this theorem.
 
 ## Reproduction and source boundary
 
@@ -378,6 +383,8 @@ uv run python -m scripts.a6_delta_seven_discriminant_wall
 uv run python -m scripts.a6_delta_seven_deeper_wall
 uv run python -m scripts.a6_delta_seven_finite_wall
 uv run python -m scripts.a6_post_delta_seven_frontier
+uv run python -m scripts.a6_delta_ten_generic
+uv run python -m scripts.a6_delta_ten_link_compatibility
 ```
 
 Together these verify the genus candidates, symbolic family and residual
@@ -391,8 +398,11 @@ three excess-three presentations, and
 positive-dimensional incidence algebra.  The stored triple-wall,
 excess-one/two, and finite-endpoint presentations are replayed exactly, but
 their original Zariski--van Kamp extraction is trusted and is not regenerated
-by a checked script in this repository.  The large-link epimorphism is the
-standard Zariski--Lefschetz theorem at infinity.  The family steps use proper
+by a checked script in this repository.  At delta ten,
+`tools/check_a6_delta_ten_generic.sage` independently regenerates the clean
+representative's presentation and singular decomposition.  The large-link
+epimorphism is the standard Zariski--Lefschetz theorem at infinity.  The
+family steps use proper
 Whitney--Thom isotopy, not mere constancy of singularity counts.  These
 topological dependencies are distinct from the exact symbolic and finite
 permutation replays.

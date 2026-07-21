@@ -263,11 +263,33 @@ The large-link census then excludes `Delta=8,9`.  Consequently
 \]
 
 under the four hypotheses.  At the coarse link stage equality leaves only
-affine degrees `(a,d)=(4,9)`, with projective infinity pair `(5,9)`.  This is
-a conditional lower bound and degree filter, not a construction of a curve,
-a cover, or a Keller map, and not a proof of `JC(2)`.  The four hypotheses
-remain unproved for arbitrary Keller branches.  See the
-[A6 one-pair note](docs/a6-one-pair-infinity.md).
+affine degrees `(a,d)=(4,9)`, with projective infinity pair `(5,9)`.
+
+That equality family is now explicit.  Every normalization is polynomially
+equivalent to
+
+\[
+  P=t^2+kt^3+t^4,
+  \qquad
+  Q=at^5+bt^6+ct^7+dt^8+t^9,
+  \qquad a\ne0,
+\]
+
+up to one residual involution.  The exact member
+`(t^2+t^3+t^4,t^5+t^9)` has one `T(2,5)` cusp, ten nodes, a `T(5,9)` branch
+at infinity, and cyclic affine complement.  Its stored four-generator van
+Kampen presentation has exactly 40 single-three-cycle assignments, all with
+image `C3`, and no `A6` image.  Proper projective Whitney--Thom transport
+therefore excludes the entire connected clean stratum.  A hostile independent
+census also shows why local link data alone cannot finish the boundary: all
+720 admissible `T(4,9) -> A6` pairs have compatible cusp, collision,
+orientation, and `2.A6` spin data.
+
+Thus a conditional delta-ten survivor must lie on a valid degeneration wall.
+No `A6` cover or Keller map has been constructed, the four hypotheses remain
+unproved for arbitrary Keller branches, and this is not a proof of `JC(2)`.
+See the [A6 one-pair note](docs/a6-one-pair-infinity.md) and the
+[generic delta-ten audit](docs/a6-delta-ten-generic.md).
 
 The delta-five equality family is now fully exhausted.  Every conditional
 `(3,8)` curve is polynomially equivalent to
@@ -626,6 +648,10 @@ optional Sage/GAP replay is an additional independent local cross-check.
   conditional `(3,10)` collision walls and finite endpoints, derives
   `Delta>=10`, and separates exact algebra and finite-group replay from the
   stored-presentation, Whitney--Thom, and finite-etale dependencies.
+- [`docs/a6-delta-ten-generic.md`](docs/a6-delta-ten-generic.md) derives the
+  complete normalized `(4,9)` family, treats the exceptional pair-incidence
+  charts honestly, and excludes its connected clean stratum by an exact
+  cyclic-complement representative and exhaustive `40^4` replay.
 - [`docs/one-dicritical-source-smoothness.md`](docs/one-dicritical-source-smoothness.md)
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.
