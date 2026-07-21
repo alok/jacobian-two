@@ -129,6 +129,300 @@ theorem isNonzeroScalarTimesSquare_of_sq_eq_scalar_mul_odd_pow
     scalar_times_square_and_odd_root_of_sq_eq_scalar_mul_pow hc ha hodd hsq
   exact ⟨eps, h, heps, haSquare⟩
 
+section ParityDecomposition
+
+variable {L : Type*} [Field L]
+
+/-- The quadratic generator used for even/odd decomposition. -/
+def parityQuadratic (eps F : L) : L[X] :=
+  C eps * X ^ 2 + C F
+
+theorem natDegree_parityQuadratic {eps F : L} (heps : eps ≠ 0) :
+    (parityQuadratic eps F).natDegree = 2 := by
+  simpa [parityQuadratic] using
+    (natDegree_quadratic (b := (0 : L)) (c := F) heps)
+
+theorem leadingCoeff_parityQuadratic {eps F : L} (heps : eps ≠ 0) :
+    (parityQuadratic eps F).leadingCoeff = eps := by
+  simpa [parityQuadratic] using
+    (leadingCoeff_quadratic (b := (0 : L)) (c := F) heps)
+
+/-- Every polynomial is the sum of a polynomial in `eps*X^2+F` and `X`
+times another polynomial in that quadratic. -/
+theorem exists_comp_parityQuadratic_add_X_mul_comp
+    (R : L[X]) {eps F : L} (heps : eps ≠ 0) :
+    ∃ H B : L[X],
+      R = H.comp (parityQuadratic eps F) +
+        X * (B.comp (parityQuadratic eps F)) := by
+  let q := parityQuadratic eps F
+  have hqdegree : q.natDegree = 2 := natDegree_parityQuadratic heps
+  have hqlead : q.leadingCoeff = eps := leadingCoeff_parityQuadratic heps
+  have hqne : q ≠ 0 := by
+    intro hzero
+    rw [hzero, natDegree_zero] at hqdegree
+    omega
+  have descend : ∀ n : ℕ, ∀ S : L[X], S.natDegree = n →
+      ∃ H B : L[X], S = H.comp q + X * (B.comp q) := by
+    intro n
+    induction n using Nat.strong_induction_on with
+    | h n ih =>
+        intro S hdegree
+        by_cases hn : n = 0
+        · have hSconstant : S = C (S.coeff 0) := by
+            apply eq_C_of_natDegree_eq_zero
+            rw [hdegree, hn]
+          refine ⟨C (S.coeff 0), 0, ?_⟩
+          rw [hSconstant]
+          simp
+        · have hSne : S ≠ 0 := by
+            intro hzero
+            rw [hzero, natDegree_zero] at hdegree
+            exact hn hdegree.symm
+          obtain heven | hodd := Nat.even_or_odd n
+          · rcases heven with ⟨m, hneven⟩
+            let mu : L := S.leadingCoeff / eps ^ m
+            have hmu : mu ≠ 0 := by
+              dsimp [mu]
+              exact div_ne_zero (leadingCoeff_ne_zero.mpr hSne)
+                (pow_ne_zero _ heps)
+            let model : L[X] := C mu * q ^ m
+            let tail : L[X] := S - model
+            have hmodel_ne : model ≠ 0 := by
+              dsimp [model]
+              exact mul_ne_zero (C_ne_zero.mpr hmu) (pow_ne_zero _ hqne)
+            have hmodel_natDegree : model.natDegree = S.natDegree := by
+              dsimp [model]
+              rw [natDegree_mul (C_ne_zero.mpr hmu) (pow_ne_zero _ hqne),
+                natDegree_C, zero_add, natDegree_pow, hqdegree, hdegree,
+                hneven]
+              omega
+            have hmodel_leadingCoeff : model.leadingCoeff = S.leadingCoeff := by
+              dsimp [model, mu]
+              rw [leadingCoeff_mul, leadingCoeff_C, leadingCoeff_pow, hqlead]
+              field_simp
+            have hmodel_degree : model.degree = S.degree := by
+              rw [degree_eq_natDegree hmodel_ne, degree_eq_natDegree hSne,
+                hmodel_natDegree]
+            have htail_degree : tail.degree < S.degree := by
+              dsimp [tail]
+              exact degree_sub_lt hmodel_degree.symm hSne
+                hmodel_leadingCoeff.symm
+            have htail_natDegree : tail.natDegree < n := by
+              by_cases htail : tail = 0
+              · simp [htail, Nat.pos_of_ne_zero hn]
+              · apply (natDegree_lt_iff_degree_lt htail).mpr
+                rw [degree_eq_natDegree hSne, hdegree] at htail_degree
+                exact htail_degree
+            obtain ⟨H, B, htail_repr⟩ :=
+              ih tail.natDegree htail_natDegree tail rfl
+            refine ⟨H + monomial m mu, B, ?_⟩
+            calc
+              S = tail + model := by simp [tail]
+              _ = (H.comp q + X * (B.comp q)) + C mu * q ^ m := by
+                rw [htail_repr]
+              _ = (H + monomial m mu).comp q + X * (B.comp q) := by
+                rw [add_comp, monomial_comp]
+                ring
+          · rcases hodd with ⟨m, hnodd⟩
+            let mu : L := S.leadingCoeff / eps ^ m
+            have hmu : mu ≠ 0 := by
+              dsimp [mu]
+              exact div_ne_zero (leadingCoeff_ne_zero.mpr hSne)
+                (pow_ne_zero _ heps)
+            let core : L[X] := C mu * q ^ m
+            let model : L[X] := X * core
+            let tail : L[X] := S - model
+            have hcore_ne : core ≠ 0 := by
+              dsimp [core]
+              exact mul_ne_zero (C_ne_zero.mpr hmu) (pow_ne_zero _ hqne)
+            have hmodel_ne : model ≠ 0 := by
+              dsimp [model]
+              exact mul_ne_zero X_ne_zero hcore_ne
+            have hcore_natDegree : core.natDegree = 2 * m := by
+              dsimp [core]
+              rw [natDegree_mul (C_ne_zero.mpr hmu) (pow_ne_zero _ hqne),
+                natDegree_C, zero_add, natDegree_pow, hqdegree]
+              omega
+            have hmodel_natDegree : model.natDegree = S.natDegree := by
+              dsimp [model]
+              rw [natDegree_X_mul hcore_ne, hcore_natDegree, hdegree, hnodd]
+            have hcore_leadingCoeff : core.leadingCoeff = S.leadingCoeff := by
+              dsimp [core, mu]
+              rw [leadingCoeff_mul, leadingCoeff_C, leadingCoeff_pow, hqlead]
+              field_simp
+            have hmodel_leadingCoeff : model.leadingCoeff = S.leadingCoeff := by
+              dsimp [model]
+              rw [leadingCoeff_mul, leadingCoeff_X, one_mul,
+                hcore_leadingCoeff]
+            have hmodel_degree : model.degree = S.degree := by
+              rw [degree_eq_natDegree hmodel_ne, degree_eq_natDegree hSne,
+                hmodel_natDegree]
+            have htail_degree : tail.degree < S.degree := by
+              dsimp [tail]
+              exact degree_sub_lt hmodel_degree.symm hSne
+                hmodel_leadingCoeff.symm
+            have htail_natDegree : tail.natDegree < n := by
+              by_cases htail : tail = 0
+              · simp [htail, Nat.pos_of_ne_zero hn]
+              · apply (natDegree_lt_iff_degree_lt htail).mpr
+                rw [degree_eq_natDegree hSne, hdegree] at htail_degree
+                exact htail_degree
+            obtain ⟨H, B, htail_repr⟩ :=
+              ih tail.natDegree htail_natDegree tail rfl
+            refine ⟨H, B + monomial m mu, ?_⟩
+            calc
+              S = tail + model := by simp [tail]
+              _ = (H.comp q + X * (B.comp q)) + X * (C mu * q ^ m) := by
+                rw [htail_repr]
+              _ = H.comp q + X * ((B + monomial m mu).comp q) := by
+                rw [add_comp, monomial_comp]
+                ring
+  simpa only [q] using descend R.natDegree R rfl
+
+/-- In any parity decomposition of a polynomial of odd degree `2*m+1`, the
+odd coefficient has degree `m`; its leading coefficient is determined by the
+leading coefficient of the original polynomial. -/
+theorem odd_degree_parityDecomposition_control
+    {R H B : L[X]} {eps F lam : L} {m : ℕ}
+    (heps : eps ≠ 0)
+    (hrepr : R = H.comp (parityQuadratic eps F) +
+      X * (B.comp (parityQuadratic eps F)))
+    (hdegree : R.natDegree = 2 * m + 1)
+    (hlead : R.leadingCoeff = lam) :
+    B.natDegree = m ∧ B.leadingCoeff = lam / eps ^ m := by
+  let q := parityQuadratic eps F
+  let evenPart := H.comp q
+  let oddPart := X * (B.comp q)
+  have hrepr' : R = evenPart + oddPart := by
+    simpa only [q, evenPart, oddPart] using hrepr
+  have hqdegree : q.natDegree = 2 := natDegree_parityQuadratic heps
+  have hqlead : q.leadingCoeff = eps := leadingCoeff_parityQuadratic heps
+  have hqdegree_ne : q.natDegree ≠ 0 := by omega
+  have hBne : B ≠ 0 := by
+    intro hzero
+    have hRdegreeEven : R.natDegree = H.natDegree * 2 := by
+      rw [hrepr, hzero]
+      simp [natDegree_comp, natDegree_parityQuadratic heps]
+    rw [hdegree] at hRdegreeEven
+    omega
+  have hBcompne : B.comp q ≠ 0 := by
+    intro hzero
+    rcases comp_eq_zero_iff.mp hzero with hBzero | ⟨_, hqconstant⟩
+    · exact hBne hBzero
+    · have hdegrees := congrArg natDegree hqconstant
+      rw [hqdegree] at hdegrees
+      simp at hdegrees
+  have hevenDegree : evenPart.natDegree = H.natDegree * 2 := by
+    dsimp [evenPart]
+    rw [natDegree_comp, hqdegree]
+  have hoddDegree : oddPart.natDegree = B.natDegree * 2 + 1 := by
+    dsimp [oddPart]
+    rw [natDegree_X_mul hBcompne, natDegree_comp, hqdegree]
+  have hdegrees_ne : evenPart.natDegree ≠ oddPart.natDegree := by
+    rw [hevenDegree, hoddDegree]
+    omega
+  obtain heven_lt_odd | hodd_lt_even := lt_or_gt_of_ne hdegrees_ne
+  · have hRdegreeOdd : R.natDegree = oddPart.natDegree := by
+      rw [hrepr']
+      exact natDegree_add_eq_right_of_natDegree_lt heven_lt_odd
+    have hBdegree : B.natDegree = m := by
+      rw [hdegree, hoddDegree] at hRdegreeOdd
+      omega
+    have hRleadOdd : R.leadingCoeff = oddPart.leadingCoeff := by
+      rw [hrepr']
+      exact leadingCoeff_add_of_degree_lt (degree_lt_degree heven_lt_odd)
+    have hoddLead :
+        oddPart.leadingCoeff = B.leadingCoeff * eps ^ B.natDegree := by
+      dsimp [oddPart]
+      rw [leadingCoeff_mul, leadingCoeff_X, one_mul,
+        leadingCoeff_comp hqdegree_ne, hqlead]
+    have hmul : B.leadingCoeff * eps ^ m = lam := by
+      calc
+        B.leadingCoeff * eps ^ m = oddPart.leadingCoeff := by
+          rw [hoddLead, hBdegree]
+        _ = R.leadingCoeff := hRleadOdd.symm
+        _ = lam := hlead
+    exact ⟨hBdegree, (eq_div_iff (pow_ne_zero _ heps)).2 hmul⟩
+  · have hRdegreeEven : R.natDegree = evenPart.natDegree := by
+      rw [hrepr']
+      exact natDegree_add_eq_left_of_natDegree_lt hodd_lt_even
+    rw [hdegree, hevenDegree] at hRdegreeEven
+    omega
+
+/-- Existence together with the exact odd-part degree and leading
+coefficient for an input of degree `2*m+1`. -/
+theorem exists_comp_parityQuadratic_add_X_mul_comp_of_odd_degree
+    (R : L[X]) {eps F lam : L} {m : ℕ}
+    (heps : eps ≠ 0)
+    (hdegree : R.natDegree = 2 * m + 1)
+    (hlead : R.leadingCoeff = lam) :
+    ∃ H B : L[X],
+      R = H.comp (parityQuadratic eps F) +
+        X * (B.comp (parityQuadratic eps F)) ∧
+      B.natDegree = m ∧ B.leadingCoeff = lam / eps ^ m := by
+  obtain ⟨H, B, hrepr⟩ :=
+    exists_comp_parityQuadratic_add_X_mul_comp R heps
+  obtain ⟨hBdegree, hBlead⟩ :=
+    odd_degree_parityDecomposition_control heps hrepr hdegree hlead
+  exact ⟨H, B, hrepr, hBdegree, hBlead⟩
+
+/-- The even/odd decomposition relative to `eps*X^2+F` is unique. -/
+theorem parityDecomposition_unique
+    {H B H' B' : L[X]} {eps F : L} (heps : eps ≠ 0)
+    (heq : H.comp (parityQuadratic eps F) +
+        X * (B.comp (parityQuadratic eps F)) =
+      H'.comp (parityQuadratic eps F) +
+        X * (B'.comp (parityQuadratic eps F))) :
+    H = H' ∧ B = B' := by
+  let q := parityQuadratic eps F
+  let A := H - H'
+  let D := B - B'
+  have hqdegree : q.natDegree = 2 := natDegree_parityQuadratic heps
+  have hqnotconstant : q ≠ C (q.coeff 0) := by
+    intro hconstant
+    have hdegrees := congrArg natDegree hconstant
+    rw [hqdegree] at hdegrees
+    simp at hdegrees
+  have comp_ne_zero : ∀ {T : L[X]}, T ≠ 0 → T.comp q ≠ 0 := by
+    intro T hT hcomp
+    rcases comp_eq_zero_iff.mp hcomp with hzero | ⟨_, hconstant⟩
+    · exact hT hzero
+    · exact hqnotconstant hconstant
+  have hzero : A.comp q + X * (D.comp q) = 0 := by
+    calc
+      A.comp q + X * (D.comp q) =
+          (H.comp q + X * (B.comp q)) -
+            (H'.comp q + X * (B'.comp q)) := by
+              dsimp [A, D]
+              rw [sub_comp, sub_comp]
+              ring
+      _ = 0 := by
+        apply sub_eq_zero.mpr
+        simpa only [q] using heq
+  have hA : A = 0 := by
+    by_contra hAne
+    have hAcompne := comp_ne_zero hAne
+    by_cases hD : D = 0
+    · apply hAcompne
+      simpa [hD] using hzero
+    · have hDcompne := comp_ne_zero hD
+      have hequal : A.comp q = -(X * (D.comp q)) := by
+        linear_combination hzero
+      have hdegrees := congrArg natDegree hequal
+      rw [natDegree_comp, hqdegree, natDegree_neg,
+        natDegree_X_mul hDcompne, natDegree_comp, hqdegree] at hdegrees
+      omega
+  have hD : D = 0 := by
+    have hproduct : X * (D.comp q) = 0 := by
+      simpa [hA] using hzero
+    have hcomp : D.comp q = 0 :=
+      (mul_eq_zero.mp hproduct).resolve_left X_ne_zero
+    by_contra hDne
+    exact (comp_ne_zero hDne) hcomp
+  exact ⟨sub_eq_zero.mp hA, sub_eq_zero.mp hD⟩
+
+end ParityDecomposition
+
 @[simp]
 theorem yDerivative_variableQuadraticCoordinate (a g f : K[X]) :
     yDerivative (variableQuadraticCoordinate a g f) =
