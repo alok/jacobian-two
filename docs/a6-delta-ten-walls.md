@@ -40,12 +40,13 @@ The follow-up [codimension-two checkpoint](a6-delta-ten-codim-two.md) now
 excludes all six displayed generic or dominant components.  The separate
 [propagation proof](a6-delta-ten-propagation.md) closes the labeled-incidence,
 connected-clean-open, simultaneous-resolution, and proper-isotopy steps for
-the `T112` and mixed contact-plus-triple charts.  This
-still does not complete the delta-ten wall audit: compatible
-lower-dimensional residual-rank loci, the split `k=0,+2,-2` charts,
-removed pair or `P`-projection/critical-fiber loci, deeper intersections, and
-endpoints remain to be eliminated or checked.  A removed `P`-critical fiber
-is not automatically a singular curve branch when `Q'` is nonzero.  The
+the `T112` and mixed contact-plus-triple charts.  All three exposed residual
+rank factors and both immersed `P`-critical same-profile threefold threats are
+now closed.  A generated 22-row split ledger proves every generic allocation
+has an exact clean witness, but it deliberately leaves most split rank-drop
+subloci open.  Thus denominator/overlap charts, split determinantal strata,
+component intersections, lower-dimensional residual taxonomy, and endpoints
+remain to be eliminated or checked.  The
 result is conditional and computer-assisted.  It does not derive the four
 hypotheses, exclude unrestricted `A6` or `S6`, construct a Keller map, or
 prove the plane Jacobian conjecture.
@@ -571,13 +572,20 @@ the optional degree-two image statement additionally uses the unique
 `T112`/two-orientation labeling argument, but the topology proof does not.
 For `T112` and a separate contact plus ordinary triple, transport is carried
 out over the smooth irreducible labeled incidence, after a finite-etale
-labeling cover and simultaneous embedded resolution.  No statement eliminates compatible lower-dimensional
-pieces supported on residual rank factors, split charts, removed pair or
-`P`-projection/critical-fiber loci, or deeper intersections.  In particular,
-the removed triple/fourth-root loci are not automatically singular branches
-of `(P,Q)`.  See the
+labeling cover and simultaneous embedded resolution.  The three residual
+factors cannot support a threefold, and the immersed critical `T112` and
+mixed boundaries have dimension at most two.  The split ledger generates all
+22 generic allocations, proves exact clean witnesses, and replays every
+`k=-2` transport, but it is not a global rank-stratum exclusion.  See the
 [codimension-two checkpoint](a6-delta-ten-codim-two.md) for the six distinct
 claim boundaries and reproduction commands.
+
+The first expected codimension-three profile is now underway.  The
+[codimension-three checkpoint](a6-delta-ten-codim-three.md) excludes the dense
+clean nonsplit `C4+6N` Cramer surface.  Its residual determinant has only a
+finite length-ten compatible base with rank-three affine-line fibers, and its
+exact cyclic member propagates across the clean surface after four relative
+contact blowups.  Split and other omitted boundaries remain open.
 
 One useful coefficient-slice check makes the next elimination finite.  For
 fixed `k`, the collision-decic coefficients are affine-linear in
@@ -618,16 +626,17 @@ dependency.  Family-wide propagation separately depends on proper projective
 Whitney--Thom triviality.
 
 The next exact work package is the unresolved boundary of the six
-codimension-two profiles in Section 7, followed by the fourteen expected
-codimension-three profiles.  A complete audit must:
+codimension-two profiles in Section 7, followed by the remaining thirteen
+expected codimension-three profiles and the omitted `C4` charts.  A complete
+audit must:
 
-1. saturate and decompose the residual coefficient-rank loci left by the
-   two-contact, contact-plus-triple, and double-triple Cramer calculations;
-2. audit all six profiles on the true split `k=0,+2,-2` pair charts;
-3. determine the removed pair, overlap, and
-   `P`-projection/critical-fiber loci on appropriate charts rather than
-   declaring them invalid; prove whether each is contained in a known
-   component or gives a genuine deeper component;
+1. saturate every unresolved split allocation rank stratum at
+   `k=0,+2,-2`;
+2. determine the removed pair-denominator and overlap loci on appropriate
+   charts rather than declaring them invalid;
+3. classify intersections of the bounded residual and `P`-critical pieces
+   with split, cusp, and deeper collision walls, and assign the remaining
+   curves and points to adjacent profiles;
 4. regenerate one presentation on every resulting connected equisingular
    component;
 5. transport finite endpoint obstructions across arithmetic conjugacy only
@@ -654,6 +663,10 @@ uv run python -m scripts.a6_delta_ten_t112
 uv run python -m scripts.a6_delta_ten_contact_triple
 uv run python -m scripts.a6_delta_ten_quadruple
 uv run python -m scripts.a6_delta_ten_double_triple
+uv run python -m scripts.a6_delta_ten_pcritical_triples
+uv run python -m scripts.a6_delta_ten_split_codim_two
+uv run python -m scripts.a6_delta_ten_residual_rank
+uv run python -m scripts.a6_delta_ten_contact_four
 
 uv run pytest -q \
   tests/test_a6_delta_ten_contact_wall.py \
@@ -665,7 +678,11 @@ uv run pytest -q \
   tests/test_a6_delta_ten_t112.py \
   tests/test_a6_delta_ten_contact_triple.py \
   tests/test_a6_delta_ten_quadruple.py \
-  tests/test_a6_delta_ten_double_triple.py
+  tests/test_a6_delta_ten_double_triple.py \
+  tests/test_a6_delta_ten_pcritical_triples.py \
+  tests/test_a6_delta_ten_split_codim_two.py \
+  tests/test_a6_delta_ten_residual_rank.py \
+  tests/test_a6_delta_ten_contact_four.py
 
 uv run mypy --no-incremental
 ```
@@ -682,6 +699,9 @@ sage tools/check_a6_delta_ten_t112.sage
 sage tools/check_a6_delta_ten_contact_triple.sage
 sage tools/check_a6_delta_ten_quadruple.sage
 sage tools/check_a6_delta_ten_double_triple.sage
+sage tools/check_a6_delta_ten_pcritical_triples.sage
+sage tools/check_a6_delta_ten_contact_triple_residual.sage
+sage tools/check_a6_delta_ten_contact_four.sage
 ```
 
 The Sage commands are manual checkers.  GitHub CI runs the Python

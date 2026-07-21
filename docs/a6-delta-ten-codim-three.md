@@ -206,7 +206,8 @@ with
 This base is smooth and irreducible.  Shrink it by the exact nonvanishing
 conditions that define the clean profile:
 
-- `a!=0` for the forced cusp;
+- `a!=0` for the forced cusp, together with nonzero cusp-image and
+  extra-critical resultants;
 - nonzero contact-pair discriminant and `Res(pair,P')`;
 - nonzero fourth-jet difference and `H''''(s)`;
 - nonzero residual-sextic leading coefficient and discriminant;
@@ -215,7 +216,8 @@ conditions that define the clean profile:
 - separation of node, contact, and cusp target sections.
 
 These are principal open conditions.  The sample (4.1) lies in their
-intersection: among the recorded values are `a=9/7`, pair discriminant `-3`,
+intersection: among the recorded values are `a=9/7`, cusp-image factor
+`1/196`, extra-critical factor `11421/49`, pair discriminant `-3`,
 `Res(pair,P')=3`, fourth-jet norm `3`, `H''''(-1)=492/7`, nonzero residual
 discriminant (4.3), and nonzero node-target and special-target separations.
 Hence the clean incidence is a nonempty irreducible complex surface and is

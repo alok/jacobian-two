@@ -1395,9 +1395,9 @@ target-fiber incidences rather than only by roots of the collision decic:
 - `C2^2+6N`: the ordered equations at two distinct double roots give a
   rational Cramer threefold dominating the full `(k,u,v)` ordered base and
   invariant under the free root swap.  The determinant/augmentation gcd
-  removes the residual rank factor as another dominant divisor.  Compatible
-  residual-rank subvarieties and the split `k=0,+2,-2` intersections could
-  support other components and remain open.
+  removes the residual rank factor as another dominant divisor.  A follow-up
+  rank-stratified audit now bounds every compatible residual incidence by
+  dimension two; split rank strata remain open.
 - `T112+6N`: the labeled triple-root base
   `sigma2^2-sigma1*sigma3-sigma2=0` is absolutely irreducible and smooth on
   the displayed `P`-unramified localization.  The removed
@@ -1426,8 +1426,8 @@ target-fiber incidences rather than only by roots of the collision decic:
   incidence therefore projects to one irreducible threefold.
 - `T111^2+4N`: two omitted roots give a dense rational Cramer graph.  The
   same-fiber determinant factor is invalid for separate target triples, while
-  the residual factor `k*u*v-u-v` is generically inconsistent.  Compatible
-  pieces supported on that factor and split boundaries remain open.
+  the residual factor `k*u*v-u-v` becomes the unit compatibility ideal after
+  exact valid-chart localization.  Split rank strata remain open.
 
 For every profile, an exact rational representative has the forced
 `T(2,5)` cusp, collision delta ten, the fixed `T(5,9)` infinity branch, and
@@ -1439,11 +1439,83 @@ certificates and tests only, not Sage.  Neither CI nor the Sage checkers
 certify proper projective Whitney--Thom transport.
 
 This maps the displayed dimension-three open-chart layer, not its full
-closure.  The next exact obligations are the three residual coefficient-rank loci,
-all six true split-incidence charts, removed pair and
-`P`-projection/critical-fiber intersections, and the fourteen expected
-codimension-three profiles.  The detailed statement and commands are in
-`docs/a6-delta-ten-codim-two.md`.
+closure.  The residual coefficient-rank and immersed `P`-critical threefold
+threats are now closed.  The next obligations are the unresolved split rank
+strata, removed pair/overlap charts, intersections, lower-dimensional
+taxonomy, and the remaining codimension-three profiles.  The detailed
+statement and commands are in `docs/a6-delta-ten-codim-two.md`.
+
+## 2026-07-21: codimension-two residual and critical threefold threats close
+
+Status: exact algebra and manual Sage saturation under the four standing
+hypotheses; this bounds incidence dimensions but does not classify the
+remaining lower-dimensional pieces or prove `JC(2)`.
+
+The three exposed residual determinants can no longer support a
+codimension-two threefold:
+
+- for `C2+T111+5N`, Sage saturation makes coefficient rank at most two empty
+  on the valid residual divisor; compatibility is a proper curve-or-point
+  subset with affine-line fibers;
+- for `T111^2+4N`, substituting `k=(u+v)/(uv)` and localizing the four
+  augmented determinants gives the unit ideal; the visible compatible family
+  `k=0,v=-u` is exactly the excluded same-`P`-fiber boundary; and
+- for `C2^2+6N`, rank-three compatibility has base dimension at most one,
+  rank-two bases are finite after exact singular-locus projection, and
+  coefficient-function Wronskians rule out rank one on the valid chart.
+
+The removed `P`-critical fourth-source boundary is three labeled prime
+curves.  An immersed critical branch has derivative `(0,Q'(e))`.  In `T112`
+it cannot be part of the tangent pair, and the other-pair incidence has
+dimension two.  In the mixed profile the rank-at-most-two curve is only the
+pair denominator; its genuine split points either change profile or are
+inconsistent.  Neither critical chart supports a threefold.
+
+At the three split values, an actual finite generator produces all 22 generic
+allocations from the `2+8` and `4+6` component budgets.  Every row has an
+exact clean witness at `k=0,+2`, and all eleven `k=2` rows are replayed under
+the full family involution at `k=-2`.  This is a generic clean-witness ledger,
+not a global split exclusion: most determinantal rank-drop subloci remain.
+
+## 2026-07-21: the first codimension-three profile is excluded generically
+
+Status: exact nonsplit incidence and residual-rank algebra, manual Sage
+singular scheme and van Kamp presentation, exhaustive finite-group replay,
+and theorem-level topology transport; omitted boundaries remain open.
+
+For `C4+6N`, the four equations `H=H'=H''=H'''=0` have determinant
+
+```text
+24*(k+2*s)^4*(s^2+k*s+1)^5*F(k,s),
+```
+
+with `F` irreducible over `QQ`.  On the valid nonsplit chart, Sage saturation
+makes coefficient rank at most two empty and the compatible scheme on `F`
+zero-dimensional of length ten.  Every compatible residual point has rank
+three and an affine-line fiber, so the residual incidence is only
+one-dimensional.  The determinant-nonzero incidence is therefore the sole
+nonsplit surface.
+
+The exact member
+
+```text
+k=1, (a,b,c,d)=(9/7,27/14,3,12/7)
+```
+
+has one contact four, six nodes, the forced cusp, and the fixed infinity
+branch.  Sage finds Jacobian pieces `(4,1),(7,1),(6,6)`, simplifies the
+four-generator complement to `Z`, and the exact `40^4` replay leaves only
+forty `C3` images and no `A6` image.
+
+The clean Cramer incidence is a nonempty irreducible open of `A2`.  A
+finite-etale cover labels both contact branches and all nodes.  Four relative
+blowups—not three—are needed at the order-four contact: after the third, the
+two branches and newest exceptional divisor still form a non-SNC triple
+crossing.  Together with the fixed node, cusp, and infinity resolutions, the
+fourth blowup gives a relative SNC projective family.  Proper Thom isotopy
+transports the cyclic complement across the dense clean surface.  Split,
+pair-denominator, cusp-pair, diagonal, residual, and deeper boundary pieces
+remain open.
 
 ## Negative results and guarded boundaries
 
@@ -1465,10 +1537,11 @@ codimension-three profiles.  The detailed statement and commands are in
    try to force Orevkov's condition `(*)` or replace it with a determinant
    inequality stable under several noncontracted preimages; do not relabel the
    conditional two-pair theorem as a solution of the unrestricted conjecture.
-2. Continue the conditional delta-ten elimination with the residual-rank and
-   split-chart closures from `docs/a6-delta-ten-codim-two.md`, then audit the
-   fourteen expected codimension-three profiles without using expected
-   dimension as emptiness.
+2. Continue the conditional delta-ten elimination with the unresolved split
+   rank strata, denominator/overlap charts, and component intersections from
+   `docs/a6-delta-ten-codim-two.md`, then audit the remaining thirteen
+   codimension-three profiles and the omitted `C4` boundaries without using
+   expected dimension as emptiness.
 3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 4. Extend the exact support analysis beyond two interior coefficients in the

@@ -310,11 +310,26 @@ resolution, and proper Whitney--Thom isotopy transports the cyclic sample.
 This avoids any assumption that the coefficient-image threefold is smooth or
 normal and does not require the `T112` image map to have degree exactly two.
 
-That is not a complete codimension-two audit.  Compatible lower-dimensional
-pieces on residual coefficient-rank factors, the split `k=0,+2,-2` charts,
-removed pair or `P`-projection/critical-fiber charts, and deeper component
-intersections remain open.  A `P`-critical fiber is not automatically a
-singular curve branch when `Q'` is nonzero.  The complete combinatorial ledger
+The three residual coefficient-rank factors are now closed at the threefold
+level: the mixed factor has rank exactly three on its valid divisor, the
+two-triple residual is empty after localization, and all two-contact residual
+incidences have dimension at most two.  The immersed `P`-critical `T112` and
+mixed boundaries likewise have dimension at most two.  On the true split
+charts, a generated 22-row allocation ledger has exact clean witnesses at
+`k=0,+2` and full replay under transport to `k=-2`.  That ledger is not a
+global split exclusion: most coefficient-rank-drop subloci, denominator and
+overlap charts, component intersections, and the lower-dimensional residual
+taxonomy remain open.
+
+The first of the fourteen expected codimension-three profiles is now attacked
+as well.  For `C4+6N`, the determinant-nonzero nonsplit incidence is one
+rational surface.  Exact Sage saturation shows that its residual determinant
+curve has a finite length-ten compatibility scheme with rank-three
+affine-line fibers, so it hides no second surface.  An exact member has one
+contact-four point, six nodes, cyclic complement, and no `A6` assignment.
+Four relative contact blowups and proper Whitney--Thom transport exclude the
+dense clean Cramer surface.  The split, denominator, cusp-pair, diagonal, and
+residual boundary pieces remain open.  The complete combinatorial ledger
 still contains 145 candidate collision
 profiles, including 55 overdetermined profiles deliberately retained until
 exact saturation proves them empty, invalid, or contained elsewhere.  No
@@ -323,7 +338,8 @@ unproved for arbitrary Keller branches, and this is not a proof of `JC(2)`.
 See the [A6 one-pair note](docs/a6-one-pair-infinity.md), the
 [generic delta-ten audit](docs/a6-delta-ten-generic.md), the
 [dominant delta-ten wall audit](docs/a6-delta-ten-walls.md), and the
-[codimension-two checkpoint](docs/a6-delta-ten-codim-two.md).
+[codimension-two checkpoint](docs/a6-delta-ten-codim-two.md), and the
+[codimension-three checkpoint](docs/a6-delta-ten-codim-three.md).
 
 The delta-five equality family is now fully exhausted.  Every conditional
 `(3,8)` curve is polynomially equivalent to
@@ -699,6 +715,10 @@ optional Sage/GAP replay is an additional independent local cross-check.
   verifies the connected-clean-open, finite-etale labeling, simultaneous
   embedded-resolution, and proper-isotopy steps for the `T112` and mixed
   contact-plus-triple dominant charts.
+- [`docs/a6-delta-ten-codim-three.md`](docs/a6-delta-ten-codim-three.md)
+  excludes the dense clean nonsplit `C4+6N` Cramer surface, including an exact
+  residual-rank saturation, contact-four singular scheme, cyclic complement,
+  and four-blowup topology transport, while retaining every omitted boundary.
 - [`docs/one-dicritical-source-smoothness.md`](docs/one-dicritical-source-smoothness.md)
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.
