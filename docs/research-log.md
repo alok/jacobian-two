@@ -719,6 +719,41 @@ degree-six argument is an actual classified finite-map germ.  Any elimination
 must couple it to the separate `3+3` collision or to global multiplication,
 trace, compactification, or splice data.
 
+## 2026-07-21: two-pair infinity stratum eliminated
+
+Status: derived and independently hostile-audited conditional theorem; not a
+full elimination of either passport.
+
+Orevkov's Section 2.4 splice equations apply when the one-dicritical target
+branch has exactly two characteristic pairs at infinity and condition `(*)`
+holds: some target boundary component has exactly one noncontracted
+irreducible preimage.  In his notation the surviving passports have
+`m=1`, `n=3` or `2`, and `N=6`.  Equations (11), (14), and (15) give
+
+```text
+N = m^2*x*d1*d2^2*R1*S1,
+x = a+n,
+R1 >= 2.
+```
+
+For `A6`, this forces `N>=8`.  For `S6`, equality first forces
+`x=3, R1=2, d1=d2=S1=1`.  Equations (12)--(13) then determine the two boundary
+stars, and the only surviving arm count reaches equation (10) as
+
+```text
+3*Q_tilde = 14,
+```
+
+impossible for an integral edge determinant.  The preceding Belyi passport
+`(2,2,2),(5,1),(4,1,1)` is itself realizable, so the splice determinant is the
+decisive input.  A typed exact checker replays the bound, both possible second
+arm counts, the fractional determinant, and a transitive product-one
+permutation triple.
+
+The conclusion cannot be promoted yet: neither exactly two infinity
+characteristic pairs nor condition `(*)` follows from the current smoothness,
+Picard, monodromy, trace, or minimal-leaf results.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.
@@ -754,8 +789,10 @@ lower bounds from being mislabeled as an elimination of `(72,108)`.
 ## Next research obligations
 
 1. Attack the surviving `A6` and `S6` generic-degree-six profiles with
-   compactification, splice, adjunction, and Belyi constraints; do not relabel
-   the monodromy filter as a solution of the unrestricted conjecture.
+   compactification, splice, adjunction, and Belyi constraints.  In particular,
+   try to force Orevkov's condition `(*)` or replace it with a determinant
+   inequality stable under several noncontracted preimages; do not relabel the
+   conditional two-pair theorem as a solution of the unrestricted conjecture.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 3. Extend the exact support analysis beyond two interior coefficients in the

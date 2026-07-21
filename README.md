@@ -108,6 +108,17 @@ branch-curve topology gives the same two groups and narrows the local types:
   An exact hostile blowup family shows that these canonical-plus-determinant
   constraints alone still admit infinitely many abstract trees.
 
+One significant compactification stratum is now completely excluded.  If the
+irreducible dicritical image has exactly two characteristic pairs at infinity
+and satisfies Orevkov's condition `(*)`—some target boundary component has
+only one noncontracted irreducible preimage—then his splice product identity
+forces degree at least eight in the `A6` case.  Equality is arithmetically
+possible at the first `S6` star, but the final edge equation becomes
+`3*Q_tilde=14`.  Thus neither passport survives in that conditional stratum.
+The extra infinity hypotheses are not currently consequences of the earlier
+one-dicritical reductions, so this is not a full elimination.  See the
+[two-pair infinity note](docs/two-pair-infinity-elimination.md).
+
 The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
 normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
 curve whose weighted-orbit product identifies the homotopy types of its local
