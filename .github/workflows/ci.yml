@@ -83,6 +83,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_post_delta_seven_frontier
       - name: Exclude the generic conditional A6 delta-ten stratum
         run: uv run --frozen python -m scripts.a6_delta_ten_generic
+      - name: Audit the surviving A6 delta-ten link data
+        run: uv run --frozen python -m scripts.a6_delta_ten_link_compatibility
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts
