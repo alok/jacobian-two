@@ -12,6 +12,8 @@ import JacobianTwo.CubicFiber
 import JacobianTwo.RatFuncDerivative
 import JacobianTwo.FractionRingDerivative
 import JacobianTwo.QuadraticDenominator
+import JacobianTwo.QuadraticClearedEval
+import JacobianTwo.QuadraticDenominatorDescent
 import JacobianTwo.QuadraticInOneVariable
 import JacobianTwo.QuadraticRecurrence
 import JacobianTwo.QuadraticRecurrencePrimitive
@@ -20,6 +22,11 @@ import JacobianTwo.QuadraticParityJacobian
 import JacobianTwo.QuadraticParityExtraction
 import JacobianTwo.QuadraticTransportJacobian
 import JacobianTwo.QuadraticReduction
+import JacobianTwo.QuadraticSpecialization
+import JacobianTwo.QuadraticDirectPackage
+import JacobianTwo.QuadraticGCDDescent
+import JacobianTwo.QuadraticUnitConclusion
+import JacobianTwo.VariableLeadingQuadraticConclusion
 
 /-!
 # Jacobian Two

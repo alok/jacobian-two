@@ -222,13 +222,13 @@ on `K(x)`, its constant field, the affine substitution `y=(U-rho)/h`, the
 exact Jacobian factor `k/h`, parity extraction, and the full coefficient
 recurrence.  Lean also constructs its primitive explicitly, proves every
 coefficient lies in `K[F]`, and tracks the exact degree and nonzero leading
-coefficient through the downward descent.  Abstract denominator certificates
-cover the final noncancellation and unit-denominator implications.
-
-It does **not** yet connect the polynomiality of the original mate, after
-specialization at `y=0`, to the unique-survivor argument forcing `h | g`;
-consequently the final proof that `h` is a unit is not yet kernel-checked.  The
-complete proof target, hostile fixtures, and exact boundary are in
+coefficient through the downward descent.  Specialization at `y=0`, a
+valuation-free gcd normalization, and a unique-survivor denominator theorem
+then force `h | g`; the terminal recurrence forces `h` to be a unit.  The
+resulting theorem `variableLeadingQuadratic_bijective_full` is a complete
+kernel-checked proof for every coordinate of the displayed at-most-quadratic
+form, including its affine branch.  The complete direct proof, hostile
+fixtures, and exact literature boundary are in
 [`docs/variable-leading-quadratic.md`](docs/variable-leading-quadratic.md).
 
 Two earlier bounded modules expose useful intermediate mechanisms.  First,
@@ -293,8 +293,7 @@ the commands above and rejects unfinished proof declarations.
   its polynomial inverse.
 - [`docs/variable-leading-quadratic.md`](docs/variable-leading-quadratic.md)
   gives the known arbitrary-leading quadratic theorem, an independently
-  derived direct proof, the current partial Lean certificate, and every
-  remaining denominator obligation.
+  derived direct proof, and its complete Lean certificate.
 - [`docs/audit.md`](docs/audit.md) gives a hand-checkable structural derivation
   of the original screenshot.
 - [`docs/research-log.md`](docs/research-log.md) records completed work,

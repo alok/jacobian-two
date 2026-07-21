@@ -264,6 +264,32 @@ hypotheses forcing `h | g`, and then prove that the terminal `k/h` equation
 lies in `K[x]`.  No automorphy claim is promoted until those links are
 kernel-checked.
 
+## 2026-07-21: complete variable-leading quadratic certificate
+
+Status: known theorem; independently derived direct proof now fully
+Lean-certified.
+
+The two remaining links above are now closed.  Specialization of the original
+mate at the quadratic center proves that `rho * B(f)` belongs to the embedded
+polynomial ring.  If `h` did not divide `g`, Lean reduces `g/h` by its gcd,
+writes the centered residual as `N/q^2`, and clears the common denominator
+`q^(2*m+1)`.  Every numerator summand is divisible by `q` except the exact
+leading term of the zero-index coefficient, whose nondivisibility follows
+from coprimality and the recurrence's degree/leading-coefficient certificate.
+This contradiction forces `h | g` without a valuation API.
+
+Once `h | g`, the center, residual, and zero-index recurrence coefficient are
+all embedded polynomials.  The terminal recurrence equation therefore puts
+`k/h` in the base ring; its nonzero scalar numerator forces `h` to be a unit.
+The general target-shear and UFD steps then prove that the original quadratic
+coefficient `a` is a unit.  The theorem
+`variableLeadingQuadratic_bijective_full` reduces the nonzero branch to the
+constant-leading result and the `a=0` branch to the affine result.
+
+This completes a machine-checked direct proof of a theorem already implied by
+Moskowicz's Theorem 2.7.  It does not resolve unrestricted `JC(2)` or the
+generic six-sheet frontier.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -278,11 +304,9 @@ kernel-checked.
 
 ## Next research obligations
 
-1. Complete the direct variable-leading certificate.  The coefficient descent,
-   odd leading-square identity, UFD square shape, fraction-field transport,
-   `k/h` Jacobian equation, recurrence solution in `K[F]`, and exact degree
-   control are Lean-certified.  The remaining work is the two specialization/
-   denominator links forcing `h | g` and then `h` to be a unit.
+1. Move beyond the completed degree-at-most-two coordinate theorem toward
+   genuinely unresolved six-sheet geometry; do not relabel known special
+   cases as progress on the unrestricted conjecture.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 3. Connect broader plane ansätze to the known degree-pair restrictions,

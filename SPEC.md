@@ -60,8 +60,8 @@ from floating-point samples or from the authority of the announcement.
 | Its nonproper-value set is exactly `V(Q)` | `DERIVED` | explicit escaping family and projective compactness argument |
 | A Keller map `(P,e(x)y+f(x))` with arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | actual bivariate Jacobian, degree descent, both explicit inverse charts |
 | A Keller map `(P,eps*y^2+g(x)y+f(x))` with `eps != 0` and arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | affine discriminant, completed-square coordinates, normal form, and both explicit inverse laws |
-| A Keller map with one coordinate of `y`-degree at most two is an automorphism | `SOURCE-CHECKED / KNOWN` | Moskowicz, Theorem 2.7; the quadratic invariant is `gcd(2,deg_x(a)) in {1,2}` |
-| The direct reduction from variable-leading quadratic `Q` to the scalar-leading theorem | `DERIVED / PARTIALLY LEAN-CERTIFIED` | Lean certifies odd-degree descent, the leading square identity and UFD shape, fraction-field centering, the exact `k/h` Jacobian transport, parity extraction, and the recurrence solution in `K[F]` with exact degree and leading-coefficient control; specialization and denominator integration remain |
+| A Keller map with one coordinate of `y`-degree at most two is an automorphism | `KNOWN / LEAN-CERTIFIED` | Moskowicz, Theorem 2.7; independently kernel-checked here, including the affine branch |
+| The direct reduction from variable-leading quadratic `Q` to the scalar-leading theorem | `DERIVED / LEAN-CERTIFIED` | Lean certifies odd-degree descent, the UFD square shape, fraction-field centering, the exact `k/h` transport, recurrence descent in `K[F]`, specialization, gcd-normalized noncancellation, and the final unit conclusion |
 | Historical novelty of the full fiber/nonproper theorem | `UNKNOWN` | derived here; same-day sources compared, priority not established |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
@@ -414,8 +414,8 @@ route that exposes why polynomiality rules out a variable leading coefficient:
    `P=H(Q)+U*B(Q)`;
 4. transport the Jacobian identity to derive the coefficient recurrence for
    `B`;
-5. specialize at `y=0` and use irreducible-polynomial valuations to prove
-   `h | g`; and
+5. specialize at `y=0` and use a gcd-normalized unique-survivor denominator
+   argument to prove `h | g`; and
 6. use the constant term of the recurrence to prove `h | k`, hence `h` is a
    unit and `a` is a nonzero scalar.
 
@@ -425,17 +425,19 @@ derivation, its constant field, affine transport, parity decomposition, and
 degree/leading-coefficient control.  In step 4, Lean certifies both the
 centered Jacobian identity with right-hand side `k/h`, the resulting
 coefficient recurrence, its exact solution in `K[F]`, and the required degree
-and nonzero-leading-coefficient descent.  Generic noncancelling-denominator
-and unit-denominator endpoints are also certified.  What remains is to derive
-their hypotheses from specialization and polynomiality in steps 5 and 6.  A
-typed exact checker covers the rational-mate trap, the top
-equation, the central-binomial recurrence, and the forced infinite-tail
+and nonzero-leading-coefficient descent.  Steps 5 and 6 are now certified as
+well: specialization supplies a base-ring membership, gcd reduction exposes
+the unique surviving numerator modulo the reduced denominator, and the
+constant recurrence coefficient forces the remaining denominator to be a
+unit.  The final theorem proves bijectivity, including the affine `a=0`
+branch.  A typed exact checker separately covers the rational-mate trap, the
+top equation, the central-binomial recurrence, and the forced infinite-tail
 obstruction.
 
 Simon--Weimann's coordinate criterion supplies a useful known corollary: after
 automorphy, the leading coefficient `a` is constant and
-`deg_x(g^2-4*a*f)=1`.  This is evidence for the statement, not a substitute for
-the unfinished direct Lean route.
+`deg_x(g^2-4*a*f)=1`.  This locates the completed direct Lean theorem in its
+known structural context.
 
 ## Repository shape
 
@@ -443,7 +445,7 @@ the unfinished direct Lean route.
 JacobianTwo/
   Counterexample.lean       # formal polynomial and collision certificate
   ConstantLeadingQuadratic.lean # arbitrary P, scalar-leading quadratic Q
-  VariableLeadingQuadratic.lean # partial direct arbitrary-leading reduction
+  VariableLeadingQuadratic.lean # degree descent, UFD shape, and centering
   RatFuncDerivative.lean # quotient-rule derivative and constant field of K(x)
   FractionRingDerivative.lean # derivative on the fraction-ring representation
   QuadraticParityJacobian.lean # centered parity Jacobian identity
@@ -453,6 +455,13 @@ JacobianTwo/
   QuadraticRecurrence.lean # coefficient equations for the odd part
   QuadraticRecurrencePrimitive.lean # exact descent in K[F] with degree control
   QuadraticDenominator.lean # noncancellation and unit endpoints
+  QuadraticClearedEval.lean # exact common numerators for C(N/q^2)
+  QuadraticDenominatorDescent.lean # valuation-free unique-survivor proof
+  QuadraticSpecialization.lean # specialization at the quadratic center
+  QuadraticDirectPackage.lean # end-to-end odd-degree certificate
+  QuadraticGCDDescent.lean # reduced denominator and h | g
+  QuadraticUnitConclusion.lean # terminal recurrence forces h to be a unit
+  VariableLeadingQuadraticConclusion.lean # full at-most-quadratic bijectivity
   AffineInOneVariable.lean  # JC(2) obstruction theorem
   QuadraticInOneVariable.lean # quadratic-in-y normal form and inverse
   CubicFiber.lean           # cubic, discriminant, reconstruction, infinity algebra

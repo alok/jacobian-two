@@ -1,12 +1,13 @@
 # A variable-leading quadratic coordinate
 
-Status: **KNOWN THEOREM / PARTIAL LEAN FORMALIZATION.** Moskowicz's Theorem 2.7
+Status: **KNOWN THEOREM / COMPLETE LEAN FORMALIZATION.** Moskowicz's Theorem 2.7
 already proves the automorphy statement below.  The six-step proof in this note
 was independently derived as a direct certificate route.  Its leading-degree,
 UFD, fraction-field centering, Jacobian-transport, parity-extraction, and
 recurrence layers are Lean-certified, including the exact solution in `K[F]`
-and its degree and leading-coefficient control.  The specialization and
-polynomiality/denominator integration are not yet kernel-checked.
+and its degree and leading-coefficient control.  Specialization, gcd-normalized
+denominator noncancellation, the unit conclusion, and final bijectivity are
+also kernel-checked.
 This is neither a solution of the full plane Jacobian
 conjecture nor a claim of mathematical novelty.
 
@@ -37,7 +38,7 @@ by the direct proof, is:
 Together with the affine-coordinate case, Moskowicz's result shows that a plane
 Keller map is invertible whenever one component has degree at most two in one
 of the variables, while the other component has arbitrary degree.  The
-arbitrary-leading conclusion is source-checked but only partially
+arbitrary-leading conclusion is both source-checked and independently
 Lean-certified here.
 
 ## Denominator ledger
@@ -429,8 +430,9 @@ Keller constant prove that `1/h` is a scalar and close the gap.
 
 ## Edge cases and scope checks
 
-- **`a=0` is deliberately excluded.** Then `Q` is affine in `y` and belongs
-  to the already Lean-certified affine-coordinate theorem.
+- **The six-step quadratic descent assumes `a != 0`.** The final Lean theorem
+  also covers `a=0` by reducing definitionally to the certified
+  affine-coordinate theorem.
 - **`k=0` is deliberately excluded.** The descent still yields some top
   relations, but the final divisibility argument has no force; for instance,
   `P=Q` has zero Jacobian for arbitrary `a`, `g`, and `f`.
@@ -565,7 +567,7 @@ intended certificate starts from the formal bivariate Jacobian and verifies:
 2. the UFD valuation consequence `a=epsilon*h^2`;
 3. the parity decomposition in `K(x)[U]` and the chain-rule factor `h`;
 4. the exact coefficient recurrence and central-binomial leading coefficient;
-5. the specialization-at-`y=0` valuation contradiction forcing `h | g`; and
+5. the specialization-at-`y=0` denominator contradiction forcing `h | g`; and
 6. the final divisibility argument forcing `h` to be a unit.
 
 Steps 1 and 2 are kernel-checked, including the simultaneous shape
@@ -573,14 +575,15 @@ Steps 1 and 2 are kernel-checked, including the simultaneous shape
 fraction field `K(x)`: Lean constructs the affine substitution, proves the
 completed-square identity, transports the quotient-rule derivation, and
 checks the exact Jacobian factor `k/h`.  The parity identity and uniqueness
-then kernel-check the recurrence in step 4.  Generic denominator lemmas certify
-the final implications once their hypotheses are supplied.  Lean now also
-solves that recurrence in `K[F]` and proves exact degree and nonzero-leading-
-coefficient control for the chosen witnesses.  The remaining formal
-obligations are to derive the unique-survivor hypothesis from polynomiality at
-`y=0` and feed that result into the final unit-denominator endpoint.
-This note may be cited as a direct derived proof and partial formalization, but
-not as a complete Lean theorem or as a new mathematical theorem.
+then kernel-check the recurrence in step 4.  Lean solves that recurrence in
+`K[F]` and proves exact degree and nonzero-leading-coefficient control for the
+chosen witnesses.  It then specializes the original polynomial mate at
+`y=0`, reduces `g/h` by its gcd, clears one common denominator, and certifies
+that exactly one numerator summand survives.  This forces `h | g`; the
+constant coefficient of the recurrence then forces `h` to be a unit.  Finally,
+Lean reduces to the constant-leading theorem and handles `a=0` through the
+affine theorem.  This note may be cited as a complete formalization of the
+independently derived direct proof, but not as a new mathematical theorem.
 
 ## Literature and tracking boundary
 
@@ -621,5 +624,5 @@ Two further primary sources locate the structural and neighboring results:
 Moskowicz is a direct theorem-level antecedent, so the automorphy statement is
 unambiguously known.  The contribution pursued here is the independently
 derived direct proof, its explicit denominator ledger, hostile fixtures, and a
-machine-checked certificate.  That certificate remains partial at the exact
-boundary stated above.
+machine-checked certificate.  The certificate is complete for coordinates
+presented as `a(x)y^2+g(x)y+f(x)`; the final wrapper also covers `a=0`.
