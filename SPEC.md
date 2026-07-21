@@ -15,6 +15,8 @@ The repository is tracked by Linear issue
 [ALOK-792](https://linear.app/aloksingh/issue/ALOK-792/formalize-the-3d-counterexample-and-establish-the-jc2-research).
 The Galois/frontier continuation is tracked by
 [ALOK-794](https://linear.app/aloksingh/issue/ALOK-794/audit-the-galois-frontier-and-determine-the-3d-maps-nonproper-value).
+The arbitrary-degree affine-coordinate continuation is tracked by
+[ALOK-795](https://linear.app/aloksingh/issue/ALOK-795/prove-the-arbitrary-degree-affine-coordinate-plane-keller-theorem).
 
 ## Exact input claim
 
@@ -224,6 +226,73 @@ Acceptance gate:
 - no theorem is described as the full plane Jacobian conjecture; and
 - prior mathematical coverage of this bounded-degree class is cited, so the
   result is presented as formalization rather than novelty.
+
+## Milestone 5: arbitrary degree with one affine coordinate
+
+Let `P : (K[X])[X]` be an arbitrary polynomial in `y` with coefficients in
+`K[x]`, and let
+
+```text
+Q(x,y) = e(x)*y + f(x).
+```
+
+Over a characteristic-zero field, the target theorem is:
+
+> If the formal Jacobian of `(P,Q)` is a nonzero constant `k`, then `(P,Q)`
+> is a polynomial automorphism.
+
+The theorem must cover both charts and expose the inverse-producing normal
+forms.
+
+1. If `e != 0`, induct on the `y`-degree of `P`.  If `a_m(x)` is the leading
+   coefficient, the top Jacobian equation is
+
+   ```text
+   a_m' * e = m * a_m * e'.
+   ```
+
+   Characteristic zero forces `a_m = lambda * e^m`.  Subtracting
+   `lambda * Q^m` lowers the `y`-degree and leaves the Jacobian unchanged.
+   Iteration gives
+
+   ```text
+   P(x,y) = G(Q(x,y)) + alpha*x + beta,
+   e = eps,
+   alpha*eps = k,
+   ```
+
+   with `alpha` and `eps` nonzero.  This has the displayed inverse
+
+   ```text
+   x = (u - G(v) - beta) / alpha,
+   y = (v - f(x)) / eps.
+   ```
+
+2. If `e = 0`, the Jacobian equation is `-P_y*f' = k`.  Since a product of
+   polynomials is a nonzero scalar, `P_y` and `f'` are nonzero constants.
+   Thus
+
+   ```text
+   P(x,y) = eta*y + c(x),
+   f(x) = delta*x + gamma,
+   -eta*delta = k,
+   ```
+
+   which is triangular with an explicit inverse.
+
+Acceptance gate:
+
+- Lean defines the two formal partial derivations on `(K[X])[X]` and proves
+  the stated normal forms from an equality of the actual formal Jacobian;
+- Lean proves both inverse laws and full bijectivity in both charts;
+- all `y`-degrees are allowed, including the constant and zero-polynomial
+  edge cases;
+- exact executable tests check generated normal forms and reject perturbed
+  nonconstant-slope fixtures;
+- `lake build`, the exact Python suite, strict type checking, and an axiom/
+  unfinished-proof audit all pass; and
+- the literature note distinguishes mathematical coverage from any claim of
+  historical novelty and states explicitly that this does not solve `JC(2)`.
 
 ## Repository shape
 
