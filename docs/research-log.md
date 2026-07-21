@@ -888,6 +888,35 @@ commutative associative rank-six multiplication whose regular trace is the
 displayed matrix.  The next algebraic attack is therefore the integral
 symmetric cubic trace tensor, not another quadratic determinant invariant.
 
+## 2026-07-21: global topology excludes the hostile `S6` trace curve
+
+Status: exact exclusion of one explicit curve; the `S6` passport remains.
+
+The trace curve
+
+```text
+P=t^4-6*t^2,
+Q=t^5-5*t^3
+```
+
+has a degree-four projection to the `P`-axis.  Zariski--van Kamp therefore
+generates its affine complement with four fiber meridians.  If all four map
+to transpositions of six sheets, their edge graph has only four edges and
+cannot be connected.  The generated group is consequently intransitive.
+
+An independent exact replay stores Sage's six-relator, four-generator
+presentation and checks all `15^4=50625` transposition assignments.  Exactly
+`735` satisfy the relations: `15` generate order two and `720` generate order
+`120`; none is transitive.  Thus the quadratic trace matrix remains a valid
+consistency model for its advertised invariants, but its branch curve cannot
+underlie a connected `S6` cover.
+
+This does not eliminate the one-dicritical `S6` frontier.  It adds a necessary
+global constraint missing from the trace lattice: a one-component
+transposition branch must have affine projection width at least five.  The
+next target is the smallest width-five curve compatible with the forced cusp
+and normalization-collision budget.
+
 ## 2026-07-21: the forced `A6` relations survive the spin cover
 
 Status: exact hostile lift; no compactification or Keller map.

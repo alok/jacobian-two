@@ -14,9 +14,13 @@ exact polynomial matrices realizing all of those quadratic constraints for:
   `T(2,3)` cusps and three smooth normalization collisions.
 
 These are hostile trace-lattice models.  They are not rank-six commutative
-algebras, finite covers, or Keller maps.  Their purpose is to prove that any
-successful next obstruction must use multiplication, associativity, the
-regular representation, or additional compactification data.
+algebras, finite covers, or Keller maps.  Their purpose is to prove that the
+listed quadratic data alone are insufficient.  A later complement-group audit
+now excludes the particular `S6` curve globally: its four-meridian projection
+cannot generate a transitive six-sheet group using transpositions.  This does
+not invalidate the matrix calculation, but it shows that connected monodromy
+is another essential datum alongside multiplication, associativity, the
+regular representation, and compactification data.
 
 ## 1. A square-discriminant `A6` model
 
@@ -308,7 +312,11 @@ The exact checker
 [`trace_hostile_matrices.py`](../scripts/trace_hostile_matrices.py) verifies
 both implicit equations, determinants, parametrized kernel vectors, all
 listed ranks, the trace factorizations, and the norm-six vectors.  A hostile
-entry perturbation breaks the `A6` certificate.
+entry perturbation breaks the `A6` certificate.  The independent
+[`S6` topology checker](../scripts/s6_trace_curve_topology.py) exhausts all
+transposition-valued representations of the explicit curve's affine
+complement and proves that none is transitive; see the
+[topology note](s6-trace-curve-topology.md).
 
 ## Primary sources
 
