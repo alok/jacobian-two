@@ -305,6 +305,7 @@ the commands above and rejects unfinished proof declarations.
 - Levent Alpöge's [original public announcement on X][announcement]
 - L. Andrew Campbell's [Galois-case theorem][campbell]
 - S. Yu. Orevkov's [three-sheet theorem][orevkov]
+- A. V. Domrina's [four-sheet theorem][domrina]
 - Henryk Żołądek's [result through generic degree five][zoladek]
 - Vered Moskowicz's [quadratic-coordinate antecedent][moskowicz]
 - Denis Simon and Martin Weimann's [coordinate/discriminant criterion][simon-weimann]
@@ -318,6 +319,7 @@ symbolic certificates.
 [announcement]: https://x.com/__alpoge__/status/2079028340955197566
 [campbell]: https://doi.org/10.1007/BF01349234
 [orevkov]: https://doi.org/10.1070/IM1987v029n03ABEH000984
+[domrina]: https://doi.org/10.1070/im2000v064n01ABEH000273
 [zoladek]: https://doi.org/10.1016/j.top.2008.04.001
 [moskowicz]: https://arxiv.org/abs/1810.08202
 [simon-weimann]: https://doi.org/10.1216/JCA-2018-10-4-559

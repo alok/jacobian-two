@@ -39,8 +39,9 @@ Here “degree” means the generic number of points in a fiber, equivalently
 |---:|---|
 | 1 | Keller's birational theorem gives an automorphism |
 | 2 | the extension is automatically Galois, so it is an automorphism |
-| 3 | excluded by Orevkov |
-| 4 and 5 | included in Żołądek's theorem through degree 5 |
+| 3 | excluded by Orevkov's two-/three-sheet theorem |
+| 4 | excluded in full generality by Domrina |
+| 5 | included in Żołądek's theorem through degree 5 |
 | 6 | first unresolved generic-fiber degree in the accepted literature |
 
 Thus the “next dimensional case” is not dimension four.  The announced map
@@ -117,6 +118,9 @@ plane degree requires geometry at infinity beyond the Galois-case theorem.
 - S. Yu. Orevkov,
   [“On three-sheeted polynomial mappings of `C^2`”](https://doi.org/10.1070/IM1987v029n03ABEH000984),
   *Mathematics of the USSR-Izvestiya* 29 (1987), 587–596.
+- A. V. Domrina,
+  [“On four-sheeted polynomial mappings of `C^2`. II. The general case”](https://doi.org/10.1070/im2000v064n01ABEH000273),
+  *Izvestiya: Mathematics* 64 (2000), 39–76.
 - Henryk Żołądek,
   [“An application of Newton–Puiseux charts to the Jacobian problem”](https://doi.org/10.1016/j.top.2008.04.001),
   *Topology* 47 (2008), 431–469.

@@ -53,7 +53,7 @@ from floating-point samples or from the authority of the announcement.
 | Counterexamples exist in every dimension `n >= 3` | `DERIVED` | append identity coordinates |
 | Whether the two-dimensional conjecture is false | `OPEN` | no implication from the dimension-three example is known or assumed here |
 | The Galois-case theorem settles every plane Keller map | `FALSE` | constant Jacobian gives finite separable, not normal/Galois |
-| Generic degree six is the first unresolved plane sheet degree | `SOURCE-CHECKED` | Campbell, Orevkov, Żołądek, and Borisov literature audit |
+| Generic degree six is the first unresolved plane sheet degree | `SOURCE-CHECKED` | Campbell, Orevkov, Domrina, Żołądek, and Borisov literature audit |
 | The universal cubic discriminant coefficient expression is `-4*Q` | `LEAN-CERTIFIED` | explicit standard formula; semantic SymPy discriminant checked independently |
 | The announced map has fiber counts `3/1/0` on the three stated strata | `DERIVED` | simple projective-root/source bijection plus exact symbolic checks |
 | Its image is `C^3 \ Gamma` | `DERIVED` | complete fiber stratification |
