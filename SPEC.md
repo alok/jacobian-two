@@ -61,7 +61,7 @@ from floating-point samples or from the authority of the announcement.
 | A Keller map `(P,e(x)y+f(x))` with arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | actual bivariate Jacobian, degree descent, both explicit inverse charts |
 | A Keller map `(P,eps*y^2+g(x)y+f(x))` with `eps != 0` and arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | affine discriminant, completed-square coordinates, normal form, and both explicit inverse laws |
 | A Keller map with one coordinate of `y`-degree at most two is an automorphism | `SOURCE-CHECKED / KNOWN` | Moskowicz, Theorem 2.7; the quadratic invariant is `gcd(2,deg_x(a)) in {1,2}` |
-| The direct reduction from variable-leading quadratic `Q` to the scalar-leading theorem | `DERIVED / PARTIALLY LEAN-CERTIFIED` | Lean certifies odd-degree descent, the leading square identity and UFD shape, fraction-field centering, the exact `k/h` Jacobian transport, parity extraction, and the abstract recurrence; solving that recurrence and the polynomiality/denominator integration remain |
+| The direct reduction from variable-leading quadratic `Q` to the scalar-leading theorem | `DERIVED / PARTIALLY LEAN-CERTIFIED` | Lean certifies odd-degree descent, the leading square identity and UFD shape, fraction-field centering, the exact `k/h` Jacobian transport, parity extraction, and the recurrence solution in `K[F]` with exact degree and leading-coefficient control; specialization and denominator integration remain |
 | Historical novelty of the full fiber/nonproper theorem | `UNKNOWN` | derived here; same-day sources compared, priority not established |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
@@ -423,11 +423,12 @@ Current Lean status: steps 1 and 2 are certified from the actual bivariate
 Jacobian.  Step 3 is instantiated over `K(x)`, including the quotient-rule
 derivation, its constant field, affine transport, parity decomposition, and
 degree/leading-coefficient control.  In step 4, Lean certifies both the
-centered Jacobian identity with right-hand side `k/h` and the resulting
-coefficient recurrence.  Generic noncancelling-denominator and
-unit-denominator endpoints are also certified.  What remains is the exact
-solution of the recurrence in `K[F]` and its integration with polynomiality in
-steps 5 and 6.  A typed exact checker covers the rational-mate trap, the top
+centered Jacobian identity with right-hand side `k/h`, the resulting
+coefficient recurrence, its exact solution in `K[F]`, and the required degree
+and nonzero-leading-coefficient descent.  Generic noncancelling-denominator
+and unit-denominator endpoints are also certified.  What remains is to derive
+their hypotheses from specialization and polynomiality in steps 5 and 6.  A
+typed exact checker covers the rational-mate trap, the top
 equation, the central-binomial recurrence, and the forced infinite-tail
 obstruction.
 
@@ -450,6 +451,7 @@ JacobianTwo/
   QuadraticTransportJacobian.lean # exact affine Jacobian factor k/h
   QuadraticReduction.lean # actual Keller pair to centered equation
   QuadraticRecurrence.lean # coefficient equations for the odd part
+  QuadraticRecurrencePrimitive.lean # exact descent in K[F] with degree control
   QuadraticDenominator.lean # noncancellation and unit endpoints
   AffineInOneVariable.lean  # JC(2) obstruction theorem
   QuadraticInOneVariable.lean # quadratic-in-y normal form and inverse

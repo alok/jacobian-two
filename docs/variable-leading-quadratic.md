@@ -4,8 +4,9 @@ Status: **KNOWN THEOREM / PARTIAL LEAN FORMALIZATION.** Moskowicz's Theorem 2.7
 already proves the automorphy statement below.  The six-step proof in this note
 was independently derived as a direct certificate route.  Its leading-degree,
 UFD, fraction-field centering, Jacobian-transport, parity-extraction, and
-abstract recurrence layers are Lean-certified.  The exact recurrence solution
-and its polynomiality/denominator integration are not yet kernel-checked.
+recurrence layers are Lean-certified, including the exact solution in `K[F]`
+and its degree and leading-coefficient control.  The specialization and
+polynomiality/denominator integration are not yet kernel-checked.
 This is neither a solution of the full plane Jacobian
 conjecture nor a claim of mathematical novelty.
 
@@ -573,10 +574,11 @@ fraction field `K(x)`: Lean constructs the affine substitution, proves the
 completed-square identity, transports the quotient-rule derivation, and
 checks the exact Jacobian factor `k/h`.  The parity identity and uniqueness
 then kernel-check the recurrence in step 4.  Generic denominator lemmas certify
-the final implications once their hypotheses are supplied.  The remaining
-formal obligations are to solve the recurrence with exact degree and leading
-coefficient control, derive the unique-survivor hypothesis from polynomiality
-at `y=0`, and feed that result into the final unit-denominator endpoint.
+the final implications once their hypotheses are supplied.  Lean now also
+solves that recurrence in `K[F]` and proves exact degree and nonzero-leading-
+coefficient control for the chosen witnesses.  The remaining formal
+obligations are to derive the unique-survivor hypothesis from polynomiality at
+`y=0` and feed that result into the final unit-denominator endpoint.
 This note may be cited as a direct derived proof and partial formalization, but
 not as a complete Lean theorem or as a new mathematical theorem.
 

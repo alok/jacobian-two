@@ -235,8 +235,8 @@ polynomial mates and exhibit the nonterminating odd coefficient tail for
 
 ## 2026-07-21: fraction-field quadratic bridge
 
-Status: known theorem; new direct-proof infrastructure is Lean-certified;
-denominator integration remains.
+Status: known theorem; recurrence descent and its direct-proof infrastructure
+are Lean-certified; specialization and denominator integration remain.
 
 The `K(x)` boundary above is now crossed.  The repository constructs the
 quotient-rule derivation on `RatFunc K`, proves that its kernel is exactly the
@@ -255,11 +255,14 @@ coefficient recurrence for `B`.  Independent denominator lemmas certify the
 unique-survivor obstruction and the implication “a unit numerator divided by
 `h` lies in the base ring, therefore `h` is a unit.”
 
-The remaining direct-proof gap is narrower: formalize the exact solution of
-the recurrence in `K[F]`, use the specialization of the original polynomial
-mate at `y=0` to supply the unique-survivor hypotheses forcing `h | g`, and
-then prove that the terminal `k/h` equation lies in `K[x]`.  No automorphy
-claim is promoted until those links are kernel-checked.
+The recurrence gap is now closed: Lean constructs an explicit primitive for
+each downward step, proves every coefficient is an evaluation of a polynomial
+in `K[F]`, and certifies exact degree growth with a nonzero leading
+coefficient.  The remaining direct-proof gap is narrower: use specialization
+of the original polynomial mate at `y=0` to supply the unique-survivor
+hypotheses forcing `h | g`, and then prove that the terminal `k/h` equation
+lies in `K[x]`.  No automorphy claim is promoted until those links are
+kernel-checked.
 
 ## Negative results and guarded boundaries
 
@@ -277,8 +280,8 @@ claim is promoted until those links are kernel-checked.
 
 1. Complete the direct variable-leading certificate.  The coefficient descent,
    odd leading-square identity, UFD square shape, fraction-field transport,
-   `k/h` Jacobian equation, and abstract recurrence are Lean-certified.  The
-   remaining work is the recurrence solution and the two polynomiality/
+   `k/h` Jacobian equation, recurrence solution in `K[F]`, and exact degree
+   control are Lean-certified.  The remaining work is the two specialization/
    denominator links forcing `h | g` and then `h` to be a unit.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.

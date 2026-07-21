@@ -220,14 +220,15 @@ certifies the top-coefficient equation, target-shear descent to an odd
 field.  The fraction-field layer also certifies the quotient-rule derivation
 on `K(x)`, its constant field, the affine substitution `y=(U-rho)/h`, the
 exact Jacobian factor `k/h`, parity extraction, and the full coefficient
-recurrence.  Abstract denominator certificates cover the final
-noncancellation and unit-denominator implications.
+recurrence.  Lean also constructs its primitive explicitly, proves every
+coefficient lies in `K[F]`, and tracks the exact degree and nonzero leading
+coefficient through the downward descent.  Abstract denominator certificates
+cover the final noncancellation and unit-denominator implications.
 
-It does **not** yet solve the recurrence inside `K[F]` or connect the
-polynomiality of the original mate to the unique-survivor argument forcing
-`h | g`; consequently the final proof that `h` is a unit is not yet
-kernel-checked.  The complete proof target, hostile fixtures, and exact
-boundary are in
+It does **not** yet connect the polynomiality of the original mate, after
+specialization at `y=0`, to the unique-survivor argument forcing `h | g`;
+consequently the final proof that `h` is a unit is not yet kernel-checked.  The
+complete proof target, hostile fixtures, and exact boundary are in
 [`docs/variable-leading-quadratic.md`](docs/variable-leading-quadratic.md).
 
 Two earlier bounded modules expose useful intermediate mechanisms.  First,

@@ -14,6 +14,7 @@ import JacobianTwo.FractionRingDerivative
 import JacobianTwo.QuadraticDenominator
 import JacobianTwo.QuadraticInOneVariable
 import JacobianTwo.QuadraticRecurrence
+import JacobianTwo.QuadraticRecurrencePrimitive
 import JacobianTwo.VariableLeadingQuadratic
 import JacobianTwo.QuadraticParityJacobian
 import JacobianTwo.QuadraticParityExtraction
