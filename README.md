@@ -123,6 +123,15 @@ classes, normal closures, normalizers, deck groups, blocks, and local subgroup
 orbits; an optional [Sage/GAP checker](tools/check_six_sheet_gap.sage) verifies
 the catalogue independently.
 
+The smooth surface package is not itself contradictory.  Explicit
+Hirzebruch-surface complements realize the one-boundary patterns
+`K_W=D` and `K_W=2D`, and an explicit triple blowup realizes the disjoint
+two-boundary pattern `K_W=D2+2D3`, including the required Picard groups and
+`A2` interiors.  These are hostile consistency models, not finite covers.
+They prove that the next obstruction must use the multiplication, trace,
+discriminant, or monodromy of the finite rank-six algebra.  See the
+[hostile-model note](docs/smooth-normalization-hostile-models.md).
+
 ## A separate sparse obstruction at coordinate degree `(72,108)`
 
 Generic sheet degree and coordinate degree are different invariants.  On the
@@ -411,6 +420,9 @@ optional Sage/GAP replay is an additional independent local cross-check.
 - [`docs/one-dicritical-leaf-labels.md`](docs/one-dicritical-leaf-labels.md)
   fixes the adjacent canonical label `e*(-E^2)-1`, proves the neighbor is
   type 2, and forces a `1--0--(-1)` transition toward the negative core.
+- [`docs/smooth-normalization-hostile-models.md`](docs/smooth-normalization-hostile-models.md)
+  constructs explicit affine surface pairs realizing every smooth/Picard/
+  canonical package above, thereby isolating the missing finite-cover data.
 - [`docs/s6-one-dicritical-local.md`](docs/s6-one-dicritical-local.md)
   gives the complete `S6` fiber census, symmetric local blocks, jump
   trichotomy, torus-knot types, and hostile analytic models.

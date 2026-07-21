@@ -62,6 +62,7 @@ from floating-point samples or from the authority of the announcement.
 | In the one-dicritical `S6` passport, the finite fiber has one of nine exact rows, every jump block has local group `S_(2+kappa)`, and every jump is `T(2,3)`, `T(3,4)`, or `T(4,5)` | `DERIVED / EXACTLY ENUMERATED` | Orevkov's three-unit budget, constant multiplicity, transposition normal generation, simple ramification, and hostile analytic germs |
 | In both surviving one-dicritical passports, Orevkov's minimal `L_C` is empty and the affine finite normalization `W` is smooth finite flat of rank six, with `W-D=A2`, `D=A1`, `Pic(W)=Z[D]`, and `K_W=(e-1)D` | `DERIVED / INDEPENDENTLY HOSTILE-AUDITED` | Orevkov's relative-minimality statement, the index-two invariant-order contradiction, the index-three cyclic-cover parity theorem at local degrees three and five, miracle flatness, divisor localization, and finite-map Riemann--Hurwitz |
 | On Orevkov's original one-dicritical source-blowup resolution, the dicritical is a type-3 leaf of label `e`; if `m=-E^2`, its unique neighbor is type 2 of label `e*m-1`, and the path to the original infinity line contains `1--0--(-1)` | `DERIVED / INDEPENDENTLY HOSTILE-AUDITED` | Orevkov's finite-chain lemma, logarithmic Keller adjunction on a rational leaf, the sign of type-1 pullback labels, and Borisov's canonical-label tree theorem |
+| The one-boundary surface packages `K_W=D`, `K_W=2D` and the saturated two-boundary package `K_W=D2+2D3` are internally consistent and therefore cannot alone eliminate the surviving passports | `DERIVED / EXPLICIT HOSTILE MODELS` | two Hirzebruch-surface complements and one triple-blowup complement, with exact Picard, canonical, intersection, and Nakai--Moishezon calculations |
 | In the saturated two-curve `S6` transposition-plus-3-cycle passport, both branch normalizations self-collide; the exact collision rows are `3+3`, `2+2+1+1` or `2+2+2`, and cross-intersections are `2+3+1` | `DERIVED / EXACT HOSTILE FIXTURE` | Nguyen's singular-component theorem, zero excess, Orevkov's local embedding, constant multiplicity six, and four exact meridians generating `S6` |
 | In that saturated `S6` passport, both minimal constant chains are empty and the finite normalization is smooth finite flat, with boundary `D2 disjoint-union D3`, `Pic(W)=Z[D2]+Z[D3]`, and `K_W=D2+2D3` | `DERIVED / INDEPENDENTLY HOSTILE-AUDITED` | componentwise zero excess, the index-two and index-three cyclic endpoint obstructions, complement purity, miracle flatness, and divisor localization |
 | The first residual transformed `(72,108)` Newton configuration needs at least three nonzero strict-interior coefficients, and the second needs at least four | `DERIVED / EXHAUSTIVELY CHECKED` | all `7504` first-case supports of size at most two and all `3683` second-case supports of size at most three have replayed exact certificates; the five zero-product exceptions have unit-ideal certificates |
@@ -570,6 +571,15 @@ The path to the original line at infinity must cross `1--0--(-1)`.  This is a
 new finite-graph constraint, not an elimination: the self-intersection is not
 yet bounded, and later target blowups must transform the leaf configuration
 rather than reuse it unchanged.
+
+The smooth pair invariants do not close the argument.  Explicit complements
+of ample sections in Hirzebruch surfaces realize both one-boundary canonical
+classes with `W-D=A2`, `D=A1`, and `Pic(W)=Z[D]`.  A separate three-blowup
+construction realizes the saturated disjoint two-boundary package and proves
+affineness by an explicit ample divisor.  None carries a finite rank-six
+Keller morphism.  Consequently the next gate is genuinely the multiplication,
+trace, discriminant, and monodromy of the finite algebra, not surface topology
+or the displayed Picard/canonical classes in isolation.
 
 ## Milestone 9: sparse support in the residual `(72,108)` polygons
 

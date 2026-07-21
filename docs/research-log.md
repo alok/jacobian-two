@@ -583,6 +583,31 @@ also belongs to the original pure-blowup resolution: later target blowups and
 re-resolution can change the strict transform's self-intersection and
 adjacency, although its divisorial canonical label remains invariant.
 
+## 2026-07-21: hostile surface models isolate the finite-algebra gap
+
+Status: explicit consistency models; they are not finite covers or Jacobian
+counterexamples.
+
+Complements of smooth ample sections `S=C0+aF` on Hirzebruch surfaces give
+smooth affine pairs with `W-D=A2`, `D=A1`, `Pic(W)=Z[D]`, and
+
+```text
+K_W = (2*a-d-2)D.
+```
+
+The choices `(d,a)=(1,2)` and `(0,2)` realize `K_W=D` and `K_W=2D`, exactly
+the one-dicritical `S6` and `A6` packages.  A separate construction on the
+triple blowup of `P1 x P1` realizes two disjoint affine-line boundaries with
+`Pic(W)=Z[D2]+Z[D3]` and `K_W=D2+2D3`.  Its boundary supports an explicit
+ample divisor of square `94`, so the complement is affine.
+
+These examples carry no finite flat degree-six map, Keller coordinates,
+branch curves, or monodromy.  They close off a tempting but invalid strategy:
+smoothness, boundary topology, the Picard group, and the canonical class alone
+cannot eliminate the remaining passports.  Any successful next step must use
+the finite rank-six algebra and its trace, different, discriminant, or
+compatible monodromy.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.
