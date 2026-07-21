@@ -170,6 +170,35 @@ type-`(m,1)` reduction, not a new mathematical class.  Sabatini's published
 real theorem uses the same leading-power elimination.  The repository's
 field-uniform statement deliberately assumes a genuinely constant Jacobian.
 
+The next certified class allows a genuinely quadratic coordinate.  Let
+
+\[
+  Q=\varepsilon y^2+g(x)y+f(x),\qquad \varepsilon\in K^\times,
+  \qquad s=2\varepsilon y+g(x).
+\]
+
+For arbitrary `P`, a nonzero constant identity `J(P,Q)=k` forces the
+discriminant `Delta=g^2-4*epsilon*f` to be affine, say `Delta=A*x+B` with
+`A != 0`, and Lean proves the original-coordinate normal form
+
+\[
+  P=G(Q)+\lambda s,\qquad \lambda A/2=k.
+\]
+
+It also proves both laws for the explicit polynomial inverse
+
+\[
+  \sigma=(u-G(v))/\lambda,\quad
+  x=(\sigma^2-4\varepsilon v-B)/A,\quad
+  y=(\sigma-g(x))/(2\varepsilon).
+\]
+
+See
+[`JacobianTwo/ConstantLeadingQuadratic.lean`](JacobianTwo/ConstantLeadingQuadratic.lean)
+and the [proof, certificate map, and literature boundary](docs/constant-leading-quadratic.md).
+This theorem has no degree bound on `P`; it does require the quadratic leading
+coefficient of `Q` to be a nonzero scalar.
+
 Two earlier bounded modules expose useful intermediate mechanisms.  First,
 
 \[
@@ -208,6 +237,7 @@ lake build
 uv run --frozen python -m scripts.verify
 uv run --frozen python -m scripts.nonproper
 uv run --frozen python -m scripts.affine_coordinate
+uv run --frozen python -m scripts.constant_leading_quadratic
 uv run --frozen pytest
 uv run --frozen mypy
 ```
@@ -225,6 +255,9 @@ the commands above and rejects unfinished proof declarations.
 - [`docs/affine-coordinate.md`](docs/affine-coordinate.md) proves the
   arbitrary-degree affine-coordinate normal form and marks its exact
   literature boundary.
+- [`docs/constant-leading-quadratic.md`](docs/constant-leading-quadratic.md)
+  proves the constant-leading quadratic-coordinate normal form and displays
+  its polynomial inverse.
 - [`docs/audit.md`](docs/audit.md) gives a hand-checkable structural derivation
   of the original screenshot.
 - [`docs/research-log.md`](docs/research-log.md) records completed work,

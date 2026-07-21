@@ -6,6 +6,7 @@ Authors: Alok Singh
 import JacobianTwo.Basic
 import JacobianTwo.AffineCoordinate
 import JacobianTwo.AffineInOneVariable
+import JacobianTwo.ConstantLeadingQuadratic
 import JacobianTwo.Counterexample
 import JacobianTwo.CubicFiber
 import JacobianTwo.QuadraticInOneVariable

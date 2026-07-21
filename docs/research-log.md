@@ -163,6 +163,34 @@ Sabatini's 2024 theorem; the repository contribution is the
 characteristic-zero field-uniform formalization and explicit packaging, not a
 novelty claim.
 
+## 2026-07-21: constant-leading quadratic-coordinate theorem
+
+Status: Lean-certified structural positive class; no novelty claim.
+
+For arbitrary `P in K[x,y]` and
+
+```text
+Q = eps*y^2 + g(x)*y + f(x),  eps != 0,
+s = 2*eps*y + g(x),
+Delta = g(x)^2 - 4*eps*f(x),
+```
+
+the actual identity `J(P,Q)=k != 0` forces `Delta=A*x+B` with `A != 0`.
+The completed-square pair `(s,Q)` is then a polynomial coordinate system.
+After transporting the Jacobian equation through this coordinate change, Lean
+proves
+
+```text
+P = G(Q) + lambda*s,  lambda*A/2 = k,
+```
+
+and verifies both laws of the resulting explicit inverse.  The independent
+exact checker uses a degree-six `g`, a degree-seven `G`, and a first coordinate
+of total degree 84.  Changing one coefficient of `f` makes the determinant
+`15-36*x`, so the hostile fixture confirms that the affine-discriminant step is
+doing real work.  This reaches arbitrary degree in the other coordinate but
+still assumes that the coefficient of `y^2` is a nonzero scalar.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -177,10 +205,11 @@ novelty claim.
 
 ## Next research obligations
 
-1. Move to the first genuinely nonlinear coordinate: an arbitrary first
-   coordinate with a quadratic second coordinate, beginning with constant
-   nonzero quadratic leading coefficient and an exact completed-square normal
-   form.
+1. Formalize the hostile-audited reduction from a variable leading coefficient
+   `a(x)` in `Q=a(x)y^2+g(x)y+f(x)` to the scalar-leading theorem above.  The
+   current algebraic argument first reduces the top `y`-degree of `P`, then uses
+   parity and valuation obstructions to force `a` to be a nonzero scalar; it is
+   not yet kernel-certified.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 3. Connect broader plane ansätze to the known degree-pair restrictions,

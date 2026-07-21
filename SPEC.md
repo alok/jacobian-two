@@ -57,6 +57,7 @@ from floating-point samples or from the authority of the announcement.
 | Its image is `C^3 \ Gamma` | `DERIVED` | complete fiber stratification |
 | Its nonproper-value set is exactly `V(Q)` | `DERIVED` | explicit escaping family and projective compactness argument |
 | A Keller map `(P,e(x)y+f(x))` with arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | actual bivariate Jacobian, degree descent, both explicit inverse charts |
+| A Keller map `(P,eps*y^2+g(x)y+f(x))` with `eps != 0` and arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | affine discriminant, completed-square coordinates, normal form, and both explicit inverse laws |
 | Historical novelty of the full fiber/nonproper theorem | `UNKNOWN` | derived here; same-day sources compared, priority not established |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
@@ -321,7 +322,7 @@ s^2 - 4*eps*Q = Delta,
 J(s,Q) = Delta'/2
 ```
 
-suggest the exact target theorem:
+lead to the now-certified theorem:
 
 > If `J(P,Q)=k` for `k in K^*`, then there are nonzero scalars `A` and
 > `lambda`, a scalar `B`, and `G in K[T]` such that
@@ -373,11 +374,18 @@ Acceptance gate:
 - the repository continues to state that the unrestricted degree-six sheet
   stratum and `JC(2)` remain open.
 
+Status: complete.  The formal statement starts from the actual bivariate
+Jacobian, proves the original-coordinate normal form, constructs the displayed
+inverse, and proves both inverse laws.  The independent exact checker exercises
+a first coordinate of total degree 84 and rejects a one-coefficient
+perturbation whose determinant becomes `15-36*x`.
+
 ## Repository shape
 
 ```text
 JacobianTwo/
   Counterexample.lean       # formal polynomial and collision certificate
+  ConstantLeadingQuadratic.lean # arbitrary P, scalar-leading quadratic Q
   AffineInOneVariable.lean  # JC(2) obstruction theorem
   QuadraticInOneVariable.lean # quadratic-in-y normal form and inverse
   CubicFiber.lean           # cubic, discriminant, reconstruction, infinity algebra
@@ -385,13 +393,16 @@ JacobianTwo/
 scripts/
   verify.py                 # independent exact symbolic checker
   nonproper.py              # exact cubic-fiber/nonproper algebra
+  constant_leading_quadratic.py # high-degree quadratic-coordinate checker
 tests/
   test_verify.py            # positive and adversarial fixtures
   test_nonproper.py         # discriminant, strata, and hostile fixtures
+  test_constant_leading_quadratic.py # normal form and perturbation checks
 docs/
   audit.md                  # readable derivation, provenance, claim boundary
   galois-frontier.md        # Galois theorem and first open sheet degree
   nonproper-set.md          # complete fiber/image/nonproper proof
+  constant-leading-quadratic.md # proof and exact Lean declaration map
   research-log.md           # dated attempts and open obligations
 ```
 

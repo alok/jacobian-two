@@ -39,6 +39,8 @@ jobs:
         run: uv run --frozen python -m scripts.nonproper
       - name: Check the arbitrary-degree affine-coordinate normal forms
         run: uv run --frozen python -m scripts.affine_coordinate
+      - name: Check the constant-leading quadratic-coordinate normal forms
+        run: uv run --frozen python -m scripts.constant_leading_quadratic
       - name: Run adversarial tests
         run: uv run --frozen pytest
       - name: Check Python types
