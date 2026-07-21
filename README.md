@@ -172,6 +172,17 @@ matrix coranks at every cusp and collision are fixed.  Those coranks remain
 consistent; this is a concrete matrix target, not yet a contradiction.  See
 the [trace-lattice note](docs/finite-flat-trace-lattices.md).
 
+That consistency is now witnessed by exact hostile matrices.  A symmetric
+`A6` model has `det(Phi)=b`, unimodular middle form, `det(T)=-b^2`, the required
+generic/cusp/collision coranks, and a primitive norm-six vector.  A symmetric
+`S6` model realizes the entire three-`T(2,3)` jump partition, three allowed
+normalization collisions, and the same unit-line condition.  Its projective
+homogenization carries the expected theta characteristic.  These models have
+no commutative rank-six multiplication law; they prove that the next
+obstruction must use the cubic trace tensor, integrality, and associativity,
+not just the quadratic trace form.  See the
+[hostile-matrix note](docs/trace-hostile-matrices.md).
+
 ## A separate sparse obstruction at coordinate degree `(72,108)`
 
 Generic sheet degree and coordinate degree are different invariants.  On the

@@ -754,6 +754,43 @@ The conclusion cannot be promoted yet: neither exactly two infinity
 characteristic pairs nor condition `(*)` follows from the current smoothness,
 Picard, monodromy, trace, or minimal-leaf results.
 
+## 2026-07-21: exact matrices close the trace-only route
+
+Status: exact hostile consistency models; no finite algebra or Keller map.
+
+For an `A6` rational branch with parametrization
+`(P,Q)=(t^2+t^3,t^5)`, an explicit symmetric `3 x 3` Bezout matrix `K` has
+determinant the branch equation and cokernel the normalization module.  Setting
+
+```text
+Phi = diag(K,I3),
+H   = [[0,I3],[I3,0]],
+T   = Phi^t H Phi
+```
+
+gives `det(Phi)=b`, `det(H)=-1`, `det(T)=-b^2`, exact generic and special
+coranks, and a primitive vector of norm six.  The curve has the forced
+`T(2,5)` cusp and smooth two-preimage collisions.
+
+A separate symmetric `5 x 5` Bezout matrix for
+
+```text
+P=t^4-6*t^2,
+Q=t^5-5*t^3
+```
+
+realizes the full `S6` `1+1+1` jump partition: three `T(2,3)` cusps, three
+normalization nodes, exact normalization-module coranks, and the unit line.
+Its homogenization is compatible with the rational normalization's theta
+characteristic `O_P1(-1)`, as predicted by Beauville's symmetric-resolution
+theory.
+
+The new exact checker replays all determinants, parametrized kernel vectors,
+ranks, and unit norms.  The models omit the essential datum: a unital
+commutative associative rank-six multiplication whose regular trace is the
+displayed matrix.  The next algebraic attack is therefore the integral
+symmetric cubic trace tensor, not another quadratic determinant invariant.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.

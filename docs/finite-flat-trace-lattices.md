@@ -578,6 +578,13 @@ None of the following tempting conclusions is valid.
 - The rank bounds in Section 5 are all compatible with the surviving local
   germs.
 
+Explicit symmetric matrices now show that this boundary is real rather than
+provisional.  The [`trace-hostile-matrices.md`](trace-hostile-matrices.md)
+note constructs exact `A6` and `S6` normalization-module presentations with
+all the determinant, corank, theta, and trace-unit properties above.  They
+omit precisely the commutative associative multiplication whose regular
+trace would have to equal `T`.
+
 The trace-lattice theorem is therefore a sharpened reduction, not a proof of
 the two-dimensional Jacobian conjecture.
 

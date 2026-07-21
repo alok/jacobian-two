@@ -51,6 +51,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_cusp_germ
       - name: Check the conditional two-pair splice obstruction
         run: uv run --frozen python -m scripts.two_pair_infinity
+      - name: Check the hostile trace-lattice matrices
+        run: uv run --frozen python -m scripts.trace_hostile_matrices
       - name: Check the residual Newton-polygon sparse-support certificates
         run: uv run --frozen python -m scripts.newton_72_108
       - name: Run adversarial tests
