@@ -87,6 +87,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_ten_link_compatibility
       - name: Exclude an exact conditional A6 delta-ten contact-wall member
         run: uv run --frozen python -m scripts.a6_delta_ten_contact_wall
+      - name: Exclude an exact conditional A6 delta-ten triple-wall member
+        run: uv run --frozen python -m scripts.a6_delta_ten_triple_wall
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts
