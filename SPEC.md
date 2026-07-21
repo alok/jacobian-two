@@ -64,6 +64,7 @@ from floating-point samples or from the authority of the announcement.
 | On a jointly minimal one-dicritical source resolution, the dicritical is a type-3 `(-1)`-leaf of label `e`, its unique neighbor is type 2 of label `e-1`, and the path to the original infinity line contains `1--0--(-1)` | `DERIVED / INDEPENDENTLY HOSTILE-AUDITED` | Orevkov's finite-chain lemma, simultaneous Castelnuovo contraction for the source blowdown and resolved map, logarithmic Keller adjunction, and Borisov's canonical-label tree theorem |
 | On that minimal leaf edge, determinant labels satisfy `d_E=d_A-1<0` with forced parity, but the canonical-plus-determinant constraints still admit an explicit infinite family | `DERIVED / EXACT HOSTILE FAMILY` | Borisov's determinant/content recurrences, Hodge index, and exact intersection-matrix replay in `canonical_leaf_graph.py` |
 | The one-boundary surface packages `K_W=D`, `K_W=2D` and the saturated two-boundary package `K_W=D2+2D3` are internally consistent and therefore cannot alone eliminate the surviving passports | `DERIVED / EXPLICIT HOSTILE MODELS` | two Hirzebruch-surface complements and one triple-blowup complement, with exact Picard, canonical, intersection, and Nakai--Moishezon calculations |
+| In all three smooth finite-flat packages, the inverse different is a nontrivial source line, the algebra is not globally Frobenius or monogenic, and the trace matrix factors as `T=Phi^* H Phi` with exact determinants `b`, `b^2`, or `b2*b3^2` and normalization-module cokernels | `DERIVED / FINITE-DUALITY AUDITED` | finite Grothendieck duality, different/discriminant norm, divisor-step lattices, Quillen--Suslin, and the Tate determinant map |
 | In the saturated two-curve `S6` transposition-plus-3-cycle passport, both branch normalizations self-collide; the exact collision rows are `3+3`, `2+2+1+1` or `2+2+2`, and cross-intersections are `2+3+1` | `DERIVED / EXACT HOSTILE FIXTURE` | Nguyen's singular-component theorem, zero excess, Orevkov's local embedding, constant multiplicity six, and four exact meridians generating `S6` |
 | In that saturated `S6` passport, both minimal constant chains are empty and the finite normalization is smooth finite flat, with boundary `D2 disjoint-union D3`, `Pic(W)=Z[D2]+Z[D3]`, and `K_W=D2+2D3` | `DERIVED / INDEPENDENTLY HOSTILE-AUDITED` | componentwise zero excess, the index-two and index-three cyclic endpoint obstructions, complement purity, miracle flatness, and divisor localization |
 | The first residual transformed `(72,108)` Newton configuration needs at least three nonzero strict-interior coefficients, and the second needs at least four | `DERIVED / EXHAUSTIVELY CHECKED` | all `7504` first-case supports of size at most two and all `3683` second-case supports of size at most three have replayed exact certificates; the five zero-product exceptions have unit-ideal certificates |
@@ -584,6 +585,27 @@ affineness by an explicit ample divisor.  None carries a finite rank-six
 Keller morphism.  Consequently the next gate is genuinely the multiplication,
 trace, discriminant, and monodromy of the finite algebra, not surface topology
 or the displayed Picard/canonical classes in isolation.
+
+Finite duality does sharpen the remaining algebra.  The relative dualizing
+module `Hom_R(A,R)` is the inverse-different line and represents `D`, `2D`, or
+`D2+2D3` in the free source Picard group.  It is therefore not free as an
+`A`-line even though it is free over `R=C[P,Q]`.  Consequently `A/R` is not a
+globally Frobenius algebra, is not monogenic, and admits no single global
+square complete-intersection presentation; the finite morphism remains
+syntomic and locally complete intersection.
+
+Writing the ramification divisor as `2E+O` gives a free half-different lattice
+and the exact symmetric factorization
+
+```text
+T = Phi^* H Phi,
+det(T) = det(H) * det(Phi)^2.
+```
+
+The three trace-determinant rows are `b`, `b^2`, and `b2*b3^2`.  Divisor sequences
+identify the cokernels with the branch-normalization modules and fix every
+matrix corank at the known cusps and collisions.  All those ranks remain
+possible, so this is a concrete algebraic endpoint rather than an exclusion.
 
 ## Milestone 9: sparse support in the residual `(72,108)` polygons
 

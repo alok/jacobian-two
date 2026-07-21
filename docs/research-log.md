@@ -645,6 +645,45 @@ cannot eliminate the remaining passports.  Any successful next step must use
 the finite rank-six algebra and its trace, different, discriminant, or
 compatible monodromy.
 
+## 2026-07-21: the inverse different is nontrivial and nonmonogenic
+
+Status: exact finite-duality reduction; excludes simple global algebra
+presentations but does not eliminate a passport.
+
+For `R=C[P,Q]` and `A=O(W)`, finite duality identifies
+
+```text
+Hom_R(A,R) = O_W(R_ram).
+```
+
+The three ramification divisors are `D`, `2D`, and `D2+2D3`.  Their classes
+are nonzero in the already computed free Picard groups.  Thus the rank-six
+finite algebra is Gorenstein but not globally Frobenius, not monogenic, and
+not one global square complete intersection over `R`.  This does not conflict
+with the morphism being syntomic: the complete-intersection presentations
+exist locally, while the nontrivial inverse-different line obstructs their
+gluing to one standard global presentation.
+
+Writing `R_ram=2E+O` and setting `M=rho_*O_W(E)` gives free rank-six lattices
+and an exact trace factorization
+
+```text
+T = Phi^* H Phi.
+```
+
+Here `H` is symmetric, `det(Phi)` is the equation of the doubled branch part,
+and `det(H)` is the equation of the odd branch part.  The exact discriminants
+are `b`, `b^2`, and `b2*b3^2`.  The cokernels are pushforwards of boundary
+normal lines, fixing the matrix coranks at every known cusp and collision.
+The `A6` square-root matrix has corank two at both its `T(2,5)` cusp and its
+separate `3+3` collision; the one-boundary `S6` trace matrix has coranks two,
+three, and four at its three torus-knot jumps.  These ranks remain compatible.
+
+Ordinary Euler characteristic also closes to an identity: it gives `2` in
+both one-boundary cases and `3` in the saturated case, exactly matching the
+surface decomposition.  The surviving target is therefore the multiplication
+law plus compactified symmetric matrix data, not a scalar Euler deficit.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.

@@ -136,6 +136,24 @@ They prove that the next obstruction must use the multiplication, trace,
 discriminant, or monodromy of the finite rank-six algebra.  See the
 [hostile-model note](docs/smooth-normalization-hostile-models.md).
 
+The finite algebra does add a new exact obstruction.  Its relative dualizing
+module is the nontrivial inverse-different line
+`O_W(D)`, `O_W(2D)`, or `O_W(D2+2D3)`.  Hence the rank-six algebra is locally
+Gorenstein but not globally Frobenius, not monogenic, and not one global
+square complete intersection over `C[P,Q]`.  Splitting the ramification
+divisor as `2E+O` factors the trace Gram matrix exactly as
+
+```text
+T = Phi^* H Phi,
+```
+
+with `H` symmetric.  The trace determinants are respectively `b`, `b^2`, and
+`b2*b3^2`.  The cokernels are the
+branch-normalization modules, so the exact
+matrix coranks at every cusp and collision are fixed.  Those coranks remain
+consistent; this is a concrete matrix target, not yet a contradiction.  See
+the [trace-lattice note](docs/finite-flat-trace-lattices.md).
+
 ## A separate sparse obstruction at coordinate degree `(72,108)`
 
 Generic sheet degree and coordinate degree are different invariants.  On the
@@ -429,6 +447,10 @@ optional Sage/GAP replay is an additional independent local cross-check.
 - [`docs/smooth-normalization-hostile-models.md`](docs/smooth-normalization-hostile-models.md)
   constructs explicit affine surface pairs realizing every smooth/Picard/
   canonical package above, thereby isolating the missing finite-cover data.
+- [`docs/finite-flat-trace-lattices.md`](docs/finite-flat-trace-lattices.md)
+  derives the inverse different, exact discriminants, the symmetric
+  half-different factorization, normalization-module cokernels, and the
+  nonmonogenic obstruction.
 - [`docs/s6-one-dicritical-local.md`](docs/s6-one-dicritical-local.md)
   gives the complete `S6` fiber census, symmetric local blocks, jump
   trichotomy, torus-knot types, and hostile analytic models.

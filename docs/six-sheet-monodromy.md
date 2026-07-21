@@ -937,6 +937,18 @@ transposition curve, and `2+3+1` at every cross-intersection.  The proof and
 an exact four-meridian fixture still generating `S6` are in
 [`s6-two-curve-collisions.md`](s6-two-curve-collisions.md).
 
+Smoothness also exposes a common finite-algebra obstruction.  If
+`R=C[P,Q]` and `A=O(W)`, finite duality gives
+`Hom_R(A,R)=O_W(R_ram)`.  This source line is nontrivial, so the algebra is
+not globally Frobenius, monogenic, or one global square complete intersection.
+Splitting `R_ram=2E+O` factors the trace matrix as `T=Phi^* H Phi`, where `H`
+is symmetric.  The three exact trace determinants are `b`, `b^2`, and
+`b2*b3^2`, and the cokernels are the branch-normalization modules.  The full
+proof and exact cusp/collision coranks are in
+[`finite-flat-trace-lattices.md`](finite-flat-trace-lattices.md).  Every forced
+corank remains algebraically possible, so this is a sharpened target rather
+than an elimination.
+
 For the unrestricted six-sheet problem, configurations with several dicritical
 components must still be handled.  Section 7 reduces their monodromy to `A6`
 or `S6`, but a combinatorial framework is still only necessary data: Borisov
