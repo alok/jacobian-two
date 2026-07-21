@@ -95,6 +95,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_ten_partition_ledger
       - name: Exclude the conditional A6 delta-ten ordinary-quadruple stratum
         run: uv run --frozen python -m scripts.a6_delta_ten_quadruple
+      - name: Exclude the conditional A6 delta-ten contact-three stratum
+        run: uv run --frozen python -m scripts.a6_delta_ten_contact_three
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts
