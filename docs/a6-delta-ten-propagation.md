@@ -247,3 +247,26 @@ Constant singular-scheme length alone would not justify the result.  The
 finite-etale residual scheme, labeled relative blowups, relative SNC divisor,
 properness, and stratumwise submersion are the hypotheses that make the
 topological transport valid.
+
+## 7. Reuse for the nonsplit contact-four surface
+
+The same argument applies to the first codimension-three profile on the
+determinant-nonzero `C4+6N` Cramer surface.  Its incidence is a principal open
+of the `(k,s)` plane and hence smooth and irreducible.  The exact cyclic sample
+lies in the open where the contact branches are immersed, the fourth jet is
+nonzero, the six residual nodes form a finite-etale scheme with separated
+targets, and the cusp and infinity types remain fixed.
+
+There is one resolution detail that must not be hidden in the phrase
+“uniform contact resolution.”  A two-branch contact of order four requires
+four relative blowups.  After three, the strict transforms are transverse to
+one another but they and the newest exceptional component meet at a triple
+crossing; a fourth blowup separates the three directions and produces a
+relative SNC divisor.  Once the branches and nodes are labeled by a finite
+etale cover, all four centers are algebraic sections with nonzero defining
+jets.  Proper Thom isotopy therefore transports the cyclic complement over
+the clean Cramer open exactly as in Sections 3--5.
+
+The full calculation and its omitted split, denominator, cusp-pair,
+diagonal, and residual boundaries are recorded in
+[the codimension-three checkpoint](a6-delta-ten-codim-three.md).

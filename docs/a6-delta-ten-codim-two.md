@@ -30,12 +30,18 @@ displayed generic or dominant incidence components are now excluded.  For
 [propagation note](a6-delta-ten-propagation.md) works over the smooth labeled
 incidence spaces and supplies the previously missing connected-clean-open,
 finite-etale labeling, simultaneous-resolution, and proper-isotopy argument.
-None of the calculations classifies every
-component supported on a denominator, coefficient-rank, split `k=0,+2,-2`,
-overlap, removed `P`-projection/critical-fiber chart, or deeper-degeneration
-boundary.  A removed `P`-critical fiber is not automatically a singular
-branch of `(P,Q)` when `Q'` is nonzero.  Those residual loci remain in the
-audit.
+The three previously exposed residual coefficient-rank factors can no longer
+support a threefold: the mixed factor has coefficient rank three on its valid
+residual divisor, the two-triple residual is incompatible after exact
+localization, and every two-contact residual incidence component has
+dimension at most two.  The removed `P`-critical triple charts for `T112` and
+the mixed profile likewise have dimension at most two when the critical
+branch is immersed.  A generated split-chart ledger now covers all 22 generic
+allocations and supplies exact clean witnesses at `k=0,+2` plus full
+transport to `k=-2`; it does **not** classify most coefficient-rank-drop
+subloci on those split charts.  Denominator charts, unresolved split rank
+strata, component intersections, lower-dimensional residual taxonomies, and
+deeper degenerations remain in the audit.
 
 The topology conclusion also has two explicit computer-assisted inputs:
 
@@ -65,11 +71,11 @@ point.
 | profile | component proved to exist | topology conclusion on that component | boundary not covered |
 |---|---|---|---|
 | `C3 + 7N` | one irreducible threefold on the valid pair chart | generic clean component excluded | removed projection-chart and split pair-chart loci, including `s=0` and pair-denominator behavior, plus deeper intersections |
-| `C2^2 + 6N` | Cramer component dominating the full `(k,u,v)` ordered base, modulo the free swap | that dominant clean component excluded | residual-rank closures and split-fiber intersections may support other components |
-| `T112 + 6N` | irreducible labeled affine-line bundle on the displayed `P`-unramified chart and generically finite threefold image | generic clean dominant chart excluded | removed `P`-critical-fiber and deeper loci, which are not automatically singular curve branches |
-| `C2 + T111 + 5N` | dense rational Cramer component on the displayed open | generic clean dominant chart excluded | residual-rank, split, overlap, removed triple/fourth-root `P`-critical, and deeper lower loci |
+| `C2^2 + 6N` | Cramer component dominating the full `(k,u,v)` ordered base, modulo the free swap | that dominant clean component excluded | residual factor has no threefold; unresolved split rank strata and component intersections remain |
+| `T112 + 6N` | irreducible labeled affine-line bundle on the displayed `P`-unramified chart and generically finite threefold image | generic clean dominant chart excluded | immersed `P`-critical boundary has no threefold; unresolved split rank strata and deeper intersections remain |
+| `C2 + T111 + 5N` | dense rational Cramer component on the displayed open | generic clean dominant chart excluded | residual and immersed `P`-critical factors have no threefold; split rank strata, overlap intersections, and lower-dimensional taxonomy remain |
 | `Q0 + 4N` | one irreducible threefold on the valid four-source fiber chart | generic clean component excluded | removed critical-fiber, non-clean, and deeper intersections |
-| `T111^2 + 4N` | rational threefold dominating the dense valid Cramer open | dense Cramer component excluded | compatible residual-rank-supported and split boundaries |
+| `T111^2 + 4N` | rational threefold dominating the dense valid Cramer open | dense Cramer component excluded | valid residual factor is empty; unresolved split rank strata and intersections remain |
 
 “Excluded” means that the component's clean equisingular open cannot carry
 the required connected six-sheet `A6` quotient with single-three-cycle branch
@@ -148,9 +154,19 @@ augmented Cramer numerators contains only
 \]
 
 not the residual determinant factor.  Hence that residual factor does not
-support another component dominating its divisor.  This gcd calculation does
-not rule out compatible subvarieties of higher codimension on the residual
-rank locus.
+support another component dominating its divisor.  The follow-up residual
+checker closes the higher-codimension threat as well.  In unordered root
+coordinates `sigma=u+v`, `pi=uv`, rank-three compatibility is a proper closed
+subset of the residual surface and therefore has base dimension at most one.
+Every rank-two point is singular on that surface.  Projection resultants put
+every positive-dimensional singular locus on `pi=0`, the split curves
+`pi=sigma-1`, `pi=-sigma-1`, or the diagonal `4*pi=sigma^2`; exact
+restriction makes each invalid or empty on the current chart.  A vertical
+projection Gröbner basis is the unit ideal.  Finally, normalized
+coefficient-function Wronskians force the two jet rows at a valid contact
+root to have rank at least two.  Thus rank-three bases have dimension at most
+one, rank-two bases are finite, and rank one is impossible.  Every compatible
+residual incidence component has dimension at most two.
 
 The exact member
 
@@ -165,9 +181,10 @@ discriminants are nonzero, squarefree, and coprime, of degree pairs `(2,13)`,
 `(6,9)`, and `(6,9)`.  That rules out an automatic double-contact divisor on
 a whole split fiber; it does not classify their codimension-two intersections.
 
-Therefore that full-base dominant clean component is excluded.  Residual-rank
-closures and split-fiber intersections remain open and could support other
-components of the same collision profile.
+Therefore that full-base dominant clean component is excluded, and its
+residual determinant cannot hide a second threefold.  The compatible
+residual curves and points have not been assigned to adjacent profiles.
+Split-fiber rank strata and their intersections remain open.
 
 ## 4. One tangent triple: `T112 + 6N`
 
@@ -264,9 +281,14 @@ Cramer's rule gives one rational threefold over an irreducible open in
 `(q,r,w)`.  The one nonboundary residual-rank factor is irreducible and has
 gcd one with a selected augmented minor after the exact specialization
 `(q,r)=(2,-1)`.  The factor is proved irreducible over `QQ`; no absolute
-irreducibility claim is used.  It supplies no second component dominating
-that rank divisor.  Compatible lower-dimensional intersections on the
-divisor are not eliminated by this test.
+irreducibility claim is used.  A manual Sage saturation of the coefficient
+rank-at-most-two minors by the complete valid-chart localizer is the unit
+ideal, with recorded exponent nine.  Hence the coefficient rank is exactly
+three everywhere on the valid residual divisor.  Compatibility is a proper
+closed subset of that divisor, so its base dimension is at most one and its
+affine-line fibers give total incidence dimension at most two.  The remaining
+compatible curves and points are not decomposed, but no same-profile
+threefold is supported there.
 
 The exact member, after harmless target scaling, is
 
@@ -284,8 +306,9 @@ Cramer incidence with a smooth irreducible open of affine three-space and
 then verifies finite-etale labeling, relative embedded resolution, and
 proper isotopy on its nonempty clean open.  Thus the generic dominant Cramer
 chart is excluded.  Neither the Python CI nor the manual Sage checker proves
-that theorem step.  Residual-rank, split, overlap, and deeper
-lower-dimensional loci remain open.
+that theorem step.  The residual factor cannot support a threefold; split
+rank strata, overlap intersections, and the lower-dimensional residual
+taxonomy remain open.
 
 ## 6. One ordinary quadruple: `Q0 + 4N`
 
@@ -351,11 +374,14 @@ where
 \]
 
 The factor `B=0` puts the two omitted roots in the same `P`-fiber and is
-invalid for two separate triple targets.  The residual factor
-`A=kuv-u-v` is generically inconsistent: at `(k,u,v)=(3/2,1,2)`, the
-coefficient matrix has rank three while the augmented matrix has rank four.
-That one hostile point proves that `A` is not a compatible dominant divisor;
-it does not classify compatible lower-dimensional pieces contained in `A=0`.
+invalid for two separate triple targets.  On the residual factor
+`A=kuv-u-v`, substitute `k=(u+v)/(uv)`.  After dividing only the nonzero
+root-difference, cusp-fiber, and same-fiber factors and applying a
+Rabinowitsch localization, the four normalized augmented determinants
+generate the unit ideal.  Thus there is no compatible point anywhere on the
+valid residual chart.  The hostile family `k=0`, `v=-u` really is compatible,
+but the exact equations put all of it on `B=0`; it is an ordinary-quadruple
+boundary rather than two separate triple targets.
 
 The complement of all determinant factors is one rational three-dimensional
 Cramer graph, symmetric under `u<->v`.  The exact member
@@ -367,10 +393,111 @@ Cramer graph, symmetric under `u<->v`.  The exact member
 has omitted roots `-1,1`, two distinct triple target values `1/3,-125/3`,
 and four residual nodes.  Sage verifies the cusp, two ordinary triple points,
 four nodes, and a cyclic complement.  This excludes the component dominating
-the dense valid Cramer open.  Residual `A`-supported components and split
-boundaries remain open.
+the dense valid Cramer open.  The valid residual `A` chart is empty; split
+rank strata and component intersections remain open.
 
-## 8. What the checkpoint changes
+## 8. The immersed `P`-critical triple boundary
+
+The fourth-source boundary removed from the ordinary triple-root chart is not
+automatically invalid.  If `e` is the critical source, then
+
+\[
+ k=-\frac{4e^2+2}{3e},\qquad
+ P(t)-P(e)=(t-e)^2
+ \left(t^2-\frac{2(1-e^2)}{3e}t+\frac{e^2-1}{3}\right). \tag{8.1}
+\]
+
+On
+
+\[
+ e(e^2-1)(2e^2-1)(2e^2+1)\ne0,                    \tag{8.2}
+\]
+
+the three distinct sources are the critical source and the two roots of the
+quadratic.  The critical plane branch is immersed exactly when `Q'(e)!=0`.
+An exact saturation of the labeled fourth-root boundary gives three prime
+curves, one for each choice of critical label.
+
+For `T112`, the critical branch cannot belong to the tangent pair: the
+cross-multiplied tangent equation then reduces to `Q'(e)=0`.  The two
+noncritical branches may be tangent.  Their two target-equality equations and
+one tangency equation have coefficient rank three throughout the valid
+critical curve, so the incidence is an affine-line bundle of dimension two.
+The exceptional algebraic value `e^2+2=0` still forces `Q'(e)=100`, rather
+than a nonimmersed branch.
+
+For `C2+T111`, the combined system is generically rank four over the
+two-dimensional `(e,w)` base.  The common curve of its rank-at-most-two
+minors is only the pair-denominator curve; off that curve the rank-at-most-two
+base is finite, and the two triple-equality rows always have rank two.  The
+denominator curve carries a genuine pair only at `e=+/-1/2`, the split
+values.  On the true vertical split chart, `rho=-1/4` changes the profile to
+`T112`, while the other determinant roots are augmented-rank inconsistent.
+Thus the same-profile critical mixed incidence also has dimension at most
+two.  Neither critical boundary supports a hidden codimension-two threefold.
+
+The exact hostile members at `k=-3`, critical source `e=2`, have `Q'(2)=588`
+for `T112+6N` and `Q'(2)=504/5` for `C2+T111+5N`.  Their manual Sage singular
+schemes have length decompositions `(4,1)+(6,1)+(6,6)` and
+`(4,1)+(3,1)+(4,1)+(5,5)`, respectively.  These fixtures prove nonemptiness;
+no complement presentation is claimed for the resulting dimension-two
+critical pieces.
+
+## 9. The true split-chart generic ledger
+
+At `k=0,+2,-2`, the unordered-pair incidence is reducible.  The genuine
+collision degrees are
+
+\[
+ (\deg V,\deg W)=(2,8)\quad(k=0),\qquad
+ (4,6)\quad(k=\pm2).                                  \tag{9.1}
+\]
+
+A finite generator now constructs every generic allocation from these
+component budgets, the edge vectors for contacts/triples/quadruples, the
+distinct-contact rules, and the unique clean `k=0` overlap rule.  It produces
+exactly 22 rows: eleven at `k=0` and eleven allocation types at `k=+/-2`.
+Three tempting `k=0` rows are impossible:
+
+- a triple root on the monic quadratic `V` component;
+- two distinct double roots on that same component; and
+- an ordinary-triple `V` edge plus a separate contact `V` edge.
+
+Every allowed row has an exact clean witness at `k=0` or `k=2`.  The checker
+verifies coefficient and augmented ranks, exact prescribed root
+multiplicities, squarefree residual roots and target values, cross-component
+target separation, separation from the special targets, and avoidance of
+the cusp, extra-critical, and unintended-overlap walls.  Exact full-family
+transport
+
+\[
+ t\mapsto-t,qquad Y\mapsto-Y,qquad
+ (a,b,c,d)\mapsto(a,-b,c,-d)                           \tag{9.2}
+\]
+
+replays all eleven `k=-2` witnesses and every clean predicate.  The
+legitimate `k=0` component overlap is handled explicitly: its generic length
+is `1+1`, while the two contact-three allocations have lengths `2+1` and
+`1+2`.
+
+Three principal rank-drop systems are globally saturated on their valid
+opens: `k=0` graph `C3`, `k=0` vertical/graph double contact, and `k=2`
+vertical/vertical double contact.  Their saturation exponents are `3,3,4`.
+
+This is a complete **generic clean-witness ledger**, not a complete split
+exclusion.  A maximal-rank witness proves a nonempty expected-rank open; it
+does not rule out a different component supported on a coefficient-rank-drop
+locus.  Most remaining split allocation systems still need determinantal and
+augmented-compatibility saturation with the bound
+
+\[
+ \dim(\text{base rank locus})+4-\operatorname{rank}.                 \tag{9.3}
+\]
+
+No van Kamp calculation or topology transport is asserted for these
+dimension-two witnesses.
+
+## 10. What the checkpoint changes
 
 The conditional delta-ten filtration is now:
 
@@ -378,26 +505,30 @@ The conditional delta-ten filtration is now:
 |---|---:|---|
 | clean, dimension five | 1 | excluded |
 | codimension-one, dimension four | 2 | both generic components excluded |
-| expected codimension two, dimension three | 6 | all six displayed generic/dominant components excluded; closure and boundary components remain open |
-| expected codimension at least three | 136 | not audited component by component |
+| expected codimension two, dimension three | 6 | all six displayed generic/dominant components excluded; all three residual and both immersed `P`-critical threefold threats closed; unresolved split/denominator/intersection rank strata remain |
+| expected codimension three, dimension two | 14 | nonsplit `C4+6N` dominant surface is the first audited profile; see the codimension-three note |
+| expected codimension at least four | 122 | not audited component by component |
 
 The 145-profile ledger remains an elimination ledger, not a list of proven
 components.  In particular, its 55 overdetermined profiles are not empty by
 dimension count alone.  The next exact work is to saturate and decompose:
 
-1. the residual-rank loci in `C2^2`, `C2+T111`, and `T111^2`;
-2. the split `k=0,+2,-2` charts for all six profiles;
-3. removed pair and `P`-projection/critical-fiber loci that can re-enter
-   through a different chart and are not automatically invalid;
-4. intersections and specializations of the six identified components; and
-5. the fourteen expected codimension-three profiles, followed by their
-   endpoints and overdetermined containments.
+1. the unresolved determinantal rank strata for the remaining split
+   allocations at `k=0,+2,-2`;
+2. removed pair-denominator and overlap charts, plus intersections of the
+   now-bounded residual and `P`-critical pieces with other walls;
+3. assignment of the compatible lower-dimensional residual curves and
+   points to adjacent collision profiles;
+4. intersections and specializations of the six identified components;
+5. the remaining thirteen expected codimension-three profiles and the
+   omitted boundaries of `C4+6N`; and
+6. the endpoint and overdetermined containment audit.
 
 Even a complete audit of that list would establish only the stated
 conditional one-pair, single-three-cycle `A6` result.  It would not settle
 the unrestricted generic-degree-six problem.
 
-## 9. Reproduction
+## 11. Reproduction
 
 Run the dependency-free algebra, exact geometry, stored-relation replay, and
 finite permutation censuses with:
@@ -409,6 +540,9 @@ uv run python -m scripts.a6_delta_ten_t112
 uv run python -m scripts.a6_delta_ten_contact_triple
 uv run python -m scripts.a6_delta_ten_quadruple
 uv run python -m scripts.a6_delta_ten_double_triple
+uv run python -m scripts.a6_delta_ten_pcritical_triples
+uv run python -m scripts.a6_delta_ten_split_codim_two
+uv run python -m scripts.a6_delta_ten_residual_rank
 
 uv run pytest -q \
   tests/test_a6_delta_ten_contact_three.py \
@@ -416,7 +550,10 @@ uv run pytest -q \
   tests/test_a6_delta_ten_t112.py \
   tests/test_a6_delta_ten_contact_triple.py \
   tests/test_a6_delta_ten_quadruple.py \
-  tests/test_a6_delta_ten_double_triple.py
+  tests/test_a6_delta_ten_double_triple.py \
+  tests/test_a6_delta_ten_pcritical_triples.py \
+  tests/test_a6_delta_ten_split_codim_two.py \
+  tests/test_a6_delta_ten_residual_rank.py
 
 uv run mypy --no-incremental
 ```
@@ -432,6 +569,8 @@ sage tools/check_a6_delta_ten_t112.sage
 sage tools/check_a6_delta_ten_contact_triple.sage
 sage tools/check_a6_delta_ten_quadruple.sage
 sage tools/check_a6_delta_ten_double_triple.sage
+sage tools/check_a6_delta_ten_pcritical_triples.sage
+sage tools/check_a6_delta_ten_contact_triple_residual.sage
 ```
 
 These Sage commands are manual checkers; GitHub CI runs the Python

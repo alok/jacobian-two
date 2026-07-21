@@ -36,6 +36,7 @@ def test_contact_four_incidence_has_one_dominant_surface() -> None:
     assert certificate.sample_incidence_residuals == (0, 0, 0, 0)
     assert certificate.sample_incidence_determinant == -168
     assert certificate.sample_valid_localizer == -9
+    assert certificate.sample_cusp_coefficient == Rational(9, 7)
 
 
 def test_rational_member_has_one_exact_contact_four_root() -> None:

@@ -314,6 +314,7 @@ class DeltaTenContactFourCertificate:
     sample_incidence_residuals: tuple[Expr, Expr, Expr, Expr]
     sample_incidence_determinant: Expr
     sample_valid_localizer: Expr
+    sample_cusp_coefficient: Expr
     collision_identity: Expr
     tangency_identity: Expr
     collision_tangency_gcd: Expr
@@ -424,6 +425,7 @@ class DeltaTenContactFourCertificate:
             and self.sample_incidence_residuals == (0, 0, 0, 0)
             and self.sample_incidence_determinant == -168
             and self.sample_valid_localizer == -9
+            and self.sample_cusp_coefficient == Rational(9, 7)
             and self.collision_identity == 0
             and self.tangency_identity == 0
             and self.collision_tangency_gcd == expand((S + 1) ** 3)
@@ -568,6 +570,7 @@ def exact_delta_ten_contact_four_certificate() -> DeltaTenContactFourCertificate
         ),
         sample_incidence_determinant=sample_coefficient_matrix.det(),
         sample_valid_localizer=CONTACT_FOUR_VALID_LOCALIZER.subs(sample_base),
+        sample_cusp_coefficient=CONTACT_FOUR_PARAMETERS[ALPHA],
         collision_identity=expand(sample_collision - CONTACT_FOUR_COLLISION),
         tangency_identity=expand(sample_tangency - CONTACT_FOUR_TANGENCY),
         collision_tangency_gcd=gcd(
