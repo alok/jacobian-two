@@ -1,6 +1,7 @@
 """Regression tests for the exact six-sheet transitive-group certificate."""
 
 from scripts.six_sheet_monodromy import (
+    OREVKOV_FORBIDDEN_RAMIFICATION_INDEX,
     OREVKOV_ONE_DICRITICAL_TYPES,
     OREVKOV_SIX_SHEET_BUDGET,
     OrevkovBudgetProfile,
@@ -16,6 +17,7 @@ from scripts.six_sheet_monodromy import (
     one_dicritical_passports,
     orevkov_budget_profiles,
     permutation_orbit_sizes,
+    ramified_branch_profiles,
 )
 
 
@@ -125,7 +127,7 @@ def test_every_non_galois_group_with_deck_symmetry_is_imprimitive() -> None:
     assert all(not row.is_primitive for row in deck_symmetric)
 
 
-def test_affine_fixed_sheet_inertia_filter_leaves_seven_groups() -> None:
+def test_affine_and_refined_unrestricted_filters_are_exact() -> None:
     rows = classify_six_sheet_groups()
 
     assert tuple(row.fixed_point_normal_closure_order for row in rows) == (
@@ -156,10 +158,79 @@ def test_affine_fixed_sheet_inertia_filter_leaves_seven_groups() -> None:
         "6T16",
     )
     assert candidate_ids(general_keller_compatible=True) == (
-        "6T12",
-        "6T14",
         "6T15",
         "6T16",
+    )
+
+
+def test_refined_primitive_branch_profiles_leave_only_a6_and_s6() -> None:
+    profiles = {
+        fixture.identifier: ramified_branch_profiles(fixture)
+        for fixture in TRANSITIVE_GROUPS[11:]
+        if fixture.identifier in {"6T12", "6T14", "6T15", "6T16"}
+    }
+
+    assert {
+        identifier: tuple(
+            (
+                tuple(
+                    (
+                        analysis.cycle_type,
+                        analysis.class_size,
+                        analysis.normal_closure_order,
+                        analysis.moved_sheet_count,
+                    )
+                    for analysis in profile.branch_classes
+                ),
+                profile.minimum_defect_cost,
+                profile.residual_defect,
+                profile.survives_irreducible_branch_obstruction,
+            )
+            for profile in group_profiles
+        )
+        for identifier, group_profiles in profiles.items()
+    } == {
+        "6T12": (
+            ((((2, 2, 1, 1), 15, 60, 4),), 4, 1, False),
+        ),
+        "6T14": (
+            ((((4, 1, 1), 30, 120, 4),), 4, 1, False),
+        ),
+        "6T15": (
+            ((((3, 1, 1, 1), 40, 360, 3),), 3, 2, True),
+            ((((2, 2, 1, 1), 45, 360, 4),), 4, 1, False),
+        ),
+        "6T16": (
+            ((((2, 1, 1, 1, 1), 15, 720, 2),), 2, 3, True),
+            ((((4, 1, 1), 90, 720, 4),), 4, 1, False),
+            (
+                (
+                    ((2, 1, 1, 1, 1), 15, 720, 2),
+                    ((2, 1, 1, 1, 1), 15, 720, 2),
+                ),
+                4,
+                1,
+                True,
+            ),
+            ((((3, 2, 1), 120, 720, 5),), 5, 0, False),
+            (
+                (
+                    ((2, 1, 1, 1, 1), 15, 720, 2),
+                    ((3, 1, 1, 1), 40, 360, 3),
+                ),
+                5,
+                0,
+                True,
+            ),
+        ),
+    }
+
+    assert all(
+        OREVKOV_FORBIDDEN_RAMIFICATION_INDEX
+        not in analysis.cycle_type
+        for group_profiles in profiles.values()
+        for profile in group_profiles
+        for analysis in profile.branch_classes
     )
 
 
@@ -269,6 +340,25 @@ def test_one_dicritical_passports_preserve_all_three_filter_stages() -> None:
             passport.group_identifier,
             passport.ramification_index,
             passport.tangential_degree,
+            passport.forced_tangential_jump,
+            passport.residual_excess,
+        )
+        for passport in passports
+    ) == (
+        ("6T7", 2, 2, 2, 1),
+        ("6T8", 4, 1, 0, 1),
+        ("6T12", 2, 2, 2, 1),
+        ("6T14", 4, 1, 0, 1),
+        ("6T15", 2, 2, 2, 1),
+        ("6T15", 3, 1, 0, 2),
+        ("6T16", 2, 1, 0, 3),
+        ("6T16", 4, 1, 0, 1),
+    )
+    assert tuple(
+        (
+            passport.group_identifier,
+            passport.ramification_index,
+            passport.tangential_degree,
         )
         for passport in passports
         if passport.survives_deck_rigidity
@@ -345,7 +435,7 @@ def test_6t11_full_generating_pairs_have_exact_minimum_costs() -> None:
             ((2, 1, 1, 1, 1), 3, 8),
             ((2, 2, 1, 1), 6, 24),
             48,
-            4,
+            6,
             (((2, 1),), ((2, 2),)),
         ),
         (
@@ -359,13 +449,13 @@ def test_6t11_full_generating_pairs_have_exact_minimum_costs() -> None:
             ((2, 2, 1, 1), 6, 24),
             ((4, 1, 1), 6, 24),
             48,
-            6,
+            8,
             (((2, 2),), ((4, 1),)),
         ),
     )
 
 
-def test_6t11_deck_symmetry_forces_the_saturated_221_profile() -> None:
+def test_refined_budget_eliminates_6t11_before_the_deck_component() -> None:
     pairs = full_generating_inertia_pairs(TRANSITIVE_GROUPS[10])
     budget_compatible = tuple(
         pair
@@ -373,30 +463,27 @@ def test_6t11_deck_symmetry_forces_the_saturated_221_profile() -> None:
         if pair.minimum_ramification_cost + 1 <= OREVKOV_SIX_SHEET_BUDGET
     )
 
-    assert len(budget_compatible) == 1
-    assert budget_compatible[0].minimum_ramification_cost == 4
-    assert orevkov_budget_profiles(
-        required_indices=(2, 2),
-        minimum_unramified_components=1,
-    ) == (
-        # The nontrivial deck involution forces the index-one component.
-        # Thus there is no room for another component or a finite jump.
-        OrevkovBudgetProfile(
-            dicritical_indices=(1, 2, 2),
-            jump_defect=0,
-        ),
-    )
+    # The cheapest class pair costs 2 + (2*2) = 6 after the forced
+    # tangential ramification is counted.  The deck-forced index-one
+    # component only strengthens the contradiction.
+    assert budget_compatible == ()
+    assert tuple(pair.minimum_ramification_cost for pair in pairs) == (6, 6, 8)
 
 
 def test_double_transposition_component_decompositions_are_complete() -> None:
     realizations = branch_inertia_realizations((2, 2, 1, 1))
 
     assert tuple(
-        (realization.components, realization.ramification_cost)
+        (
+            realization.components,
+            realization.outer_sum_cost,
+            realization.forced_tangential_jump,
+            realization.ramification_cost,
+        )
         for realization in realizations
     ) == (
-        (((2, 2),), 2),
-        (((2, 1), (2, 1)), 4),
+        (((2, 2),), 2, 2, 4),
+        (((2, 1), (2, 1)), 4, 0, 4),
     )
 
 

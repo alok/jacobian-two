@@ -56,7 +56,7 @@ from floating-point samples or from the authority of the announcement.
 | Whether the two-dimensional conjecture is false | `OPEN` | no implication from the dimension-three example is known or assumed here |
 | The Galois-case theorem settles every plane Keller map | `FALSE` | constant Jacobian gives finite separable, not normal/Galois |
 | Generic degree six is the first unresolved plane sheet degree | `SOURCE-CHECKED` | Campbell, Orevkov, Domrina, Żołądek, and Borisov literature audit |
-| A degree-six plane Keller counterexample must have primitive monodromy `A5`, `S5`, `A6`, or `S6` in its transitive degree-six action | `DERIVED / EXACTLY ENUMERATED` | affine fixed-sheet inertia leaves seven groups; Orevkov's budget, deck symmetry, purity, and local monodromy eliminate `6T7`, `6T8`, and `6T11` |
+| A degree-six plane Keller counterexample must have monodromy `A6` or `S6` in its transitive degree-six action | `DERIVED / EXACTLY ENUMERATED` | affine fixed-sheet inertia leaves seven groups; the refined identity `sum(e*d+delta)=5`, exact class costs, and the irreducible-branch obstruction eliminate the other five |
 | A one-dicritical degree-six counterexample can only have `A6` with `(e,d)=(3,1)` or `S6` with `(2,1)`, and its branch normalization is noninjective | `DERIVED / EXACTLY ENUMERATED` | finite-normalization deck rigidity, local multiplicity, purity, Lin--Zaidenberg topology, and exact subgroup witnesses |
 | The first residual transformed `(72,108)` Newton configuration needs at least three nonzero strict-interior coefficients, and the second needs at least four | `DERIVED / EXHAUSTIVELY CHECKED` | all `7504` first-case supports of size at most two and all `3683` second-case supports of size at most three have replayed exact certificates; the five zero-product exceptions have unit-ideal certificates |
 | The universal cubic discriminant coefficient expression is `-4*Q` | `LEAN-CERTIFIED` | explicit standard formula; semantic SymPy discriminant checked independently |
@@ -467,7 +467,9 @@ of `JC(2)`:
    to the remaining imprimitive groups;
 4. use purity and local monodromy to handle singular branch germs without
    silently assuming they are smooth; and
-5. record the exact primitive groups and one-dicritical passports which remain.
+5. refine the defect budget by tangential Riemann--Hurwitz, eliminate every
+   sole ramified branch moving more than three sheets, and record the exact
+   unrestricted and one-dicritical passports which remain.
 
 Acceptance gate:
 
@@ -484,12 +486,26 @@ Acceptance gate:
 
 Status: complete.  Fixed-sheet inertia reduces sixteen groups to seven.
 Orevkov's budget, boundary deck symmetry, purity, and the local
-double-transposition lemma eliminate `6T7`, `6T8`, and `6T11`.  Thus every
-hypothetical six-sheet counterexample has primitive monodromy
+double-transposition lemma first eliminate `6T7`, `6T8`, and `6T11`.
+Tangential Riemann--Hurwitz sharpens the exact budget to
 
 ```text
-6T12 = A5,  6T14 = S5,  6T15 = A6,  or  6T16 = S6.
+sum_E (e_E*d_E + delta_E) = 5,  delta_E >= 0.
 ```
+
+The resulting moved-sheet budget and irreducible-branch topology obstruction
+also eliminate `6T12=A5`, `6T14=S5`, the double-transposition `A6` profile,
+and the four-cycle and same-branch `(3)(2)` `S6` profiles.  Thus every
+hypothetical six-sheet counterexample has monodromy
+
+```text
+6T15 = A6  or  6T16 = S6.
+```
+
+In the unrestricted `A6` case there is one ramified `(e,d)=(3,1)` branch with
+noninjective normalization.  In the unrestricted `S6` case the ramified
+profiles are one transposition branch, two distinct transposition branches,
+or distinct transposition and 3-cycle branches.
 
 With one dicritical component, deck rigidity first leaves the same four
 groups.  Local multiplicity sharpens the `(e,d)=(2,2)` and `(4,1)` passports,
@@ -497,8 +513,7 @@ and Lin--Zaidenberg topology then eliminates both: an injectively normalized
 branch would have identical local and global complement groups, contradicting
 the intransitive local sheet action.  Only `6T15=A6` with `(3,1)` and
 `6T16=S6` with `(2,1)` remain, and their branch normalization must identify
-points.  The four primitive groups in the unrestricted multi-dicritical case
-and `JC(2)` remain open.
+points.  The surviving `A6` and `S6` profiles and `JC(2)` remain open.
 
 ## Milestone 9: sparse support in the residual `(72,108)` polygons
 

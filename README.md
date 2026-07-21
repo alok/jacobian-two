@@ -44,16 +44,33 @@ those meridians normally generate `G`.  Exact enumeration of all sixteen
 transitive degree-six groups initially leaves seven possibilities.  Orevkov's
 exact defect budget, the finite-normalization boundary, deck symmetry, purity
 of the branch locus, and a local double-transposition obstruction eliminate
-the three imprimitive survivors.  Therefore
+the three imprimitive survivors.  A new Riemann--Hurwitz refinement then
+charges a dicritical of normal index `e` and tangential degree `d` at least
+`e*d` units in Orevkov's budget:
 
 \[
-  G\in\{6T12=A_5,\;6T14=S_5,\;6T15=A_6,\;6T16=S_6\}.
+  \sum_E(e_Ed_E+\delta_E)=5,\qquad \delta_E\ge0.
+\]
+
+Together with an irreducible-branch normalization obstruction, this also
+eliminates `A5` and `S5`.  Therefore
+
+\[
+  \boxed{G\in\{6T15=A_6,\;6T16=S_6\}}.
 \]
 
 Equivalently, the function-field extension of any hypothetical six-sheet
 counterexample must be primitive.  This applies without a one-dicritical
-hypothesis.  Under the additional assumption of exactly one dicritical
-component, global branch-curve topology narrows the result further:
+hypothesis.  More precisely, the unrestricted ramified profiles are now:
+
+- `A6`: one `(e,d)=(3,1)` branch; its normalization is noninjective, and every
+  normalization collision is two smooth multiplicity-three branches which
+  use all six sheets and give an omitted affine value;
+- `S6`: one transposition branch, two distinct transposition branches, or
+  distinct transposition and 3-cycle branches.
+
+Under the additional assumption of exactly one dicritical component, global
+branch-curve topology gives the same two groups and narrows the local types:
 
 - only `6T15=A6` with `(e,d)=(3,1)` or `6T16=S6` with `(2,1)` remains;
 - the branch normalization `A1 -> B` must be noninjective, so the nonproperness
@@ -68,8 +85,10 @@ curve whose weighted-orbit product identifies the homotopy types of its local
 and global complements; its intransitive local six-sheet action cannot equal
 the transitive global monodromy.
 
-These are necessary conditions, not constructions or an exclusion of all four
-primitive cases.  The complete geometric proof and claim boundary are in the
+These are necessary conditions, not constructions or an exclusion of `A6`
+and `S6`.  The refined identity and universal elimination are proved in the
+[refined budget note](docs/refined-six-sheet-budget.md), with the broader
+geometric setup in the
 [six-sheet monodromy note](docs/six-sheet-monodromy.md).  The dependency-free
 [Python certificate](scripts/six_sheet_monodromy.py) rebuilds the exact groups,
 classes, normal closures, normalizers, deck groups, blocks, and local subgroup
@@ -350,8 +369,10 @@ optional Sage/GAP replay is an additional independent local cross-check.
 - [`docs/galois-frontier.md`](docs/galois-frontier.md) explains the Galois
   misconception and identifies generic degree six as the first open frontier.
 - [`docs/six-sheet-monodromy.md`](docs/six-sheet-monodromy.md) proves the
-  primitive-monodromy restriction and the conditional one-dicritical
-  passports at generic degree six.
+  degree-six monodromy filters and the conditional one-dicritical passports.
+- [`docs/refined-six-sheet-budget.md`](docs/refined-six-sheet-budget.md)
+  proves `sum(e*d+delta)=5`, eliminates `A5` and `S5` universally, and lists
+  the exact surviving `A6`/`S6` ramified profiles.
 - [`docs/newton-72-108-sparse.md`](docs/newton-72-108-sparse.md) gives the
   exact sparse-support obstruction in the separate residual coordinate-degree
   configurations.

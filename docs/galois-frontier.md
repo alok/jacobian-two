@@ -56,11 +56,20 @@ a real open problem, not something this repository claims to close.
 The repository does now obtain a new necessary condition inside degree six.
 Affine fixed-sheet inertia, Orevkov's defect identity, finite-normalization
 deck symmetry, purity, and local monodromy eliminate every imprimitive
-transitive action.  Thus a six-sheet counterexample would have to have one of
-the four primitive actions `A5`, `S5`, `A6`, or `S6`.  This is a substantial
-filter, but it does not exclude those four actions and therefore does not raise
-the accepted lower bound.  See
-[`six-sheet-monodromy.md`](six-sheet-monodromy.md) for the complete proof.
+transitive action.  Refining Orevkov's identity by Riemann--Hurwitz gives
+
+\[
+\sum_E(e_Ed_E+\delta_E)=5,\qquad\delta_E\ge0,
+\]
+
+so a generic branch class costs at least the number of sheets it moves.  An
+irreducible-branch topology argument then eliminates `A5` and `S5` as well.
+Thus a six-sheet counterexample would have to have monodromy `A6` or `S6`.
+This is a substantial filter, but it excludes neither survivor and therefore
+does not yet raise the accepted lower bound.  See
+[`six-sheet-monodromy.md`](six-sheet-monodromy.md) and
+[`refined-six-sheet-budget.md`](refined-six-sheet-budget.md) for the complete
+proofs.
 
 ## Two tempting but unsafe shortcuts
 
@@ -98,9 +107,9 @@ There are four intentionally separate levels.
 
 1. `JC(2)` itself, beginning at generic degree six, remains open.
 2. At generic degree six, the repository proves the primitive-monodromy
-   restriction above and sharper conditional one-dicritical passports.  These
-   are necessary conditions, not existence or nonexistence theorems for all
-   six-sheet maps.
+   restriction `G in {A6,S6}`, the exact surviving ramified profiles, and
+   sharper conditional one-dicritical passports.  These are necessary
+   conditions, not existence or nonexistence theorems for the survivors.
 3. The repository proves kernel-checked positive fragments for maps of bounded
    degree in one variable.  The quadratic-in-one-variable normal form is a
    Lean formalization and explicit reconstruction of a mathematically known

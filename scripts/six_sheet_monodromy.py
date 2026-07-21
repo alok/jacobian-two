@@ -26,6 +26,7 @@ CycleType: TypeAlias = tuple[int, ...]
 DEGREE: Final = 6
 IDENTITY: Final[Permutation] = tuple(range(DEGREE))
 OREVKOV_SIX_SHEET_BUDGET: Final = DEGREE - 1
+OREVKOV_FORBIDDEN_RAMIFICATION_INDEX: Final = DEGREE - 1
 OREVKOV_ONE_DICRITICAL_TYPES: Final[frozenset[CycleType]] = frozenset(
     {
         (2, 1, 1, 1, 1),
@@ -269,6 +270,22 @@ class ConjugacyClassAnalysis:
     class_size: int
     normal_closure_order: int
 
+    @property
+    def moved_sheet_count(self) -> int:
+        """Return the number of sheets moved by a class representative.
+
+        For a generic branch meridian this is also the minimum contribution
+        ``sum(e*d)`` forced by the tangentially refined Orevkov identity.
+        """
+
+        return sum(length for length in self.cycle_type if length > 1)
+
+    @property
+    def avoids_forbidden_index(self) -> bool:
+        """Whether no cycle requires Orevkov's forbidden index ``N - 1``."""
+
+        return OREVKOV_FORBIDDEN_RAMIFICATION_INDEX not in self.cycle_type
+
 
 def conjugacy_class_analyses(group: PermutationGroup) -> tuple[ConjugacyClassAnalysis, ...]:
     """Enumerate classes separately even when they have the same cycle type."""
@@ -338,17 +355,33 @@ class BranchInertiaRealization:
 
     Each pair is ``(e, d)``: normal ramification index ``e`` and tangential
     degree ``d``.  One component contributes ``d`` disjoint ``e``-cycles to
-    the meridian.  Orevkov's defect budget charges that component ``e`` only,
-    not ``e*d``.
+    the meridian.  Orevkov's outer term starts at ``e``, while
+    Riemann--Hurwitz forces at least ``e*(d-1)`` finite jump units.  Its true
+    minimum contribution to the exact defect budget is therefore ``e*d``.
     """
 
     components: tuple[tuple[int, int], ...]
 
     @property
-    def ramification_cost(self) -> int:
-        """Return this realization's contribution to Orevkov's outer sum."""
+    def outer_sum_cost(self) -> int:
+        """Return the unrefined ``sum(e)`` contribution."""
 
         return sum(index for index, _degree in self.components)
+
+    @property
+    def forced_tangential_jump(self) -> int:
+        """Return the jump defect forced by finite tangential ramification."""
+
+        return sum(
+            index * (tangential_degree - 1)
+            for index, tangential_degree in self.components
+        )
+
+    @property
+    def ramification_cost(self) -> int:
+        """Return the refined minimum ``sum(e*d)`` defect contribution."""
+
+        return self.outer_sum_cost + self.forced_tangential_jump
 
 
 def branch_inertia_realizations(
@@ -423,12 +456,115 @@ class InertiaClassPairAnalysis:
 
     @property
     def minimum_ramification_cost(self) -> int:
-        """Return the least outer-sum cost before deck-forced components."""
+        """Return the least refined defect cost before deck-forced components."""
 
         return sum(
             realization.ramification_cost
             for realization in self.minimum_realizations
         )
+
+
+@dataclass(frozen=True)
+class RamifiedBranchProfile:
+    """Normally generating branch classes within the refined degree-six budget.
+
+    Each entry of ``branch_classes`` represents a distinct irreducible target
+    branch curve.  Dicritical components over the same target curve have
+    already been combined into that meridian's disjoint cycles.
+    """
+
+    group_identifier: str
+    branch_classes: tuple[ConjugacyClassAnalysis, ...]
+    minimum_defect_cost: int
+
+    @property
+    def residual_defect(self) -> int:
+        """Return the budget left for unramified dicriticals and excess jumps."""
+
+        return OREVKOV_SIX_SHEET_BUDGET - self.minimum_defect_cost
+
+    @property
+    def survives_irreducible_branch_obstruction(self) -> bool:
+        """Whether the sole-branch normalization obstruction leaves the profile.
+
+        If there is just one ramified branch curve and its generic inertia moves
+        more than half of the six sheets, a normalization collision would cost
+        more than six sheets.  Its normalization is therefore injective.  The
+        Lin--Zaidenberg local/global argument rules out that configuration.
+        """
+
+        return not (
+            len(self.branch_classes) == 1
+            and self.branch_classes[0].moved_sheet_count * 2 > DEGREE
+        )
+
+
+def ramified_branch_profiles(
+    fixture: TransitiveGroupFixture,
+) -> tuple[RamifiedBranchProfile, ...]:
+    """Enumerate every normally generating ramified profile of cost at most five.
+
+    Riemann--Hurwitz turns a generic meridian's moved-sheet count into its
+    minimum Orevkov cost.  A fixed-point class containing a five-cycle is
+    omitted because it requires a dicritical of index ``N - 1``, excluded by
+    Orevkov's final remark.
+    """
+
+    group = generated_group(fixture.generators)
+    candidates = tuple(
+        analysis
+        for analysis in conjugacy_class_analyses(group)
+        if analysis.representative != IDENTITY
+        and has_fixed_point(analysis.representative)
+        and analysis.avoids_forbidden_index
+    )
+    result: list[RamifiedBranchProfile] = []
+    # Every nontrivial inertia moves at least two sheets, so budget five permits
+    # at most two distinct ramified target curves.
+    for number_of_branches in (1, 2):
+        for branch_classes in combinations_with_replacement(
+            candidates,
+            number_of_branches,
+        ):
+            minimum_defect_cost = sum(
+                analysis.moved_sheet_count for analysis in branch_classes
+            )
+            if minimum_defect_cost > OREVKOV_SIX_SHEET_BUDGET:
+                continue
+            generated = generated_group(
+                representative
+                for analysis in branch_classes
+                for representative in conjugacy_class(
+                    group,
+                    analysis.representative,
+                )
+            )
+            if len(generated) != len(group):
+                continue
+            result.append(
+                RamifiedBranchProfile(
+                    group_identifier=fixture.identifier,
+                    branch_classes=branch_classes,
+                    minimum_defect_cost=minimum_defect_cost,
+                )
+            )
+    return tuple(
+        sorted(
+            result,
+            key=lambda profile: (
+                profile.minimum_defect_cost,
+                len(profile.branch_classes),
+                tuple(
+                    (
+                        analysis.cycle_type,
+                        analysis.class_size,
+                        analysis.normal_closure_order,
+                    )
+                    for analysis in profile.branch_classes
+                ),
+            ),
+        )
+    )
 
 
 def full_generating_inertia_pairs(
@@ -485,6 +621,18 @@ class OneDicriticalPassport:
     tangential_degree: int
     jump_defect: int
     inertia_class: ConjugacyClassAnalysis
+
+    @property
+    def forced_tangential_jump(self) -> int:
+        """Return the part of ``jump_defect`` forced by tangential degree."""
+
+        return self.ramification_index * (self.tangential_degree - 1)
+
+    @property
+    def residual_excess(self) -> int:
+        """Return the jump budget left after the Riemann--Hurwitz minimum."""
+
+        return self.jump_defect - self.forced_tangential_jump
 
     @property
     def survives_deck_rigidity(self) -> bool:
@@ -745,12 +893,14 @@ class SixSheetGroupAnalysis:
         """Whether the proved unrestricted degree-six filters leave ``G``.
 
         The fixed-sheet normal-generation theorem first leaves seven groups.
-        The deck/budget/local-monodromy arguments, proved geometrically outside
-        this finite certificate, eliminate its three imprimitive entries
-        ``6T7``, ``6T8``, and ``6T11``.
+        The deck/budget/local-monodromy arguments eliminate its three
+        imprimitive entries.  The refined ``sum(e*d + delta) = 5`` identity
+        and the irreducible-branch normalization obstruction then eliminate
+        ``6T12=A5`` and ``6T14=S5``.  Those geometric arguments are proved
+        outside this finite certificate.
         """
 
-        return self.affine_inertia_compatible and self.is_primitive
+        return self.identifier in {"6T15", "6T16"}
 
     @property
     def one_dicritical_inertia_compatible(self) -> bool:

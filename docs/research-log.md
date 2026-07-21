@@ -322,7 +322,7 @@ local discriminant; an irreducible branch meridian cannot normally generate a
 transitive four-sheet group from `(12)(34)`.  This removes the last
 imprimitive action.
 
-The universal surviving list is therefore exactly
+The universal surviving list at this intermediate milestone was
 
 ```text
 6T12 = A5, 6T14 = S5, 6T15 = A6, 6T16 = S6.
@@ -348,9 +348,50 @@ lies outside the image of the original affine Keller map.
 The pure-Python certificate reconstructs all groups, conjugacy classes,
 normal closures, normalizers, deck quotients, block systems, budget profiles,
 and relevant local subgroup orbits.  Sage/GAP 4.14 independently reproduces
-the catalogue and every conjugacy-class invariant.  The remaining four
-primitive cases require compactification/splice/adjunction geometry rather
-than another assertion that the extension is Galois.
+the catalogue and every conjugacy-class invariant.  The next milestone below
+refines this four-group boundary further.
+
+## 2026-07-21: tangential defect budget leaves only `A6` and `S6`
+
+Status: derived here, independently hostile-audited, and exactly enumerated;
+mathematical priority not established; generic degree six remains open.
+
+For each dicritical `E`, Orevkov's affine-line structure factors its boundary
+map as a polynomial `A1 -> A1` of tangential degree `d_E`.  If `a_c` is its
+local tangential degree, local sheet counting gives
+`mu_(pi(c)) >= e_E*a_c`, while Riemann--Hurwitz gives
+`sum_c(a_c-1)=d_E-1`.  Orevkov's exact degree-six identity therefore sharpens
+to
+
+```text
+sum_E (e_E*d_E + delta_E) = 5,  delta_E >= 0.
+```
+
+Thus a generic branch meridian costs at least the number of sheets it moves.
+The exact class enumeration and total cost five leave only a short list of
+normally generating primitive profiles.  If the sole ramified branch moves
+four or five sheets, two normalization points cannot collide within degree
+six, so the normalization is injective.  Lin--Zaidenberg then makes the branch
+contractible and identifies its local and global complement groups; the local
+finite cover is disconnected because every boundary local degree is at most
+five, while the global cover is connected.  This contradiction eliminates
+`A5`, `S5`, the `A6` double-transposition profile, and the `S6` four-cycle and
+same-branch `(3)(2)` profiles.
+
+The unconditional frontier is now
+
+```text
+6T15 = A6 or 6T16 = S6.
+```
+
+The `A6` case has one ramified `(e,d)=(3,1)` branch with noninjective
+normalization.  Every normalization collision is exactly two smooth
+multiplicity-three boundary points, exhausts all six sheets, and is omitted by
+the affine map.  The `S6` ramified profiles are exactly one transposition
+branch, two distinct transposition branches, or distinct transposition and
+3-cycle branches.  The executable certificate now enumerates these complete
+cost-compatible profiles and preserves the forbidden index-five classes as
+hostile fixtures before applying Orevkov's final remark.
 
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
@@ -379,14 +420,14 @@ lower bounds from being mislabeled as an elimination of `(72,108)`.
 - The three-dimensional example does not justify saying that `JC(2)` is false.
 - Finite separability does not justify calling the plane function-field
   extension Galois; normality is a separate condition.
-- The degree-six frontier has been reduced to four primitive monodromy
-  actions, not solved.
+- The degree-six frontier has been reduced to `A6` and `S6` monodromy, not
+  solved.
 - Same-day social posts are not enough to settle historical attribution, even
   though the displayed finite certificate is fully checkable.
 
 ## Next research obligations
 
-1. Attack the four primitive generic-degree-six actions with
+1. Attack the surviving `A6` and `S6` generic-degree-six profiles with
    compactification, splice, adjunction, and Belyi constraints; do not relabel
    the monodromy filter as a solution of the unrestricted conjecture.
 2. Formalize more of the projective simple-root/fiber correspondence if a
