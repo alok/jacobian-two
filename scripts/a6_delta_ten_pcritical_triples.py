@@ -542,14 +542,10 @@ class DeltaTenPCriticalTripleCertificate:
     critical_tangent_reduction_identity: Expr
     t112_immersion_determinant_identity: Expr
     exceptional_immersion_residuals: tuple[Expr, Expr, Expr, Expr]
-    t112_component_dimension: int
-    t112_same_profile_threefold_exists: bool
     c2_incidence_determinant_identity: Expr
     c2_rank_two_minor_gcd_identity: Expr
     c2_normalized_rank_two_minor_gcd: Expr
     pair_denominator_incidence_identity: Expr
-    c2_component_dimension: int
-    c2_same_profile_threefold_exists: bool
     split_vertical_determinant_identities: tuple[Expr, Expr]
     split_vertical_rank_data: tuple[tuple[tuple[int, int], ...], ...]
     t112_sample_incidence_residuals: tuple[Expr, Expr, Expr]
@@ -577,6 +573,68 @@ class DeltaTenPCriticalTripleCertificate:
     c2_sage_jacobian_components: tuple[tuple[int, int], ...]
     topology_computed: bool
     topology_propagation_dependencies: tuple[str, str]
+
+    @property
+    def t112_component_dimension(self) -> int | None:
+        """Derive the valid critical-curve incidence dimension fail-closed.
+
+        The normalized maximal-minor gcd is one in the single base variable
+        ``e``.  After the displayed boundary factors are inverted, the
+        ``3 x 4`` system therefore has rank three everywhere.  A one-dimensional
+        base plus its affine-line solution fiber has dimension two.
+        """
+
+        if (
+            self.t112_minor_gcd_identity == 0
+            and self.t112_normalized_minor_gcd == 1
+            and self.critical_tangent_reduction_identity == 0
+            and self.t112_immersion_determinant_identity == 0
+            and self.exceptional_immersion_residuals == (0, 0, 0, 100)
+        ):
+            return 1 + (4 - 3)
+        return None
+
+    @property
+    def t112_same_profile_threefold_exists(self) -> bool:
+        """Conservatively report whether the exact dimension bound fails."""
+
+        return self.t112_component_dimension != 2
+
+    @property
+    def c2_component_dimension(self) -> int | None:
+        """Derive the maximum critical mixed-incidence dimension.
+
+        Off the determinant divisor, the two-dimensional base has a unique
+        coefficient solution.  Rank three occurs on curves and has
+        affine-line fibers.  Away from the pair-denominator curve the
+        rank-at-most-two base is finite; the two triple-equality rows have
+        rank two, so rank one is impossible.  The only genuine denominator
+        pairs occur at the separately checked split values, whose rank data
+        are at most one-dimensional.  Every case is therefore bounded by two.
+        """
+
+        expected_split_rank_data = (
+            ((3, 3), (3, 4), (3, 4)),
+            ((3, 3), (3, 4), (3, 4)),
+        )
+        if (
+            self.t111_minor_gcd_identity == 0
+            and self.t111_normalized_minor_gcd == 1
+            and self.c2_incidence_determinant_identity == 0
+            and self.c2_rank_two_minor_gcd_identity == 0
+            and self.c2_normalized_rank_two_minor_gcd == 1
+            and self.pair_denominator_incidence_identity == 0
+            and self.split_vertical_determinant_identities == (0, 0)
+            and self.split_vertical_rank_data == expected_split_rank_data
+        ):
+            return 2
+        return None
+
+    @property
+    def c2_same_profile_threefold_exists(self) -> bool:
+        """Conservatively report whether the exact dimension bound fails."""
+
+        return self.c2_component_dimension != 2
 
     @property
     def verified(self) -> bool:
@@ -804,8 +862,6 @@ def exact_delta_ten_pcritical_triple_certificate() -> (
             - EXPECTED_T112_IMMERSION_DETERMINANT
         ),
         exceptional_immersion_residuals=exceptional_residuals,
-        t112_component_dimension=2,
-        t112_same_profile_threefold_exists=False,
         c2_incidence_determinant_identity=cancel(
             C2_INCIDENCE_MATRIX.det(method="domain-ge")
             - EXPECTED_C2_INCIDENCE_DETERMINANT
@@ -820,8 +876,6 @@ def exact_delta_ten_pcritical_triple_certificate() -> (
             )
             - EXPECTED_PAIR_INCIDENCE_RESIDUAL
         ),
-        c2_component_dimension=2,
-        c2_same_profile_threefold_exists=False,
         split_vertical_determinant_identities=tuple(
             expand(actual - expected)
             for actual, expected in zip(
