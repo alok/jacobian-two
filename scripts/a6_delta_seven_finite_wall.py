@@ -5,21 +5,16 @@ partition-changing points.  This module classifies those points and stores
 the exact number-field van Kampen relations needed to replay their
 single-three-cycle images into ``A6``.
 
-Two principles are kept separate:
-
-* algebraic Galois conjugacy is not, by itself, used to identify complement
-  groups at distinct real embeddings;
-* coefficientwise complex conjugation *is* an antiholomorphic complement
-  homeomorphism.  It reverses meridian orientation, but the inverse of a
-  single three-cycle is again a single three-cycle.
-
 The algebraic classification covers ``(5,1,1)``, ``(4,2,1)``, ``(3,3,1)``,
-and every absent or invalid coarser partition.  The stored topology covers
-both ``(5,1,1)`` points, all four ``(4,2,1)`` points, and the conjugate pair
-of nonreal ``(3,3,1)`` points.  The real ``(3,3,1)`` embedding is deliberately
-left open until its separate van Kamp computation finishes.  As in the rest
-of the repository, this is a conditional, computer-assisted statement, not
-an unconditional proof of the plane Jacobian conjecture.
+and every absent or invalid coarser partition.  For the required *finite*
+``A6`` quotient, one directly checked embedding of each irreducible endpoint
+component suffices: finite etale covers and divisorial tame inertia transport
+under algebraic conjugation, and an order-three inertia generator remains a
+single three-cycle after a profinite-unit power.  This does not identify the
+discrete fundamental groups or assert that conjugate complements are
+homeomorphic.  As in the rest of the repository, the result is conditional
+and computer-assisted, not an unconditional proof of the plane Jacobian
+conjecture.
 """
 
 from __future__ import annotations
@@ -30,6 +25,7 @@ from typing import Final
 
 from sympy import (
     Expr,
+    Poly,
     Rational,
     Symbol,
     cancel,
@@ -947,7 +943,7 @@ class EndpointPresentationCertificate:
 
 @cache
 def checked_endpoint_presentations() -> tuple[EndpointPresentationCertificate, ...]:
-    """Return checked embeddings; the real P33 endpoint is not yet stored."""
+    """Return direct embedding-level computations retained as fixtures."""
 
     data = (
         ("P5 negative real embedding", (5, 1, 1), P5_NEGATIVE_RELATIONS),
@@ -976,11 +972,101 @@ def checked_endpoint_presentations() -> tuple[EndpointPresentationCertificate, .
     )
 
 
+@dataclass(frozen=True, slots=True)
+class EndpointArithmeticOrbitCertificate:
+    """One irreducible endpoint orbit and a directly checked embedding.
+
+    The executable part checks irreducibility and the representative census.
+    Transport of the finite quotient and its tame-inertia condition across
+    embeddings is the standard finite-etale/Riemann-existence dependency
+    described in the module docstring.
+    """
+
+    name: str
+    partition: tuple[int, ...]
+    defining_polynomial: Expr
+    variable: Symbol
+    geometric_points: int
+    representative: EndpointPresentationCertificate
+
+    @property
+    def verified(self) -> bool:
+        """Whether this is one irreducible orbit with an excluded sample."""
+
+        polynomial = Poly(
+            self.defining_polynomial,
+            self.variable,
+            domain="QQ",
+        )
+        return bool(
+            polynomial.degree() == self.geometric_points
+            and polynomial.is_irreducible
+            and self.representative.partition == self.partition
+            and self.representative.verified
+        )
+
+
+@cache
+def checked_endpoint_arithmetic_orbits(
+) -> tuple[EndpointArithmeticOrbitCertificate, ...]:
+    """Return one finite-quotient computation per irreducible component."""
+
+    data = (
+        (
+            "P5 orbit",
+            (5, 1, 1),
+            CONTACT_FIVE_POLYNOMIAL,
+            V,
+            2,
+            "P5 negative real embedding",
+        ),
+        (
+            "P42 orbit",
+            (4, 2, 1),
+            CONTACT_FOUR_TWO_POLYNOMIAL,
+            V,
+            4,
+            "P42 nonreal embedding (conjugate covers the fourth)",
+        ),
+        (
+            "P33 orbit",
+            (3, 3, 1),
+            CONTACT_THREE_THREE_POLYNOMIAL,
+            R33,
+            3,
+            "P33 nonreal embedding (conjugate covers the third)",
+        ),
+    )
+    presentations = {
+        presentation.name: presentation
+        for presentation in checked_endpoint_presentations()
+    }
+    return tuple(
+        EndpointArithmeticOrbitCertificate(
+            name=name,
+            partition=partition,
+            defining_polynomial=polynomial,
+            variable=variable,
+            geometric_points=geometric_points,
+            representative=presentations[representative_name],
+        )
+        for (
+            name,
+            partition,
+            polynomial,
+            variable,
+            geometric_points,
+            representative_name,
+        ) in data
+    )
+
+
 def main() -> None:
     """Print the exact finite-wall checkpoint currently stored."""
 
     algebra = exact_finite_wall_algebra_certificate()
     presentations = checked_endpoint_presentations()
+    orbits = checked_endpoint_arithmetic_orbits()
     print("finite partition algebra verified:", algebra.verified)
     print(
         "checked endpoint histograms:",
@@ -990,6 +1076,14 @@ def main() -> None:
         },
     )
     print("all stored endpoints excluded:", all(p.verified for p in presentations))
+    print(
+        "arithmetic endpoint orbit coverage:",
+        sum(orbit.geometric_points for orbit in orbits),
+        "points in",
+        len(orbits),
+        "irreducible orbits",
+    )
+    print("all required finite A6 endpoint quotients excluded:", all(o.verified for o in orbits))
 
 
 if __name__ == "__main__":

@@ -7,6 +7,7 @@ from scripts.a6_delta_seven_finite_wall import (
     P42_REAL_ZERO_RELATIONS,
     P5_NEGATIVE_RELATIONS,
     P5_POSITIVE_RELATIONS,
+    checked_endpoint_arithmetic_orbits,
     checked_endpoint_presentations,
     exact_finite_wall_algebra_certificate,
 )
@@ -66,6 +67,19 @@ def test_every_stored_number_field_embedding_has_no_a6_image() -> None:
         (3, 3, 1),
     )
     assert all(endpoint.verified for endpoint in endpoints)
+
+
+def test_one_embedding_covers_each_irreducible_finite_etale_orbit() -> None:
+    orbits = checked_endpoint_arithmetic_orbits()
+
+    assert tuple(orbit.partition for orbit in orbits) == (
+        (5, 1, 1),
+        (4, 2, 1),
+        (3, 3, 1),
+    )
+    assert tuple(orbit.geometric_points for orbit in orbits) == (2, 4, 3)
+    assert sum(orbit.geometric_points for orbit in orbits) == 9
+    assert all(orbit.verified for orbit in orbits)
 
 
 def test_endpoint_relation_words_have_stable_lengths() -> None:
