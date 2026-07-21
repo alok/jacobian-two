@@ -17,6 +17,10 @@ def test_width_five_curve_has_the_exact_allowed_geometric_budget() -> None:
     assert certificate.arithmetic_genus == 15
     assert certificate.total_delta == 15
     assert certificate.width == 5
+    assert certificate.pairing_resultant_identity == 0
+    assert certificate.pair_product_nonzero_resultant == 4
+    assert certificate.velocity_factorization_identity == 0
+    assert certificate.rational_pair_velocity_factor == -15
     assert certificate.verified
 
 

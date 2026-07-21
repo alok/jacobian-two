@@ -1,4 +1,4 @@
-"""Exact obstruction for the smallest width-five ``S6`` target curve.
+"""Obstruction in the degree-minimal singular-one-pair width-five slot.
 
 The rational curve
 
@@ -10,8 +10,8 @@ jump and six normalization nodes.  Exact Zariski--van Kamp relations show,
 however, that its affine complement has no transitive transposition image on
 six sheets.  Sage further simplifies the complement group to ``Z``.
 
-This excludes one degree-minimal branch curve, not the ``S6`` passport or the
-plane Jacobian conjecture.
+This excludes one curve in the degree-minimal singular-one-pair slot, not the
+``S6`` passport or the plane Jacobian conjecture.
 """
 
 from __future__ import annotations
@@ -198,9 +198,12 @@ class WidthFiveCurveArithmeticCertificate:
     node_coordinate_discriminant: Expr
     rational_node_separation: Expr
     pair_sum_discriminant: Expr
+    pairing_resultant_identity: Expr
+    pair_product_nonzero_resultant: Expr
+    velocity_factorization_identity: Expr
     pair_distinctness_resultant: Expr
     pair_transversality_resultant: Expr
-    rational_pair_transversality: Expr
+    rational_pair_velocity_factor: Expr
     width: int
     finite_cusp_pair: tuple[int, int]
     infinity_pair: tuple[int, int]
@@ -223,10 +226,13 @@ class WidthFiveCurveArithmeticCertificate:
             == 2**16 * 3**6 * 71**2 * 797
             and self.rational_node_separation == -135
             and self.pair_sum_discriminant == 2**4 * 797
+            and self.pairing_resultant_identity == 0
+            and self.pair_product_nonzero_resultant == 4
+            and self.velocity_factorization_identity == 0
             and abs(int(self.pair_distinctness_resultant)) == 2 * 79
             and abs(int(self.pair_transversality_resultant))
             == 2**2 * 5 * 79 * 797
-            and self.rational_pair_transversality == -15
+            and self.rational_pair_velocity_factor == -15
             and self.width == 5
             and self.finite_cusp_pair == (4, 5)
             and self.infinity_pair == (2, 7)
@@ -257,6 +263,18 @@ def exact_width_five_curve_arithmetic_certificate(
         - 28 * pair_product
         + 20
     ).as_numer_denom()[0]
+    parameter_p_s_derivative = diff(parameter_p_s, S)
+    parameter_q_s_derivative = diff(parameter_q_s, S)
+    velocity_determinant = (
+        diff(PARAMETER_P, T) * parameter_q_s_derivative
+        - diff(PARAMETER_Q, T) * parameter_p_s_derivative
+    )
+    reduced_velocity_factor = (
+        35 * (T + S) * T * S
+        + 28 * (T + S) ** 2
+        - 28 * T * S
+        + 20
+    )
     return WidthFiveCurveArithmeticCertificate(
         implicit_resultant_identity=expand(
             resultant(P_COORD - PARAMETER_P, Q_COORD - PARAMETER_Q, T)
@@ -294,6 +312,25 @@ def exact_width_five_curve_arithmetic_certificate(
             PAIR_SUM_POLYNOMIAL,
             PAIR_SUM,
         ),
+        pairing_resultant_identity=expand(
+            resultant(
+                PAIR_SUM_POLYNOMIAL,
+                (1 - PAIR_SUM) * (T**2 - PAIR_SUM * T)
+                + PAIR_SUM**2
+                + 1,
+                PAIR_SUM,
+            )
+            - 2 * COLLISION_FACTOR
+        ),
+        pair_product_nonzero_resultant=resultant(
+            PAIR_SUM_POLYNOMIAL,
+            PAIR_SUM**2 + 1,
+            PAIR_SUM,
+        ),
+        velocity_factorization_identity=expand(
+            velocity_determinant
+            - T**3 * S**3 * (S - T) * reduced_velocity_factor
+        ),
         pair_distinctness_resultant=resultant(
             PAIR_SUM_POLYNOMIAL,
             pair_discriminant_numerator,
@@ -304,7 +341,7 @@ def exact_width_five_curve_arithmetic_certificate(
             velocity_factor_numerator,
             PAIR_SUM,
         ),
-        rational_pair_transversality=(
+        rational_pair_velocity_factor=(
             35 * PAIR_SUM * pair_product
             + 28 * PAIR_SUM**2
             - 28 * pair_product
@@ -407,7 +444,7 @@ class S6WidthFiveCurveCertificate:
 
 
 def exact_s6_width_five_curve_certificate() -> S6WidthFiveCurveCertificate:
-    """Build the exact certificate for the degree-minimal near-miss."""
+    """Build the certificate for the degree-minimal singular-one-pair near-miss."""
 
     return S6WidthFiveCurveCertificate(
         arithmetic=exact_width_five_curve_arithmetic_certificate(),
@@ -440,7 +477,10 @@ def main() -> int:
     )
     print(f"S6 width-five curve certificate verified: {certificate.verified}")
     print("Sage simplification: pi_1(A2-B)=Z; all five meridians are equal")
-    print("claim boundary: this minimal curve only; the S6 passport remains open")
+    print(
+        "claim boundary: this singular-one-pair curve only; "
+        "the S6 passport remains open"
+    )
     return 0 if certificate.verified else 1
 
 

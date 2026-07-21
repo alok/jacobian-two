@@ -932,8 +932,8 @@ attains the transposition-generator lower bound `width=5`.  Exact
 normalization arithmetic finds the complete singularity package: one finite
 `T(4,5)` jump-three cusp, six transverse nodes, and one `(2,7)` pair at
 infinity.  Their deltas are `6+6+3=15`, equal to the arithmetic genus of the
-degree-seven closure.  Thus this is the degree-minimal one-pair geometric
-near-miss, not a fixture that failed a local budget.
+degree-seven closure.  Thus this lies in the degree-minimal
+singular-one-pair slot, not a fixture that failed a local budget.
 
 It fails globally.  Sage's five-meridian Zariski--van Kamp presentation has an
 explicit Tietze isomorphism to `Z`, sending all five geometric meridians to one

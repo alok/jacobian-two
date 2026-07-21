@@ -226,8 +226,8 @@ transverse normalization nodes, one `(2,7)` pair at infinity, and complete
 genus accounting.  Nevertheless, exact Zariski--van Kamp simplification gives
 complement group `Z`: all five geometric meridians coincide.  A separate
 `15^5` transposition census finds only 15 cyclic images and no transitive one.
-This kills the degree-minimal geometric near-miss, not all width-five `S6`
-curves.  See the
+This kills a near-miss in the degree-minimal singular-one-pair slot, not all
+width-five `S6` curves.  See the
 [width-five near-miss note](docs/s6-width-five-near-miss.md).
 
 The explicit `A6` trace curve is globally dead as well: its affine complement

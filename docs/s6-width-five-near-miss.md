@@ -9,9 +9,9 @@ degrees.  Its cusp, node, infinity, and genus data all fit the surviving
 one-dicritical passport, but its affine complement group is `Z`.  It therefore
 cannot carry connected six-sheet monodromy.
 
-This excludes one degree-minimal target curve.  It does **not** prove that all
-width-five curves are cyclic, eliminate the `S6` passport, construct a Keller
-map, or solve `JC(2)`.
+This excludes one curve in the degree-minimal singular-one-pair slot.  It does
+**not** prove that all width-five curves are cyclic, eliminate the `S6`
+passport, construct a Keller map, or solve `JC(2)`.
 
 ## 1. The width theorem
 
@@ -48,7 +48,7 @@ For the one-dicritical `S6` survivor, `w>=5`.  At equality the five supports
 must form a spanning tree, so the five transpositions themselves generate all
 of `S6`.
 
-## 2. A degree-minimal geometric near-miss
+## 2. A near-miss in the degree-minimal singular-one-pair slot
 
 Consider
 
@@ -155,8 +155,16 @@ The exact pair-distinctness and velocity-determinant resultants are nonzero:
   2^2\cdot5\cdot79\cdot797.
 \]
 
-The rational pair's velocity determinant is `-15`.  Thus all six collisions
-are transverse two-preimage nodes.
+The full velocity determinant factors as
+
+\[
+  t^3s^3(s-t)(35uv+28u^2-28v+20).
+\]
+
+After removing the already nonzero factor `t^3*s^3*(s-t)`, the rational
+pair's reduced velocity factor is `-15`.  Exact resultants also verify that
+`ts` never vanishes on the five conjugate pairs.  Thus all six collisions are
+transverse two-preimage nodes.
 
 The degree-seven closure has one point at infinity.  In the `Q=1` chart with
 `u=1/t`,
@@ -202,8 +210,8 @@ The repo includes two independent replays:
 
 Exactly 15 assignments satisfy all relators—one for each choice of a common
 transposition.  Every image has order two, and none is transitive.  Therefore
-the curve satisfies the local geometry and minimum-width test but fails the
-decisive global complement-monodromy test.
+the curve satisfies the local geometry and minimum-width singular-one-pair
+test but fails the decisive global complement-monodromy test.
 
 ## 5. What remains
 
