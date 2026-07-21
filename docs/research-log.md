@@ -803,6 +803,54 @@ integrality, degree, and inertia parity alone cannot force condition `(*)`.
 The next argument must couple the split matrix to canonical-discrepancy or
 local-map data across the entire boundary, not just at one selected component.
 
+## 2026-07-21: a genuine finite `S6` cover globally violates `(*)`
+
+Status: exact finite flat hostile cover; not Keller and not the surviving
+branch passport.
+
+The affine map
+
+```text
+(x,z) -> (P,Q)=(x^2+z, x^3-x^4*z)
+```
+
+has coordinate algebra
+
+```text
+C[x,z] = C[P,Q][x]/(x^6-P*x^4+x^3-Q),
+```
+
+so it is finite flat of rank six.  Three basepoint-free sections of
+`O_P1xP1(3,1)` extend it to a finite degree-six morphism
+`P1 x P1 -> P2`.  The target boundary has one line `T`, and
+
+```text
+phi^*T=2*C1+C2,
+```
+
+with both source components noncontracted of tangential degrees `(1,4)`.
+Thus condition `(*)` fails for the complete boundary of an actual finite
+cover, not merely for an abstract matrix.
+
+The six-sheet polynomial is indecomposable over `C(P)`, so its polynomial
+monodromy is primitive.  Its exact discriminant is `Q^2*H(P,Q)`, with `H`
+squarefree in `Q`; generic inertia along `H=0` is a transposition.  Hence the
+geometric monodromy is all of `S6`.  After one corner and one free source
+blowup, the boundary even has numerical labels `2--1--0--(-1)` and determinant
+labels `-3,-2` on the first edge, while retaining exact pullback transport.
+
+The decisive missing condition is visible in the Jacobian
+
+```text
+x^2*(4*x*z-2*x^3-3),
+```
+
+which is not constant.  The cover has affine branching and its numerical
+label-two leaf is contracted to a boundary point, not a type-three
+dicritical.  Therefore the model does not threaten the conjecture; it proves
+that any derivation of `(*)` must use affine unramifiedness, the genuine
+Keller type assignment, or the forced branch passport.
+
 ## 2026-07-21: exact matrices close the trace-only route
 
 Status: exact hostile consistency models; no finite algebra or Keller map.

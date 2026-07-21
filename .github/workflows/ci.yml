@@ -53,6 +53,8 @@ jobs:
         run: uv run --frozen python -m scripts.two_pair_infinity
       - name: Check split boundary determinant transport
         run: uv run --frozen python -m scripts.split_boundary_transport
+      - name: Check the finite S6 split-boundary cover
+        run: uv run --frozen python -m scripts.s6_split_cover
       - name: Check the hostile trace-lattice matrices
         run: uv run --frozen python -m scripts.trace_hostile_matrices
       - name: Check the hostile A6 local multiplication fixtures

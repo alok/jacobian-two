@@ -134,6 +134,18 @@ data.  See the
 Orevkov's relevant first-star determinant has the opposite raw-intersection
 sign, so the Hodge inequality is unavailable there rather than stronger.
 
+There is now a global algebraic stopping model as well.  The finite flat map
+`(x,z) -> (x^2+z, x^3-x^4*z)` has degree six, extends to a finite morphism
+`P1 x P1 -> P2`, and has geometric monodromy `S6`.  The sole target boundary
+line pulls back as `2*C1+C2`, where both components are noncontracted of
+degrees one and four; condition `(*)` therefore genuinely fails for this
+cover.  Two source blowups even reproduce the numerical `2--1--0--(-1)`
+corridor and determinant parity.  Its Jacobian is nonconstant and it has
+affine branching, so it is not a Keller map.  This isolates affine
+unramifiedness and the genuine dicritical type assignment as indispensable
+remaining inputs.  See the
+[finite split-cover note](docs/s6-split-boundary-cover.md).
+
 The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
 normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
 curve whose weighted-orbit product identifies the homotopy types of its local
