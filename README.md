@@ -193,6 +193,18 @@ signs.  Thus finite local monodromy does not determine a spin obstruction;
 one must derive an infinity word and framing from the Keller compactification.
 See the [spin-lift note](docs/a6-spin-lift.md).
 
+The multiplication enhancement is now an exact finite target as well.  A
+completely symmetric cubic tensor with `56` polynomial entries must satisfy
+explicit divisibility, unit, WDVV associativity, ordinary-regular-trace, and
+middle-lattice equations.  Normalization turns every apparent division by
+the branch equation into one polynomial identity in `t`.  Both forced special
+fibers nevertheless survive: the exact trace data admit
+`C[z]/(z^5) x C` at the cusp and
+`C[z]/(z^3) x C[w]/(w^3)` at a collision, including compatible perfect
+middle forms and divisor sections.  Thus any multiplication obstruction is
+global, not pointwise.  See the
+[multiplication-tensor note](docs/a6-multiplication-tensor.md).
+
 ## A separate sparse obstruction at coordinate degree `(72,108)`
 
 Generic sheet degree and coordinate degree are different invariants.  On the

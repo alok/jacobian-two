@@ -819,6 +819,43 @@ peripheral framing from the Keller compactification.  The checker enumerates
 the upstairs and downstairs groups and replays every Clifford identity; a
 sign-flipped order-six lift is an adversarial failure fixture.
 
+## 2026-07-21: local multiplication survives both forced `A6` events
+
+Status: exact local hostile algebras and a finite global equation system; no
+global algebra, cover, or Keller map.
+
+For the explicit `A6` trace matrix `T=[[0,K],[K,0]]`, a completely symmetric
+cubic tensor has `56` independent polynomial entries.  Multiplication is
+recovered using `adj(K)/b`.  Polynomial divisibility, the unit equations,
+denominator-cleared WDVV equations, ordinary-regular-trace equations, and the
+additional `Phi/H` middle-lattice equations now give an exact finite target
+for a global enhancement.
+
+The normalization parametrization `(P,Q)=(t^2+t^3,t^5)` makes the divisibility
+conditions concrete.  Exact calculation gives
+
+```text
+adj(K)(t) = -t^4*Phi5(t)*(1,t,t^2)^t*(1,t,t^2),
+```
+
+and membership in `im(K)` becomes one polynomial identity on the
+normalization.  This retains the value-and-jet information that disappears if
+one merely specializes the vanishing adjugate at a singular point.
+
+Both tempting pointwise contradictions fail.  An explicit basis identifies
+the cusp trace form with the ordinary trace of
+`C[z]/(z^5) x C`; another identifies the collision trace form with that of
+`C[z]/(z^3) x C[w]/(w^3)`.  Each algebra also has a perfect Frobenius middle
+form and a divisor section whose squared factorization is the ordinary trace,
+with multiplication-section kernel equal to `ker(Phi)`.  A separate monic
+rank-six family over the normalization realizes the transitions
+`3+1+1+1 -> 5+1` and `3+1+1+1 -> 3+3`.
+
+These are residue-fiber and normalization-level stopping fixtures.  They do
+not solve the global cubic system or descend it across the singular branch.
+The remaining obstruction must couple normalization jets, the middle module,
+connected monodromy, and infinity globally.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.
