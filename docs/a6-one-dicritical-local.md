@@ -304,7 +304,153 @@ local degree five.  Its generalized form in
 also excludes a contracted generic degree-three point and proves that `L_C` is
 empty.  Thus the smooth `(2,5)` case is mandatory.
 
-## 6. Abstract monodromy does not eliminate the cusp
+## 6. The forced cusp germ actually exists
+
+Orevkov's 2026 classification of smooth finite map germs branched over a
+one-Puiseux-pair curve applies to this local block.  There is one hypothesis
+worth making explicit.  The local five-sheet monodromy is `A5`, and a
+peripheral longitude commutes with its 3-cycle meridian.  In the natural
+five-point action,
+
+\[
+C_{A_5}((123))=\langle(123)\rangle.
+\]
+
+Consequently the longitude fixes each of the meridian's two fixed sheets,
+not merely their set.  The two unramified components over the cusp therefore
+have tangential degree one.  The ramification component also has tangential
+degree one by the one-dicritical passport.  Thus the restriction of the
+finite germ to every irreducible component of the cusp pullback is bijective,
+which is Orevkov's condition `(A2)`; smoothness of the finite normalization
+gives `(A1)`.
+
+Case (b) of Orevkov's Theorem 2 has parameters
+
+\[
+m_1=k_2\ell_2+1,
+\quad m_2=k_1\ell_1+1,
+\quad d_1=k_1m_1,
+\quad d_2=k_2m_2,
+\quad N=m_1m_2,
+\quad n=\ell_1+\ell_2+1.
+\]
+
+The specialization
+
+\[
+(k_1,k_2;\ell_1,\ell_2)=(2,1;2,0)
+\]
+
+gives
+
+\[
+(m_1,m_2;d_1,d_2;N,n)=(1,5;2,5;5,3).
+\]
+
+This is precisely the degree-five local block, target cusp
+`u^2=v^5`, and ramification order three required here.  Orevkov's explicit
+normal form in this row has `v=y` and
+
+\[
+u_x=\lambda(x^2-y)^2,
+\qquad
+u(0,y)=0,
+\qquad
+u(1,1)=1.
+\]
+
+Integration and the last normalization give `lambda=15/8` and
+
+\[
+F(x,y)=
+\left(
+\frac{3x^5-10yx^3+15y^2x}{8},
+y
+\right).
+\tag{6.1}
+\]
+
+This polynomial map is finite of degree five, and
+
+\[
+J(F)=\frac{15}{8}(x^2-y)^2.
+\tag{6.2}
+\]
+
+Its critical curve `R={y=x^2}` maps by
+
+\[
+x\longmapsto (u,v)=(x^5,x^2),
+\]
+
+so its image is exactly the `(2,5)` cusp.  More strongly, the complete
+pullback factors as
+
+\[
+64(u^2-v^5)
+=(x^2-y)^3(9x^4-33x^2y+64y^2).
+\tag{6.3}
+\]
+
+Over `C`, the residual quadratic gives two distinct smooth components
+`y=c_+x^2` and `y=c_-x^2`, where
+
+\[
+c_\pm=\frac{33\pm9i\sqrt{15}}{128}.
+\]
+
+They are nonzero because the parameter polynomial
+`64c^2-33c+9` has nonzero constant term, and they are distinct because its
+discriminant is `-1215`.  Put
+
+\[
+A(c)=\frac{3-10c+15c^2}{8}.
+\]
+
+Exact reduction modulo `64c^2-33c+9` gives `A(c)^2=c^5`.  Hence
+`beta=A(c)/c^2` satisfies `beta^2=c` and `beta^5=A(c)`.  The parameter
+`t=beta*x` identifies each residual restriction with the cusp normalization
+
+\[
+t\longmapsto(t^5,t^2).
+\]
+
+The critical restriction has the same form with `t=x`.  Thus (6.3) checks
+condition `(A2)` directly: the three reduced pullback components all map
+bijectively to the cusp, while the critical component occurs with
+multiplicity three.
+
+The typed exact checker
+[`a6_cusp_germ.py`](../scripts/a6_cusp_germ.py) verifies the theorem
+parameters, degree, Jacobian, critical image, full factorization, residual
+discriminant, and the congruence `A(c)^2=c^5`.  It also treats the source
+coordinate as a quintic over the target:
+
+\[
+p(X)=3X^5-10vX^3+15v^2X-8u.
+\]
+
+Its exact polynomial discriminant is
+
+\[
+\operatorname{disc}_X(p)
+=1{,}036{,}800{,}000\,(u^2-v^5)^2.
+\tag{6.4}
+\]
+
+Thus the square discriminant required by the `A6` passport is realized too;
+the local trace discriminant cannot exclude the germ.  A hostile coefficient
+perturbation breaks the certificate.
+
+This closes a route, rather than the passport: local analytic classification
+cannot eliminate the forced cusp because (6.1) realizes it exactly.  The germ
+is not a Keller map—its Jacobian vanishes on `R`—and it supplies only the
+five-sheet ramified block.  A hypothetical rank-six finite normalization has
+one additional unramified local sheet.  The ramification lies on the boundary
+omitted from the original affine `A2`, so there is no conflict with the
+constant-Jacobian condition on that open set.
+
+## 7. Abstract monodromy does not eliminate the cusp
 
 The `T(2,5)` knot group has the meridional Artin presentation
 
@@ -337,7 +483,7 @@ This fixture is deliberately hostile: the forced cusp type and the global
 group are mutually compatible at the level of abstract local monodromy.  A
 valid elimination must use more global Keller geometry.
 
-## 7. Collision contact still carries data
+## 8. Collision contact still carries data
 
 Let two smooth zero-jump normalization branches collide with intersection
 multiplicity `q`.  At any smooth source point over one branch, the local
@@ -351,7 +497,7 @@ Writing the other branch as `v=u^q` times a unit and absorbing a cube root of
 that unit, its pullback is
 
 \[
-z^3=u^q. \tag{7.1}
+z^3=u^q. \tag{8.1}
 \]
 
 It has `gcd(3,q)` puncture branches.  Thus the residual degree-three pullback
@@ -377,15 +523,17 @@ place at infinity.  It is not asserted to be a Keller branch curve.  It shows
 that the newly forced curve singularities are not contradictory by
 themselves.
 
-## 8. The next exact target
+## 9. The next exact target
 
 The one-dicritical `A6` problem has been reduced to a smooth finite-flat
 normalization, one degree-five local `A5` point with a `(2,5)` target cusp,
 and at least one separate `3+3` collision.  Every exceptional cyclic-plumbing
 source is impossible by the Hirzebruch--Jung lift and parity argument in
 [`one-dicritical-source-smoothness.md`](one-dicritical-source-smoothness.md).
-The next attack must couple the cusp and the collision Kummer laws (7.1)
-through the
+Orevkov's 2026 theorem and (6.1) now show that the surviving cusp block is
+analytically realizable and unique up to the equivalence recorded in his
+classification.  The next attack must couple the cusp and the collision
+Kummer laws (8.1) through the
 Domrina--Orevkov splice equations or Borisov's canonical and determinant
 labels on the compactification graph.
 
@@ -398,6 +546,11 @@ None of the arguments in this note excludes the remaining `S6` passport.
   *Mathematics of the USSR-Izvestiya* 29 (1987), 587–596.  Lemma 2.1 gives
   the linear `L_C-E` chain, Lemma 4.2 gives the exact defect budget, and Lemma
   5.2 gives smooth local embeddings at zero-jump points.
+- S. Yu. Orevkov,
+  [“On germs of mappings `C^2 -> C^2`”](https://www.math.univ-toulouse.fr/~orevkov/k-en.pdf)
+  (2026).  Conditions `(A1)` and `(A2)` are stated in Section 1; Theorem 2
+  classifies the numerical cases; and Section 5 gives the derivative normal
+  form used to derive (6.1).
 
 The local-degree-four exclusion, the unique-jump theorem, and the smooth
 `(2,5)` classification are derived in this note.  The separate

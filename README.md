@@ -84,7 +84,12 @@ branch-curve topology gives the same two groups and narrows the local types:
 - in the `A6` passport, every normalization collision consists of two smooth
   multiplicity-three branches, uses all six sheets, and is omitted by the
   original affine map; moreover, the two jump units concentrate at a unique
-  local-degree-five point, and its branch is a `(2,5)` cusp;
+  local-degree-five point, and its branch is a `(2,5)` cusp.  Orevkov's 2026
+  local classification contains exactly this block: an explicit finite
+  degree-five polynomial germ has Jacobian
+  `(15/8)(x^2-y)^2`, maps its critical parabola onto the cusp, and satisfies
+  the required componentwise-bijective pullback condition.  Thus local
+  analytic classification confirms the survivor rather than eliminating it;
 - in the `S6` passport, the complete nine-row fiber census is known, each jump
   block has local group `S_(2+kappa)`, and every jump is exactly one of
   `T(2,3)`, `T(3,4)`, or `T(4,5)`; and
@@ -118,8 +123,10 @@ two-curve `S6` collision theorem is in the
 [two-curve collision note](docs/s6-two-curve-collisions.md), which also proves
 the saturated smooth-normalization package.  The
 contracted-source obstruction and finite-flat consequences are in the
-[smooth-normalization note](docs/one-dicritical-source-smoothness.md).  The
-[canonical-label note](docs/one-dicritical-leaf-labels.md) derives the forced
+  [smooth-normalization note](docs/one-dicritical-source-smoothness.md).  The
+  [A6 local note](docs/a6-one-dicritical-local.md) now includes the exact
+  Orevkov germ and its complete three-component cusp pullback.  The
+  [canonical-label note](docs/one-dicritical-leaf-labels.md) derives the forced
 leaf-to-infinity corridor and states its compactification-model boundary.  The
 dependency-free
 [Python certificate](scripts/six_sheet_monodromy.py) rebuilds the exact groups,

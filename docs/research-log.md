@@ -684,6 +684,41 @@ both one-boundary cases and `3` in the saturated case, exactly matching the
 surface decomposition.  The surviving target is therefore the multiplication
 law plus compactified symmetric matrix data, not a scalar Euler deficit.
 
+## 2026-07-21: Orevkov's classified germ realizes the forced `A6` cusp
+
+Status: source-classified and exactly checked hostile local model; not a
+Keller map or a global rank-six cover.
+
+Orevkov's 2026 classification applies to the surviving degree-five local
+block.  The case-(b) parameters `(k1,k2;l1,l2)=(2,1;2,0)` give exactly
+`(d1,d2,N,n)=(2,5,5,3)`.  His derivative normal form integrates to
+
+```text
+u = (3*x^5 - 10*y*x^3 + 15*y^2*x)/8,
+v = y,
+J = (15/8)*(x^2-y)^2.
+```
+
+The critical parabola maps as `x -> (x^5,x^2)`.  The complete pullback is
+
+```text
+64*(u^2-v^5) = (x^2-y)^3*(9*x^4-33*x^2*y+64*y^2).
+```
+
+The residual factor splits into two smooth parabolas, and exact reduction in
+their quadratic parameter proves that each maps with normalization degree
+one to the cusp.  Together with the critical component, this verifies the
+componentwise-bijective hypothesis rather than silently assuming it.  The
+quintic fiber discriminant is exactly
+`1,036,800,000*(u^2-v^5)^2`, so the required `A6` square discriminant also
+survives.  The new typed checker and hostile perturbation test replay every
+identity.
+
+This is a sharp negative research result: the cusp forced by the global
+degree-six argument is an actual classified finite-map germ.  Any elimination
+must couple it to the separate `3+3` collision or to global multiplication,
+trace, compactification, or splice data.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.
