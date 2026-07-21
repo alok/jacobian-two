@@ -37,6 +37,7 @@ from sympy import (
     expand,
     factor,
     gcd,
+    groebner,
     resultant,
 )
 
@@ -252,6 +253,40 @@ TWO_DOUBLE_PARAMETERS[GAMMA] = (
 TWO_DOUBLE_REPEATED_FACTOR: Final = S**2 - ROOT_SUM * S + ROOT_PRODUCT
 TWO_DOUBLE_RESIDUAL_FACTOR: Final = (
     S**3 + TWO_DOUBLE_C2 * S**2 + TWO_DOUBLE_C1 * S + TWO_DOUBLE_C0
+)
+
+# The rational two-double chart divides by ``TWO_DOUBLE_DENOMINATOR``.  To
+# prove that this loses no valid component, retain the two residual cubic
+# coefficients before solving the coefficient-slice equations.  Their
+# compatibility ideal on the denominator boundary has only two geometric
+# possibilities.  The first has a repeated root at ``s = -1`` and hence lies
+# on the forbidden cusp boundary.  The second is the line below; its extra
+# critical factor vanishes identically.
+TWO_DOUBLE_FREE_C0: Final = Symbol("c0")
+TWO_DOUBLE_FREE_C1: Final = Symbol("c1")
+TWO_DOUBLE_GENERAL_RESIDUAL_FACTOR: Final = (
+    S**3
+    + (6 + 2 * ROOT_SUM) * S**2
+    + TWO_DOUBLE_FREE_C1 * S
+    + TWO_DOUBLE_FREE_C0
+)
+TWO_DOUBLE_GENERAL_POLYNOMIAL: Final = (
+    TWO_DOUBLE_REPEATED_FACTOR**2 * TWO_DOUBLE_GENERAL_RESIDUAL_FACTOR
+)
+TWO_DOUBLE_EXCEPTIONAL_SUM: Final = Rational(-5, 3)
+TWO_DOUBLE_EXCEPTIONAL_PRODUCT: Final = Rational(4, 9)
+TWO_DOUBLE_EXCEPTIONAL_C1: Final = 2 * TWO_DOUBLE_FREE_C0 + 1
+TWO_DOUBLE_EXCEPTIONAL_FACTORIZATION: Final = (
+    (3 * S + 1) ** 2
+    * (3 * S + 4) ** 2
+    * (
+        6 * TWO_DOUBLE_FREE_C0 * S
+        + 3 * TWO_DOUBLE_FREE_C0
+        + 3 * S**3
+        + 8 * S**2
+        + 3 * S
+    )
+    / 243
 )
 
 # Exact Sage 10.8 affine presentations.  Generator indices 1..3 are geometric
@@ -471,6 +506,13 @@ class DiscriminantIncidenceCertificate:
     triple_rank_minor_gcd: Expr
     two_double_factor_identity: Expr
     two_double_determinant_identity: Expr
+    two_double_compatibility_eliminant: Expr
+    two_double_cusp_boundary_gcd: Expr
+    two_double_exceptional_boundary_gcd: Expr
+    two_double_exceptional_slice_remainders: tuple[Expr, Expr]
+    two_double_exceptional_factor_identity: Expr
+    two_double_exceptional_critical_factor: Expr
+    two_double_exceptional_triple_factor: Expr
 
     @property
     def verified(self) -> bool:
@@ -487,6 +529,19 @@ class DiscriminantIncidenceCertificate:
             and self.triple_rank_minor_gcd == 2 * (R + 1) ** 3
             and self.two_double_factor_identity == 0
             and self.two_double_determinant_identity == 0
+            and self.two_double_compatibility_eliminant
+            == (ROOT_SUM + 2) ** 4 * (3 * ROOT_SUM + 5) ** 2
+            and self.two_double_cusp_boundary_gcd
+            == (ROOT_PRODUCT - 1) ** 2
+            and expand(
+                self.two_double_exceptional_boundary_gcd
+                - (ROOT_PRODUCT - Rational(4, 9))
+            )
+            == 0
+            and self.two_double_exceptional_slice_remainders == (0, 0)
+            and self.two_double_exceptional_factor_identity == 0
+            and self.two_double_exceptional_critical_factor == 0
+            and self.two_double_exceptional_triple_factor == 0
         )
 
 
@@ -521,6 +576,51 @@ def exact_discriminant_incidence_certificate(
     triple_h = COLLISION_POLYNOMIAL.subs(TRIPLE_INCIDENCE_PARAMETERS)
     repeated_factor = TWO_DOUBLE_REPEATED_FACTOR**2
     two_double_h = COLLISION_POLYNOMIAL.subs(TWO_DOUBLE_PARAMETERS)
+
+    general_two_double_coefficients = {
+        coefficient: expand(TWO_DOUBLE_GENERAL_POLYNOMIAL).coeff(S, degree)
+        for coefficient, degree in (
+            (H0, 0),
+            (H1, 1),
+            (H2, 2),
+            (H3, 3),
+            (H4, 4),
+            (H5, 5),
+        )
+    }
+    general_two_double_slice = (
+        expand(COEFFICIENT_SLICE_FIRST.subs(general_two_double_coefficients)),
+        expand(COEFFICIENT_SLICE_SECOND.subs(general_two_double_coefficients)),
+    )
+    compatibility_basis = groebner(
+        [TWO_DOUBLE_DENOMINATOR, TWO_DOUBLE_N0, TWO_DOUBLE_N1],
+        ROOT_PRODUCT,
+        ROOT_SUM,
+        order="lex",
+    )
+    exceptional_substitution = {
+        ROOT_SUM: TWO_DOUBLE_EXCEPTIONAL_SUM,
+        ROOT_PRODUCT: TWO_DOUBLE_EXCEPTIONAL_PRODUCT,
+        TWO_DOUBLE_FREE_C1: TWO_DOUBLE_EXCEPTIONAL_C1,
+    }
+    exceptional_h = factor(
+        TWO_DOUBLE_GENERAL_POLYNOMIAL.subs(exceptional_substitution)
+    )
+    exceptional_coefficients = {
+        coefficient: expand(exceptional_h).coeff(S, degree)
+        for coefficient, degree in (
+            (H0, 0),
+            (H1, 1),
+            (H2, 2),
+            (H3, 3),
+            (H4, 4),
+            (H5, 5),
+        )
+    }
+    exceptional_parameters = {
+        parameter: factor(expression.subs(exceptional_coefficients))
+        for parameter, expression in COEFFICIENT_SLICE_INVERSE.items()
+    }
 
     ordered_equations = tuple(
         diff(COLLISION_POLYNOMIAL, S, order).subs(S, root)
@@ -568,6 +668,44 @@ def exact_discriminant_incidence_certificate(
         ),
         two_double_determinant_identity=expand(
             ordered_matrix.det() - expected_ordered_determinant
+        ),
+        two_double_compatibility_eliminant=factor(
+            compatibility_basis.polys[-1].as_expr()
+        ),
+        two_double_cusp_boundary_gcd=factor(
+            gcd(
+                gcd(
+                    TWO_DOUBLE_DENOMINATOR.subs(ROOT_SUM, -2),
+                    TWO_DOUBLE_N0.subs(ROOT_SUM, -2),
+                ),
+                TWO_DOUBLE_N1.subs(ROOT_SUM, -2),
+            )
+        ),
+        two_double_exceptional_boundary_gcd=factor(
+            gcd(
+                gcd(
+                    TWO_DOUBLE_DENOMINATOR.subs(
+                        ROOT_SUM, TWO_DOUBLE_EXCEPTIONAL_SUM
+                    ),
+                    TWO_DOUBLE_N0.subs(
+                        ROOT_SUM, TWO_DOUBLE_EXCEPTIONAL_SUM
+                    ),
+                ),
+                TWO_DOUBLE_N1.subs(ROOT_SUM, TWO_DOUBLE_EXCEPTIONAL_SUM),
+            )
+        ),
+        two_double_exceptional_slice_remainders=tuple(
+            expand(equation.subs(exceptional_substitution))
+            for equation in general_two_double_slice
+        ),
+        two_double_exceptional_factor_identity=expand(
+            exceptional_h - TWO_DOUBLE_EXCEPTIONAL_FACTORIZATION
+        ),
+        two_double_exceptional_critical_factor=expand(
+            EXTRA_CRITICAL_FACTOR.subs(exceptional_parameters)
+        ),
+        two_double_exceptional_triple_factor=expand(
+            TRIPLE_COLLISION_FACTOR.subs(exceptional_parameters)
         ),
     )
 

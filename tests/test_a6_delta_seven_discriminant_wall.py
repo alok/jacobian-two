@@ -12,6 +12,8 @@ from scripts.a6_delta_seven_discriminant_wall import (
     HOSTILE_CONTACT_THREE_TRIPLE,
     HOSTILE_CONTACT_TWO_TRIPLE,
     R,
+    ROOT_PRODUCT,
+    ROOT_SUM,
     TWO_DOUBLE_SAMPLE_PARAMETERS,
     collision_partitions,
     contact_relation_census,
@@ -47,6 +49,18 @@ def test_coefficient_slice_and_incidence_normalizations_are_exact() -> None:
     assert certificate.triple_rank_minor_gcd == 2 * (R + 1) ** 3
     assert certificate.two_double_factor_identity == 0
     assert certificate.two_double_determinant_identity == 0
+    assert certificate.two_double_compatibility_eliminant == (
+        (ROOT_SUM + 2) ** 4 * (3 * ROOT_SUM + 5) ** 2
+    )
+    assert certificate.two_double_cusp_boundary_gcd == (ROOT_PRODUCT - 1) ** 2
+    assert (
+        certificate.two_double_exceptional_boundary_gcd
+        - (ROOT_PRODUCT - Rational(4, 9))
+    ).expand() == 0
+    assert certificate.two_double_exceptional_slice_remainders == (0, 0)
+    assert certificate.two_double_exceptional_factor_identity == 0
+    assert certificate.two_double_exceptional_critical_factor == 0
+    assert certificate.two_double_exceptional_triple_factor == 0
     assert certificate.verified
 
 
