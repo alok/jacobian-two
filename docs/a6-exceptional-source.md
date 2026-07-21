@@ -12,8 +12,14 @@ two alternatives:
 2. the source point is the unique normal-surface singularity obtained by
    contracting Orevkov's linear constant boundary chain.
 
-This note eliminates alternative 2.  It does **not** eliminate the smooth
-`(2,5)` cusp, the one-dicritical `A6` passport, generic degree six, or `JC(2)`.
+This note eliminates alternative 2 at local degree five.  The same proof is
+generalized in
+[`one-dicritical-source-smoothness.md`](one-dicritical-source-smoothness.md):
+at index three, every contracted endpoint has even local degree.  Since the
+`A6` boundary degrees are three or five, the stronger conclusion is that
+`L_C` is empty, so the finite normalization is smooth everywhere.  Neither result
+eliminates the smooth `(2,5)` cusp, the one-dicritical `A6` passport, generic
+degree six, or `JC(2)`.
 
 The local statement proved is:
 
@@ -234,7 +240,7 @@ The exceptional contracted-source germ cannot exist.
 ## 4. Exact surviving local frontier
 
 The earlier smooth-source analysis and the contradiction above combine to
-give one alternative, not a dichotomy:
+give one alternative, not a dichotomy at the jump point:
 
 \[
 \boxed{
@@ -242,6 +248,10 @@ give one alternative, not a dichotomy:
 target branch has Puiseux pair }(2,5).}
 \tag{4.1}
 \]
+
+The generalized parity theorem also applies at the generic local degree three,
+so no point of `D` can arise from contracting `L_C`; the full affine finite
+normalization is smooth.
 
 The exact permutations `(345)` and `(123)` still realize the local `A5`
 five-braid relation, and adjoining `(456)` generates global `A6`.  Therefore

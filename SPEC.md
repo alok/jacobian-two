@@ -58,8 +58,9 @@ from floating-point samples or from the authority of the announcement.
 | Generic degree six is the first unresolved plane sheet degree | `SOURCE-CHECKED` | Campbell, Orevkov, Domrina, Żołądek, and Borisov literature audit |
 | A degree-six plane Keller counterexample must have monodromy `A6` or `S6` in its transitive degree-six action | `DERIVED / EXACTLY ENUMERATED` | affine fixed-sheet inertia leaves seven groups; the refined identity `sum(e*d+delta)=5`, exact class costs, and the irreducible-branch obstruction eliminate the other five |
 | A one-dicritical degree-six counterexample can only have `A6` with `(e,d)=(3,1)` or `S6` with `(2,1)`, and its branch normalization is noninjective | `DERIVED / EXACTLY ENUMERATED` | finite-normalization deck rigidity, local multiplicity, purity, Lin--Zaidenberg topology, and exact subgroup witnesses |
-| In the one-dicritical `A6` passport, the two jump units occur at one unique local-degree-five point; its source is necessarily smooth and its branch has Puiseux pair `(2,5)` | `DERIVED / HOSTILE-AUDITED` | one-chain source topology, Hirzebruch--Jung cyclic lift, quadratic-jet characters, exact local intersection parity, and the surviving `A5 -> A6` permutation fixture |
-| In the one-dicritical `S6` passport, the finite fiber has one of nine exact rows, every jump block has local group `S_(2+kappa)`, and every smooth-source jump is `T(2,3)`, `T(3,4)`, or `T(4,5)` | `DERIVED / EXACTLY ENUMERATED` | Orevkov's three-unit budget, constant multiplicity, transposition normal generation, simple ramification, and hostile analytic germs |
+| In the one-dicritical `A6` passport, the two jump units occur at one unique local-degree-five point, and its branch has Puiseux pair `(2,5)` | `DERIVED / HOSTILE-AUDITED` | one-chain source topology, Hirzebruch--Jung cyclic lift, quadratic-jet characters, exact local intersection parity, and the surviving `A5 -> A6` permutation fixture |
+| In the one-dicritical `S6` passport, the finite fiber has one of nine exact rows, every jump block has local group `S_(2+kappa)`, and every jump is `T(2,3)`, `T(3,4)`, or `T(4,5)` | `DERIVED / EXACTLY ENUMERATED` | Orevkov's three-unit budget, constant multiplicity, transposition normal generation, simple ramification, and hostile analytic germs |
+| In both surviving one-dicritical passports, Orevkov's minimal `L_C` is empty and the affine finite normalization `W` is smooth finite flat of rank six, with `W-D=A2`, `D=A1`, `Pic(W)=Z[D]`, and `K_W=(e-1)D` | `DERIVED / INDEPENDENTLY HOSTILE-AUDITED` | Orevkov's relative-minimality statement, the index-two invariant-order contradiction, the index-three cyclic-cover parity theorem at local degrees three and five, miracle flatness, divisor localization, and finite-map Riemann--Hurwitz |
 | In the saturated two-curve `S6` transposition-plus-3-cycle passport, both branch normalizations self-collide; the exact collision rows are `3+3`, `2+2+1+1` or `2+2+2`, and cross-intersections are `2+3+1` | `DERIVED / EXACT HOSTILE FIXTURE` | Nguyen's singular-component theorem, zero excess, Orevkov's local embedding, constant multiplicity six, and four exact meridians generating `S6` |
 | The first residual transformed `(72,108)` Newton configuration needs at least three nonzero strict-interior coefficients, and the second needs at least four | `DERIVED / EXHAUSTIVELY CHECKED` | all `7504` first-case supports of size at most two and all `3683` second-case supports of size at most three have replayed exact certificates; the five zero-product exceptions have unit-ideal certificates |
 | The universal cubic discriminant coefficient expression is `-4*Q` | `LEAN-CERTIFIED` | explicit standard formula; semantic SymPy discriminant checked independently |
@@ -519,15 +520,19 @@ the intransitive local sheet action.  Only `6T15=A6` with `(3,1)` and
 points.  The surviving `A6` and `S6` profiles and `JC(2)` remain open.
 
 For the one-dicritical `A6` survivor, the raw jump partition `1+1` is now
-excluded.  Orevkov's one-chain structure gives at most one singular source
-point on the boundary.  At a smooth point the Jacobian divisor is twice the
-smooth ramification prime; rank-one parity and a corank-two quadratic-jet
+excluded.  Orevkov's one-chain structure initially gives at most one singular
+source point on the boundary.  At a smooth point the Jacobian divisor is
+twice the smooth ramification prime; rank-one parity and a corank-two quadratic-jet
 argument both rule out local degree four.  Hence the two jump units form one
 unique local degree five.  A smooth such point has rank one and a forced
 `(2,5)` cusp.  Pulling the exceptional singular-source alternative to its
 Hirzebruch--Jung universal cyclic cover forces an `A1` quotient, then an exact
 intersection count forces an even contact order where deck invariance forces
-an odd one.  Thus the source is necessarily smooth.  An exact hostile fixture
+an odd one.  The same argument applies to a contracted generic
+local-degree-three point: index three forces every contracted endpoint to have
+even local degree, whereas the exact boundary degrees are three and five.
+Thus `L_C` is empty and the whole affine finite normalization is smooth.  An
+exact hostile fixture
 verifies that its knot group can still map onto local `A5` and extend with a
 collision meridian to global `A6`, so this remains a reduction rather than an
 elimination.
@@ -536,11 +541,18 @@ For the one-dicritical `S6` survivor, writing `kappa(t)=mu_t-2` gives
 `sum kappa=3` and the exact fiber formula
 `#F^-1(y)=6-2*#nu^-1(y)-kappa_y`.  The resulting nine rows are executable.
 The connected block at `t` is `S_(2+kappa(t))`, because it is transitive and
-normally generated by a transposition.  Orevkov's one-chain structure leaves
-at most one exceptional source point; every other jump has branch valuations
+normally generated by a transposition.  A nonempty contracted chain would
+lift to a small cyclic quotient cover whose invariant coordinate functions
+start in degree two, while its pulled-back Jacobian has order one.  This is
+impossible, so `L_C` is empty.  Every jump therefore has branch valuations
 `(m-1,m)` for `m=2+kappa`, yielding `T(2,3)`, `T(3,4)`, or `T(4,5)`.
 Explicit germs `(a,z) -> (a,z^m+a*z)` realize all three types, so the result is
 an exact local classification rather than a contradiction.
+
+In both one-dicritical survivors, the normalization `W -> A2` is now a smooth
+finite-flat map of rank six with `W-D=A2`, `D=A1`,
+`Pic(W)=Z[D]`, and `K_W=(e-1)D`.  Quillen--Suslin makes the underlying
+rank-six algebra module free, but does not split its multiplication.
 
 ## Milestone 9: sparse support in the residual `(72,108)` polygons
 

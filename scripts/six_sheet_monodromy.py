@@ -737,23 +737,55 @@ S6_TWO_CURVE_FIBER_PROFILES: Final[tuple[S6TwoCurveFiberProfile, ...]] = (
 
 
 @dataclass(frozen=True)
-class A6ExceptionalParityEndpoint:
-    """Arithmetic endpoint of the exceptional-source contradiction.
+class OneDicriticalContractedSourceEndpoint:
+    """Finite endpoint of the contracted-source obstruction.
 
-    Geometry outside this finite certificate forces the universal cyclic
-    cover to have order two, the lifted map to have degree ten, and the two
-    branches of one target coordinate to contribute ``2`` and ``2*r``.  Deck
-    invariance requires ``r`` to be odd.  This object records the final exact
-    incompatibility without pretending to certify the geometric premises.
+    The geometry is deliberately outside this certificate.  A nontrivial
+    Hirzebruch--Jung endpoint cover has no invariant linear forms.  For
+    ramification index two this puts the exact Jacobian order one below the
+    invariant lower bound two.  For index three, geometry further forces a
+    double cover and the branch equation ``2*mu = 2 + 2*r``; deck invariance
+    requires ``r`` to be odd.  This object certifies only those final integer
+    incompatibilities.
     """
 
-    local_degree: int = 5
-    cyclic_cover_order: int = 2
+    ramification_index: int
+    local_degree: int
     transverse_branch_contribution: int = 2
+    invariant_jacobian_lower_bound: int = 2
+
+    def __post_init__(self) -> None:
+        if self.ramification_index not in (2, 3):
+            msg = "the endpoint certificate only covers ramification index 2 or 3"
+            raise ValueError(msg)
+        if self.local_degree <= 0:
+            msg = "local degree must be positive"
+            raise ValueError(msg)
+
+    @property
+    def jacobian_order(self) -> int:
+        """Return the exact lifted Jacobian order ``e - 1``."""
+
+        return self.ramification_index - 1
+
+    @property
+    def contradicts_invariant_order(self) -> bool:
+        """Whether the Jacobian order is below the invariant quadratic bound."""
+
+        return self.jacobian_order < self.invariant_jacobian_lower_bound
+
+    @property
+    def cyclic_cover_order(self) -> int:
+        """Return the cover order forced by the index-three quadratic jets."""
+
+        if self.ramification_index != 3:
+            msg = "the index-two case ends before a cover order is forced"
+            raise ValueError(msg)
+        return 2
 
     @property
     def lifted_degree(self) -> int:
-        """Return the local degree after the cyclic quotient cover."""
+        """Return the index-three local degree after the cyclic quotient cover."""
 
         return self.local_degree * self.cyclic_cover_order
 
@@ -769,12 +801,40 @@ class A6ExceptionalParityEndpoint:
 
     @property
     def contradicts_odd_deck_invariance(self) -> bool:
-        """Whether the forced contact order violates oddness under ``-I``."""
+        """Whether index three forces an even contact under an oddness rule."""
 
-        return self.forced_tangent_contact_order % 2 == 0
+        return (
+            self.ramification_index == 3
+            and self.forced_tangent_contact_order % 2 == 0
+        )
+
+    @property
+    def eliminates_contracted_source(self) -> bool:
+        """Whether either exact endpoint contradicts the geometric premises."""
+
+        return (
+            self.contradicts_invariant_order
+            or self.contradicts_odd_deck_invariance
+        )
 
 
-A6_EXCEPTIONAL_PARITY_ENDPOINT: Final = A6ExceptionalParityEndpoint()
+A6_CONTRACTED_SOURCE_ENDPOINTS: Final = tuple(
+    OneDicriticalContractedSourceEndpoint(
+        ramification_index=3,
+        local_degree=local_degree,
+    )
+    for local_degree in (3, 5)
+)
+S6_CONTRACTED_SOURCE_ENDPOINTS: Final = tuple(
+    OneDicriticalContractedSourceEndpoint(
+        ramification_index=2,
+        local_degree=local_degree,
+    )
+    for local_degree in range(2, 6)
+)
+
+# Backwards-compatible name for the original degree-five A6 endpoint.
+A6_EXCEPTIONAL_PARITY_ENDPOINT: Final = A6_CONTRACTED_SOURCE_ENDPOINTS[-1]
 
 
 def one_dicritical_s6_fiber_profiles() -> tuple[OneDicriticalS6FiberProfile, ...]:

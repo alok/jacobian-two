@@ -1,14 +1,19 @@
 """Regression tests for the exact six-sheet transitive-group certificate."""
 
+import pytest
+
 from scripts.six_sheet_monodromy import (
     A6_COLLISION_MERIDIAN,
+    A6_CONTRACTED_SOURCE_ENDPOINTS,
     A6_EXCEPTIONAL_PARITY_ENDPOINT,
     A6_TORUS_2_5_LOCAL_GENERATORS,
     OREVKOV_FORBIDDEN_RAMIFICATION_INDEX,
     OREVKOV_ONE_DICRITICAL_TYPES,
     OREVKOV_SIX_SHEET_BUDGET,
     OrevkovBudgetProfile,
+    OneDicriticalContractedSourceEndpoint,
     S6_TWO_CURVE_COLLISION_GENERATORS,
+    S6_CONTRACTED_SOURCE_ENDPOINTS,
     S6_TWO_CURVE_FIBER_PROFILES,
     TRANSITIVE_GROUPS,
     branch_inertia_realizations,
@@ -275,6 +280,64 @@ def test_a6_exceptional_source_parity_endpoint_is_inconsistent() -> None:
     assert endpoint.lifted_degree == 10
     assert endpoint.forced_tangent_contact_order == 4
     assert endpoint.contradicts_odd_deck_invariance
+
+
+def test_every_one_dicritical_contracted_source_endpoint_is_eliminated() -> None:
+    assert tuple(
+        (
+            endpoint.local_degree,
+            endpoint.jacobian_order,
+            endpoint.forced_tangent_contact_order,
+            endpoint.contradicts_odd_deck_invariance,
+        )
+        for endpoint in A6_CONTRACTED_SOURCE_ENDPOINTS
+    ) == (
+        (3, 2, 2, True),
+        (5, 2, 4, True),
+    )
+    assert tuple(
+        (
+            endpoint.local_degree,
+            endpoint.jacobian_order,
+            endpoint.invariant_jacobian_lower_bound,
+            endpoint.contradicts_invariant_order,
+        )
+        for endpoint in S6_CONTRACTED_SOURCE_ENDPOINTS
+    ) == (
+        (2, 1, 2, True),
+        (3, 1, 2, True),
+        (4, 1, 2, True),
+        (5, 1, 2, True),
+    )
+    assert all(
+        endpoint.eliminates_contracted_source
+        for endpoint in (
+            *A6_CONTRACTED_SOURCE_ENDPOINTS,
+            *S6_CONTRACTED_SOURCE_ENDPOINTS,
+        )
+    )
+
+
+def test_contracted_source_endpoint_preserves_its_exact_boundary() -> None:
+    even_index_three = OneDicriticalContractedSourceEndpoint(
+        ramification_index=3,
+        local_degree=4,
+    )
+
+    assert even_index_three.forced_tangent_contact_order == 3
+    assert not even_index_three.contradicts_invariant_order
+    assert not even_index_three.contradicts_odd_deck_invariance
+    assert not even_index_three.eliminates_contracted_source
+    with pytest.raises(ValueError, match="ramification index 2 or 3"):
+        OneDicriticalContractedSourceEndpoint(
+            ramification_index=4,
+            local_degree=5,
+        )
+    with pytest.raises(ValueError, match="local degree must be positive"):
+        OneDicriticalContractedSourceEndpoint(
+            ramification_index=3,
+            local_degree=0,
+        )
 
 
 def test_one_dicritical_s6_fiber_census_is_exhaustive() -> None:

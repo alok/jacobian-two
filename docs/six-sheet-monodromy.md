@@ -897,19 +897,22 @@ branches, exhausts all six sheets above an omitted target value, and consumes
 none of the remaining jump defect two.  The local analysis in
 [`a6-one-dicritical-local.md`](a6-one-dicritical-local.md) rules out splitting
 those two units as `1+1`: there is one unique local-degree-five point.  If its
-source is smooth, its target branch is a `(2,5)` cusp.  The cyclic-quotient
-lift and parity contradiction in
-[`a6-exceptional-source.md`](a6-exceptional-source.md) now prove that the
-source must be smooth.  Eliminating this surviving cusp stratum would leave
+source is smooth, its target branch is a `(2,5)` cusp.  The generalized
+cyclic-quotient lift and parity contradiction in
+[`one-dicritical-source-smoothness.md`](one-dicritical-source-smoothness.md)
+prove more: every contracted endpoint would have even local degree, whereas
+all boundary degrees are three or five.  Thus `L_C` is empty and the whole
+affine finite normalization is smooth.  Eliminating this surviving cusp stratum would leave
 only the `S6` passport, but this repository does not yet claim that
 elimination.
 
 The complementary local analysis in
 [`s6-one-dicritical-local.md`](s6-one-dicritical-local.md) gives all nine
 finite fiber rows for the `S6,(e,d)=(2,1)` passport.  A jump
-`kappa=mu-2` has local group `S_(2+kappa)`, and every jump away from the
-at-most-one contracted source singularity is exactly `T(2,3)`, `T(3,4)`, or
-`T(4,5)`.  Explicit local germs realize those rows, so this is again a sharp
+`kappa=mu-2` has local group `S_(2+kappa)`.  The same smooth-normalization note
+rules out a contracted endpoint immediately: invariant coordinates begin in
+degree two, but the lifted index-two Jacobian has order one.  Hence every jump
+is exactly `T(2,3)`, `T(3,4)`, or `T(4,5)`.  Explicit local germs realize those rows, so this is again a sharp
 restriction rather than an elimination.
 
 The unrestricted two-curve `S6` profiles also have a forced global feature.

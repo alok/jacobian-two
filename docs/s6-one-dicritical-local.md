@@ -19,8 +19,8 @@ Orevkov's defect identity.  It proves that a jump
 \]
 
 is exactly an intrinsically singular branch, that its connected local
-monodromy is `S_(2+kappa)`, and that every jump away from the at-most-one
-contracted source singularity has one of the exact torus-knot types
+monodromy is `S_(2+kappa)`, and that every jump has one of the exact
+torus-knot types
 
 \[
 T(2,3),\qquad T(3,4),\qquad T(4,5).
@@ -181,7 +181,7 @@ contradicting local degree `2+kappa(t)>2`.  Therefore
 This separates an intrinsic unibranch singularity from a collision of several
 individually smooth normalization branches.
 
-## 4. At most one exceptional source point
+## 4. A contracted source point is impossible
 
 With one dicritical, Orevkov's Lemma 2.1 gives one linear boundary chain
 
@@ -189,15 +189,47 @@ With one dicritical, Orevkov's Lemma 2.1 gives one linear boundary chain
 L_C-E.
 \]
 
-The connected, possibly empty, constant chain `L_C` contracts to at most one
-finite singular point `x_0` of the normalized source.  Orevkov uses a minimal
-model in which a point created by a nonempty contraction is singular.  Away
-from `x_0`, the source and the ramification curve are smooth.  Thus all but at
-most one positive-jump point admit a smooth-source classification.
+Suppose that the connected constant chain `L_C` were nonempty.  Its minimal
+contraction would produce a nonsmooth Hirzebruch--Jung cyclic quotient germ
+`(X,x_0)`.  The unique ramification prime is the endpoint curvette `D`, of
+generic index two.  In its universal quasi-etale cyclic cover
 
-## 5. Smooth-source jumps are exact torus knots
+\[
+q:(\mathbb C^2,0)\longrightarrow(X,x_0),
+\]
 
-Let `x_t != x_0` be a jump point and put
+the reduced inverse image of `D` is one smooth axis, say `x=0`.  For
+`h=\rho\circ q=(u,v)`, pullback of the different gives
+
+\[
+J_h=\varepsilon x. \tag{4.1}
+\]
+
+The cyclic deck representation is small.  An invariant linear form would
+give its generator an eigenvalue one and hence a pseudoreflection, impossible
+for this quasi-etale quotient.  Both `u` and `v` are invariant, so
+
+\[
+\operatorname{ord}u,\operatorname{ord}v\ge2,
+\qquad
+\operatorname{ord}J_h\ge2,
+\]
+
+contradicting (4.1).  Therefore
+
+\[
+\boxed{L_C=\varnothing.} \tag{4.2}
+\]
+
+The complete proof, including the simultaneous index-three parity argument
+for `A6`, is in
+[`one-dicritical-source-smoothness.md`](one-dicritical-source-smoothness.md).
+The finite normalization and its ramification curve are consequently smooth
+at every finite point.
+
+## 5. Every jump is an exact torus knot
+
+Let `x_t` be a jump point and put
 
 \[
 m=\mu_{x_t}=2+\kappa(t)\in\{3,4,5\}.
@@ -247,8 +279,8 @@ there are no later Puiseux pairs.  The exact types are:
 | 2 | 4 | `(3,4)` | `T(3,4)` |
 | 3 | 5 | `(4,5)` | `T(4,5)` |
 
-At most one positive-jump branch can fail to have the listed torus-knot type,
-namely the branch through the unique possible contracted source singularity.
+Thus the table classifies every positive-jump branch, with no exceptional
+source case.
 
 ## 6. A double-branched-cover quotient at every jump
 
@@ -272,7 +304,7 @@ meridian, which already maps to the identity.  Therefore
 \tag{6.1}
 \]
 
-This remains valid at the exceptional source point.  In particular:
+In particular:
 
 - for `kappa=1`, the quotient is `A3=C3`;
 - for `kappa=2`, the quotient is `A4`, whose abelianization is `C3`;
@@ -285,10 +317,9 @@ the knot determinant, the first two cases imply
 3\mid\det(K_t). \tag{6.2}
 \]
 
-At smooth source points this matches
-`det(T(2,3))=det(T(3,4))=3`.  For an exceptional jump-three branch, the useful
-condition is the stronger `A5` quotient in (6.1), not an abelian divisibility
-statement.
+This matches `det(T(2,3))=det(T(3,4))=3`.  For the jump-three knot `T(4,5)`,
+the useful condition is the stronger `A5` quotient in (6.1), not an abelian
+divisibility statement.
 
 ## 7. The global jump trichotomy
 
@@ -304,8 +335,8 @@ There is one jump-three branch.
   collision.
 - The required normalization collision occurs at a different value and uses
   only zero-jump smooth branches.
-- If the jump source is smooth, the branch is `T(4,5)`; otherwise its
-  double-branched-cover group surjects onto `A5`.
+- Its branch is exactly `T(4,5)`, and its double-branched-cover group
+  surjects onto `A5`.
 
 ### Type `2+1`
 
@@ -313,8 +344,7 @@ There are separate jump-two and jump-one normalization points.
 
 - Their local groups are `S4` and `S3`.
 - Both branch-knot determinants are divisible by three.
-- At least one lies at a smooth source point and is exactly `T(3,4)` or
-  `T(2,3)`.
+- The jump-two and jump-one branches are exactly `T(3,4)` and `T(2,3)`.
 - A jump-two branch may collide with one zero-jump branch; that value is
   omitted.
 - A jump-one branch may collide with one zero-jump branch; that value has one
@@ -328,7 +358,7 @@ There are three jump-one normalization points.
 
 - Every local block is `S3` and every branch-knot determinant is divisible by
   three.
-- At least two of the three branches are exact `T(2,3)` cusps.
+- All three branches are exact `T(2,3)` cusps.
 - At most two jump branches can share one target value.  If two do, their
   `3+3` boundary degrees exhaust the fiber and the value is omitted.
 - A jump-one branch may instead collide with one zero-jump branch, leaving one
@@ -394,7 +424,7 @@ The one-dicritical `S6` case is reduced to:
 
 - one of the three jump partitions in Section 7;
 - exact local symmetric blocks of degrees three, four, and five;
-- all but at most one jump branch among three explicit torus-knot types;
+- every jump branch among three explicit torus-knot types;
 - at least one separate normalization collision with one of the exact fiber
   rows in Section 1.
 
