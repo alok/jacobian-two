@@ -36,7 +36,9 @@ additional branch escaping from infinity, contradicting the generic degree.
 
 Nguyen Van Chau's Theorem 4.4 decomposes `E_F` into irreducible polynomially
 parametrized curves and proves in item `(E3)` that every one of those curves
-has a singularity.  Thus
+has a singularity.  The theorem is written after a generic linear source
+change makes both coordinates monic in `y`; that change does not alter
+`E_F`.  Thus
 
 \[
 \boxed{\text{every irreducible component of the Keller nonproper set is
@@ -46,8 +48,11 @@ singular}.}
 
 Every reduced branch component of the finite normalization is a nonproper
 component: affine ramification is absent, so its ramification prime lies on
-the normalization boundary.  The converse can fail when an index-one
-dicritical contributes a nonproper curve without ramifying the finite map.
+the normalization boundary.  More explicitly, it is an irreducible closed
+curve contained in the nonproper set, and hence equals an irreducible curve
+component rather than a proper subset of one.  The converse can fail when an
+index-one dicritical contributes a nonproper curve without ramifying the
+finite map.
 
 Now let a dicritical `E` dominate a branch curve `B`, and assume
 
@@ -249,8 +254,8 @@ claimed here.
 - Nguyen Van Chau,
   [“Non-zero constant Jacobian polynomial maps of `C^2`”](https://doi.org/10.4064/ap-71-3-287-310),
   *Annales Polonici Mathematici* 71.3 (1999), 287--310.  Theorem 4.4,
-  item `(E3)`, proves that every parametrized component of the deficient-fiber
-  set has a singularity.
+  item `(E3)`, on printed pages 304--305 proves that every parametrized
+  component of the deficient-fiber set has a singularity.
 - S. Yu. Orevkov,
   [“On three-sheeted polynomial mappings of `C^2`”](https://www.math.univ-toulouse.fr/~orevkov/jc86.pdf),
   *Mathematics of the USSR-Izvestiya* 29 (1987), 587--596.  Lemma 4.2 gives

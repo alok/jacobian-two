@@ -17,11 +17,11 @@ This note eliminates alternative 2.  It does **not** eliminate the smooth
 
 The local statement proved is:
 
-> Let `rho:(X,x)->(C2,0)` be the exceptional local-degree-five finite germ.
-> Suppose `(X,x)` is obtained by contracting the connected rational linear
-> chain adjacent to the unique dicritical, and the ramification curve `D` is
-> the endpoint curvette with generic index three.  Then such a germ cannot
-> exist.
+> Let `rho:(X,x)->(C2,0)` be the exceptional local-degree-five finite germ,
+> with `X` normal.  Suppose `(X,x)` is obtained by contracting the connected
+> rational linear chain adjacent to the unique dicritical, and the
+> ramification curve `D` is the endpoint curvette, the only ramification prime
+> through `x`, with generic index three.  Then such a germ cannot exist.
 
 ## 1. The Hirzebruch--Jung cover
 
@@ -40,8 +40,10 @@ be its universal quasi-etale cyclic cover, of order `n>1`.
 The strict transform of `D` meets an endpoint of the chain.  In the toric
 Hirzebruch--Jung model an endpoint curvette lifts to one coordinate axis.
 Equivalently, the endpoint-arrow plumbing has a solid-torus complement; its
-lift to the universal `S3` link is again a solid torus, so the lifted
-plane-curve link is one unknot.  Thus
+knot is a core representing a generator of the lens-space fundamental group.
+Its inverse image in the universal `S3` link is therefore connected, and its
+complement is again a solid torus.  The lifted plane-curve link is one unknot.
+Thus
 
 \[
 \widetilde D=q^{-1}(D)
@@ -80,9 +82,10 @@ for a unit `epsilon`.
 
 ## 2. Quadratic jets force the `A1` quotient
 
-The cyclic deck representation is small: if it fixed a linear form, it would
-contain a pseudoreflection and the quotient would be smooth.  Both components
-of `h` are deck invariant, so
+The cyclic deck representation is small.  If its generator fixed a linear
+form, that generator would be a pseudoreflection, contradicting the
+quasi-etaleness of the quotient cover.  Both components of `h` are deck
+invariant, so
 
 \[
 dh_0=0.
@@ -102,9 +105,9 @@ If `U,V` were coprime, they would define a degree-two map
 [U:V]:\mathbb P^1\longrightarrow\mathbb P^1.
 \]
 
-Its Wronskian (2.1) would put the entire degree-two ramification divisor over
-one point.  That is impossible: a degree-two map has two simple ramification
-points by Riemann--Hurwitz.  The quadratics cannot be proportional because
+Its Wronskian (2.1) would concentrate the entire degree-two ramification
+divisor at one source point.  That is impossible: a degree-two map has two
+simple ramification points by Riemann--Hurwitz.  The quadratics cannot be proportional because
 their Wronskian is nonzero.  Hence their gcd is exactly one linear form.
 After linear source and target changes,
 
@@ -251,8 +254,8 @@ braid, splice, or compactification-graph data.
 - S. Yu. Orevkov,
   [“On three-sheeted polynomial mappings of `C^2`”](https://www.math.univ-toulouse.fr/~orevkov/jc86.pdf),
   *Mathematics of the USSR-Izvestiya* 29 (1987), 587--596.  Lemma 2.1 gives
-  the linear boundary chain, Lemma 3.1 gives the generic index-three local
-  form, and Lemma 5.2 supplies the endpoint plumbing/local-embedding input.
+  the linear endpoint chain and curvette geometry, and Lemma 3.1 gives the
+  generic index-three local form.
 - Egbert Brieskorn,
   [“Rationale Singularitaten komplexer Flachen”](https://doi.org/10.1007/BF01425318),
   *Inventiones Mathematicae* 4 (1968), 336--358.  The Hirzebruch--Jung
