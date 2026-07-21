@@ -25,7 +25,6 @@ from sympy import (
     Matrix,
     Poly,
     QQ,
-    Rational,
     Symbol,
     diff,
     discriminant,

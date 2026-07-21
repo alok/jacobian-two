@@ -53,7 +53,6 @@ def _blade_product(first: int, second: int) -> tuple[int, int]:
     remaining = first
     while remaining:
         lowest = remaining & -remaining
-        index = lowest.bit_length() - 1
         inversions += (second & (lowest - 1)).bit_count()
         remaining ^= lowest
     return (-1 if inversions % 2 else 1, first ^ second)

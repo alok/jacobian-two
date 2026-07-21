@@ -24,7 +24,6 @@ from sympy import (
     I,
     Matrix,
     Poly,
-    Rational,
     Symbol,
     diag,
     expand,

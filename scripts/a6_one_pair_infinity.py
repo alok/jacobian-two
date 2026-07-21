@@ -19,14 +19,12 @@ from collections import Counter
 from collections.abc import Sequence
 from dataclasses import dataclass
 from functools import cache
-from itertools import product
 from math import gcd
 from typing import Final
 
 from sympy import (
     Expr,
     Symbol,
-    cancel,
     diff,
     discriminant,
     expand,

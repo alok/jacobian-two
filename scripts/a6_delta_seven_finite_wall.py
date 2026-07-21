@@ -48,7 +48,6 @@ from scripts.a6_delta_seven_deeper_wall import (
     E,
     THREE_DOUBLE_C_FACTOR,
     THREE_DOUBLE_CUBIC,
-    THREE_DOUBLE_FACTORIZATION,
     THREE_DOUBLE_T_FACTOR,
     V,
     _collision_coefficients,

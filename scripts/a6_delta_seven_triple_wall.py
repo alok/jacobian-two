@@ -48,7 +48,6 @@ from scripts.a6_one_pair_infinity import (
 from scripts.six_sheet_monodromy import (
     A6_COLLISION_MERIDIAN,
     A6_TORUS_2_5_LOCAL_GENERATORS,
-    IDENTITY,
     Permutation,
     compose,
     cycle_type,

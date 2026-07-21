@@ -52,7 +52,6 @@ from scripts.a6_delta_seven_generic import (
     FAMILY_Q,
     GAMMA,
     S,
-    T,
     TANGENCY_POLYNOMIAL,
     TRIPLE_COLLISION_FACTOR,
     X,
