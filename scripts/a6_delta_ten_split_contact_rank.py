@@ -209,6 +209,21 @@ class LinearRankSpec:
     expected_rank: int
     expected_maximal_minor_gcd: Expr
 
+    @property
+    def base_dimension(self) -> int:
+        """Dimension of the true-component source base for this allocation."""
+
+        # A component root moves in one parameter.  At the prescribed
+        # vertical/graph intersection that root is fixed, so only the
+        # coefficient fiber remains.
+        return 0 if self.allocation.startswith("overlap-") else 1
+
+    @property
+    def generic_incidence_dimension(self) -> int:
+        """Dimension of the maximal-rank affine incidence."""
+
+        return self.base_dimension + 4 - self.expected_rank
+
 
 @cache
 def c3_rank_specs() -> tuple[LinearRankSpec, ...]:
@@ -335,6 +350,20 @@ class SimpleDoubleContactSpec:
     expected_rank: int
     expected_rank_drop_generator: Expr
 
+    @property
+    def base_dimension(self) -> int:
+        """Dimension of the ordered source-pair base for this allocation."""
+
+        # Two independently moving component roots give dimension two.  The
+        # overlap pair is fixed and leaves only the separate W root.
+        return 1 if self.allocation == "overlap+W" else 2
+
+    @property
+    def generic_incidence_dimension(self) -> int:
+        """Dimension of the maximal-rank affine incidence."""
+
+        return self.base_dimension + 4 - self.expected_rank
+
 
 @cache
 def simple_double_contact_specs() -> tuple[SimpleDoubleContactSpec, ...]:
@@ -430,6 +459,12 @@ class ResidualRankSpec:
     compatibility_power: int
     rank_two_power: int
     expected_base_length: int
+
+    @property
+    def generic_incidence_dimension(self) -> int:
+        """Dimension away from the residual determinant on the two-root base."""
+
+        return 2 + 4 - len(self.equations)
 
 
 @cache

@@ -119,6 +119,7 @@ class AllSplitRankCertificate:
 
     expected_keys: tuple[AllocationKey, ...]
     audited_keys: tuple[AllocationKey, ...]
+    audited_incidence_dimension_bounds: tuple[tuple[AllocationKey, int], ...]
     profile_counts: tuple[tuple[str, int], ...]
     contact_rank_verified: bool
     triple_mixed_rank_verified: bool
@@ -139,6 +140,11 @@ class AllSplitRankCertificate:
             len(self.expected_keys) == len(self.audited_keys) == 22
             and len(set(self.audited_keys)) == 22
             and set(self.audited_keys) == set(self.expected_keys)
+            and len(self.audited_incidence_dimension_bounds) == 22
+            and {
+                key for key, _bound in self.audited_incidence_dimension_bounds
+            }
+            == set(self.expected_keys)
             and self.profile_counts == EXPECTED_PROFILE_COUNTS
         )
 
@@ -186,9 +192,55 @@ def exact_all_split_rank_certificate() -> AllSplitRankCertificate:
     global_fiber = exact_split_q0_double_triple_rank_certificate()
     closure = exact_split_component_closure_certificate()
     contact_closure = exact_split_contact_closure_certificate()
+    audited_dimension_bounds = (
+        *(
+            (
+                (spec.profile, _split_class(spec.kappa), spec.allocation),
+                spec.generic_incidence_dimension,
+            )
+            for spec in c3_rank_specs()
+        ),
+        *(
+            (
+                ("C2^2+6N", _split_class(spec.kappa), spec.allocation),
+                spec.generic_incidence_dimension,
+            )
+            for spec in simple_double_contact_specs()
+        ),
+        *(
+            (
+                ("C2^2+6N", _split_class(spec.kappa), spec.allocation),
+                spec.generic_incidence_dimension,
+            )
+            for spec in residual_rank_specs()
+        ),
+        *(
+            (
+                (spec.profile, _split_class(spec.kappa), spec.allocation),
+                max(
+                    spec.generic_incidence_dimension,
+                    spec.residual_incidence_dimension_bound,
+                ),
+            )
+            for spec in SPLIT_INCIDENCE_SPECS
+        ),
+        *(
+            (
+                key,
+                (
+                    global_fiber.quadruple.maximum_valid_incidence_dimension
+                    if key[0] == "Q0+4N"
+                    else global_fiber.double_triple.maximum_valid_incidence_dimension
+                ),
+            )
+            for key in expected_keys
+            if key[0] in {"Q0+4N", "T111^2+4N"}
+        ),
+    )
     return AllSplitRankCertificate(
         expected_keys=expected_keys,
         audited_keys=_audited_keys(),
+        audited_incidence_dimension_bounds=audited_dimension_bounds,
         profile_counts=profile_counts,
         contact_rank_verified=contact.verified,
         triple_mixed_rank_verified=triple_mixed.verified,
@@ -199,7 +251,9 @@ def exact_all_split_rank_certificate() -> AllSplitRankCertificate:
         contact_rank_open_closure_verified=(
             contact_closure.maximal_rank_topology_closed
         ),
-        maximum_split_incidence_dimension=2,
+        maximum_split_incidence_dimension=max(
+            bound for _key, bound in audited_dimension_bounds
+        ),
         maximum_residual_rankdrop_incidence_dimension=max(
             contact.maximum_residual_incidence_dimension,
             *(
