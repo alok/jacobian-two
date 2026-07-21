@@ -917,6 +917,35 @@ transposition branch must have affine projection width at least five.  The
 next target is the smallest width-five curve compatible with the forced cusp
 and normalization-collision budget.
 
+## 2026-07-21: the smallest width-five `S6` near-miss is cyclic
+
+Status: exact geometric fixture and computer-assisted global exclusion; the
+`S6` passport remains.
+
+The curve
+
+```text
+(P,Q)=(t^5+t^4,t^7+t^5)
+```
+
+attains the transposition-generator lower bound `width=5`.  Exact
+normalization arithmetic finds the complete singularity package: one finite
+`T(4,5)` jump-three cusp, six transverse nodes, and one `(2,7)` pair at
+infinity.  Their deltas are `6+6+3=15`, equal to the arithmetic genus of the
+degree-seven closure.  Thus this is the degree-minimal one-pair geometric
+near-miss, not a fixture that failed a local budget.
+
+It fails globally.  Sage's five-meridian Zariski--van Kamp presentation has an
+explicit Tietze isomorphism to `Z`, sending all five geometric meridians to one
+generator.  The dependency-free checker independently exhausts all
+`15^5=759375` transposition assignments: exactly 15 satisfy the ten relators,
+all have order-two image, and none is transitive.  A connected six-sheet cover
+cannot use this branch curve.
+
+This does not classify all width-five curves.  The remaining `S6` target is a
+different width-five curve with noncyclic complement, or a higher-width or
+multi-pair infinity configuration, coupled to the Keller compactification.
+
 ## 2026-07-21: a one-pair `A6` branch needs collision delta at least five
 
 Status: conditional, computer-assisted exclusion; not a solution of `JC(2)`.

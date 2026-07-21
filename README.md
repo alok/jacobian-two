@@ -220,6 +220,16 @@ explicit trace curve, but not of the `S6` passport: any replacement branch
 curve must have projection width at least five.  See the
 [trace-curve topology note](docs/s6-trace-curve-topology.md).
 
+The first curve at equality is now excluded too.  The parametrization
+`(t^5+t^4,t^7+t^5)` has exact width five, one allowed `T(4,5)` jump cusp, six
+transverse normalization nodes, one `(2,7)` pair at infinity, and complete
+genus accounting.  Nevertheless, exact Zariski--van Kamp simplification gives
+complement group `Z`: all five geometric meridians coincide.  A separate
+`15^5` transposition census finds only 15 cyclic images and no transitive one.
+This kills the degree-minimal geometric near-miss, not all width-five `S6`
+curves.  See the
+[width-five near-miss note](docs/s6-width-five-near-miss.md).
+
 The explicit `A6` trace curve is globally dead as well: its affine complement
 group is `Z`, so single-3-cycle meridians cannot generate `A6`.  More broadly,
 under the additional hypotheses that the branch has one genuine Puiseux pair

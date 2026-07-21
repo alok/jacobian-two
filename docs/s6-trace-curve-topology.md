@@ -92,7 +92,9 @@ complement-group constraint.  For a one-component `S6` branch, any polynomial
 normalization used in a future model must have affine projection width at
 least five.
 
-The next question is therefore not whether this matrix secretly defines a
-Keller cover—it does not—but whether every rational branch curve compatible
-with the forced `S6` cusp/collision budget and width at least five is still
-topologically obstructed.
+The next question was therefore not whether this matrix secretly defines a
+Keller cover—it does not—but what happens at width five.  The first exact
+degree-minimal curve at equality is also cyclic and hence impossible, as shown
+in the [width-five near-miss note](s6-width-five-near-miss.md).  That result
+still does not classify every rational branch curve compatible with the forced
+`S6` cusp/collision budget and width at least five.
