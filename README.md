@@ -294,15 +294,36 @@ transport excludes their connected generic equisingular opens.  Consequently
 any remaining conditional delta-ten survivor lies in a lower-dimensional
 degeneration stratum.
 
-The complete combinatorial ledger contains 145 candidate collision profiles.
-After the clean locus and the two divisors, the next worklist has six expected
-codimension-two profiles; 55 overdetermined profiles are deliberately retained
-until exact elimination proves them empty, invalid, or contained elsewhere.
-No `A6` cover or Keller map has been constructed, the four hypotheses remain
+The six expected codimension-two profiles now have exact component-level
+certificates as well.  The valid generic components of contact-three and
+ordinary-quadruple incidence are irreducible; the displayed `P`-unramified
+`T112` incidence is an irreducible affine-line bundle, and the displayed
+Cramer calculations identify rational threefolds for two contacts, a separate
+contact and ordinary triple, and two ordinary triples.  An exact
+representative of each has cyclic complement, and every raw `40^4` replay
+again leaves only 40 diagonal `C3` images and no `A6` image.  Four component
+exclusions are complete at the stated level.  For `T112`, a generic-chart
+exclusion is conditionally supported but still requires the
+unique-fiber/two-orientation labeling and connected clean Whitney--Thom
+transport.  For the mixed contact-plus-triple component, a connected
+equisingular clean open and its Whitney--Thom propagation still require
+separate verification; the scripts establish the dense Cramer component and
+cyclic sample, not that transport.
+
+That is not a complete codimension-two audit.  Compatible lower-dimensional
+pieces on residual coefficient-rank factors, the split `k=0,+2,-2` charts,
+removed pair or `P`-projection/critical-fiber charts, and deeper component
+intersections remain open.  A `P`-critical fiber is not automatically a
+singular curve branch when `Q'` is nonzero.  The complete combinatorial ledger
+still contains 145 candidate collision
+profiles, including 55 overdetermined profiles deliberately retained until
+exact saturation proves them empty, invalid, or contained elsewhere.  No
+`A6` cover or Keller map has been constructed, the four hypotheses remain
 unproved for arbitrary Keller branches, and this is not a proof of `JC(2)`.
 See the [A6 one-pair note](docs/a6-one-pair-infinity.md), the
-[generic delta-ten audit](docs/a6-delta-ten-generic.md), and the
-[dominant delta-ten wall audit](docs/a6-delta-ten-walls.md).
+[generic delta-ten audit](docs/a6-delta-ten-generic.md), the
+[dominant delta-ten wall audit](docs/a6-delta-ten-walls.md), and the
+[codimension-two checkpoint](docs/a6-delta-ten-codim-two.md).
 
 The delta-five equality family is now fully exhausted.  Every conditional
 `(3,8)` curve is polynomially equivalent to
@@ -669,6 +690,12 @@ optional Sage/GAP replay is an additional independent local cross-check.
   contact-two and ordinary-triple incidences are the two irreducible dominant
   wall components, excludes their generic equisingular opens, and gives the
   exact 145-profile ledger for the deeper audit.
+- [`docs/a6-delta-ten-codim-two.md`](docs/a6-delta-ten-codim-two.md) excludes
+  four identified generic or dominant components and gives the exact
+  propagation conditions for the `T112` and mixed contact-plus-triple
+  candidates, while retaining the residual-rank, split-chart, removed
+  `P`-projection/critical-fiber, and deeper-intersection loci as explicit open
+  obligations.
 - [`docs/one-dicritical-source-smoothness.md`](docs/one-dicritical-source-smoothness.md)
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.

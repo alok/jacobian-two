@@ -36,12 +36,19 @@ complement `Z`; each raw four-meridian presentation has an exhaustive
 `A6` image.  Proper projective Whitney--Thom propagation therefore excludes
 the connected generic equisingular open of both divisors.
 
-This is not a complete delta-ten wall audit.  There are six expected
-codimension-two profiles and many deeper candidate profiles.  Their actual
-incidence components, split-fiber boundaries, and endpoints remain to be
-eliminated or checked.  The result is conditional and computer-assisted.  It
-does not derive the four hypotheses, exclude unrestricted `A6` or `S6`,
-construct a Keller map, or prove the plane Jacobian conjecture.
+The follow-up [codimension-two checkpoint](a6-delta-ten-codim-two.md) now
+excludes four identified generic or dominant components and supplies cyclic
+members plus exact incidence algebra for the `T112` and mixed
+contact-plus-triple candidates.  Those last two generic exclusions retain
+explicit labeling or connected-equisingular propagation obligations.  This
+still does not complete the delta-ten wall audit: compatible
+lower-dimensional residual-rank loci, the split `k=0,+2,-2` charts,
+removed pair or `P`-projection/critical-fiber loci, deeper intersections, and
+endpoints remain to be eliminated or checked.  A removed `P`-critical fiber
+is not automatically a singular curve branch when `Q'` is nonzero.  The
+result is conditional and computer-assisted.  It does not derive the four
+hypotheses, exclude unrestricted `A6` or `S6`, construct a Keller map, or
+prove the plane Jacobian conjecture.
 
 ## 1. Pair collisions and target fibers are different data
 
@@ -556,6 +563,23 @@ are retained as candidates.  Special coefficient relations can defeat a
 naive dimension count, so exact saturation or containment is required before
 any is declared empty.
 
+The six codimension-two profiles have now been audited on their displayed
+generic or Cramer opens.  Exact incidence calculations and cyclic
+representatives exclude the identified components for contact three,
+ordinary quadruple incidence, two contacts over the full ordered Cramer base,
+and the dense double-triple Cramer open.  For `T112`, the length-two Sage
+fiber proves generic finiteness while degree two additionally uses the unique
+`T112`/two-orientation labeling argument.  For a separate contact and
+ordinary triple, the calculation establishes a dense rational Cramer
+component and cyclic sample; connected equisingular propagation remains a
+separate obligation.  No statement eliminates compatible lower-dimensional
+pieces supported on residual rank factors, split charts, removed pair or
+`P`-projection/critical-fiber loci, or deeper intersections.  In particular,
+the removed triple/fourth-root loci are not automatically singular branches
+of `(P,Q)`.  See the
+[codimension-two checkpoint](a6-delta-ten-codim-two.md) for the six distinct
+claim boundaries and reproduction commands.
+
 One useful coefficient-slice check makes the next elimination finite.  For
 fixed `k`, the collision-decic coefficients are affine-linear in
 `(a,b,c,d)`.  Two `4 x 4` coefficient minors are
@@ -594,18 +618,25 @@ Sage's Zariski--van Kamp implementation remains a computer-assisted
 dependency.  Family-wide propagation separately depends on proper projective
 Whitney--Thom triviality.
 
-The next exact work package is the six expected codimension-two profiles in
-Section 7, followed by their lower-dimensional intersections and the split
-fibers.  A complete audit must:
+The next exact work package is the unresolved boundary of the six
+codimension-two profiles in Section 7, followed by the fourteen expected
+codimension-three profiles.  A complete audit must:
 
-1. build saturated ordered double-, triple-, and quadruple-point incidence
-   schemes over the full `(X,Y)` target;
-2. decompose every valid minimal prime and determine its actual codimension;
-3. audit all denominator and coefficient-rank boundaries;
-4. regenerate one presentation on every connected equisingular component;
-5. transport finite endpoint obstructions across arithmetic conjugacy only
+1. saturate and decompose the residual coefficient-rank loci left by the
+   two-contact, contact-plus-triple, and double-triple Cramer calculations;
+2. audit all six profiles on the true split `k=0,+2,-2` pair charts;
+3. determine the removed pair, overlap, and
+   `P`-projection/critical-fiber loci on appropriate charts rather than
+   declaring them invalid; prove whether each is contained in a known
+   component or gives a genuine deeper component;
+4. finish the `T112` geometric labeling/propagation argument and separately
+   verify the connected equisingular clean open for the mixed
+   contact-plus-triple component;
+5. regenerate one presentation on every resulting connected equisingular
+   component;
+6. transport finite endpoint obstructions across arithmetic conjugacy only
    with the finite-etale/Riemann-existence hypotheses stated explicitly; and
-6. prove emptiness, invalidity, or containment for every overdetermined
+7. prove emptiness, invalidity, or containment for every overdetermined
    profile instead of relying on expected dimension.
 
 Even completing that list would still prove only the stated conditional
@@ -621,12 +652,24 @@ uv run python -m scripts.a6_delta_ten_contact_wall
 uv run python -m scripts.a6_delta_ten_triple_wall
 uv run python -m scripts.a6_delta_ten_wall_components
 uv run python -m scripts.a6_delta_ten_partition_ledger
+uv run python -m scripts.a6_delta_ten_contact_three
+uv run python -m scripts.a6_delta_ten_double_contact
+uv run python -m scripts.a6_delta_ten_t112
+uv run python -m scripts.a6_delta_ten_contact_triple
+uv run python -m scripts.a6_delta_ten_quadruple
+uv run python -m scripts.a6_delta_ten_double_triple
 
 uv run pytest -q \
   tests/test_a6_delta_ten_contact_wall.py \
   tests/test_a6_delta_ten_triple_wall.py \
   tests/test_a6_delta_ten_wall_components.py \
-  tests/test_a6_delta_ten_partition_ledger.py
+  tests/test_a6_delta_ten_partition_ledger.py \
+  tests/test_a6_delta_ten_contact_three.py \
+  tests/test_a6_delta_ten_double_contact.py \
+  tests/test_a6_delta_ten_t112.py \
+  tests/test_a6_delta_ten_contact_triple.py \
+  tests/test_a6_delta_ten_quadruple.py \
+  tests/test_a6_delta_ten_double_triple.py
 
 uv run mypy --no-incremental
 ```
@@ -637,4 +680,14 @@ Regenerate both exact curves, singular schemes, and presentations with Sage
 ```bash
 sage tools/check_a6_delta_ten_contact_wall.sage
 sage tools/check_a6_delta_ten_triple_wall.sage
+sage tools/check_a6_delta_ten_contact_three.sage
+sage tools/check_a6_delta_ten_double_contact.sage
+sage tools/check_a6_delta_ten_t112.sage
+sage tools/check_a6_delta_ten_contact_triple.sage
+sage tools/check_a6_delta_ten_quadruple.sage
+sage tools/check_a6_delta_ten_double_triple.sage
 ```
+
+The Sage commands are manual checkers.  GitHub CI runs the Python
+certificates and tests, not Sage, and neither route certifies the separate
+proper Whitney--Thom propagation arguments.

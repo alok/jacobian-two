@@ -1372,6 +1372,77 @@ profiles; there are 38 expected endpoints and 55 overdetermined candidates
 that still require exact elimination.  Expected dimension is explicitly not
 used as an emptiness proof.
 
+## 2026-07-21: six codimension-two open-chart components are identified
+
+Status: exact component algebra, exhaustive finite-group replay, manual Sage
+singular schemes and presentations, and computer-assisted topology under the
+same four standing hypotheses.  Four component exclusions are established at
+the stated level.  The `T112` and mixed contact-plus-triple generic exclusions
+retain explicit labeling or connected-equisingular propagation obligations.
+Residual-rank, split-chart, removed pair or `P`-projection/critical-fiber, and
+deeper-intersection loci remain open; a removed `P`-critical fiber is not
+automatically a singular curve branch when `Q'` is nonzero.  This is not a
+proof of the plane Jacobian conjecture.
+
+The six expected codimension-two profiles were attacked by their actual
+target-fiber incidences rather than only by roots of the collision decic:
+
+- `C3+7N`: `H=H'=H''=0` has rank three on the valid pair chart.  Its only
+  localized rank-drop base is inconsistent by a nonzero augmented minor, so
+  the valid incidence has one irreducible three-dimensional image.
+- `C2^2+6N`: the ordered equations at two distinct double roots give a
+  rational Cramer threefold dominating the full `(k,u,v)` ordered base and
+  invariant under the free root swap.  The determinant/augmentation gcd
+  removes the residual rank factor as another dominant divisor.  Compatible
+  residual-rank subvarieties and the split `k=0,+2,-2` intersections could
+  support other components and remain open.
+- `T112+6N`: the labeled triple-root base
+  `sigma2^2-sigma1*sigma3-sigma2=0` is absolutely irreducible and smooth on
+  the displayed `P`-unramified localization.  The removed
+  triple-source/fourth-root loci are `P`-critical-fiber boundaries, not
+  automatically singular branches of `(P,Q)`; the full clean profile there
+  is not covered.  Sage saturation makes the maximal-minor ideal the unit
+  ideal on the displayed chart.  The sample projection fiber is reduced of
+  length two, proving generic finiteness.  Degree two additionally uses the
+  geometric fact that the clean target has a unique `T112` fiber and hence
+  only the two orientations of its tangent pair.  The corresponding
+  generic-chart exclusion is supported conditional on that labeling and
+  connected clean Whitney--Thom propagation; it is not a CAS-certified
+  theorem.
+- `C2+T111+5N`: the combined contact and triple equations define a rational
+  Cramer threefold on the displayed dense open.  The sole nonboundary rank
+  factor is irreducible over `QQ` and coprime to a specialized augmented
+  minor, so it has no additional component dominating that divisor.  The
+  cyclic sample is exact, but generic exclusion still requires separate
+  verification of a connected equisingular clean open and proper
+  Whitney--Thom propagation.  Compatible lower-dimensional rank, split,
+  overlap, and removed triple/fourth-root `P`-critical loci remain open; the
+  last are not automatically singular branches when `Q'` is nonzero.
+- `Q0+4N`: constancy of `Q mod (P-h)` gives three affine-linear equations of
+  rank three for `h!=0`; the first equation recovers `h` uniquely.  The valid
+  incidence therefore projects to one irreducible threefold.
+- `T111^2+4N`: two omitted roots give a dense rational Cramer graph.  The
+  same-fiber determinant factor is invalid for separate target triples, while
+  the residual factor `k*u*v-u-v` is generically inconsistent.  Compatible
+  pieces supported on that factor and split boundaries remain open.
+
+For every profile, an exact rational representative has the forced
+`T(2,5)` cusp, collision delta ten, the fixed `T(5,9)` infinity branch, and
+genus balance 28.  Manual Sage 10.8 checkers regenerate each primitive curve,
+singular scheme, raw four-generator van Kamp presentation, and a
+simplification to `Z`.  Every dependency-free `40^4` replay leaves exactly
+40 diagonal `C3` images and no `A6` image.  The repository CI runs the Python
+certificates and tests only, not Sage.  Neither CI nor the Sage checkers
+certify proper projective Whitney--Thom transport.
+
+This maps the displayed dimension-three open-chart layer, not its full
+closure.  The next exact obligations are the `T112` labeling and
+mixed-component propagation steps, the three residual coefficient-rank loci,
+all six true split-incidence charts, removed pair and
+`P`-projection/critical-fiber intersections, and the fourteen expected
+codimension-three profiles.  The detailed statement and commands are in
+`docs/a6-delta-ten-codim-two.md`.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -1392,9 +1463,11 @@ used as an emptiness proof.
    try to force Orevkov's condition `(*)` or replace it with a determinant
    inequality stable under several noncontracted preimages; do not relabel the
    conditional two-pair theorem as a solution of the unrestricted conjecture.
-2. Continue the conditional delta-ten elimination with the six exact
-   codimension-two collision profiles in `docs/a6-delta-ten-walls.md`, treating
-   target-fiber grouping and the split `k=0,+2,-2` incidences separately.
+2. Continue the conditional delta-ten elimination with the unresolved
+   `T112`/mixed-component propagation steps and the residual-rank and
+   split-chart closures from `docs/a6-delta-ten-codim-two.md`, then audit the
+   fourteen expected codimension-three profiles without using expected
+   dimension as emptiness.
 3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 4. Extend the exact support analysis beyond two interior coefficients in the
