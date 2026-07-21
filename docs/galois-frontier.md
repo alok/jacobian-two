@@ -53,6 +53,15 @@ Alexander Borisov's framework paper independently states the lower bound six
 and asks whether its birational-combinatorial methods can improve it.  That is
 a real open problem, not something this repository claims to close.
 
+The repository does now obtain a new necessary condition inside degree six.
+Affine fixed-sheet inertia, Orevkov's defect identity, finite-normalization
+deck symmetry, purity, and local monodromy eliminate every imprimitive
+transitive action.  Thus a six-sheet counterexample would have to have one of
+the four primitive actions `A5`, `S5`, `A6`, or `S6`.  This is a substantial
+filter, but it does not exclude those four actions and therefore does not raise
+the accepted lower bound.  See
+[`six-sheet-monodromy.md`](six-sheet-monodromy.md) for the complete proof.
+
 ## Two tempting but unsafe shortcuts
 
 ### A claimed plane proof
@@ -85,14 +94,18 @@ class, while the repository supplies its own explicit field-algebra proof.
 
 ## What this repository attacks
 
-There are three intentionally separate levels.
+There are four intentionally separate levels.
 
 1. `JC(2)` itself, beginning at generic degree six, remains open.
-2. The repository proves kernel-checked positive fragments for maps of bounded
+2. At generic degree six, the repository proves the primitive-monodromy
+   restriction above and sharper conditional one-dicritical passports.  These
+   are necessary conditions, not existence or nonexistence theorems for all
+   six-sheet maps.
+3. The repository proves kernel-checked positive fragments for maps of bounded
    degree in one variable.  The quadratic-in-one-variable normal form is a
    Lean formalization and explicit reconstruction of a mathematically known
    special case; no novelty claim is made.
-3. For the new three-dimensional counterexample, the repository determines
+4. For the new three-dimensional counterexample, the repository determines
    the full fiber stratification, exact omitted curve, and complete
    nonproper-value set.  These are finite consequences of the explicit map and
    do not purport to solve `JC(2)`.
