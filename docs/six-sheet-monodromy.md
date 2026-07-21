@@ -909,6 +909,16 @@ at-most-one contracted source singularity is exactly `T(2,3)`, `T(3,4)`, or
 `T(4,5)`.  Explicit local germs realize those rows, so this is again a sharp
 restriction rather than an elimination.
 
+The unrestricted two-curve `S6` profiles also have a forced global feature.
+Nguyen Van Chau's singular-component theorem, combined with zero excess and
+Orevkov's local-embedding lemma, forces a normalization self-collision on at
+least one curve in the two-transposition profile.  In the saturated
+transposition-plus-3-cycle profile both curves self-collide.  Their exact
+fiber rows are `3+3` on the 3-cycle curve, `2+2+1+1` or `2+2+2` on the
+transposition curve, and `2+3+1` at every cross-intersection.  The proof and
+an exact four-meridian fixture still generating `S6` are in
+[`s6-two-curve-collisions.md`](s6-two-curve-collisions.md).
+
 For the unrestricted six-sheet problem, configurations with several dicritical
 components must still be handled.  Section 7 reduces their monodromy to `A6`
 or `S6`, but a combinatorial framework is still only necessary data: Borisov

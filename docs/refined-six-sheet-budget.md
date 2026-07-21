@@ -340,6 +340,13 @@ For the one-dicritical `S6` survivor, the complete local fiber census and
 smooth-source torus-knot classification are in
 [`s6-one-dicritical-local.md`](s6-one-dicritical-local.md).
 
+For the two-curve `S6` survivors, Nguyen Van Chau's singular-component
+theorem forces at least one zero-jump transposition curve to self-collide.  In
+the saturated transposition-plus-3-cycle profile both branch curves
+self-collide, and constant multiplicity gives the exact rows `3+3`,
+`2+2+1+1` or `2+2+2`, and `2+3+1` at cross-intersections.  See
+[`s6-two-curve-collisions.md`](s6-two-curve-collisions.md).
+
 ## 7. Why this still does not finish degree six
 
 The surviving actions are primitive.  Their point stabilizers

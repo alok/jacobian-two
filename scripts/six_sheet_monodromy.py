@@ -69,6 +69,16 @@ A6_TORUS_2_5_LOCAL_GENERATORS: Final[tuple[Permutation, Permutation]] = (
 )
 A6_COLLISION_MERIDIAN: Final[Permutation] = _from_cycles((4, 5, 6))
 
+# Hostile stopping fixture for the saturated two-curve S6 passport.  The first
+# pair models a 3+3 self-collision and the second pair a 2+2 self-collision.
+# Each pair has disjoint support, but all four meridians together generate S6.
+S6_TWO_CURVE_COLLISION_GENERATORS: Final[tuple[Permutation, ...]] = (
+    _from_cycles((1, 2, 3)),
+    _from_cycles((4, 5, 6)),
+    _from_cycles((1, 4)),
+    _from_cycles((2, 5)),
+)
+
 
 def compose(left: Permutation, right: Permutation) -> Permutation:
     """Return ``left ∘ right``."""
@@ -696,6 +706,34 @@ class OneDicriticalS6FiberProfile:
         """Whether the original affine Keller map omits the target value."""
 
         return self.affine_fiber_size == 0
+
+
+@dataclass(frozen=True)
+class S6TwoCurveFiberProfile:
+    """One exact collision row in the transposition-plus-3-cycle passport."""
+
+    event: str
+    boundary_block_sizes: tuple[int, ...]
+
+    @property
+    def affine_fiber_size(self) -> int:
+        """Return the affine sheets left by constant multiplicity six."""
+
+        return DEGREE - sum(self.boundary_block_sizes)
+
+    @property
+    def is_omitted(self) -> bool:
+        """Whether the boundary blocks exhaust all six sheets."""
+
+        return self.affine_fiber_size == 0
+
+
+S6_TWO_CURVE_FIBER_PROFILES: Final[tuple[S6TwoCurveFiberProfile, ...]] = (
+    S6TwoCurveFiberProfile("three_cycle_self_collision", (3, 3)),
+    S6TwoCurveFiberProfile("transposition_double_self_collision", (2, 2)),
+    S6TwoCurveFiberProfile("transposition_triple_self_collision", (2, 2, 2)),
+    S6TwoCurveFiberProfile("cross_intersection", (2, 3)),
+)
 
 
 def one_dicritical_s6_fiber_profiles() -> tuple[OneDicriticalS6FiberProfile, ...]:

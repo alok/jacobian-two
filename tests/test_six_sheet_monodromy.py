@@ -7,6 +7,8 @@ from scripts.six_sheet_monodromy import (
     OREVKOV_ONE_DICRITICAL_TYPES,
     OREVKOV_SIX_SHEET_BUDGET,
     OrevkovBudgetProfile,
+    S6_TWO_CURVE_COLLISION_GENERATORS,
+    S6_TWO_CURVE_FIBER_PROFILES,
     TRANSITIVE_GROUPS,
     branch_inertia_realizations,
     candidate_ids,
@@ -288,6 +290,51 @@ def test_one_dicritical_s6_fiber_census_is_exhaustive() -> None:
         ((1, 1), (3, 3), 0, True),
         ((0, 0, 0), (2, 2, 2), 0, True),
     )
+
+
+def test_saturated_two_curve_s6_collision_rows_are_exact() -> None:
+    assert tuple(
+        (
+            profile.event,
+            profile.boundary_block_sizes,
+            profile.affine_fiber_size,
+            profile.is_omitted,
+        )
+        for profile in S6_TWO_CURVE_FIBER_PROFILES
+    ) == (
+        ("three_cycle_self_collision", (3, 3), 0, True),
+        ("transposition_double_self_collision", (2, 2), 2, False),
+        ("transposition_triple_self_collision", (2, 2, 2), 0, True),
+        ("cross_intersection", (2, 3), 1, False),
+    )
+
+
+def test_saturated_two_curve_collision_fixture_still_generates_s6() -> None:
+    first_three_cycle, second_three_cycle, first_transposition, second_transposition = (
+        S6_TWO_CURVE_COLLISION_GENERATORS
+    )
+    three_cycle_collision = generated_group(
+        (first_three_cycle, second_three_cycle)
+    )
+    transposition_collision = generated_group(
+        (first_transposition, second_transposition)
+    )
+    global_group = generated_group(S6_TWO_CURVE_COLLISION_GENERATORS)
+
+    assert compose(first_three_cycle, second_three_cycle) == compose(
+        second_three_cycle,
+        first_three_cycle,
+    )
+    assert compose(first_transposition, second_transposition) == compose(
+        second_transposition,
+        first_transposition,
+    )
+    assert len(three_cycle_collision) == 9
+    assert permutation_orbit_sizes(three_cycle_collision) == (3, 3)
+    assert len(transposition_collision) == 4
+    assert permutation_orbit_sizes(transposition_collision) == (2, 2, 1, 1)
+    assert len(global_group) == 720
+    assert global_group == generated_group(TRANSITIVE_GROUPS[15].generators)
 
 
 def test_one_dicritical_filter_keeps_distinct_same_cycle_type_classes() -> None:

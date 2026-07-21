@@ -67,7 +67,11 @@ hypothesis.  More precisely, the unrestricted ramified profiles are now:
   normalization collision is two smooth multiplicity-three branches which
   use all six sheets and give an omitted affine value;
 - `S6`: one transposition branch, two distinct transposition branches, or
-  distinct transposition and 3-cycle branches.
+  distinct transposition and 3-cycle branches.  In the two-transposition
+  profile at least one zero-jump branch curve must self-collide.  In the
+  saturated transposition-plus-3-cycle profile both curves self-collide, with
+  exact fiber rows `3+3`, `2+2+1+1` or `2+2+2`, and `2+3+1` at a
+  cross-intersection.
 
 Under the additional assumption of exactly one dicritical component, global
 branch-curve topology gives the same two groups and narrows the local types:
@@ -94,7 +98,9 @@ These are necessary conditions, not constructions or an exclusion of `A6`
 and `S6`.  The refined identity and universal elimination are proved in the
 [refined budget note](docs/refined-six-sheet-budget.md), with the broader
 geometric setup in the
-[six-sheet monodromy note](docs/six-sheet-monodromy.md).  The dependency-free
+[six-sheet monodromy note](docs/six-sheet-monodromy.md).  The universal
+two-curve `S6` collision theorem is in the
+[two-curve collision note](docs/s6-two-curve-collisions.md).  The dependency-free
 [Python certificate](scripts/six_sheet_monodromy.py) rebuilds the exact groups,
 classes, normal closures, normalizers, deck groups, blocks, and local subgroup
 orbits; an optional [Sage/GAP checker](tools/check_six_sheet_gap.sage) verifies

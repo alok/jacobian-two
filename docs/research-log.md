@@ -456,6 +456,29 @@ models show that local multiplicity and knot parity alone cannot finish the
 case; the next input must couple the rows through global braid or
 compactification-graph data.
 
+## 2026-07-21: universal collisions in the two-curve `S6` passports
+
+Status: derived here, source-checked, and exactly fixture-tested; a global
+collision theorem, not an elimination of `S6`.
+
+Nguyen Van Chau's Theorem 4.4(E3) says that every irreducible component of a
+Keller map's deficient-fiber/nonproper set is singular.  When a branch
+dicritical has `d=1` and zero excess, Orevkov makes its normalization map an
+immersion everywhere.  Its required singularity must therefore identify two
+distinct normalization points.
+
+In the two-transposition profile the residual defect is one, so at least one
+of the two ramified curves has zero excess and must self-collide.  In the
+transposition-plus-3-cycle profile the costs `2+3=5` saturate the budget:
+there are no index-one dicriticals, both excesses vanish, and both branch
+curves self-collide.  Constant multiplicity gives the exact rows `3+3`,
+`2+2+1+1` or `2+2+2`, and `2+3+1` at cross-intersections.
+
+The disjoint local meridians `(123),(456),(14),(25)` nevertheless generate
+all of `S6`.  This hostile fixture proves that the new collision census stops
+at the global braid/splice/canonical realization problem rather than at a
+permutation contradiction.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.
