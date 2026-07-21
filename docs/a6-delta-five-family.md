@@ -1,22 +1,49 @@
-# The `A6` delta-five family reduces to codimension two
+# The conditional `A6` delta-five family is exhausted
 
 ## Claim boundary
 
-The conditional one-pair audit proves that collision delta five is the first
-remaining `A6` budget and that affine pole degrees `(3,8)` are forced at
-equality.  This note attacks that family.  It proves, using exact collision
-algebra, equisingular-family topology, and Sage Zariski--van Kamp
-presentations, that:
+The conditional one-pair audit originally found collision delta five as the
+first remaining `A6` budget and forced affine pole degrees `(3,8)` at
+equality.  This note exhausts that family.  Using exact collision algebra,
+equisingular-family topology, Sage Zariski--van Kamp presentations, and a
+dependency-free finite-group replay, it proves that:
 
-- the generic three-parameter stratum has cyclic affine complement;
-- the generic ordinary-triple divisor has cyclic complement; and
-- the generic contact-two divisor has cyclic complement.
+- the stored generic three-parameter presentation simplifies in Sage to a
+  cyclic affine complement;
+- the stored ordinary-triple presentation simplifies in Sage to a cyclic
+  complement;
+- the stored contact-two presentation simplifies in Sage to a cyclic
+  complement;
+- the codimension-two residual has four rational irreducible curves and only
+  four valid exceptional parameter points; and
+- none of the eight residual presentations admits an `A6` image when every
+  geometric meridian is a single 3-cycle.
 
-Consequently every admissible survivor lies in an explicit
-codimension-at-least-two collision-degeneration locus.  Those deeper strata
-are not fully classified here.  This is therefore a conditional,
-computer-assisted family reduction—not an elimination of delta five, `A6`, or
-the plane Jacobian conjecture.
+Consequently collision delta five is impossible under the hypotheses.  The
+delta-six large link is impossible as well; at delta seven only affine degrees
+`(3,10)` pass the link test.  Thus the sharpened conditional conclusion is
+
+\[
+  \boxed{\Delta\ge7,\qquad
+  \Delta=7\Longrightarrow(a,d)=(3,10).}
+\]
+
+This remains a conditional, computer-assisted theorem.  The hypotheses that
+the branch has polynomial normalization, exactly one genuine infinity pair,
+only the forced intrinsic `T(2,5)` cusp, and otherwise only smooth-branch
+normalization collisions have not been derived for every Keller branch.  The
+result does not eliminate the unrestricted `A6` passport or prove the plane
+Jacobian conjecture.
+
+The evidence has three deliberately separate layers.  The collision
+factorizations, primary-component memberships, exceptional-factor audit, and
+finite permutation censuses are exact algebraic computations.  Sage's
+Zariski--van Kamp implementation supplies the eight stored presentations.
+Transport from one presentation to every point of an open stratum is the
+computer-assisted topological layer: it additionally uses simultaneous
+resolution and proper Whitney--Thom isotopy.  The dependency-free replay
+checks the stored relators exactly, but does not independently derive those
+relators or the equisingular transport theorem.
 
 ## 1. Three-parameter normal form
 
@@ -176,7 +203,7 @@ nodes.  Its infinity chart is uniformly
 
 so the `(5,8)` embedded infinity type is constant.
 
-## 3. A clean curve is locally perfect and globally cyclic
+## 3. A clean curve is locally perfect; Sage simplifies its complement to `Z`
 
 Take
 
@@ -283,8 +310,9 @@ On the ordinary-triple divisor `T=0`, take
 \]
 
 The cubic factor gives the three pair sums of one ordinary triple point; the
-remaining two pairs are nodes.  Sage again gives complement group `Z`, and
-the exact `40^3` replay gives only 40 cyclic images.
+remaining two pairs are nodes.  Sage's presentation simplifier again reports
+complement group `Z`, and the decisive exact `40^3` replay gives only 40
+cyclic images.
 
 On the tangency divisor `G=0`, take
 
@@ -303,72 +331,349 @@ embedded collision and infinity data plus the same Whitney--Thom argument
 therefore propagate the two representative exclusions across both
 codimension-one strata.
 
-## 6. The remaining locus
+## 6. Exact primary decomposition of the residual
 
-Every admissible survivor is now confined to
+Write
+
+\[
+  C=\alpha-\beta+\gamma-1,
+  \qquad
+  V=\{\alpha LC\ne0\}.
+\]
+
+Exact primary decomposition over `QQ` gives three components in each half of
+the residual:
+
+\[
+\sqrt{I(\operatorname{Sing}G)}=I_A\cap I_B\cap
+  \langle\alpha-\gamma+2,\;\beta-2\gamma+3\rangle, \tag{6.1}
+\]
+
+\[
+\sqrt{\langle G,T\rangle}=I_N\cap I_E\cap
+  \langle27\alpha-8\gamma+12,\;27\beta-31\gamma+31\rangle. \tag{6.2}
+\]
+
+The last line in (6.1) lies identically in `C=0`; the last line in (6.2)
+lies identically in `L=0`.  They are invalid under the hypotheses.  The four
+valid primes are rational curves.  The rational parametrizations below land
+on the stated primary components and have dense image: the checker substitutes
+`A,B` into `G` and all three first partials, substitutes `N,E` into `(G,T)`,
+and verifies a nonconstant map to each one-dimensional component.  They make
+the geometry transparent; no birational-normalization claim is needed.
+
+### 6.1 Curve `A`: contact three plus two nodes
+
+With normalization parameter `h`, set
+
+\[
+\begin{aligned}
+\alpha_A&=-\frac{2h^3(3h^2+12h+13)}{3h+11},\\
+\beta_A&=-\frac{3h^5+9h^4-4h^3-24h^2+6h-4}{3h+11},\\
+\gamma_A&=-\frac{6(h^2+3h-2)}{3h+11}.
+\end{aligned} \tag{6.3}
+\]
+
+Then
+
+\[
+H=(s-h)^3\frac{R_h(s)}{3h+11}, \tag{6.4}
+\]
+
+where
+
+\[
+R_h=(3h+11)s^2+(3h^2+21h+34)s+6h^2+24h+26.
+\]
+
+Generically this is one contact-three collision and two nodes.  The exact
+validity factors are
+
+\[
+L=-\frac{2(3h+1)^2(3h+4)^3}{3h+11},\quad
+C=-\frac{3(h+1)^5}{3h+11},\quad
+T=\frac{(h+3)^3(3h+1)^3}{(3h+11)^2}. \tag{6.5}
+\]
+
+### 6.2 Curve `B`: two contact-two collisions plus one node
+
+With parameter `m`, put
+
+\[
+\begin{aligned}
+p&=-\frac{2(m^2-4m+5)}{m-3},\\
+q&=-\frac{2m^3-6m^2+3m+3}{m-3},\\
+r&=-\frac{2(m-2)}{m-3}.
+\end{aligned}
+\]
+
+There are explicit rational functions
+`(alpha_B,beta_B,gamma_B)` stored in the checker for which
+
+\[
+  H=(s^2+ps+q)^2(s-r). \tag{6.6}
+\]
+
+A small valid representative is
+
+\[
+  (\alpha,\beta,\gamma)=\left(\frac16,\frac{127}{108},2\right),
+  \qquad
+  H=\frac{(3s+2)(6s^2+10s+3)^2}{108}. \tag{6.7}
+\]
+
+### 6.3 Curve `N`: a nonordinary triple plus one node
+
+With parameter `u`, set
+
+\[
+\begin{aligned}
+\alpha_N&=\frac{(u+1)^2(u+2)^2(2u+1)}u,\\
+\beta_N&=\frac{(u^2+3u+1)(u^3+4u^2+5u+3)}u,\\
+\gamma_N&=\frac{u^2+4u+1}{u}.
+\end{aligned} \tag{6.8}
+\]
+
+Then
+
+\[
+H=\frac{(s+u+2)^2(su+2u+1)
+  (s^2-su+u^2+2u+1)}u. \tag{6.9}
+\]
+
+The double root is one of the three pair sums of a triple collision.  Thus
+the generic topology is a nonordinary triple with one tangent branch pair,
+plus one separate node.  In particular, the earlier description of
+`(20/3,1,2/3)` as an ordinary triple plus a separate tangency was incorrect;
+that point is the `u=-3` representative of (6.9).
+
+### 6.4 Curve `E`: an ordinary triple plus a separate tangency
+
+With `v=beta`, set
+
+\[
+  \gamma_E=6,\qquad \alpha_E=\frac95v-9.
+\]
+
+Then
+
+\[
+H=(s+3)^2
+  \frac{v+5s^3+10s^2+5s-5}{5}. \tag{6.10}
+\]
+
+The cubic factor contains the three pair sums of an ordinary triple point;
+the fixed double root `s=-3` is a separate contact-two collision.  Both
+`(-9,0,6)` and `(2,55/9,6)` lie in the connected generic open of this line.
+
+## 7. The four generic residual curves are excluded
+
+For exact rational representatives of `A`, `B`, `N`, and `E`, Sage 10.8
+produces presentations on three geometric fiber meridians.  The dependency-
+free checker exhausts all `40^3=64000` assignments of those meridians to
+single 3-cycles.  In every case exactly 40 assignments satisfy the relators,
+and every satisfying image has order three:
+
+| residual curve | generic finite collisions | satisfying images | `A6` images |
+|---|---|---:|---:|
+| `A` | contact 3 + node + node | 40 copies of `C3` | 0 |
+| `B` | contact 2 + contact 2 + node | 40 copies of `C3` | 0 |
+| `N` | nonordinary triple + node | 40 copies of `C3` | 0 |
+| `E` | ordinary triple + separate contact 2 | 40 copies of `C3` | 0 |
+
+Each rational curve minus its finitely many invalid and exceptional values is
+a connected complex curve.  On that open, the collision equivalence
+relation, contact orders, forced finite cusp, and infinity pair `(5,8)` are
+constant.  After a finite base change labels the collision sections,
+simultaneous resolution and proper Whitney--Thom isotopy transport the exact
+representative complement throughout the stratum.  This theorem dependency
+is essential: no conclusion is inferred from a singularity count alone.
+
+## 8. Every exceptional point
+
+The factorization identities leave only three exceptional geometric types,
+comprising four parameter points.
+
+### 8.1 Contact four plus one node
+
+At `h=-13/3` (equivalently `m=8/3`),
+
+\[
+(\alpha,\beta,\gamma)=
+\left(-\frac{114244}{81},-\frac{63407}{81},\frac{34}{3}\right),
+\qquad
+H=\frac{(s-4)(3s+13)^4}{81}. \tag{8.1}
+\]
+
+Sage's presentation simplifier reports a noncyclic affine complement.
+Regardless of that whole-group simplification, the decisive complete `40^3`
+replay again finds exactly 40 order-three images and no `A6` image.
+
+### 8.2 Contact three plus contact two
+
+The two conjugate points are parameterized by
+
+\[
+h_\pm=-2\pm\frac{2\sqrt6}{3},\qquad
+3h_\pm^2+12h_\pm+4=0, \tag{8.2}
+\]
+
+with
+
+\[
+\begin{aligned}
+\alpha_\pm&=4272\mp1744\sqrt6,\\
+\beta_\pm&=2384\mp\frac{8756}{9}\sqrt6,\\
+\gamma_\pm&=-8\pm4\sqrt6.
+\end{aligned}
+\]
+
+If `k=-3(3h+2)/2`, then
+
+\[
+H=(s-h)^3(s-k)^2. \tag{8.3}
+\]
+
+Sage was run separately on both embeddings of `QuadraticField(6)`.  Sirocco
+emitted abort/retry warnings before Sage's exact Puiseux fallback completed;
+the final raw presentations differ, and Sage's simplifier reports both as
+noncyclic.  Independently of those whole-group observations, each exact
+permutation replay has only 40 cyclic images and no `A6` image.
+
+### 8.3 A higher nonordinary triple
+
+At `h=-3`, `u=1`, and `v=65`, all three residual curves meet:
+
+\[
+  (\alpha,\beta,\gamma)=(108,65,6),
+  \qquad H=(s+3)^3(s^2-s+4). \tag{8.4}
+\]
+
+This is a three-branch point with pairwise contacts `(3,1,1)`.  Sage's
+presentation simplifier reports a cyclic complement, and its decisive
+representation census again has 40 `C3` images and no `A6` image.
+
+### 8.4 Why this list is complete
+
+On curve `A`, the two possible changes are
+
+\[
+R_h(h)=\frac{2(h+1)^2(3h+13)}{3h+11},\qquad
+\operatorname{Disc}R_h=3(h+1)^2(3h^2+12h+4).
+\]
+
+Together with (6.5), these leave exactly (8.1), (8.2), and (8.4) on `V`.
+On curve `B`,
+
+\[
+\operatorname{Disc}(s^2+ps+q)=
+\frac{4(m-2)(m-1)^2(3m-8)}{(m-3)^2},
+\]
+
+\[
+r^2+pr+q=-\frac{(m-1)^2(2m^2-12m+15)}{(m-3)^2},
+\]
+
+which give precisely (8.1) and (8.2) after invalid factors are removed.  The
+checker performs that removal as polynomial arithmetic, not by inspecting a
+list of roots.  If `I_*` is the product of invalid factors and `K_*` the
+product of all topology-change factors, it verifies
+
+\[
+\begin{aligned}
+\operatorname{factor}(K_A/\gcd(K_A,I_A))
+  &=(h+3)(3h+13)(3h^2+12h+4),\\
+\operatorname{factor}(K_B/\gcd(K_B,I_B))
+  &=(3m-8)(2m^2-12m+15),\\
+\operatorname{factor}(K_N/\gcd(K_N,I_N))&=u-1,\\
+\operatorname{factor}(K_E/\gcd(K_E,I_E))&=v-65.
+\end{aligned} \tag{8.5}
+\]
+
+The factors `I_*` and `K_*` are stored explicitly in the Python certificate.
+For
+(6.9), the double and simple collision roots differ by
+
+\[
+  \frac{1-u^2}{u}.
+\]
+
+The root `u=-1` lies in `C=0`, while `u=1` is exactly (8.4).  For (6.10),
+the cubic discriminant factors as `-25(v-5)(27v-155)`: the first root lies
+in `C=0`, the second in `L=0`, and the cubic meets `s=-3` only at `v=65`,
+again (8.4).  The checker also identifies (8.1) and both embeddings of (8.2)
+from the `A` and `B` parameters.  Hence no valid residual parameter is
+unclassified or represented only by extrapolation.
+
+Combining Sections 3--8 proves the conditional exclusion
+
+\[
+  \boxed{\Delta=5\text{ is impossible}.} \tag{8.6}
+\]
+
+## 9. The next one-pair frontier
+
+The genus equation at delta six leaves only `(2,17)`.  Its large affine link
+has no `A6`-generating quotient with a single-3-cycle meridian.  At delta
+seven the candidates are
+
+\[
+  (2,19),\qquad(3,10),\qquad(4,7).
+\]
+
+Exact `A6` censuses give respectively `0`, `720`, and `0` suitable generating
+pairs.  Therefore the full result of this conditional audit is
 
 \[
   \boxed{
-  \left(\operatorname{Sing}G\ \cup\ (G\cap T)\right)
-  \cap
-  \{\alpha L(\alpha-\beta+\gamma-1)\ne0\}.
-  }
+  \Delta\ge7,\qquad
+  \Delta=7\Longrightarrow(a,d)=(3,10),
+  \quad(d-a,d)=(7,10).
+  } \tag{9.1}
 \]
 
-This codimension-at-least-two locus contains higher-contact collisions, two
-simultaneous multiple collisions, and nonordinary combinations of a triple
-collision with tangency.  The list is exhaustive under the stated
-hypotheses: a triple root or two double roots of `H` lies in the singular
-locus of the universal discriminant, hence in `Sing(G)` on the valid set; a
-nonordinary triple collision has a tangent branch pair and lies in `G intersect
-T`; and four distinct preimages cannot collide because `P` has degree three.
-
-The residual locus is genuinely nonempty.  For example,
-
-\[
-  (\alpha,\beta,\gamma)=\left(\frac{16}{5},\frac{32}{5},\frac{24}{5}\right)
-\]
-
-has `alpha*L*C=768/5`, `T=-5`, and
-
-\[
-  H=\frac{(s+2)^3(5s^2+4s+2)}5.
-\]
-
-It is a valid point of `Sing(G) minus T`, representing a contact-three
-collision and two nodes.  Likewise,
-
-\[
-  (\alpha,\beta,\gamma)=\left(\frac{20}{3},1,\frac23\right)
-\]
-
-has `alpha*L*C=250880/9`, lies in `G intersect T`, and satisfies
-
-\[
-  H=\frac{(s-1)^2(3s+5)(s^2+3s+4)}3.
-\]
-
-It represents an ordinary triple collision together with a separate
-contact-two pair.  The components containing these examples have not all
-been classified.  A full delta-five exclusion must finish that finite
-stratification rather than extrapolate from generic points.
+Passing the large-link test does not construct the degree-`(3,10)` branch,
+an `A6` cover, or a Keller map.  It merely names the next conditional family.
 
 ## Reproduction
 
-Run the dependency-free algebra and permutation replay with:
+Run the original generic and codimension-one checker with:
 
 ```bash
 uv run python -m scripts.a6_delta_five_family
 ```
 
-Regenerate all three affine complement presentations and their explicit
-isomorphisms to `Z` with:
+Run the residual algebra, all eight dependency-free presentation censuses,
+and the delta-six/seven link corollary with:
+
+```bash
+uv run python -m scripts.a6_delta_five_residual
+```
+
+Regenerate the original three Sage presentations with:
 
 ```bash
 sage tools/check_a6_delta_five_family.sage
 ```
 
-The exact relators are stored in both checkers.  The family-topology step uses
-the standard equivalence between plane-curve equisingularity and simultaneous
-resolution; see Joseph Lipman's
+Regenerate the residual primary decompositions, six rational presentations,
+and both quadratic-number-field presentations with:
+
+```bash
+sage tools/check_a6_delta_five_residual.sage
+```
+
+For the exact primary decompositions, component memberships, rational
+implicit specializations, and quadratic parameter identities without the
+long Zariski--van Kamp run, use:
+
+```bash
+sage tools/check_a6_delta_five_residual.sage --algebra-only
+```
+
+The exact relators are stored and exhaustively replayed in the
+dependency-free checker.  Their Zariski--van Kamp extraction remains a Sage
+computation.  The family-topology step uses the standard equivalence between
+plane-curve equisingularity and simultaneous resolution, followed by proper
+Whitney--Thom isotopy; see Joseph Lipman's
 [“Equisingularity and simultaneous resolution of singularities”](https://arxiv.org/abs/math/9802010).

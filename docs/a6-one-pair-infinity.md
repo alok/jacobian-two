@@ -19,18 +19,21 @@ conjecture.  Assume that the branch curve of the one-dicritical degree-six
 Then the exact calculation below proves
 
 \[
-  \boxed{\Delta\ge5,}
+  \boxed{\Delta\ge7,}
 \]
 
-and equality can pass the large-link test only for affine degrees `(3,8)`.
+and equality can pass the large-link test only for affine degrees `(3,10)`.
 
 The one-pair hypothesis and the restriction on finite singularities have not
 been derived for every Keller compactification.  The complement presentations
-are produced by Sage's exact Zariski--van Kamp implementation and replayed by
-a dependency-free permutation checker.  The result should therefore be read
-as a conditional, computer-assisted exclusion of the `Delta<=2` stratum.
-The subsequent `Delta=3,4` exclusions and the `Delta=5` degree reduction are
-finite exact group censuses once the same geometric hypotheses are assumed.
+are produced by Sage's Zariski--van Kamp implementation and replayed by a
+dependency-free permutation checker.  The family exclusions through delta
+five are therefore conditional and computer-assisted.  The symbolic
+collision algebra and finite permutation replays are exact; presentation
+extraction and Whitney--Thom propagation across equisingular strata are
+separate computer-assisted topology dependencies.  The `Delta=3,4,6`
+exclusions and the delta-five and delta-seven degree reductions use finite
+exact group censuses once the same geometric hypotheses are assumed.
 
 ## 1. Genus leaves finitely many degree pairs at each delta
 
@@ -72,6 +75,10 @@ Exact divisor enumeration gives:
 | 4 | `(3,7)` | `(4,7)` |
 | 5 | `(2,15)` | `(13,15)` |
 | 5 | `(3,8)` | `(5,8)` |
+| 6 | `(2,17)` | `(15,17)` |
+| 7 | `(2,19)` | `(17,19)` |
+| 7 | `(3,10)` | `(7,10)` |
+| 7 | `(4,7)` | `(3,7)` |
 
 If smooth infinity were allowed, `Delta=1` would also contain `(3,4)`.
 Excluding it is exactly where the genuine singular-pair hypothesis enters.
@@ -119,6 +126,10 @@ In a quotient onto centerless `A6`, the common central power dies, so
 | `T(3,7)` | `(1,-2)` | 0 |
 | `T(2,15)` | `(1,-7)` | 0 |
 | `T(3,8)` | `(-1,3)` | 720 |
+| `T(2,17)` | `(1,-8)` | 0 |
+| `T(2,19)` | `(1,-9)` | 0 |
+| `T(3,10)` | `(1,-3)` | 720 |
+| `T(4,7)` | `(-1,2)` | 0 |
 
 Thus `Delta=1` is excluded, and one of the two `Delta=2` cases is excluded.
 The coarse link test genuinely does not kill `(3,5)`.  For example,
@@ -264,7 +275,7 @@ Consequently neither the generic nor the contact-two part of the exhaustive
 family supports the required global monodromy.  This excludes `Delta=2` and
 completes the only family-level calculation needed below.
 
-## 5. The first surviving collision budget is five
+## 5. The coarse delta-five survivor is eliminated
 
 Equation (1.1) gives one candidate at `Delta=3`, namely `(2,11)`, and two at
 `Delta=4`, namely `(2,13)` and `(3,7)`.  Their large affine links have no
@@ -284,7 +295,7 @@ single-3-cycle meridian.  One witness is
   x^{-1}y^3=(2\,3\,4).
 \]
 
-Therefore the strongest conclusion of this audit is
+The large-link calculation alone therefore gives the intermediate statement
 
 \[
   \boxed{
@@ -295,11 +306,31 @@ Therefore the strongest conclusion of this audit is
   }
 \]
 
-No plane curve or Keller map with this surviving data is constructed here.
-The generic and codimension-one topology of the degree-`(3,8)` family is now
-excluded in the [delta-five family note](a6-delta-five-family.md); only an
-explicit codimension-at-least-two collision locus remains.  Multi-pair
-infinity remains outside this theorem.
+The [delta-five family audit](a6-delta-five-family.md) then treats every
+degree-`(3,8)` curve in the normalized three-parameter family.  It excludes
+the generic open, both codimension-one walls, all four generic residual
+curves, and every valid exceptional point.  The last eight presentation
+censuses each exhaust `40^3` single-3-cycle assignments and find exactly 40
+cyclic images, never `A6`.  Thus `Delta=5` is impossible under the same
+hypotheses.
+
+At `Delta=6`, equation (1.1) leaves only `(2,17)`, and its large affine link
+has zero suitable `A6` images.  At `Delta=7`, the three candidates are
+`(2,19)`, `(3,10)`, and `(4,7)`; their exact suitable-image counts are `0`,
+`720`, and `0`.  The strongest conclusion of the combined audit is therefore
+
+\[
+  \boxed{
+    \Delta\ge7,
+    \qquad
+    \Delta=7\Longrightarrow(a,d)=(3,10),
+    \quad(d-a,d)=(7,10).
+  }
+\]
+
+No plane curve or Keller map with the surviving `(3,10)` data is constructed
+here.  Multi-pair infinity and branches violating the finite-singularity
+hypotheses remain outside this theorem.
 
 ## Reproduction and source boundary
 
@@ -307,15 +338,20 @@ Run the dependency-free replay with:
 
 ```bash
 uv run python -m scripts.a6_one_pair_infinity
+uv run python -m scripts.a6_delta_five_family
+uv run python -m scripts.a6_delta_five_residual
 ```
 
-It verifies the genus candidates, every symbolic family identity, all torus
-quotient censuses, and both `40^3` presentation censuses.  Extracting the two
-presentations themselves uses Sage 10.8/Sirocco; reproduce that extraction
-with `sage tools/check_a6_one_pair_infinity.sage`.  The large-link epimorphism
-is the standard Zariski--Lefschetz theorem at infinity; the family step uses
-the proper Whitney--Thom isotopy theorem, not mere constancy of singularity
-counts.
+Together these verify the genus candidates, symbolic family and residual
+identities, all relevant torus-quotient censuses through delta seven, and all
+stored presentation censuses.  Extracting the presentations themselves uses
+Sage 10.8/Sirocco; reproduce that extraction with
+`sage tools/check_a6_one_pair_infinity.sage` and
+`sage tools/check_a6_delta_five_residual.sage`.  The large-link epimorphism is
+the standard Zariski--Lefschetz theorem at infinity.  The family steps use
+proper Whitney--Thom isotopy, not mere constancy of singularity counts.  These
+topological dependencies are distinct from the exact symbolic and finite
+permutation replays.
 
 Useful source:
 

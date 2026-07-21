@@ -252,22 +252,29 @@ third has the exhaustive family `(t^2+t^3,c*t^4+t^5)`; proper equisingular
 isotopy reduces its generic part to the cyclic curve, while the only valid
 exceptional fiber has only `C3` and `A5` three-cycle images.  Therefore this
 conditional stratum excludes `Delta=2`.  Continuing the exact genus and
-large-link census excludes `Delta=3,4` as well; at `Delta=5`, only affine
-degrees `(3,8)` survive.  Thus `Delta>=5` under the stated hypotheses.  The
-extra infinity and singularity hypotheses remain unproved for arbitrary
-Keller branches.  See the
+large-link census excludes `Delta=3,4`; at `Delta=5`, only affine degrees
+`(3,8)` survive the coarse link test.  The residual family audit described
+next excludes that entire equality family, and the `Delta=6` link also dies.
+At `Delta=7`, only affine degrees `(3,10)` survive the large-link test.  Thus
+`Delta>=7` under the stated hypotheses, with equality forcing `(3,10)` at
+this coarse stage.  The extra infinity and singularity hypotheses remain
+unproved for arbitrary Keller branches.  See the
 [A6 one-pair note](docs/a6-one-pair-infinity.md).
 
-The equality family is no longer generic.  Every conditional `(3,8)` curve is
+The delta-five equality family is now fully exhausted.  Every conditional `(3,8)` curve is
 polynomially equivalent to
 `(t^2+t^3,alpha*t^5+beta*t^6+gamma*t^7+t^8)`.  Exact collision resultants split
 its valid parameter space into a generic five-node stratum, an ordinary-triple
-divisor, and a contact-two divisor.  Clean representatives of all three have
-complement group `Z`; each `40^3` single-3-cycle census has only 40 cyclic
-images.  Equisingular-family topology propagates those exclusions across the
-generic stratum and both codimension-one walls.  Any survivor is now confined
-to an explicit codimension-at-least-two locus of higher or simultaneous
-collision degenerations.  Those deeper strata remain open.  See the
+divisor, and a contact-two divisor.  Sage's presentation simplifier reports
+complement group `Z` for clean representatives of all three; each `40^3`
+single-3-cycle census has only 40 cyclic images.  Exact primary decomposition
+splits the residual into four valid
+rational curves.  Their four generic presentations and the four presentations
+at every valid exceptional point again have exactly 40 cyclic images and no
+`A6` image.  Exact algebra and finite permutation replay are separated from
+the computer-assisted Zariski--van Kamp extraction and Whitney--Thom transport.
+Consequently `Delta=5` is conditionally impossible; this does not eliminate
+the unrestricted `A6` passport.  See the
 [A6 delta-five family note](docs/a6-delta-five-family.md).
 
 The first cubic-cover obstruction also survives an exact lift test.  In the

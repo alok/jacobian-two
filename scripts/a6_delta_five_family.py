@@ -4,11 +4,14 @@ Under the one-pair hypotheses isolated in ``a6_one_pair_infinity.py``, the
 first large-link survivor has affine degrees ``(3,8)`` and collision delta
 five.  Polynomial changes reduce it to a three-parameter family.  Exact
 collision algebra and three Zariski--van Kamp presentations exclude the
-generic stratum and both admissible codimension-one walls.  Only deeper
-collision degenerations remain.
+generic stratum and both admissible codimension-one walls.  This stage leaves
+deeper collision degenerations; ``scripts.a6_delta_five_residual`` exhausts
+those residual strata.
 
-This is a conditional, computer-assisted family reduction.  It is not a full
-elimination of delta five, the ``A6`` passport, or the plane conjecture.
+This module is a conditional, computer-assisted family reduction.  Its
+companion residual certificate supplies the full conditional delta-five
+elimination; neither module eliminates the unrestricted ``A6`` passport or
+proves the plane conjecture.
 """
 
 from __future__ import annotations
@@ -589,7 +592,11 @@ def main() -> int:
     )
     print(f"conditional A6 delta-five family certificate: {certificate.verified}")
     print("excluded: generic open and both admissible codimension-one strata")
-    print("remaining: codimension-at-least-two collision degenerations")
+    print(
+        "remaining at this stage: codimension-at-least-two collision "
+        "degenerations"
+    )
+    print("companion exhaustion: scripts.a6_delta_five_residual")
     print("claim boundary: conditional/computer-assisted; JC(2) remains open")
     return 0 if certificate.verified else 1
 

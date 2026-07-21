@@ -992,7 +992,7 @@ transpositions, proving that the image is `S6`.  Hence `(5,12)` is the first
 one-pair infinity-group target.  This does not construct its branch curve or
 cover, and it does not touch multi-pair infinity.
 
-## 2026-07-21: a one-pair `A6` branch needs collision delta at least five
+## 2026-07-21: the coarse one-pair `A6` audit first reaches delta five
 
 Status: conditional, computer-assisted exclusion; not a solution of `JC(2)`.
 
@@ -1020,8 +1020,8 @@ Exact collision elimination finds the only exceptional parameters
 `1/2,5/6,1,5`.  The first three violate the forced singularity/fiber
 hypotheses; `c=5` is the sole valid contact-two fiber.  Over the complement of
 those values, the properly compactified family is Whitney equisingular, so
-Thom isotopy transports the complement group from `c=0`, where an exact
-van Kamp presentation collapses to `Z`.  At `c=5`, all `40^3` assignments of
+Thom isotopy transports the complement group from `c=0`, where Sage's exact
+van Kamp presentation simplifies to `Z`.  At `c=5`, all `40^3` assignments of
 the three geometric meridians to 3-cycles give only `40` cyclic and `720`
 `A5` images, never `A6`.
 
@@ -1029,20 +1029,20 @@ The same genus and large-link census then excludes `Delta=3`: its only degree
 pair is `(2,11)`.  At `Delta=4`, both `(2,13)` and `(3,7)` fail.  At
 `Delta=5`, `(2,15)` has `2880` `A6`-generating torus pairs but none with the
 required single-3-cycle meridian; `(3,8)` has exactly `720` correct pairs and
-is the first coarse survivor.  Therefore `Delta>=5`, with `(3,8)` forced at
-equality, under the stated hypotheses.
+is the first coarse survivor.  At this stage, therefore, `Delta>=5`, with
+`(3,8)` forced at equality under the stated hypotheses.  The next log entry
+records the residual audit that eliminates this coarse survivor.
 
 This also kills
 the explicit hostile `A6` trace curve globally while preserving its original
-purpose as a quadratic trace-lattice consistency model.  What remains open is
-to force the one-pair/finite-singularity hypotheses from the Keller
-compactification, or to attack the degree-`(3,8)` and multi-pair infinity
-frontiers directly.
+purpose as a quadratic trace-lattice consistency model.  The remaining
+unrestricted problems are to force the one-pair/finite-singularity hypotheses
+from the Keller compactification and to handle multi-pair infinity.
 
-## 2026-07-21: the `A6` delta-five family reduces to codimension two
+## 2026-07-21: the conditional `A6` delta-five family is exhausted
 
-Status: conditional exact family algebra plus computer-assisted topology; the
-deepest collision strata remain open.
+Status: conditional exact family algebra and finite permutation replay, plus
+computer-assisted Zariski--van Kamp extraction and equisingular topology.
 
 After a polynomial target shear, every conditional `(3,8)` curve has the
 three-parameter normal form
@@ -1070,9 +1070,41 @@ Plane-curve equisingularity and proper Thom isotopy propagate the three
 representative computations across the generic open and both generic walls.
 Every valid survivor is therefore confined to
 `(Sing(G) union (G intersect T))` away from the explicitly invalid factors.
-This locus has codimension at least two and contains higher or simultaneous
-collision degenerations.  It has not yet been completely stratified, so the
-delta-five family is narrowed rather than eliminated.
+Exact primary decomposition splits this codimension-two locus into four valid
+rational curves:
+
+- `A`, with a generic contact-three collision and two nodes;
+- `B`, with two generic contact-two collisions and one node;
+- `N`, with a generic nonordinary triple and one node; and
+- `E`, with a generic ordinary triple and a separate contact-two collision.
+
+The old description of `(alpha,beta,gamma)=(20/3,1,2/3)` as an ordinary
+triple plus a separate tangency was wrong.  It is the `u=-3` representative
+of `N`, hence a nonordinary triple with one tangent branch pair plus a node.
+
+Exact factor identities leave only four valid exceptional parameter points:
+one contact-four point `P4`, one higher nonordinary triple `PNT`, and the two
+conjugate contact-three/contact-two points `P32+/-` over `QQ(sqrt(6))`.  Sage
+produces presentations for the four generic residual types and all four
+exceptional points.  Each dependency-free `40^3` replay has exactly 40
+satisfying assignments, all with cyclic image `C3`, and none with image `A6`.
+The checker also verifies that `A,B` lie on `Sing(G)`, that `N,E` lie on
+`(G,T)`, and that every exceptional factor maps either to an invalid divisor
+or one of the four audited points.
+
+Thus collision delta five is impossible under the one-pair and
+finite-singularity hypotheses.  Delta six has only `(2,17)`, whose link
+census fails.  Delta seven has `(2,19)`, `(3,10)`, and `(4,7)`; the exact
+single-3-cycle `A6` counts are `0`, `720`, and `0`.  The sharpened conditional
+frontier is therefore `Delta>=7`, with equality forcing affine degrees
+`(3,10)` and projective infinity pair `(7,10)` at the coarse link stage.
+
+This does not prove the one-pair or finite-singularity hypotheses, construct
+the surviving `(3,10)` branch, eliminate the unrestricted `A6` passport, or
+prove the plane Jacobian conjecture.  The algebraic identities and finite
+group enumerations are exact; deriving the stored presentations and
+transporting representatives along strata remain the computer-assisted
+Zariski--van Kamp and Whitney--Thom layers.
 
 ## 2026-07-21: the forced `A6` relations survive the spin cover
 
