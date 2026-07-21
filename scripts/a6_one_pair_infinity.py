@@ -335,31 +335,60 @@ class ThreeCyclePresentationCensus:
 
 
 @cache
-def three_cycle_presentation_census(
+def n_generator_three_cycle_presentation_census(
     relations: tuple[tuple[int, ...], ...],
+    generator_count: int,
 ) -> ThreeCyclePresentationCensus:
-    """Exhaust all 40^3 three-cycle assignments to a three-meridian group."""
+    """Exhaust single-three-cycle images with incremental relation pruning."""
+
+    if generator_count < 1:
+        msg = "the presentation must have at least one generator"
+        raise ValueError(msg)
+    for relation in relations:
+        for letter in relation:
+            if letter == 0 or abs(letter) > generator_count:
+                msg = "a relation references a generator outside the presentation"
+                raise ValueError(msg)
 
     three_cycles = tuple(
         element
         for element in alternating_group_six()
         if cycle_type(element) == (3, 1, 1, 1)
     )
-    orders: Counter[int] = Counter()
-    satisfying = 0
-    for images in product(three_cycles, repeat=3):
-        if not all(
-            evaluate_signed_word(relation, images) == IDENTITY
+    partial_assignments: tuple[tuple[Permutation, ...], ...] = ((),)
+    for assigned_count in range(1, generator_count + 1):
+        newly_decidable = tuple(
+            relation
             for relation in relations
-        ):
-            continue
-        satisfying += 1
+            if relation and max(abs(letter) for letter in relation) == assigned_count
+        )
+        partial_assignments = tuple(
+            partial + (image,)
+            for partial in partial_assignments
+            for image in three_cycles
+            if all(
+                evaluate_signed_word(relation, partial + (image,)) == IDENTITY
+                for relation in newly_decidable
+            )
+        )
+
+    orders: Counter[int] = Counter()
+    for images in partial_assignments:
         orders[len(generated_group(images))] += 1
     return ThreeCyclePresentationCensus(
-        assignments=len(three_cycles) ** 3,
-        satisfying_assignments=satisfying,
+        assignments=len(three_cycles) ** generator_count,
+        satisfying_assignments=len(partial_assignments),
         generated_order_histogram=tuple(sorted(orders.items())),
     )
+
+
+@cache
+def three_cycle_presentation_census(
+    relations: tuple[tuple[int, ...], ...],
+) -> ThreeCyclePresentationCensus:
+    """Exhaust all 40^3 three-cycle assignments to a three-meridian group."""
+
+    return n_generator_three_cycle_presentation_census(relations, 3)
 
 
 @dataclass(frozen=True, slots=True)
