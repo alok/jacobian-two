@@ -21,12 +21,19 @@ dependency-free finite-group replay, it proves that:
 
 Consequently collision delta five is impossible under the hypotheses.  The
 delta-six large link is impossible as well; at delta seven only affine degrees
-`(3,10)` pass the link test.  Thus the sharpened conditional conclusion is
+`(3,10)` pass the link test.  Thus the sharpened conditional conclusion at the
+historical endpoint of this note is
 
 \[
   \boxed{\Delta\ge7,\qquad
   \Delta=7\Longrightarrow(a,d)=(3,10).}
 \]
+
+The later [generic delta-seven audit](a6-delta-seven-generic.md) and
+[delta-seven wall audit](a6-delta-seven-walls.md) supersede that frontier.
+Together with the exact post-delta-seven link scan they give the current
+combined conditional bound `Delta>=10`; equality at the coarse link stage
+leaves only affine degrees `(4,9)` and projective infinity pair `(5,9)`.
 
 This remains a conditional, computer-assisted theorem.  The hypotheses that
 the branch has polynomial normalization, exactly one genuine infinity pair,
@@ -611,7 +618,7 @@ Combining Sections 3--8 proves the conditional exclusion
   \boxed{\Delta=5\text{ is impossible}.} \tag{8.6}
 \]
 
-## 9. The next one-pair frontier
+## 9. The historical and current one-pair frontiers
 
 The genus equation at delta six leaves only `(2,17)`.  Its large affine link
 has no `A6`-generating quotient with a single-3-cycle meridian.  At delta
@@ -622,7 +629,7 @@ seven the candidates are
 \]
 
 Exact `A6` censuses give respectively `0`, `720`, and `0` suitable generating
-pairs.  Therefore the full result of this conditional audit is
+pairs.  Therefore the full result reached by the delta-five audit itself is
 
 \[
   \boxed{
@@ -634,8 +641,18 @@ pairs.  Therefore the full result of this conditional audit is
 
 The [generic delta-seven audit](a6-delta-seven-generic.md) constructs a clean
 degree-`(3,10)` branch and excludes the connected nondegenerate open of its
-complete four-parameter family.  It does not classify the collision walls,
-construct an `A6` cover, or construct a Keller map.
+complete four-parameter family.  At that historical stage it did not classify
+the collision walls.  The follow-up
+[delta-seven wall audit](a6-delta-seven-walls.md) excludes those walls and all
+their finite endpoints under the same hypotheses.  Its exact post-delta scan
+then excludes deltas eight and nine and leaves at delta ten only
+
+\[
+  (a,d)=(4,9),\qquad(d-a,d)=(5,9).
+\]
+
+Accordingly the current combined frontier is `Delta>=10`, with `(4,9)` only a
+coarse link survivor; no `A6` cover or Keller map is constructed.
 
 ## Reproduction
 
@@ -679,3 +696,11 @@ computation.  The family-topology step uses the standard equivalence between
 plane-curve equisingularity and simultaneous resolution, followed by proper
 Whitney--Thom isotopy; see Joseph Lipman's
 [“Equisingularity and simultaneous resolution of singularities”](https://arxiv.org/abs/math/9802010).
+
+For the delta-seven follow-up, the checked Sage sources regenerate only the
+generic-open and three excess-three presentations.  The component checker
+independently verifies the exact positive-dimensional incidence algebra.  The
+stored triple-wall, excess-one/two, and finite-endpoint presentations are
+replayed exactly, but their original Zariski--van Kamp extraction remains a
+trusted input; see the
+[wall audit reproduction section](a6-delta-seven-walls.md#9-reproduction).

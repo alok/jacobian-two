@@ -16,13 +16,17 @@ conjecture.  Assume that the branch curve of the one-dicritical degree-six
 4. every other finite singularity is a collision of distinct smooth
    normalization points, with total delta/contact sum `Delta>=1`.
 
-Then the exact calculation below proves
+Then the exact lower-delta calculation below, together with the subsequent
+[delta-seven wall audit](a6-delta-seven-walls.md), proves the current combined
+conditional bound
 
 \[
-  \boxed{\Delta\ge7,}
+  \boxed{\Delta\ge10.}
 \]
 
-and equality can pass the large-link test only for affine degrees `(3,10)`.
+At equality the coarse large-link test leaves only affine degrees `(4,9)`,
+whose projective infinity pair is `(5,9)`.  This is a degree filter, not a
+construction of a curve, cover, or Keller map.
 
 The one-pair hypothesis and the restriction on finite singularities have not
 been derived for every Keller compactification.  The complement presentations
@@ -31,9 +35,13 @@ dependency-free permutation checker.  The family exclusions through delta
 five are therefore conditional and computer-assisted.  The symbolic
 collision algebra and finite permutation replays are exact; presentation
 extraction and Whitney--Thom propagation across equisingular strata are
-separate computer-assisted topology dependencies.  The `Delta=3,4,6`
-exclusions and the delta-five and delta-seven degree reductions use finite
-exact group censuses once the same geometric hypotheses are assumed.
+separate computer-assisted topology dependencies.  The `Delta=3,4,6,8,9`
+exclusions and the delta-five, delta-seven, and delta-ten degree reductions
+use finite exact group censuses once the same geometric hypotheses are
+assumed.  For the delta-seven topology, checked Sage scripts regenerate only
+the generic-open and three excess-three presentations; the component checker
+verifies exact incidence algebra, while the other stored presentations are
+trusted Zariski--van Kamp inputs whose relators are replayed exactly.
 
 ## 1. Genus leaves finitely many degree pairs at each delta
 
@@ -79,6 +87,13 @@ Exact divisor enumeration gives:
 | 7 | `(2,19)` | `(17,19)` |
 | 7 | `(3,10)` | `(7,10)` |
 | 7 | `(4,7)` | `(3,7)` |
+| 8 | `(2,21)` | `(19,21)` |
+| 8 | `(3,11)` | `(8,11)` |
+| 9 | `(2,23)` | `(21,23)` |
+| 10 | `(2,25)` | `(23,25)` |
+| 10 | `(3,13)` | `(10,13)` |
+| 10 | `(4,9)` | `(5,9)` |
+| 10 | `(5,7)` | `(2,7)` |
 
 If smooth infinity were allowed, `Delta=1` would also contain `(3,4)`.
 Excluding it is exactly where the genuine singular-pair hypothesis enters.
@@ -317,7 +332,8 @@ hypotheses.
 At `Delta=6`, equation (1.1) leaves only `(2,17)`, and its large affine link
 has zero suitable `A6` images.  At `Delta=7`, the three candidates are
 `(2,19)`, `(3,10)`, and `(4,7)`; their exact suitable-image counts are `0`,
-`720`, and `0`.  The strongest conclusion of the combined audit is therefore
+`720`, and `0`.  At this intermediate stage the strongest conclusion is
+therefore
 
 \[
   \boxed{
@@ -330,11 +346,23 @@ has zero suitable `A6` images.  At `Delta=7`, the three candidates are
 
 The [generic delta-seven audit](a6-delta-seven-generic.md) gives the complete
 four-parameter normal form and excludes its nondegenerate open by an exact
-cyclic-complement representative plus proper Whitney--Thom transport.  A
-conditional equality survivor must therefore lie on the repeated-collision
-or triple-image walls `G=0` or `T=0`.  No `A6` cover or Keller map is
-constructed.  Those walls, multi-pair infinity, and branches violating the
-finite-singularity hypotheses remain outside this theorem.
+cyclic-complement representative plus proper Whitney--Thom transport.  At
+that historical stage, a conditional equality survivor still had to lie on
+the repeated-collision or triple-image walls `G=0` or `T=0`.
+
+The follow-up [delta-seven wall audit](a6-delta-seven-walls.md) covers the full
+`T` wall, every positive-dimensional `G` stratum, and all finite endpoints.
+It therefore excludes `Delta=7` completely under the same hypotheses.  The
+exact link scan then excludes `Delta=8,9` and, at `Delta=10`, leaves only
+
+\[
+  (a,d)=(4,9),\qquad(d-a,d)=(5,9).
+\]
+
+Thus the current combined frontier is `Delta>=10`, with `(4,9)` only a coarse
+equality candidate.  No `A6` cover or Keller map is constructed.  Multi-pair
+infinity and branches violating the finite-singularity hypotheses remain
+outside this theorem.
 
 ## Reproduction and source boundary
 
@@ -345,18 +373,27 @@ uv run python -m scripts.a6_one_pair_infinity
 uv run python -m scripts.a6_delta_five_family
 uv run python -m scripts.a6_delta_five_residual
 uv run python -m scripts.a6_delta_seven_generic
+uv run python -m scripts.a6_delta_seven_triple_wall
+uv run python -m scripts.a6_delta_seven_discriminant_wall
+uv run python -m scripts.a6_delta_seven_deeper_wall
+uv run python -m scripts.a6_delta_seven_finite_wall
+uv run python -m scripts.a6_post_delta_seven_frontier
 ```
 
 Together these verify the genus candidates, symbolic family and residual
-identities, all relevant torus-quotient censuses through delta seven, and all
-stored presentation censuses.  Extracting the presentations themselves uses
-Sage 10.8/Sirocco; reproduce that extraction with
-`sage tools/check_a6_one_pair_infinity.sage` and
-`sage tools/check_a6_delta_five_residual.sage`, and reproduce the generic
-delta-seven presentation with
-`sage tools/check_a6_delta_seven_generic.sage`.  The large-link epimorphism is
-the standard Zariski--Lefschetz theorem at infinity.  The family steps use
-proper Whitney--Thom isotopy, not mere constancy of singularity counts.  These
+identities, all relevant torus-quotient censuses through delta ten, and all
+stored presentation censuses.  The lower-delta Sage scripts retain their own
+source boundaries as documented in the family notes.  At delta seven,
+`tools/check_a6_delta_seven_generic.sage` regenerates the generic-open
+presentation, `tools/check_a6_delta_seven_deeper_wall.sage` regenerates the
+three excess-three presentations, and
+`tools/check_a6_delta_seven_components.sage` independently checks the exact
+positive-dimensional incidence algebra.  The stored triple-wall,
+excess-one/two, and finite-endpoint presentations are replayed exactly, but
+their original Zariski--van Kamp extraction is trusted and is not regenerated
+by a checked script in this repository.  The large-link epimorphism is the
+standard Zariski--Lefschetz theorem at infinity.  The family steps use proper
+Whitney--Thom isotopy, not mere constancy of singularity counts.  These
 topological dependencies are distinct from the exact symbolic and finite
 permutation replays.
 

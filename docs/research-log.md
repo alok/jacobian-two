@@ -1223,6 +1223,68 @@ The full polygons deliberately stop the propagation procedure, as does a
 named four-interior Case 2 fixture.  Those hostile checks prevent the sparse
 lower bounds from being mislabeled as an elimination of `(72,108)`.
 
+## 2026-07-21: the full conditional `A6` delta-seven family is excluded
+
+Status: exact family and component algebra, exhaustive finite-group replay,
+and computer-assisted topology under four standing one-pair hypotheses; not a
+proof of the plane Jacobian conjecture.
+
+The degree-`(3,10)` normal form has collision septic `H` in an exact
+four-dimensional affine coefficient slice.  The complete root-partition
+ledger now exhausts the triple-image wall `T=0`, every
+positive-dimensional repeated-collision stratum on `G=0`, every excess-four
+endpoint, and all coarser partitions.  The complete trigonal fiber on `T=0`
+gives three global generating meridians.  For every contact profile allowed
+by the delta budget, all `40^3` single-three-cycle assignments fail to
+generate `A6`.
+
+The positive-dimensional component audit is no longer based only on sample
+curves.  Constant-rank incidence bundles cover the generic double and triple
+strata.  Exact saturation handles the unordered two-double chart and shows
+that its denominator branches lie on `C=0` or `L=T=0`.  The contact-four
+chart loses no point at its apparent denominator.  The mixed
+`(3,2,1,1)` incidence has one geometrically irreducible genus-two component;
+its dense rational chart misses two valid conjugate points, but primary
+decomposition places both on the same component.  The unrestricted
+three-double incidence has four prime supports, exactly one of which survives
+away from `C=0` and the already audited `T=0` wall.
+
+The nine finite endpoint embeddings lie in three irreducible arithmetic
+orbits of degrees `(2,4,3)`.  A checked presentation for one embedding of each
+orbit has only cyclic `C3` images.  Riemann existence converts a hypothetical
+finite topological quotient into a finite etale cover; field automorphisms
+transport the labeled `A6` cover and divisorial tame inertia.  This excludes
+the required quotient at every arithmetic conjugate, including the uncomputed
+real `P33` embedding.  It does not assert homeomorphism or equality of the
+discrete complement groups.
+
+Consequently, under polynomial normalization, exactly one genuine infinity
+pair, only the forced `T(2,5)` intrinsic cusp, and smooth-branch collisions for
+all other finite singularities, collision delta seven is impossible.  The
+exact link census then excludes deltas eight and nine.  At delta ten, only
+affine degrees `(4,9)` survive the coarse single-three-cycle `A6` test, with
+projective infinity pair `(5,9)` and exactly 720 qualifying pairs.  Thus the
+combined conditional frontier is
+
+```text
+Delta >= 10,
+Delta = 10  =>  (a,d) = (4,9),  (d-a,d) = (5,9).
+```
+
+The algebraic identities, primary decompositions, endpoint orbit arithmetic,
+and permutation censuses are exactly reproducible.  Dependency-free tests
+replay every stored relation word.  Checked Sage scripts regenerate the
+generic-open and three excess-three presentations and certify all incidence
+components; the triple-wall, excess-one/two, and finite-endpoint van Kamp
+extractions remain trusted computer-assisted inputs.  Family-wide transport
+also depends on proper Whitney--Thom triviality, and the endpoint argument on
+Riemann existence and tame-inertia compatibility.
+
+No curve, cover, or Keller map is constructed at `(4,9)`.  The four standing
+hypotheses are not derived for an arbitrary Keller branch, and the
+unrestricted `A6` passport, the `S6` passport, and therefore `JC(2)` remain
+open.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
