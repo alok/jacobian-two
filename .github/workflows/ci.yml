@@ -101,6 +101,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_ten_double_triple
       - name: Exclude the dominant conditional A6 delta-ten double-contact stratum
         run: uv run --frozen python -m scripts.a6_delta_ten_double_contact
+      - name: Exclude the conditional A6 delta-ten contact-triple Cramer component
+        run: uv run --frozen python -m scripts.a6_delta_ten_contact_triple
       - name: Exclude the dominant conditional A6 delta-ten T112 stratum
         run: uv run --frozen python -m scripts.a6_delta_ten_t112
       - name: Check the hostile A6 local multiplication fixtures
