@@ -306,10 +306,10 @@ def exact_delta_ten_double_triple_certificate() -> DeltaTenDoubleTripleCertifica
             incidence_determinant - EXPECTED_INCIDENCE_DETERMINANT
         ),
         same_fiber_identity=expand(
-            SAMPLE_P.subs(T, FIRST_OMITTED_ROOT)
-            - SAMPLE_P.subs(T, SECOND_OMITTED_ROOT)
+            FAMILY_P.subs(T, FIRST_OMITTED_ROOT)
+            - FAMILY_P.subs(T, SECOND_OMITTED_ROOT)
             - (FIRST_OMITTED_ROOT - SECOND_OMITTED_ROOT)
-            * SAME_FIBER_FACTOR.subs(KAPPA, 3)
+            * SAME_FIBER_FACTOR
         ),
         rankdrop_coefficient_rank=rankdrop_matrix.rank(),
         rankdrop_augmented_rank=rankdrop_augmented.rank(),
