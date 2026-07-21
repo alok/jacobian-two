@@ -35,6 +35,67 @@ The resulting dimensional boundary is now:
 This repository does **not** claim to solve `JC(2)` or its degree-six frontier.
 It records exactly what was proved, what was derived, and what remains open.
 
+## New progress at the first open sheet degree
+
+The degree-six frontier can now be narrowed substantially.  Let `G <= S6` be
+the monodromy group of a hypothetical six-sheet plane Keller counterexample.
+Affine local inverse branches force every branch meridian to fix a sheet, and
+those meridians normally generate `G`.  Exact enumeration of all sixteen
+transitive degree-six groups initially leaves seven possibilities.  Orevkov's
+exact defect budget, the finite-normalization boundary, deck symmetry, purity
+of the branch locus, and a local double-transposition obstruction eliminate
+the three imprimitive survivors.  Therefore
+
+\[
+  G\in\{6T12=A_5,\;6T14=S_5,\;6T15=A_6,\;6T16=S_6\}.
+\]
+
+Equivalently, the function-field extension of any hypothetical six-sheet
+counterexample must be primitive.  This applies without a one-dicritical
+hypothesis.  Under the additional assumption of exactly one dicritical
+component, global branch-curve topology narrows the result further:
+
+- only `6T15=A6` with `(e,d)=(3,1)` or `6T16=S6` with `(2,1)` remains;
+- the branch normalization `A1 -> B` must be noninjective, so the nonproperness
+  curve has a finite multibranch singularity; and
+- in the `A6` passport, every normalization collision consists of two smooth
+  multiplicity-three branches, uses all six sheets, and is omitted by the
+  original affine map.
+
+The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
+normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
+curve whose weighted-orbit product identifies the homotopy types of its local
+and global complements; its intransitive local six-sheet action cannot equal
+the transitive global monodromy.
+
+These are necessary conditions, not constructions or an exclusion of all four
+primitive cases.  The complete geometric proof and claim boundary are in the
+[six-sheet monodromy note](docs/six-sheet-monodromy.md).  The dependency-free
+[Python certificate](scripts/six_sheet_monodromy.py) rebuilds the exact groups,
+classes, normal closures, normalizers, deck groups, blocks, and local subgroup
+orbits; an optional [Sage/GAP checker](tools/check_six_sheet_gap.sage) verifies
+the catalogue independently.
+
+## A separate sparse obstruction at coordinate degree `(72,108)`
+
+Generic sheet degree and coordinate degree are different invariants.  On the
+coordinate-degree side, Guccione--Guccione--Horruitiner--Valqui reduce the
+remaining sub-`125` problem to `(72,108)` and its transpose, with two explicit
+transformed Newton-polygon configurations satisfying `[P,Q]=x^2`.
+
+An exhaustive exact support calculation now proves that the first
+configuration needs at least three nonzero coefficients strictly inside its
+two Newton polygons, while the second needs at least four.  All boundary
+lattice coefficients remain arbitrary; only the exact polygon vertices are
+assumed nonzero.  The checker certifies all `7504` first-case supports with at
+most two interior terms and all `3683` second-case supports with at most three.
+Of the latter, `3678` have replayed zero-product certificates and the five
+remaining triples have exact unit-ideal certificates.  Hostile fixtures
+confirm that the method stops on the full polygons and on a named four-term
+second-case support.  This is a sparse-support lower bound, not an elimination
+of `(72,108)`.  See the [Newton-polygon note](docs/newton-72-108-sparse.md) and
+its [exact certificate](scripts/newton_72_108.py).
+
 ## The screenshot is exactly correct
 
 For
@@ -271,18 +332,29 @@ uv run --frozen python -m scripts.nonproper
 uv run --frozen python -m scripts.affine_coordinate
 uv run --frozen python -m scripts.constant_leading_quadratic
 uv run --frozen python -m scripts.variable_leading_quadratic --depth 9
+uv run --frozen python -m scripts.six_sheet_monodromy
+uv run --frozen python -m scripts.newton_72_108
 uv run --frozen pytest
 uv run --frozen mypy
+# Optional independent finite-group cross-check:
+sage tools/check_six_sheet_gap.sage
 ```
 
-The Lean source contains no `sorry`, `admit`, or custom axiom.  CI runs all of
-the commands above and rejects unfinished proof declarations.
+The Lean source contains no `sorry`, `admit`, or custom axiom.  CI runs the
+Lean build, every displayed `uv` command, and the unfinished-proof check.  The
+optional Sage/GAP replay is an additional independent local cross-check.
 
 ## Reading map
 
 - [`SPEC.md`](SPEC.md) is the research specification and claim-status ledger.
 - [`docs/galois-frontier.md`](docs/galois-frontier.md) explains the Galois
   misconception and identifies generic degree six as the first open frontier.
+- [`docs/six-sheet-monodromy.md`](docs/six-sheet-monodromy.md) proves the
+  primitive-monodromy restriction and the conditional one-dicritical
+  passports at generic degree six.
+- [`docs/newton-72-108-sparse.md`](docs/newton-72-108-sparse.md) gives the
+  exact sparse-support obstruction in the separate residual coordinate-degree
+  configurations.
 - [`docs/nonproper-set.md`](docs/nonproper-set.md) proves the complete fiber,
   image, and nonproper-set theorem.
 - [`docs/affine-coordinate.md`](docs/affine-coordinate.md) proves the
@@ -306,6 +378,8 @@ the commands above and rejects unfinished proof declarations.
 - S. Yu. Orevkov's [three-sheet theorem][orevkov]
 - A. V. Domrina's [four-sheet theorem][domrina]
 - Henryk Żołądek's [result through generic degree five][zoladek]
+- Alexander Borisov's [Keller-map compactification framework][borisov]
+- Guccione--Guccione--Horruitiner--Valqui's [(72,108) reduction][guccione]
 - Vered Moskowicz's [quadratic-coordinate antecedent][moskowicz]
 - Denis Simon and Martin Weimann's [coordinate/discriminant criterion][simon-weimann]
 - Marco Sabatini's [type-`(m,1)` triangular reduction][sabatini]
@@ -320,6 +394,8 @@ symbolic certificates.
 [orevkov]: https://doi.org/10.1070/IM1987v029n03ABEH000984
 [domrina]: https://doi.org/10.1070/im2000v064n01ABEH000273
 [zoladek]: https://doi.org/10.1016/j.top.2008.04.001
+[borisov]: https://www.combinatorics.org/ojs/index.php/eljc/article/view/v27i3p54
+[guccione]: https://arxiv.org/abs/2204.14178
 [moskowicz]: https://arxiv.org/abs/1810.08202
 [simon-weimann]: https://doi.org/10.1216/JCA-2018-10-4-559
 [sabatini]: https://doi.org/10.4064/cm9195-1-2024

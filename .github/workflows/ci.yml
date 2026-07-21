@@ -43,6 +43,10 @@ jobs:
         run: uv run --frozen python -m scripts.constant_leading_quadratic
       - name: Check the variable-leading quadratic hostile fixtures
         run: uv run --frozen python -m scripts.variable_leading_quadratic --depth 9
+      - name: Check the exact six-sheet monodromy certificate
+        run: uv run --frozen python -m scripts.six_sheet_monodromy
+      - name: Check the residual Newton-polygon sparse-support certificates
+        run: uv run --frozen python -m scripts.newton_72_108
       - name: Run adversarial tests
         run: uv run --frozen pytest
       - name: Check Python types
