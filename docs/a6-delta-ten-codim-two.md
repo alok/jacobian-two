@@ -24,11 +24,13 @@ Under those hypotheses, collision delta ten forces the normalized family
 \]
 
 The clean locus and both codimension-one divisors are already excluded.  This
-checkpoint treats the six profiles of expected codimension two.  Four exact
-component exclusions are now in hand.  The `T112` and mixed
-contact-plus-triple calculations identify the expected threefolds and cyclic
-members, but their generic exclusions retain explicit geometric propagation
-obligations described below.  None of the calculations classifies every
+checkpoint treats the six profiles of expected codimension two.  All six
+displayed generic or dominant incidence components are now excluded.  For
+`T112` and the mixed contact-plus-triple chart, the separate
+[propagation note](a6-delta-ten-propagation.md) works over the smooth labeled
+incidence spaces and supplies the previously missing connected-clean-open,
+finite-etale labeling, simultaneous-resolution, and proper-isotopy argument.
+None of the calculations classifies every
 component supported on a denominator, coefficient-rank, split `k=0,+2,-2`,
 overlap, removed `P`-projection/critical-fiber chart, or deeper-degeneration
 boundary.  A removed `P`-critical fiber is not automatically a singular
@@ -64,18 +66,18 @@ point.
 |---|---|---|---|
 | `C3 + 7N` | one irreducible threefold on the valid pair chart | generic clean component excluded | removed projection-chart and split pair-chart loci, including `s=0` and pair-denominator behavior, plus deeper intersections |
 | `C2^2 + 6N` | Cramer component dominating the full `(k,u,v)` ordered base, modulo the free swap | that dominant clean component excluded | residual-rank closures and split-fiber intersections may support other components |
-| `T112 + 6N` | irreducible labeled affine-line bundle on the displayed `P`-unramified chart and generically finite threefold image | conditional generic-chart exclusion supported, not CAS-certified | geometric two-orientation labeling and connected clean Whitney--Thom propagation; removed `P`-critical-fiber and deeper loci, which are not automatically singular curve branches |
-| `C2 + T111 + 5N` | dense rational Cramer component on the displayed open | cyclic sample proved; generic-chart exclusion still conditional | separately verify a connected equisingular clean open and proper Whitney--Thom propagation; residual-rank, split, overlap, removed triple/fourth-root `P`-critical, and deeper lower loci |
+| `T112 + 6N` | irreducible labeled affine-line bundle on the displayed `P`-unramified chart and generically finite threefold image | generic clean dominant chart excluded | removed `P`-critical-fiber and deeper loci, which are not automatically singular curve branches |
+| `C2 + T111 + 5N` | dense rational Cramer component on the displayed open | generic clean dominant chart excluded | residual-rank, split, overlap, removed triple/fourth-root `P`-critical, and deeper lower loci |
 | `Q0 + 4N` | one irreducible threefold on the valid four-source fiber chart | generic clean component excluded | removed critical-fiber, non-clean, and deeper intersections |
 | `T111^2 + 4N` | rational threefold dominating the dense valid Cramer open | dense Cramer component excluded | compatible residual-rank-supported and split boundaries |
 
 “Excluded” means that the component's clean equisingular open cannot carry
 the required connected six-sheet `A6` quotient with single-three-cycle branch
 meridians.  It does not mean that the corresponding profile has been removed
-scheme-theoretically from every boundary chart.  “Conditional generic
-exclusion supported” means that the exact incidence and cyclic member are in
-hand, while the stated labeling or connected-propagation argument remains a
-separate mathematical dependency; neither CI nor Sage certifies that step.
+scheme-theoretically from every boundary chart.  The exact family-wide
+argument for the last two rows is mathematical rather than CAS-certified:
+the [propagation note](a6-delta-ten-propagation.md) verifies the hypotheses for
+simultaneous embedded resolution and Thom's first isotopy lemma.
 
 ## 2. Contact three: `C3 + 7N`
 
@@ -212,9 +214,10 @@ w - 1/5.
 The reduced length-two computation proves generic finiteness.  Identifying
 its degree as two additionally uses the geometric fact that a clean target in
 this stratum has a unique `T112` fiber and that the only labels above it are
-the two orientations of its unique tangent pair.  With that labeling input,
-the clean unlabeled quotient and its threefold image are irreducible and
-connected.
+the two orientations of its unique tangent pair.  That degree-two
+identification is not needed for topology transport: the clean labeled
+incidence itself is smooth and irreducible, and its image closure is
+irreducible.
 
 The rational member has
 
@@ -226,12 +229,14 @@ The rational member has
 
 with triple sources `-3/5,-2/5,1/5`; the first two have contact exactly two.
 The remaining collision packets contain two and four nodes.  Sage finds
-singular-scheme lengths `4+6+2+4` and a cyclic complement.  These facts
-support exclusion of the generic clean `T112` component conditional on the
-unique-fiber/two-orientation labeling argument and proper projective
-Whitney--Thom propagation on the connected clean open.  The manual Sage
-checker certifies the saturation, singular scheme, and presentation, not the
-propagation theorem.  The removed `P`-critical-fiber loci and deeper
+singular-scheme lengths `4+6+2+4` and a cyclic complement.  The
+[propagation proof](a6-delta-ten-propagation.md) verifies that the exact clean
+locus in the smooth labeled incidence is a nonempty irreducible open, labels
+its residual nodes after a finite-etale cover, constructs a relative embedded
+resolution, and applies proper Whitney--Thom isotopy.  This excludes the
+generic clean `T112` chart without using the degree-two labeling claim.  The
+manual Sage checker certifies the saturation, singular scheme, and
+presentation, not the propagation theorem.  The removed `P`-critical-fiber loci and deeper
 intersections are outside the claim; they are not declared geometrically
 invalid.
 
@@ -273,12 +278,13 @@ The exact member, after harmless target scaling, is
 
 It has the forced cusp, a contact-two fiber, a separate ordinary triple, and
 five nodes.  The independent Sage checker verifies singular-scheme lengths
-`4+3+4+5`, regenerates the raw presentation, and simplifies it to `Z`.  This
-proves a cyclic member on the dense rational Cramer component.  A generic
-clean exclusion is supported only conditional on separately verifying that
-the relevant equisingular clean open is connected and then applying proper
-projective Whitney--Thom propagation.  Neither the Python CI nor the manual
-Sage checker proves that transport.  Residual-rank, split, overlap, and deeper
+`4+3+4+5`, regenerates the raw presentation, and simplifies it to `Z`.  The
+[propagation proof](a6-delta-ten-propagation.md) identifies the displayed
+Cramer incidence with a smooth irreducible open of affine three-space and
+then verifies finite-etale labeling, relative embedded resolution, and
+proper isotopy on its nonempty clean open.  Thus the generic dominant Cramer
+chart is excluded.  Neither the Python CI nor the manual Sage checker proves
+that theorem step.  Residual-rank, split, overlap, and deeper
 lower-dimensional loci remain open.
 
 ## 6. One ordinary quadruple: `Q0 + 4N`
@@ -372,7 +378,7 @@ The conditional delta-ten filtration is now:
 |---|---:|---|
 | clean, dimension five | 1 | excluded |
 | codimension-one, dimension four | 2 | both generic components excluded |
-| expected codimension two, dimension three | 6 | four identified generic/dominant components excluded; `T112` and `C2+T111` generic exclusions conditionally supported with the propagation qualifications above |
+| expected codimension two, dimension three | 6 | all six displayed generic/dominant components excluded; closure and boundary components remain open |
 | expected codimension at least three | 136 | not audited component by component |
 
 The 145-profile ledger remains an elimination ledger, not a list of proven
@@ -383,10 +389,8 @@ dimension count alone.  The next exact work is to saturate and decompose:
 2. the split `k=0,+2,-2` charts for all six profiles;
 3. removed pair and `P`-projection/critical-fiber loci that can re-enter
    through a different chart and are not automatically invalid;
-4. the remaining `T112` labeling/propagation and mixed-component connected
-   equisingular propagation arguments;
-5. intersections and specializations of the six identified components; and
-6. the fourteen expected codimension-three profiles, followed by their
+4. intersections and specializations of the six identified components; and
+5. the fourteen expected codimension-three profiles, followed by their
    endpoints and overdetermined containments.
 
 Even a complete audit of that list would establish only the stated
@@ -435,4 +439,6 @@ certificates and tests, not Sage.  Sage's Zariski--van Kamp implementation
 remains a computer-assisted dependency.  The presentation replay itself,
 including the complete `40^4` single-three-cycle census, is dependency-free
 once the relation words have been generated.  Neither the Python jobs nor the
-Sage scripts certify proper Whitney--Thom propagation.
+Sage scripts certify proper Whitney--Thom propagation; the exact hypotheses
+and theorem argument are documented separately in
+[the propagation note](a6-delta-ten-propagation.md).

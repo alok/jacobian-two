@@ -301,14 +301,14 @@ ordinary-quadruple incidence are irreducible; the displayed `P`-unramified
 Cramer calculations identify rational threefolds for two contacts, a separate
 contact and ordinary triple, and two ordinary triples.  An exact
 representative of each has cyclic complement, and every raw `40^4` replay
-again leaves only 40 diagonal `C3` images and no `A6` image.  Four component
-exclusions are complete at the stated level.  For `T112`, a generic-chart
-exclusion is conditionally supported but still requires the
-unique-fiber/two-orientation labeling and connected clean Whitney--Thom
-transport.  For the mixed contact-plus-triple component, a connected
-equisingular clean open and its Whitney--Thom propagation still require
-separate verification; the scripts establish the dense Cramer component and
-cyclic sample, not that transport.
+again leaves only 40 diagonal `C3` images and no `A6` image.  All six
+displayed generic or dominant components are excluded at that level.  For
+`T112` and the mixed contact-plus-triple chart, the proof works over the
+smooth irreducible labeled incidence space: a finite-etale cover labels the
+clean collision sections, relative blowups give a simultaneous embedded
+resolution, and proper Whitney--Thom isotopy transports the cyclic sample.
+This avoids any assumption that the coefficient-image threefold is smooth or
+normal and does not require the `T112` image map to have degree exactly two.
 
 That is not a complete codimension-two audit.  Compatible lower-dimensional
 pieces on residual coefficient-rank factors, the split `k=0,+2,-2` charts,
@@ -691,11 +691,14 @@ optional Sage/GAP replay is an additional independent local cross-check.
   wall components, excludes their generic equisingular opens, and gives the
   exact 145-profile ledger for the deeper audit.
 - [`docs/a6-delta-ten-codim-two.md`](docs/a6-delta-ten-codim-two.md) excludes
-  four identified generic or dominant components and gives the exact
-  propagation conditions for the `T112` and mixed contact-plus-triple
-  candidates, while retaining the residual-rank, split-chart, removed
+  all six displayed generic or dominant components, while retaining the
+  residual-rank, split-chart, removed
   `P`-projection/critical-fiber, and deeper-intersection loci as explicit open
   obligations.
+- [`docs/a6-delta-ten-propagation.md`](docs/a6-delta-ten-propagation.md)
+  verifies the connected-clean-open, finite-etale labeling, simultaneous
+  embedded-resolution, and proper-isotopy steps for the `T112` and mixed
+  contact-plus-triple dominant charts.
 - [`docs/one-dicritical-source-smoothness.md`](docs/one-dicritical-source-smoothness.md)
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.

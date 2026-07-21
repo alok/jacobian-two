@@ -1376,9 +1376,11 @@ used as an emptiness proof.
 
 Status: exact component algebra, exhaustive finite-group replay, manual Sage
 singular schemes and presentations, and computer-assisted topology under the
-same four standing hypotheses.  Four component exclusions are established at
-the stated level.  The `T112` and mixed contact-plus-triple generic exclusions
-retain explicit labeling or connected-equisingular propagation obligations.
+same four standing hypotheses.  All six displayed generic or dominant
+components are excluded at the stated level.  The `T112` and mixed
+contact-plus-triple topology steps are proved over their smooth labeled
+incidence spaces by finite-etale labeling, relative embedded resolution, and
+proper Whitney--Thom isotopy.
 Residual-rank, split-chart, removed pair or `P`-projection/critical-fiber, and
 deeper-intersection loci remain open; a removed `P`-critical fiber is not
 automatically a singular curve branch when `Q'` is nonzero.  This is not a
@@ -1405,17 +1407,18 @@ target-fiber incidences rather than only by roots of the collision decic:
   ideal on the displayed chart.  The sample projection fiber is reduced of
   length two, proving generic finiteness.  Degree two additionally uses the
   geometric fact that the clean target has a unique `T112` fiber and hence
-  only the two orientations of its tangent pair.  The corresponding
-  generic-chart exclusion is supported conditional on that labeling and
-  connected clean Whitney--Thom propagation; it is not a CAS-certified
-  theorem.
+  only the two orientations of its tangent pair.  That optional degree-two
+  statement is not needed for topology propagation: the labeled incidence is
+  smooth and irreducible, and its nonempty clean open has a simultaneous
+  embedded resolution after finite-etale labeling.  The generic chart is
+  excluded.
 - `C2+T111+5N`: the combined contact and triple equations define a rational
   Cramer threefold on the displayed dense open.  The sole nonboundary rank
   factor is irreducible over `QQ` and coprime to a specialized augmented
   minor, so it has no additional component dominating that divisor.  The
-  cyclic sample is exact, but generic exclusion still requires separate
-  verification of a connected equisingular clean open and proper
-  Whitney--Thom propagation.  Compatible lower-dimensional rank, split,
+  cyclic sample is exact.  Its smooth irreducible clean Cramer open has the
+  same relative-resolution and proper-isotopy transport, so the generic chart
+  is excluded.  Compatible lower-dimensional rank, split,
   overlap, and removed triple/fourth-root `P`-critical loci remain open; the
   last are not automatically singular branches when `Q'` is nonzero.
 - `Q0+4N`: constancy of `Q mod (P-h)` gives three affine-linear equations of
@@ -1436,8 +1439,7 @@ certificates and tests only, not Sage.  Neither CI nor the Sage checkers
 certify proper projective Whitney--Thom transport.
 
 This maps the displayed dimension-three open-chart layer, not its full
-closure.  The next exact obligations are the `T112` labeling and
-mixed-component propagation steps, the three residual coefficient-rank loci,
+closure.  The next exact obligations are the three residual coefficient-rank loci,
 all six true split-incidence charts, removed pair and
 `P`-projection/critical-fiber intersections, and the fourteen expected
 codimension-three profiles.  The detailed statement and commands are in
@@ -1463,8 +1465,7 @@ codimension-three profiles.  The detailed statement and commands are in
    try to force Orevkov's condition `(*)` or replace it with a determinant
    inequality stable under several noncontracted preimages; do not relabel the
    conditional two-pair theorem as a solution of the unrestricted conjecture.
-2. Continue the conditional delta-ten elimination with the unresolved
-   `T112`/mixed-component propagation steps and the residual-rank and
+2. Continue the conditional delta-ten elimination with the residual-rank and
    split-chart closures from `docs/a6-delta-ten-codim-two.md`, then audit the
    fourteen expected codimension-three profiles without using expected
    dimension as emptiness.

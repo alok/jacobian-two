@@ -37,10 +37,10 @@ complement `Z`; each raw four-meridian presentation has an exhaustive
 the connected generic equisingular open of both divisors.
 
 The follow-up [codimension-two checkpoint](a6-delta-ten-codim-two.md) now
-excludes four identified generic or dominant components and supplies cyclic
-members plus exact incidence algebra for the `T112` and mixed
-contact-plus-triple candidates.  Those last two generic exclusions retain
-explicit labeling or connected-equisingular propagation obligations.  This
+excludes all six displayed generic or dominant components.  The separate
+[propagation proof](a6-delta-ten-propagation.md) closes the labeled-incidence,
+connected-clean-open, simultaneous-resolution, and proper-isotopy steps for
+the `T112` and mixed contact-plus-triple charts.  This
 still does not complete the delta-ten wall audit: compatible
 lower-dimensional residual-rank loci, the split `k=0,+2,-2` charts,
 removed pair or `P`-projection/critical-fiber loci, deeper intersections, and
@@ -564,15 +564,14 @@ naive dimension count, so exact saturation or containment is required before
 any is declared empty.
 
 The six codimension-two profiles have now been audited on their displayed
-generic or Cramer opens.  Exact incidence calculations and cyclic
-representatives exclude the identified components for contact three,
-ordinary quadruple incidence, two contacts over the full ordered Cramer base,
-and the dense double-triple Cramer open.  For `T112`, the length-two Sage
-fiber proves generic finiteness while degree two additionally uses the unique
-`T112`/two-orientation labeling argument.  For a separate contact and
-ordinary triple, the calculation establishes a dense rational Cramer
-component and cyclic sample; connected equisingular propagation remains a
-separate obligation.  No statement eliminates compatible lower-dimensional
+generic or Cramer opens.  Exact incidence calculations, cyclic
+representatives, and proper topology transport exclude all six identified
+components.  For `T112`, the length-two Sage fiber proves generic finiteness;
+the optional degree-two image statement additionally uses the unique
+`T112`/two-orientation labeling argument, but the topology proof does not.
+For `T112` and a separate contact plus ordinary triple, transport is carried
+out over the smooth irreducible labeled incidence, after a finite-etale
+labeling cover and simultaneous embedded resolution.  No statement eliminates compatible lower-dimensional
 pieces supported on residual rank factors, split charts, removed pair or
 `P`-projection/critical-fiber loci, or deeper intersections.  In particular,
 the removed triple/fourth-root loci are not automatically singular branches
@@ -629,14 +628,11 @@ codimension-three profiles.  A complete audit must:
    `P`-projection/critical-fiber loci on appropriate charts rather than
    declaring them invalid; prove whether each is contained in a known
    component or gives a genuine deeper component;
-4. finish the `T112` geometric labeling/propagation argument and separately
-   verify the connected equisingular clean open for the mixed
-   contact-plus-triple component;
-5. regenerate one presentation on every resulting connected equisingular
+4. regenerate one presentation on every resulting connected equisingular
    component;
-6. transport finite endpoint obstructions across arithmetic conjugacy only
+5. transport finite endpoint obstructions across arithmetic conjugacy only
    with the finite-etale/Riemann-existence hypotheses stated explicitly; and
-7. prove emptiness, invalidity, or containment for every overdetermined
+6. prove emptiness, invalidity, or containment for every overdetermined
    profile instead of relying on expected dimension.
 
 Even completing that list would still prove only the stated conditional
