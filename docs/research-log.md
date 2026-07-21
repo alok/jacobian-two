@@ -558,6 +558,31 @@ surface `W`, with `W-D=A2` and `D=A1`.  Miracle flatness makes
 underlying pushforward module is free by Quillen--Suslin, but this supplies no
 splitting of the rank-six algebra and no contradiction by itself.
 
+## 2026-07-21: a forced canonical-label corridor
+
+Status: derived here and independently hostile-audited; exact restriction on
+Orevkov's original one-dicritical source-blowup graph, not an elimination.
+
+Once `L_C` is empty, Orevkov's finite-chain lemma makes the dicritical `E` a
+leaf.  Borisov's logarithmic Keller formula assigns it augmented-canonical
+label `e`, not `e-1`.  Writing `m=-E^2`, boundary adjunction gives
+
+```text
+label(neighbor(E)) = e*m - 1.
+```
+
+The neighbor lies over infinity.  Its positive label rules out type 1, whose
+label would be a positive normal degree times the target label `-1`; hence it
+is type 2.  Borisov's canonical-label tree theorem then forces the path from
+this positive vertex to the original infinity line of label `-2` to contain
+consecutive labels `1--0--(-1)`.  Thus the `S6` neighbor label is positive odd,
+while the `A6` neighbor label is positive and congruent to two modulo three.
+
+The self-intersection `m` is not bounded by this argument.  The leaf equation
+also belongs to the original pure-blowup resolution: later target blowups and
+re-resolution can change the strict transform's self-intersection and
+adjacency, although its divisorial canonical label remains invariant.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.

@@ -847,6 +847,65 @@ S6_SATURATED_CONTRACTED_SOURCE_ENDPOINTS: Final = (
 A6_EXCEPTIONAL_PARITY_ENDPOINT: Final = A6_CONTRACTED_SOURCE_ENDPOINTS[-1]
 
 
+@dataclass(frozen=True)
+class DicriticalLeafLabelEndpoint:
+    """Arithmetic endpoint of the one-dicritical leaf adjunction formula.
+
+    On Orevkov's original pure-blowup resolution, geometry gives a type-three
+    dicritical leaf of augmented-canonical label ``e`` and self-intersection
+    ``-m``.  Adjunction forces its unique neighbor to have label ``e*m - 1``.
+    This object records that integer relation without certifying leafhood or
+    the geometric type of either curve.
+    """
+
+    ramification_index: int
+    negative_self_intersection: int
+
+    def __post_init__(self) -> None:
+        if self.ramification_index < 2:
+            msg = "the ramified dicritical index must be at least two"
+            raise ValueError(msg)
+        if self.negative_self_intersection < 1:
+            msg = "the exceptional dicritical must have negative self-intersection"
+            raise ValueError(msg)
+
+    @property
+    def dicritical_label(self) -> int:
+        """Return the augmented-canonical label of the type-three leaf."""
+
+        return self.ramification_index
+
+    @property
+    def neighbor_label(self) -> int:
+        """Return ``e*(-E^2) - 1`` from leaf adjunction."""
+
+        return (
+            self.ramification_index * self.negative_self_intersection - 1
+        )
+
+    @property
+    def has_forced_congruence(self) -> bool:
+        """Whether the neighbor label is ``-1`` modulo the ramification index."""
+
+        return (self.neighbor_label + 1) % self.ramification_index == 0
+
+
+S6_DICRITICAL_LEAF_LABEL_ENDPOINTS: Final = tuple(
+    DicriticalLeafLabelEndpoint(
+        ramification_index=2,
+        negative_self_intersection=negative_self_intersection,
+    )
+    for negative_self_intersection in range(1, 7)
+)
+A6_DICRITICAL_LEAF_LABEL_ENDPOINTS: Final = tuple(
+    DicriticalLeafLabelEndpoint(
+        ramification_index=3,
+        negative_self_intersection=negative_self_intersection,
+    )
+    for negative_self_intersection in range(1, 7)
+)
+
+
 def one_dicritical_s6_fiber_profiles() -> tuple[OneDicriticalS6FiberProfile, ...]:
     """Enumerate the complete finite fiber census for the ``S6`` passport.
 

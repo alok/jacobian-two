@@ -5,15 +5,18 @@ import pytest
 from scripts.six_sheet_monodromy import (
     A6_COLLISION_MERIDIAN,
     A6_CONTRACTED_SOURCE_ENDPOINTS,
+    A6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
     A6_EXCEPTIONAL_PARITY_ENDPOINT,
     A6_TORUS_2_5_LOCAL_GENERATORS,
     OREVKOV_FORBIDDEN_RAMIFICATION_INDEX,
     OREVKOV_ONE_DICRITICAL_TYPES,
     OREVKOV_SIX_SHEET_BUDGET,
     OrevkovBudgetProfile,
+    DicriticalLeafLabelEndpoint,
     OneDicriticalContractedSourceEndpoint,
     S6_TWO_CURVE_COLLISION_GENERATORS,
     S6_CONTRACTED_SOURCE_ENDPOINTS,
+    S6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
     S6_SATURATED_CONTRACTED_SOURCE_ENDPOINTS,
     S6_TWO_CURVE_FIBER_PROFILES,
     TRANSITIVE_GROUPS,
@@ -353,6 +356,36 @@ def test_saturated_s6_contracts_neither_boundary_chain() -> None:
         (2, 2, True),
         (3, 3, True),
     )
+
+
+def test_one_dicritical_leaf_neighbor_label_progressions_are_exact() -> None:
+    assert tuple(
+        endpoint.neighbor_label
+        for endpoint in S6_DICRITICAL_LEAF_LABEL_ENDPOINTS
+    ) == (1, 3, 5, 7, 9, 11)
+    assert tuple(
+        endpoint.neighbor_label
+        for endpoint in A6_DICRITICAL_LEAF_LABEL_ENDPOINTS
+    ) == (2, 5, 8, 11, 14, 17)
+    assert all(
+        endpoint.dicritical_label == endpoint.ramification_index
+        and endpoint.neighbor_label > 0
+        and endpoint.has_forced_congruence
+        for endpoint in (
+            *S6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
+            *A6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
+        )
+    )
+    with pytest.raises(ValueError, match="index must be at least two"):
+        DicriticalLeafLabelEndpoint(
+            ramification_index=1,
+            negative_self_intersection=1,
+        )
+    with pytest.raises(ValueError, match="negative self-intersection"):
+        DicriticalLeafLabelEndpoint(
+            ramification_index=2,
+            negative_self_intersection=0,
+        )
 
 
 def test_one_dicritical_s6_fiber_census_is_exhaustive() -> None:

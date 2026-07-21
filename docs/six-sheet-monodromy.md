@@ -906,6 +906,16 @@ affine finite normalization is smooth.  Eliminating this surviving cusp stratum 
 only the `S6` passport, but this repository does not yet claim that
 elimination.
 
+The same emptiness result fixes the beginning and end of the canonical-label
+path on Orevkov's original source-blowup resolution.  The dicritical is a
+type-3 leaf of label `e`; if `m=-E^2`, adjunction makes its unique neighbor a
+type-2 vertex of label `e*m-1`.  The path toward the original infinity line
+must then cross `1--0--(-1)` before reaching label `-2`.  The proof and the
+essential warning about later target blowups are in
+[`one-dicritical-leaf-labels.md`](one-dicritical-leaf-labels.md).  This
+corridor is necessary but not yet contradictory because the argument does not
+bound `m`.
+
 The complementary local analysis in
 [`s6-one-dicritical-local.md`](s6-one-dicritical-local.md) gives all nine
 finite fiber rows for the `S6,(e,d)=(2,1)` passport.  A jump
