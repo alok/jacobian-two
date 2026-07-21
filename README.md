@@ -143,9 +143,34 @@ literature-priority claim for the fuller stratification.
 
 ## Certified positive fragments in the plane
 
-Two bounded one-variable ansätze are formalized.
+The strongest plane result in this repository has no degree bound on its
+first coordinate.  Let
 
-First,
+\[
+  F=(P,Q),\qquad P\in K[x,y],\qquad Q=e(x)y+f(x),
+\]
+
+over a characteristic-zero field.  If the actual formal Jacobian is a
+nonzero scalar, Lean proves that `F` is a polynomial automorphism.  In the
+`e != 0` chart it derives
+
+\[
+  e=\varepsilon\in K^\times,\qquad
+  P=G(Q)+\alpha x+\beta,\qquad
+  \alpha\varepsilon=k,
+\]
+
+and in the `e=0` chart it derives the complementary triangular form.  Both
+charts have kernel-checked explicit inverses.  See
+[`JacobianTwo/AffineCoordinate.lean`](JacobianTwo/AffineCoordinate.lean) and
+the [proof and literature note](docs/affine-coordinate.md).
+
+This is a characteristic-zero algebraic formalization of the known
+type-`(m,1)` reduction, not a new mathematical class.  Sabatini's published
+real theorem uses the same leading-power elimination.  The repository's
+field-uniform statement deliberately assumes a genuinely constant Jacobian.
+
+Two earlier bounded modules expose useful intermediate mechanisms.  First,
 
 \[
   (x,y)\longmapsto(A(x)y+B(x),\ C(x)y+D(x))
@@ -157,7 +182,7 @@ combination of the outputs recovers `x` and then `y`.
 [`JacobianTwo/AffineInOneVariable.lean`](JacobianTwo/AffineInOneVariable.lean)
 contains the proof.
 
-Second, the larger class
+Second,
 
 \[
   (x,y)\longmapsto
@@ -169,8 +194,9 @@ triangular normal form in the nonzero-`e` chart, with a displayed polynomial
 inverse.  The complementary `e=0` chart is handled separately in the final
 theorem.  See
 [`JacobianTwo/QuadraticInOneVariable.lean`](JacobianTwo/QuadraticInOneVariable.lean).
-This is a formalization and explicit reconstruction of a mathematically known
-special case, not a novelty claim and not a proof of general `JC(2)`.
+These bounded results are now subsumed by the arbitrary-degree theorem, but
+their shorter coefficient proofs remain useful.  None of these statements is
+a proof of general `JC(2)` or of the generic-degree-six frontier.
 
 ## Reproduce the certificates
 
@@ -181,6 +207,7 @@ locked by `uv.lock`.
 lake build
 uv run --frozen python -m scripts.verify
 uv run --frozen python -m scripts.nonproper
+uv run --frozen python -m scripts.affine_coordinate
 uv run --frozen pytest
 uv run --frozen mypy
 ```
@@ -195,6 +222,9 @@ the commands above and rejects unfinished proof declarations.
   misconception and identifies generic degree six as the first open frontier.
 - [`docs/nonproper-set.md`](docs/nonproper-set.md) proves the complete fiber,
   image, and nonproper-set theorem.
+- [`docs/affine-coordinate.md`](docs/affine-coordinate.md) proves the
+  arbitrary-degree affine-coordinate normal form and marks its exact
+  literature boundary.
 - [`docs/audit.md`](docs/audit.md) gives a hand-checkable structural derivation
   of the original screenshot.
 - [`docs/research-log.md`](docs/research-log.md) records completed work,
@@ -206,6 +236,7 @@ the commands above and rejects unfinished proof declarations.
 - L. Andrew Campbell's [Galois-case theorem][campbell]
 - S. Yu. Orevkov's [three-sheet theorem][orevkov]
 - Henryk Żołądek's [result through generic degree five][zoladek]
+- Marco Sabatini's [type-`(m,1)` triangular reduction][sabatini]
 - Zihan Zhang's [direct-consequences note][consequences]
 
 The announcement and expository note establish provenance.  The finite
@@ -216,6 +247,7 @@ symbolic certificates.
 [campbell]: https://doi.org/10.1007/BF01349234
 [orevkov]: https://doi.org/10.1070/IM1987v029n03ABEH000984
 [zoladek]: https://doi.org/10.1016/j.top.2008.04.001
+[sabatini]: https://doi.org/10.4064/cm9195-1-2024
 [consequences]: https://zzhang-iu.github.io/papers/direct-consequences-jacobian/index.html
 
 ## License

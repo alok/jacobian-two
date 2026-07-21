@@ -136,6 +136,33 @@ The complementary `e=0` case is triangular after the equations force `a=0`,
 combines the two branches.  This narrows a known class; it does not reach the
 generic-degree-six frontier.
 
+## 2026-07-21: arbitrary-degree affine-coordinate theorem
+
+Status: Lean-certified formalization of a known positive class.
+
+For an arbitrary first coordinate `P in K[x,y]` and
+
+```text
+Q(x,y) = e(x)*y + f(x),
+```
+
+Lean now defines both bivariate partial derivatives as bundled derivations and
+starts from the actual formal identity `J(P,Q)=k`.  Strong induction removes
+the top `y`-power of `P` by subtracting a scalar multiple of a power of `Q`.
+The final theorem covers both charts:
+
+```text
+e != 0:  e=eps, P=G(Q)+alpha*x+beta, alpha*eps=k;
+e = 0:   P=eta*y+c(x), Q=delta*x+gamma, -eta*delta=k.
+```
+
+Both normal forms have explicit kernel-checked two-sided inverses.  An exact
+SymPy checker exercises a degree-seven outer polynomial and rejects a
+nonconstant-slope perturbation.  The type-`(m,1)` elimination is known from
+Sabatini's 2024 theorem; the repository contribution is the
+characteristic-zero field-uniform formalization and explicit packaging, not a
+novelty claim.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -150,8 +177,10 @@ generic-degree-six frontier.
 
 ## Next research obligations
 
-1. Relate the quadratic-in-one-variable normal form to degree-six geometry at
-   infinity without mistaking a bounded-degree theorem for the full problem.
+1. Move to the first genuinely nonlinear coordinate: an arbitrary first
+   coordinate with a quadratic second coordinate, beginning with constant
+   nonzero quadratic leading coefficient and an exact completed-square normal
+   form.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 3. Connect broader plane ansätze to the known degree-pair restrictions,

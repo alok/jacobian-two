@@ -54,6 +54,7 @@ from floating-point samples or from the authority of the announcement.
 | The announced map has fiber counts `3/1/0` on the three stated strata | `DERIVED` | simple projective-root/source bijection plus exact symbolic checks |
 | Its image is `C^3 \ Gamma` | `DERIVED` | complete fiber stratification |
 | Its nonproper-value set is exactly `V(Q)` | `DERIVED` | explicit escaping family and projective compactness argument |
+| A Keller map `(P,e(x)y+f(x))` with arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | actual bivariate Jacobian, degree descent, both explicit inverse charts |
 | Historical novelty of the full fiber/nonproper theorem | `UNKNOWN` | derived here; same-day sources compared, priority not established |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
