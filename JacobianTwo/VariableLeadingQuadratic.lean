@@ -423,6 +423,294 @@ theorem parityDecomposition_unique
 
 end ParityDecomposition
 
+section FractionFieldCentering
+
+variable {L : Type*} [Field L]
+
+/-- The center that removes the linear term after scaling the variable by
+`h`. -/
+def quadraticCenter (eps h g : L) : L :=
+  g / (2 * eps * h)
+
+/-- The inverse affine substitution `y = (U-rho)/h`. -/
+def centeredAffineSubstitution (h rho : L) : L[X] :=
+  C h⁻¹ * (X - C rho)
+
+theorem natDegree_centeredAffineSubstitution
+    {h rho : L} (hh : h ≠ 0) :
+    (centeredAffineSubstitution h rho).natDegree = 1 := by
+  have hnormal : centeredAffineSubstitution h rho =
+      C h⁻¹ * X + C (-h⁻¹ * rho) := by
+    simp [centeredAffineSubstitution]
+    ring
+  rw [hnormal]
+  exact natDegree_linear (inv_ne_zero hh)
+
+theorem leadingCoeff_centeredAffineSubstitution
+    {h rho : L} (hh : h ≠ 0) :
+    (centeredAffineSubstitution h rho).leadingCoeff = h⁻¹ := by
+  have hnormal : centeredAffineSubstitution h rho =
+      C h⁻¹ * X + C (-h⁻¹ * rho) := by
+    simp [centeredAffineSubstitution]
+    ring
+  rw [hnormal]
+  exact leadingCoeff_linear (inv_ne_zero hh)
+
+/-- The constant term left after completing the square. -/
+def quadraticCenteredResidual (eps rho f : L) : L :=
+  f - eps * rho ^ 2
+
+@[simp]
+theorem derivative_centeredAffineSubstitution (h rho : L) :
+    derivative (centeredAffineSubstitution h rho) = C h⁻¹ := by
+  simp [centeredAffineSubstitution]
+
+/-- Chain rule for the inverse affine substitution. -/
+theorem derivative_comp_centeredAffineSubstitution
+    (R : L[X]) (h rho : L) :
+    derivative (R.comp (centeredAffineSubstitution h rho)) =
+      C h⁻¹ * (derivative R).comp (centeredAffineSubstitution h rho) := by
+  rw [derivative_comp, derivative_centeredAffineSubstitution]
+
+/-- Completion of the square after the invertible affine substitution
+`y = (U-rho)/h`. -/
+theorem quadratic_comp_centeredAffineSubstitution
+    {eps h : L} (g f : L) (htwo : (2 : L) ≠ 0)
+    (heps : eps ≠ 0) (hh : h ≠ 0) :
+    (C (eps * h ^ 2) * X ^ 2 + C g * X + C f).comp
+        (centeredAffineSubstitution h (quadraticCenter eps h g)) =
+      parityQuadratic eps
+        (quadraticCenteredResidual eps (quadraticCenter eps h g) f) := by
+  let rho := quadraticCenter eps h g
+  let z := centeredAffineSubstitution h rho
+  have hcenter : 2 * eps * h * rho = g := by
+    dsimp [rho, quadraticCenter]
+    field_simp
+  have hz : C h * z = X - C rho := by
+    dsimp [z, centeredAffineSubstitution]
+    calc
+      C h * (C h⁻¹ * (X - C rho)) = C (h * h⁻¹) * (X - C rho) := by
+        rw [C_mul]
+        ring
+      _ = X - C rho := by rw [mul_inv_cancel₀ hh, C_1, one_mul]
+  have hquadratic : C (eps * h ^ 2) * z ^ 2 =
+      C eps * (C h * z) ^ 2 := by
+    rw [C_mul, C_pow]
+    ring
+  have hlinear : C g * z = C (2 * eps * rho) * (C h * z) := by
+    rw [← hcenter]
+    simp only [map_mul]
+    ring
+  change (C (eps * h ^ 2) * X ^ 2 + C g * X + C f).comp z =
+    parityQuadratic eps (quadraticCenteredResidual eps rho f)
+  simp only [add_comp, mul_comp, pow_comp, C_comp, X_comp]
+  rw [hquadratic, hlinear, hz]
+  simp only [parityQuadratic, quadraticCenteredResidual]
+  have hClinear : C (2 * eps * rho) = 2 * C eps * C rho := by
+    rw [C_mul, C_mul, C_ofNat]
+  have hCresidual : C (f - eps * rho ^ 2) =
+      C f - C eps * C rho ^ 2 := by
+    simp [map_sub, map_mul, map_pow]
+  rw [hClinear, hCresidual]
+  ring
+
+end FractionFieldCentering
+
+section FractionRingTransport
+
+/-- Embed a polynomial in `K[x]` into its fraction field. -/
+def toPolynomialFractionField (p : K[X]) : FractionRing K[X] :=
+  algebraMap K[X] (FractionRing K[X]) p
+
+/-- Map the coefficients of a polynomial in `K[x][y]` into `Frac(K[x])`. -/
+def mapToPolynomialFractionField (P : K[X][Y]) :
+    (FractionRing K[X])[X] :=
+  P.map (algebraMap K[X] (FractionRing K[X]))
+
+/-- The center `g/(2*eps*h)` in `Frac(K[x])`. -/
+def fractionQuadraticCenter (eps : K) (h g : K[X]) : FractionRing K[X] :=
+  quadraticCenter
+    (toPolynomialFractionField (C eps))
+    (toPolynomialFractionField h)
+    (toPolynomialFractionField g)
+
+/-- The inverse source substitution over `Frac(K[x])`. -/
+def fractionCenteredAffineSubstitution (eps : K) (h g : K[X]) :
+    (FractionRing K[X])[X] :=
+  centeredAffineSubstitution
+    (toPolynomialFractionField h)
+    (fractionQuadraticCenter eps h g)
+
+/-- The centered residual in `Frac(K[x])`. -/
+def fractionQuadraticCenteredResidual
+    (eps : K) (h g f : K[X]) : FractionRing K[X] :=
+  quadraticCenteredResidual
+    (toPolynomialFractionField (C eps))
+    (fractionQuadraticCenter eps h g)
+    (toPolynomialFractionField f)
+
+/-- Map coefficients into `Frac(K[x])` and then apply the inverse affine
+source substitution. -/
+def fractionAffineTransport
+    (eps : K) (h g : K[X]) (P : K[X][Y]) : (FractionRing K[X])[X] :=
+  (mapToPolynomialFractionField P).comp
+    (fractionCenteredAffineSubstitution eps h g)
+
+/-- After mapping coefficients into `Frac(K[x])` and applying
+`y = (U-rho)/h`, a quadratic with leading coefficient `eps*h^2` becomes
+`eps*U^2+F`. -/
+theorem map_variableQuadraticCoordinate_comp_fractionCenteredAffineSubstitution
+    [CharZero K] {eps : K} {h g f : K[X]}
+    (heps : eps ≠ 0) (hh : h ≠ 0) :
+    fractionAffineTransport eps h g
+        (variableQuadraticCoordinate (C eps * h ^ 2) g f) =
+      parityQuadratic (toPolynomialFractionField (C eps))
+        (fractionQuadraticCenteredResidual eps h g f) := by
+  have hepsFraction : toPolynomialFractionField (C eps) ≠ 0 := by
+    simpa [toPolynomialFractionField] using
+      (IsFractionRing.injective K[X] (FractionRing K[X])).ne
+        (C_ne_zero.mpr heps)
+  have hhFraction : toPolynomialFractionField h ≠ 0 := by
+    simpa [toPolynomialFractionField] using
+      (IsFractionRing.injective K[X] (FractionRing K[X])).ne hh
+  have htwoPolynomial : (2 : K[X]) ≠ 0 := by norm_num
+  have htwoFraction : (2 : FractionRing K[X]) ≠ 0 := by
+    intro hzero
+    apply htwoPolynomial
+    apply IsFractionRing.injective K[X] (FractionRing K[X])
+    rw [map_ofNat, map_zero]
+    exact hzero
+  simpa [fractionAffineTransport, mapToPolynomialFractionField,
+    variableQuadraticCoordinate,
+    fractionCenteredAffineSubstitution, fractionQuadraticCenter,
+    fractionQuadraticCenteredResidual, toPolynomialFractionField,
+    map_mul, map_pow] using
+    (quadratic_comp_centeredAffineSubstitution
+      (L := FractionRing K[X])
+      (toPolynomialFractionField g) (toPolynomialFractionField f)
+      htwoFraction hepsFraction hhFraction)
+
+/-- The parity decomposition instantiated over `Frac(K[x])` for the affine
+transport of an arbitrary first coordinate. -/
+theorem exists_fractionAffineTransport_parityDecomposition
+    [CharZero K] {eps : K} {h g f : K[X]}
+    (P : K[X][Y]) (heps : eps ≠ 0) :
+    ∃ H B : (FractionRing K[X])[X],
+      fractionAffineTransport eps h g P =
+        H.comp
+            (parityQuadratic (toPolynomialFractionField (C eps))
+              (fractionQuadraticCenteredResidual eps h g f)) +
+          X *
+            (B.comp
+              (parityQuadratic (toPolynomialFractionField (C eps))
+                (fractionQuadraticCenteredResidual eps h g f))) := by
+  have hepsFraction : toPolynomialFractionField (C eps) ≠ 0 := by
+    simpa [toPolynomialFractionField] using
+      (IsFractionRing.injective K[X] (FractionRing K[X])).ne
+        (C_ne_zero.mpr heps)
+  exact exists_comp_parityQuadratic_add_X_mul_comp
+    (fractionAffineTransport eps h g P) hepsFraction
+
+/-- Re-express the parity decomposition using the transported quadratic
+coordinate itself as the generator. -/
+theorem exists_fractionAffineTransport_comp_transformedQuadratic
+    [CharZero K] {eps : K} {h g f : K[X]}
+    (P : K[X][Y]) (heps : eps ≠ 0) (hh : h ≠ 0) :
+    ∃ H B : (FractionRing K[X])[X],
+      fractionAffineTransport eps h g P =
+        H.comp
+            (fractionAffineTransport eps h g
+              (variableQuadraticCoordinate (C eps * h ^ 2) g f)) +
+          X *
+            (B.comp
+              (fractionAffineTransport eps h g
+                (variableQuadraticCoordinate (C eps * h ^ 2) g f))) := by
+  obtain ⟨H, B, hrepr⟩ :=
+    exists_fractionAffineTransport_parityDecomposition
+      (f := f) P heps
+  refine ⟨H, B, ?_⟩
+  rw [map_variableQuadraticCoordinate_comp_fractionCenteredAffineSubstitution
+    heps hh]
+  exact hrepr
+
+/-- Transport of formal differentiation in the source variable.  This is the
+`U`-derivative part of the transformed Jacobian; differentiating the
+`Frac(K[x])` coefficients with respect to `x` is a separate derivation. -/
+theorem derivative_fractionAffineTransport
+    (eps : K) (h g : K[X]) (P : K[X][Y]) :
+    derivative (fractionAffineTransport eps h g P) =
+      C (toPolynomialFractionField h)⁻¹ *
+        (mapToPolynomialFractionField (yDerivative P)).comp
+          (fractionCenteredAffineSubstitution eps h g) := by
+  rw [fractionAffineTransport, derivative_comp,
+    fractionCenteredAffineSubstitution,
+    derivative_centeredAffineSubstitution]
+  rw [yDerivative_apply, mapToPolynomialFractionField, derivative_map]
+  rfl
+
+/-- The invertible affine source substitution preserves `y`-degree after
+passing to `Frac(K[x])`. -/
+theorem natDegree_fractionAffineTransport
+    (eps : K) {h g : K[X]} (P : K[X][Y]) (hh : h ≠ 0) :
+    (fractionAffineTransport eps h g P).natDegree = P.natDegree := by
+  have hinjective := IsFractionRing.injective K[X] (FractionRing K[X])
+  rw [fractionAffineTransport, natDegree_comp,
+    mapToPolynomialFractionField,
+    natDegree_map_eq_of_injective hinjective,
+    fractionCenteredAffineSubstitution,
+    natDegree_centeredAffineSubstitution]
+  · simp
+  · simpa [toPolynomialFractionField] using hh
+
+/-- Exact leading-coefficient scaling under the inverse affine source
+substitution. -/
+theorem leadingCoeff_fractionAffineTransport
+    (eps : K) {h g : K[X]} (P : K[X][Y]) (hh : h ≠ 0) :
+    (fractionAffineTransport eps h g P).leadingCoeff =
+      toPolynomialFractionField P.leadingCoeff *
+        (toPolynomialFractionField h)⁻¹ ^ P.natDegree := by
+  have hinjective := IsFractionRing.injective K[X] (FractionRing K[X])
+  have hhFraction : toPolynomialFractionField h ≠ 0 := by
+    simpa [toPolynomialFractionField] using hinjective.ne hh
+  rw [fractionAffineTransport,
+    leadingCoeff_comp (by
+      rw [fractionCenteredAffineSubstitution,
+        natDegree_centeredAffineSubstitution hhFraction]
+      omega),
+    mapToPolynomialFractionField,
+    leadingCoeff_map_of_injective hinjective,
+    fractionCenteredAffineSubstitution,
+    leadingCoeff_centeredAffineSubstitution hhFraction,
+    natDegree_map_eq_of_injective hinjective]
+  rfl
+
+/-- A leading coefficient of the form `lam*h^n` becomes the scalar `lam`
+after the inverse affine substitution. -/
+theorem leadingCoeff_fractionAffineTransport_of_shape
+    (eps : K) {h g : K[X]} (P : K[X][Y]) {lam : K}
+    (hh : h ≠ 0)
+    (hlead : P.leadingCoeff = C lam * h ^ P.natDegree) :
+    (fractionAffineTransport eps h g P).leadingCoeff =
+      toPolynomialFractionField (C lam) := by
+  rw [leadingCoeff_fractionAffineTransport eps P hh, hlead]
+  simp only [toPolynomialFractionField, map_mul, map_pow]
+  have hhFraction :
+      algebraMap K[X] (FractionRing K[X]) h ≠ 0 := by
+    simpa only [map_zero] using
+      (IsFractionRing.injective K[X] (FractionRing K[X])).ne hh
+  calc
+    (algebraMap K[X] (FractionRing K[X]) (C lam) *
+          algebraMap K[X] (FractionRing K[X]) h ^ P.natDegree) *
+        (algebraMap K[X] (FractionRing K[X]) h)⁻¹ ^ P.natDegree =
+      algebraMap K[X] (FractionRing K[X]) (C lam) *
+        ((algebraMap K[X] (FractionRing K[X]) h) ^ P.natDegree *
+          (algebraMap K[X] (FractionRing K[X]) h)⁻¹ ^ P.natDegree) := by
+            ring
+    _ = algebraMap K[X] (FractionRing K[X]) (C lam) := by
+      rw [← mul_pow, mul_inv_cancel₀ hhFraction, one_pow, mul_one]
+
+end FractionRingTransport
+
 @[simp]
 theorem yDerivative_variableQuadraticCoordinate (a g f : K[X]) :
     yDerivative (variableQuadraticCoordinate a g f) =
