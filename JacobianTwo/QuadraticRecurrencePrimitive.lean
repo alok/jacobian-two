@@ -3,6 +3,7 @@ Copyright (c) 2026 Alok Singh. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Alok Singh
 -/
+import JacobianTwo.FractionRingDerivative
 import JacobianTwo.QuadraticRecurrence
 import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Ring
@@ -25,6 +26,9 @@ noncomputable section
 open Polynomial
 
 namespace JacobianTwo.QuadraticRecurrencePrimitive
+
+open JacobianTwo.FractionRingDerivative
+open JacobianTwo.QuadraticRecurrence
 
 variable {K : Type*} [Field K] [CharZero K]
 
@@ -131,5 +135,35 @@ theorem coeff_aeval_of_downward_recurrence
   | of_succ j hj ih =>
       exact aeval_of_recurrence_step D F (B.coeff j) (B.coeff (j + 1))
         hker (hrec j hj) ih
+
+/-- Every coefficient of a solution to the fraction-field recurrence is a
+polynomial in the centered residual `F` with coefficients in `K`. -/
+theorem coeff_aeval_of_fraction_recurrencePolynomial_eq_C
+    (F C₀ : FractionRing K[X]) (B : (FractionRing K[X])[X])
+    (h : recurrencePolynomial
+      (fractionRingDerivative (K := K)) F B = C C₀)
+    (j : ℕ) :
+    ∃ S : K[X], B.coeff j = aeval F S := by
+  by_cases hj : j ≤ B.natDegree
+  · have htopD :
+        fractionRingDerivative (K := K) (B.coeff B.natDegree) = 0 :=
+      top_coefficient_derivative_eq_zero
+        (R := K) (L := FractionRing K[X])
+        (fractionRingDerivative (K := K)) F C₀ B h
+    obtain ⟨c, hc⟩ :=
+      (fractionRingDerivative_eq_zero_iff
+        (K := K) (B.coeff B.natDegree)).1 htopD
+    have htop : ∃ S : K[X], B.coeff B.natDegree = aeval F S := by
+      exact ⟨C c, by simp [hc]⟩
+    exact coeff_aeval_of_downward_recurrence
+      (fractionRingDerivative (K := K)) F B B.natDegree
+      (fun z hz ↦ (fractionRingDerivative_eq_zero_iff (K := K) z).1 hz)
+      (fun i _ ↦ coefficient_recurrence
+        (R := K) (L := FractionRing K[X])
+        (fractionRingDerivative (K := K)) F C₀ B h i)
+      htop j hj
+  · refine ⟨0, ?_⟩
+    rw [coeff_eq_zero_of_natDegree_lt (Nat.lt_of_not_ge hj)]
+    exact (map_zero (aeval F)).symm
 
 end JacobianTwo.QuadraticRecurrencePrimitive
