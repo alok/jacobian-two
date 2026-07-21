@@ -754,6 +754,55 @@ The conclusion cannot be promoted yet: neither exactly two infinity
 characteristic pairs nor condition `(*)` follows from the current smoothness,
 Picard, monodromy, trace, or minimal-leaf results.
 
+## 2026-07-21: exact split transport does not force condition `(*)`
+
+Status: derived matrix theorem plus exact hostile blowup lattices; no
+compactified map.
+
+For a target boundary component with several noncontracted source preimages,
+let `n` be their normal multiplicities, `m` their tangential degrees, `q` the
+target dual square, and `Q` the selected block of the inverse source
+intersection matrix.  Projection formula replaces Orevkov's scalar
+determinant ratio by
+
+```text
+Q*m=q*n,   n.m=N,   m^t*Q*m=N*q.
+```
+
+For `q>0`, Hodge index gives the sharp inequality
+
+```text
+Q-(q/N)*n*n^t <= 0.
+```
+
+Orevkov's negative-intersection determinant convention reverses this sign:
+his positive first-star determinant `R1*D1` means raw dual square
+`q=-R1*D1<0`.  Thus the Hodge inequality is unavailable at the star used in
+the conditional proof; the projection-formula matrix identity is the robust
+part.
+
+The scalar formula is recovered when there is one noncontracted preimage, but
+the matrix version has genuine split solutions at degree six.  Three explicit
+boundary blowups give an integral dual block `[[1,2],[2,1]]` with
+`m=(1,1), n=(3,3)`, hence `A6`-compatible `3+3` inertia.  Four blowups give
+`[[-2,2],[2,0]]` with `m=(1,2), n=(2,2)`, hence `S6`-compatible `2+2+2`
+inertia.  Both full boundary intersection matrices are unimodular, and both
+Hodge remainders are negative semidefinite with the required kernel.
+
+A larger `A6` stopping fixture survives more structure.  Its selected target
+component has valency two, augmented-canonical label `-1`, and dual square
+`q=2`.  Two disjoint valency-two source components have labels `(-5,-1)`,
+normal degrees `(5,1)`, tangential degrees `(1,1)`, and dual block
+`[[6,4],[4,-2]]`.  Thus the local type-one canonical pullback rule holds
+exactly, the monomial germs `(x^5,y)` and `(x,y)` supply local models, and a
+5-cycle together with `(456)` generates all `A6`.
+
+These models do not include the dicritical, canonical labels, or local
+holomorphic maps.  They prove that determinant transport, Hodge index,
+integrality, degree, and inertia parity alone cannot force condition `(*)`.
+The next argument must couple the split matrix to canonical-discrepancy or
+local-map data across the entire boundary, not just at one selected component.
+
 ## 2026-07-21: exact matrices close the trace-only route
 
 Status: exact hostile consistency models; no finite algebra or Keller map.

@@ -119,6 +119,21 @@ The extra infinity hypotheses are not currently consequences of the earlier
 one-dicritical reductions, so this is not a full elimination.  See the
 [two-pair infinity note](docs/two-pair-infinity-elimination.md).
 
+The natural attempt to remove condition `(*)` is now exact and known to be
+insufficient on its own.  With several noncontracted preimages, Orevkov's
+scalar determinant ratio becomes `Q*m=q*n`; Hodge index adds the sharp matrix
+inequality `Q-(q/6)*n*n^t <= 0` when `q>0`.  Explicit unimodular trees produced
+by boundary blowups satisfy all of these identities with split `A6` `3+3`
+and `S6` `2+2+2` inertia.  Thus determinant transport, Hodge index, degree,
+and parity do not force a unique preimage.  A stronger `A6` fixture also
+retains valency two, the local augmented-canonical pullback labels `(-5,-1)`,
+monomial normal forms, and primitive `A6` generation.  What remains must
+couple all boundary components through global pullback, effectivity, or splice
+data.  See the
+[split-boundary note](docs/split-boundary-transport.md).
+Orevkov's relevant first-star determinant has the opposite raw-intersection
+sign, so the Hodge inequality is unavailable there rather than stronger.
+
 The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
 normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
 curve whose weighted-orbit product identifies the homotopy types of its local

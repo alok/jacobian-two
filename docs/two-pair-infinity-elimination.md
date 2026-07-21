@@ -258,6 +258,33 @@ single noncontracted preimage over some target boundary component, or replace
 that condition with a determinant inequality that survives arbitrary
 splitting.
 
+The latter replacement has now been derived.  If `n_i` and `m_i` are the
+normal and tangential degrees of the several noncontracted components, `q` is
+the target dual square, and `Q` is the corresponding block of the inverse
+source intersection matrix, projection formula gives
+
+```text
+Q*m = q*n,   n.m=N.
+```
+
+When `q>0`, Hodge index further gives
+
+```text
+Q-(q/N)*n*n^t <= 0.
+```
+
+There is an important sign boundary.  Orevkov's determinants use the negative
+intersection matrix, so his first-star value `R1*D1>0` corresponds to the raw
+dual square `q=-R1*D1<0`.  The Hodge inequality therefore does not apply at
+that star; only the matrix transport identity survives there.
+
+This sharp matrix inequality still does not recover `(*)`: explicit
+unimodular trees obtained by three and four boundary blowups realize it at
+`N=6` with `A6` `3+3` and `S6` `2+2+2` inertia.  See the
+[split-boundary transport note](split-boundary-transport.md).  Any extension
+of the conditional theorem must therefore use data beyond intersection
+transport and Hodge index.
+
 ## Primary source
 
 - S. Yu. Orevkov,
