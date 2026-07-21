@@ -3,9 +3,10 @@
 Status: **KNOWN THEOREM / PARTIAL LEAN FORMALIZATION.** Moskowicz's Theorem 2.7
 already proves the automorphy statement below.  The six-step proof in this note
 was independently derived as a direct certificate route.  Its leading-degree,
-UFD, and abstract parity-decomposition layers are Lean-certified; its
-fraction-field recurrence and denominator-clearing layers are not yet
-kernel-checked.  This is neither a solution of the full plane Jacobian
+UFD, fraction-field centering, Jacobian-transport, parity-extraction, and
+abstract recurrence layers are Lean-certified.  The exact recurrence solution
+and its polynomiality/denominator integration are not yet kernel-checked.
+This is neither a solution of the full plane Jacobian
 conjecture nor a claim of mathematical novelty.
 
 ## Statement and conventions
@@ -566,11 +567,16 @@ intended certificate starts from the formal bivariate Jacobian and verifies:
 5. the specialization-at-`y=0` valuation contradiction forcing `h | g`; and
 6. the final divisibility argument forcing `h` to be a unit.
 
-Steps 1 and 2 are now kernel-checked, including the simultaneous shape
-`a=epsilon*h^2` and `p_n=lambda*h^n`.  The abstract existence, uniqueness, and
-odd-degree control in the parity decomposition of step 3 are also
-kernel-checked over an arbitrary field.  The `K(x)` substitution and chain
-rule in step 3, and all of steps 4--6, remain open formalization obligations.
+Steps 1 and 2 are kernel-checked, including the simultaneous shape
+`a=epsilon*h^2` and `p_n=lambda*h^n`.  Step 3 is now certified over the actual
+fraction field `K(x)`: Lean constructs the affine substitution, proves the
+completed-square identity, transports the quotient-rule derivation, and
+checks the exact Jacobian factor `k/h`.  The parity identity and uniqueness
+then kernel-check the recurrence in step 4.  Generic denominator lemmas certify
+the final implications once their hypotheses are supplied.  The remaining
+formal obligations are to solve the recurrence with exact degree and leading
+coefficient control, derive the unique-survivor hypothesis from polynomiality
+at `y=0`, and feed that result into the final unit-denominator endpoint.
 This note may be cited as a direct derived proof and partial formalization, but
 not as a complete Lean theorem or as a new mathematical theorem.
 

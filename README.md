@@ -217,9 +217,17 @@ develops an independent direct certificate for that known theorem.  Lean now
 certifies the top-coefficient equation, target-shear descent to an odd
 `y`-degree, the identity `p_n^2=c*a^n`, the UFD shape
 `a=epsilon*h^2, p_n=lambda*h^n`, and the unique even--odd decomposition over a
-field.  It does **not** yet certify the final fraction-field recurrence or the
-denominator argument forcing `h` to be a unit.  The complete proof target,
-hostile fixtures, and exact boundary are in
+field.  The fraction-field layer also certifies the quotient-rule derivation
+on `K(x)`, its constant field, the affine substitution `y=(U-rho)/h`, the
+exact Jacobian factor `k/h`, parity extraction, and the full coefficient
+recurrence.  Abstract denominator certificates cover the final
+noncancellation and unit-denominator implications.
+
+It does **not** yet solve the recurrence inside `K[F]` or connect the
+polynomiality of the original mate to the unique-survivor argument forcing
+`h | g`; consequently the final proof that `h` is a unit is not yet
+kernel-checked.  The complete proof target, hostile fixtures, and exact
+boundary are in
 [`docs/variable-leading-quadratic.md`](docs/variable-leading-quadratic.md).
 
 Two earlier bounded modules expose useful intermediate mechanisms.  First,

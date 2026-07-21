@@ -233,6 +233,34 @@ forces `h` to be a unit.  Exact hostile fixtures distinguish rational from
 polynomial mates and exhibit the nonterminating odd coefficient tail for
 `Q=x+x^2*y^2`.
 
+## 2026-07-21: fraction-field quadratic bridge
+
+Status: known theorem; new direct-proof infrastructure is Lean-certified;
+denominator integration remains.
+
+The `K(x)` boundary above is now crossed.  The repository constructs the
+quotient-rule derivation on `RatFunc K`, proves that its kernel is exactly the
+constant field in characteristic zero, and transports it to the generic
+`FractionRing K[X]` used by the affine chart.  The substitution
+
+```text
+y = (U-rho)/h
+```
+
+is certified coefficientwise.  A general composition theorem proves that the
+centered Jacobian is multiplied by `1/h`; consequently an original Keller
+equation `J(P,Q)=k` becomes exactly `k/h`.  The parity identity and uniqueness
+then separate the odd part and produce both `D(H)=0` and the complete
+coefficient recurrence for `B`.  Independent denominator lemmas certify the
+unique-survivor obstruction and the implication “a unit numerator divided by
+`h` lies in the base ring, therefore `h` is a unit.”
+
+The remaining direct-proof gap is narrower: formalize the exact solution of
+the recurrence in `K[F]`, use the specialization of the original polynomial
+mate at `y=0` to supply the unique-survivor hypotheses forcing `h | g`, and
+then prove that the terminal `k/h` equation lies in `K[x]`.  No automorphy
+claim is promoted until those links are kernel-checked.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -248,10 +276,10 @@ polynomial mates and exhibit the nonterminating odd coefficient tail for
 ## Next research obligations
 
 1. Complete the direct variable-leading certificate.  The coefficient descent,
-   odd leading-square identity, UFD square shape, and abstract parity
-   decomposition are Lean-certified.  The remaining work is the fraction-field
-   coordinate transport, coefficient recurrence, and the two denominator
-   arguments forcing `h | g` and then `h` to be a unit.
+   odd leading-square identity, UFD square shape, fraction-field transport,
+   `k/h` Jacobian equation, and abstract recurrence are Lean-certified.  The
+   remaining work is the recurrence solution and the two polynomiality/
+   denominator links forcing `h | g` and then `h` to be a unit.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 3. Connect broader plane ansätze to the known degree-pair restrictions,

@@ -9,8 +9,16 @@ import JacobianTwo.AffineInOneVariable
 import JacobianTwo.ConstantLeadingQuadratic
 import JacobianTwo.Counterexample
 import JacobianTwo.CubicFiber
+import JacobianTwo.RatFuncDerivative
+import JacobianTwo.FractionRingDerivative
+import JacobianTwo.QuadraticDenominator
 import JacobianTwo.QuadraticInOneVariable
+import JacobianTwo.QuadraticRecurrence
 import JacobianTwo.VariableLeadingQuadratic
+import JacobianTwo.QuadraticParityJacobian
+import JacobianTwo.QuadraticParityExtraction
+import JacobianTwo.QuadraticTransportJacobian
+import JacobianTwo.QuadraticReduction
 
 /-!
 # Jacobian Two
