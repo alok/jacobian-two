@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Alok Singh
 -/
 import JacobianTwo.Basic
+import JacobianTwo.AffineCoordinate
 import JacobianTwo.AffineInOneVariable
 import JacobianTwo.Counterexample
 import JacobianTwo.CubicFiber
