@@ -7,9 +7,10 @@ parameters ``(a,b,c,d)``.  Their coefficient matrix has rank three on the
 valid chart except at two conjugate base points; an exact augmented minor is
 nonzero there, so those rank-drop fibers are inconsistent rather than hidden
 components.  The valid incidence is therefore an affine-line bundle over an
-irreducible open surface.  Since ``H`` is monic in the pair-sum coordinate,
-its projection to coefficient space is finite; the image closure is therefore
-one three-dimensional codimension-two component.
+irreducible open surface.  Monicity of ``H`` makes the ambient closed
+incidence projection finite; after restricting to the valid open, the map is
+quasi-finite.  Its image closure is therefore one three-dimensional
+codimension-two component.
 
 The module also checks the rational member
 

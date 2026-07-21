@@ -40,7 +40,7 @@ def test_general_labeled_incidence_component_is_globally_irreducible() -> None:
         == SAGE_BASE_ABSOLUTELY_IRREDUCIBLE
     )
     assert certificate.base_surface_dimension == 2
-    assert certificate.valid_base_value != 0
+    assert certificate.p_unramified_base_value != 0
     assert certificate.base_smooth_saturation == SAGE_BASE_SMOOTH_SATURATION
     assert certificate.rank_drop_saturation == SAGE_RANK_DROP_SATURATION
     assert certificate.incidence_rank == 3
@@ -62,6 +62,7 @@ def test_projection_is_generically_the_two_orientation_label_cover() -> None:
     assert certificate.unlabeled_component_irreducible
     assert certificate.clean_open_connected
     assert certificate.proper_whitney_thom_required
+    assert not certificate.topology_propagation_computer_verified
 
 
 def test_rational_slice_solves_incidence_and_avoids_named_boundaries() -> None:
@@ -155,4 +156,4 @@ def test_full_delta_ten_t112_certificate_is_verified() -> None:
     """Every exact algebraic and computer-assisted invariant agrees."""
 
     assert exact_delta_ten_t112_certificate().verified
-    assert exact_delta_ten_t112_certificate().generic_component_excluded
+    assert exact_delta_ten_t112_certificate().conditional_generic_exclusion_supported

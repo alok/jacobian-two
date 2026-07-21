@@ -3,10 +3,10 @@
 from sage.schemes.curves.zariski_vankampen import fundamental_group
 
 
-# Global labeled incidence component.  The valid-base product removes zero or
-# repeated sources, the sigma_2 chart boundary, and coincidence with the
-# fourth root.  On this localization the triple-root surface is smooth and
-# every incidence matrix has rank three.
+# Global labeled incidence chart.  The localization removes zero or repeated
+# sources, the sigma_2 boundary, and P-critical coincidence with the fourth
+# root.  The last condition makes the chosen P-projection unramified; it is
+# not asserted to be necessary for smoothness of the parametrized plane curve.
 Base.<base_a, base_b, base_c> = QQ[]
 base_sigma_1 = base_a + base_b + base_c
 base_sigma_2 = base_a*base_b + base_a*base_c + base_b*base_c
@@ -22,7 +22,7 @@ absolute_factorization = BaseAlgebraic(base_constraint).factor()
 assert len(absolute_factorization) == 1
 assert absolute_factorization[0][1] == 1
 
-valid_base_product = (
+p_unramified_base_product = (
     base_a*base_b*base_c*base_sigma_2
     * (base_a - base_b)*(base_a - base_c)*(base_b - base_c)
     * (base_sigma_2 + base_b*base_c)
@@ -39,11 +39,11 @@ base_singular_ideal = Base.ideal(
 )
 assert base_singular_ideal.radical() == Base.ideal([base_a, base_b, base_c])
 base_smooth_saturation, base_smooth_exponent = base_singular_ideal.saturation(
-    Base.ideal(valid_base_product)
+    Base.ideal(p_unramified_base_product)
 )
 assert base_smooth_exponent == 1
 assert base_smooth_saturation.is_one()
-assert base_singular_ideal.reduce(valid_base_product) == 0
+assert base_singular_ideal.reduce(p_unramified_base_product) == 0
 
 
 def divided_power(degree, left, right):
@@ -90,11 +90,11 @@ rank_drop_ideal = Base.ideal(
 )
 assert rank_drop_ideal.dimension() == 1
 rank_drop_saturation, rank_drop_exponent = rank_drop_ideal.saturation(
-    Base.ideal(valid_base_product)
+    Base.ideal(p_unramified_base_product)
 )
 assert rank_drop_exponent == 3
 assert rank_drop_saturation.is_one()
-assert rank_drop_ideal.reduce(valid_base_product^3) == 0
+assert rank_drop_ideal.reduce(p_unramified_base_product^3) == 0
 
 # The exact clean member has only the two orientations of its tangent pair in
 # the labeled incidence fiber.  This proves the coefficient projection is
@@ -116,7 +116,7 @@ sample_equations = [
 ]
 sample_fiber_ideal = Base.ideal([base_constraint] + sample_equations)
 sample_fiber_saturation, sample_fiber_exponent = sample_fiber_ideal.saturation(
-    Base.ideal(valid_base_product)
+    Base.ideal(p_unramified_base_product)
 )
 expected_sample_fiber = Base.ideal(
     [
@@ -320,7 +320,8 @@ assert isomorphism(section(simplified.gen(0))) == simplified.gen(0)
 
 print(
     "delta-ten T112 global incidence:",
-    "absolutely irreducible smooth valid base; rank-drop saturation = (1), exponent 3; "
+    "absolutely irreducible smooth P-unramified base chart; "
+    "rank-drop saturation = (1), exponent 3; "
     "sample projection fiber reduced of length 2",
 )
 print("delta-ten T112 implicit equation:", curve)

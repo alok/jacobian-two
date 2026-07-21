@@ -10,12 +10,13 @@ quartic ``P=t^2+k*t^3+t^4`` forces
 For a chosen tangent pair, say ``a,b``, the two target-equality equations and
 the equality of slopes are three affine-linear equations in the four lower
 coefficients of ``Q``.  An exact Sage saturation of their maximal-minor ideal
-shows that they have rank three everywhere on the valid labeled base: the
-rank-drop ideal becomes the unit ideal after removing zero or repeated
-sources, the ``sigma_2`` chart boundary, and collision with the fourth root.
+shows that they have rank three everywhere on the displayed
+``P``-unramified labeled chart: the rank-drop ideal becomes the unit ideal
+after removing zero or repeated sources, the ``sigma_2`` chart boundary, and
+coincidence with the fourth root.  The last removal is a projection-critical
+boundary, not automatically a singular branch of the parametrized curve.
 The irreducible triple-root surface is smooth on that localization, so the
-incidence space is an affine-line bundle of dimension three and is itself
-irreducible.
+incidence space there is an affine-line bundle of dimension three.
 
 The three choices of tangent pair are permuted transitively by the source
 labels.  Their coefficient images therefore have the same irreducible
@@ -24,9 +25,9 @@ exactly the two orientations of its tangent pair, proving generic finiteness;
 on the clean locus the label cover has degree two.  Hence the clean unlabeled
 quotient of the incidence component is irreducible and connected, while its
 coefficient-image closure is an irreducible threefold.  The clean labeled
-open contains the cyclic sample.  Proper projective Whitney--Thom propagation
-over that connected open then excludes the generic clean component from the
-required ``A6`` quotient.
+open contains the cyclic sample.  Subject to proper projective Whitney--Thom
+propagation over that connected equisingular open, this excludes its generic
+``P``-unramified locus from the required ``A6`` quotient.
 
 The exact rational member used here lies on the especially transparent
 ``k=2`` slice.  It has source parameters ``-3/5,-2/5,1/5`` over one target,
@@ -36,13 +37,13 @@ independently finds Jacobian lengths ``4 + 6 + 2 + 4`` and a cyclic affine
 complement.  Exhaustive replay of all ``40^4`` single-three-cycle meridian
 images leaves only forty diagonal ``C3`` images and no ``A6`` image.
 
-This is an exact algebraic and computer-assisted generic-component theorem.
+This is an exact algebraic and computer-assisted generic-chart theorem.
 The ideal saturations, primary decomposition, and affine van Kamp
 presentation are independently recomputed in Sage 10.8.  The propagation
 step uses the standard proper projective Whitney--Thom theorem.  Deeper
-boundary intersections and additional components supported entirely on the
-excluded invalid base remain outside the claim, and the result does not prove
-or disprove the two-dimensional Jacobian conjecture.
+boundary intersections, including the removed ``P``-critical-fiber loci,
+remain outside the claim, and the result does not prove or disprove the
+two-dimensional Jacobian conjecture.
 """
 
 from __future__ import annotations
@@ -145,13 +146,15 @@ T112_LABELED_TANGENT_PAIRS: Final = (("u", "v"), ("u", "w"), ("v", "w"))
 # Exact localization used by the independent Sage maximal-minor calculation.
 # On the root constraint, ``u-fourth`` is
 # ``u*(sigma_2+v*w)/sigma_2`` and cyclically, so these factors are precisely
-# the nonzero, pairwise-distinct, immersed-source conditions on this chart.
+# the nonzero, pairwise-distinct, P-unramified conditions on this chart.
+# Their vanishing does not by itself make the plane-curve branch singular:
+# Q' may remain nonzero when P' vanishes.
 ROOT_FOURTH_SEPARATION_FACTORS: Final = (
     ROOT_SIGMA_2 + ROOT_B * ROOT_C,
     ROOT_SIGMA_2 + ROOT_A * ROOT_C,
     ROOT_SIGMA_2 + ROOT_A * ROOT_B,
 )
-VALID_BASE_PRODUCT: Final = expand(
+P_UNRAMIFIED_BASE_PRODUCT: Final = expand(
     ROOT_A
     * ROOT_B
     * ROOT_C
@@ -516,7 +519,7 @@ class DeltaTenT112Certificate:
     base_constraint_irreducible: bool
     base_constraint_absolutely_irreducible: bool
     base_surface_dimension: int
-    valid_base_value: Expr
+    p_unramified_base_value: Expr
     base_smooth_saturation: tuple[int, bool]
     rank_drop_saturation: tuple[int, int, bool]
     incidence_rank: int
@@ -530,6 +533,7 @@ class DeltaTenT112Certificate:
     unlabeled_component_irreducible: bool
     clean_open_connected: bool
     proper_whitney_thom_required: bool
+    topology_propagation_computer_verified: bool
     slice_incidence_identities: tuple[Expr, ...]
     vertical_factor_identity: Expr
     graph_factor_identity: Expr
@@ -578,8 +582,13 @@ class DeltaTenT112Certificate:
         return self.cusp_delta + self.t112_delta + self.node_count + self.infinity_delta
 
     @property
-    def generic_component_excluded(self) -> bool:
-        """Whether the conditional generic-component theorem is certified."""
+    def conditional_generic_exclusion_supported(self) -> bool:
+        """Whether the exact data support exclusion after the stated theorem step.
+
+        This property records the mathematical implication used by the audit.  It
+        does not claim that the Whitney--Thom propagation step was checked by the
+        Python or Sage programs.
+        """
 
         return bool(
             self.verified
@@ -606,7 +615,7 @@ class DeltaTenT112Certificate:
             and self.base_constraint_absolutely_irreducible
             == SAGE_BASE_ABSOLUTELY_IRREDUCIBLE
             and self.base_surface_dimension == 2
-            and self.valid_base_value != 0
+            and self.p_unramified_base_value != 0
             and self.base_smooth_saturation == SAGE_BASE_SMOOTH_SATURATION
             and self.rank_drop_saturation == SAGE_RANK_DROP_SATURATION
             and self.incidence_rank == 3
@@ -732,7 +741,7 @@ def exact_delta_ten_t112_certificate() -> DeltaTenT112Certificate:
         ),
         base_constraint_absolutely_irreducible=SAGE_BASE_ABSOLUTELY_IRREDUCIBLE,
         base_surface_dimension=2,
-        valid_base_value=VALID_BASE_PRODUCT.subs(SLICE_ROOT_SUBSTITUTION),
+        p_unramified_base_value=P_UNRAMIFIED_BASE_PRODUCT.subs(SLICE_ROOT_SUBSTITUTION),
         base_smooth_saturation=SAGE_BASE_SMOOTH_SATURATION,
         rank_drop_saturation=SAGE_RANK_DROP_SATURATION,
         incidence_rank=sample_matrix.rank(),
@@ -749,6 +758,7 @@ def exact_delta_ten_t112_certificate() -> DeltaTenT112Certificate:
         # the exact sample complement uses proper projective Whitney--Thom
         # triviality over the connected clean open.
         proper_whitney_thom_required=True,
+        topology_propagation_computer_verified=False,
         slice_incidence_identities=SLICE_INCIDENCE_IDENTITIES,
         vertical_factor_identity=expand(
             exceptional_vertical(1).subs(SLICE_COEFFICIENTS)
@@ -857,15 +867,15 @@ def main() -> int:
         dict(certificate.complement_census.generated_order_histogram),
     )
     print(
-        "generic clean T112 component excluded from A6:",
-        certificate.generic_component_excluded,
+        "conditional generic clean T112 exclusion supported:",
+        certificate.conditional_generic_exclusion_supported,
     )
     print(
         "claim boundary: exact Sage ideal/complement certificate plus proper "
-        "Whitney--Thom propagation; invalid-base components, deeper intersections, "
-        "and JC(2) remain open"
+        "Whitney--Thom propagation; P-critical-fiber boundaries, deeper "
+        "intersections, and JC(2) remain open"
     )
-    return 0 if certificate.generic_component_excluded else 1
+    return 0 if certificate.conditional_generic_exclusion_supported else 1
 
 
 if __name__ == "__main__":

@@ -47,11 +47,11 @@ explicit section.  An independent replay exhausts all ``40^4`` assignments
 of the raw meridians to single three-cycles; only forty order-three images
 survive, so no assignment generates ``A6``.
 
-Thus the unique dominant clean component is excluded, conditional on the
-standing reduction and the standard proper Whitney--Thom propagation across
-its connected clean open.  The lower-dimensional split and residual-rank
-closures above remain open, and nothing here proves the plane Jacobian
-conjecture.
+Thus the generic clean open of the component dominating the full ordered
+Cramer base is excluded, conditional on the standing reduction and the
+standard proper Whitney--Thom propagation.  This does not rule out components
+supported on lower-dimensional rank-drop or split loci.  Those closures remain
+open, and nothing here proves the plane Jacobian conjecture.
 """
 
 from __future__ import annotations
@@ -1031,8 +1031,9 @@ def main() -> int:
         "closures, and the other delta-ten partition strata"
     )
     print(
-        "claim boundary: the unique dominant clean C2^2 component is "
-        "excluded; lower-dimensional closures remain open"
+        "claim boundary: the component dominating the full ordered Cramer "
+        "base is conditionally excluded on its generic clean open; "
+        "lower-dimensional closures remain open"
     )
     return 0 if verified else 1
 
