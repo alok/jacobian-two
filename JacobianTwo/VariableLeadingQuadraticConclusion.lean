@@ -130,4 +130,39 @@ theorem variableLeadingQuadratic_bijective
   rw [← hscalar, variableQuadraticCoordinateMap_C_eq]
   exact constantLeadingQuadratic_bijective heps hk hjacScalar
 
+omit [CharZero K] in
+/-- With zero quadratic coefficient, `variableQuadraticCoordinate` is exactly
+the affine coordinate. -/
+theorem variableQuadraticCoordinate_zero_eq (g f : K[X]) :
+    variableQuadraticCoordinate 0 g f = affineCoordinate g f := by
+  simp [variableQuadraticCoordinate, affineCoordinate]
+
+omit [CharZero K] in
+/-- The corresponding evaluation map also reduces to the affine-coordinate
+map. -/
+theorem variableQuadraticCoordinateMap_zero_eq
+    (P : K[X][Y]) (g f : K[X]) :
+    variableQuadraticCoordinateMap P 0 g f =
+      affineCoordinateMap P g f := by
+  funext p
+  simp only [variableQuadraticCoordinateMap, affineCoordinateMap,
+    variableQuadraticCoordinate_zero_eq]
+
+/-- Full at-most-quadratic wrapper.  The nonzero branch is the
+variable-leading theorem, while the zero branch is the affine-coordinate
+theorem. -/
+theorem variableLeadingQuadratic_bijective_full
+    {P : K[X][Y]} {a g f : K[X]} {k : K}
+    (hk : k ≠ 0)
+    (hjac : jacobian P (variableQuadraticCoordinate a g f) = CC k) :
+    Function.Bijective (variableQuadraticCoordinateMap P a g f) := by
+  by_cases ha : a = 0
+  · subst a
+    have hjacAffine : jacobian P (affineCoordinate g f) = CC k := by
+      rw [← variableQuadraticCoordinate_zero_eq]
+      exact hjac
+    rw [variableQuadraticCoordinateMap_zero_eq]
+    exact affineCoordinate_bijective hk hjacAffine
+  · exact variableLeadingQuadratic_bijective ha hk hjac
+
 end JacobianTwo.VariableLeadingQuadraticConclusion
