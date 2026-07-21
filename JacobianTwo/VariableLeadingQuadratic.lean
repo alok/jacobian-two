@@ -52,6 +52,12 @@ to vary with `x`. -/
 def variableQuadraticCoordinate (a g f : K[X]) : K[X][Y] :=
   C a * Y ^ 2 + C g * Y + C f
 
+/-- The exact UFD square-shape conclusion needed after the odd-degree
+leading-coefficient identity.  Establishing this predicate from that identity
+is a separate factorization step. -/
+def IsNonzeroScalarTimesSquare (a : K[X]) : Prop :=
+  ∃ eps : K, ∃ h : K[X], eps ≠ 0 ∧ a = C eps * h ^ 2
+
 @[simp]
 theorem yDerivative_variableQuadraticCoordinate (a g f : K[X]) :
     yDerivative (variableQuadraticCoordinate a g f) =
@@ -163,6 +169,47 @@ theorem leadingCoeff_eq_C_mul_pow_of_even_natDegree [CharZero K]
       C (r : K) * P.leadingCoeff * derivative a := by
     exact mul_left_cancel₀ htwoC hscaled
   exact eq_C_mul_pow_of_differential_eq ha hr hreduced
+
+/-- At odd `y`-degree, the square of the leading coefficient is a nonzero
+scalar multiple of the corresponding power of the quadratic coefficient.
+This is the differential identity whose UFD factorization should imply
+`IsNonzeroScalarTimesSquare a`. -/
+theorem leadingCoeff_sq_eq_C_mul_pow_of_odd_natDegree [CharZero K]
+    {P : K[X][Y]} {a g f : K[X]} {k : K}
+    (ha : a ≠ 0) (hodd : Odd P.natDegree)
+    (hjac : jacobian P (variableQuadraticCoordinate a g f) = CC k) :
+    ∃ c : K, c ≠ 0 ∧
+      P.leadingCoeff ^ 2 = C c * a ^ P.natDegree := by
+  have hn : P.natDegree ≠ 0 := Nat.ne_of_gt hodd.pos
+  have htop :=
+    leadingCoeff_differential_eq_of_constant_jacobian P a g f k hjac
+  have hsquareDifferential :
+      derivative (P.leadingCoeff ^ 2) * a =
+        C (P.natDegree : K) * P.leadingCoeff ^ 2 * derivative a := by
+    rw [derivative_pow]
+    simp only [Nat.reduceSubDiff, pow_one]
+    calc
+      C (2 : K) * P.leadingCoeff * derivative P.leadingCoeff * a =
+          P.leadingCoeff *
+            (C (2 : K) * derivative P.leadingCoeff * a) := by ring
+      _ = P.leadingCoeff *
+          (C (P.natDegree : K) * P.leadingCoeff * derivative a) := by
+            rw [htop]
+      _ = C (P.natDegree : K) * P.leadingCoeff ^ 2 * derivative a := by
+            ring
+  obtain ⟨c, hc⟩ :=
+    eq_C_mul_pow_of_differential_eq ha hn hsquareDifferential
+  have hPne : P ≠ 0 := by
+    intro hzero
+    rw [hzero, natDegree_zero] at hn
+    exact hn rfl
+  have hlead : P.leadingCoeff ≠ 0 := leadingCoeff_ne_zero.mpr hPne
+  have hcne : c ≠ 0 := by
+    intro hzero
+    have hsquareZero : P.leadingCoeff ^ 2 = 0 := by
+      simpa [hzero] using hc
+    exact (pow_ne_zero 2 hlead) hsquareZero
+  exact ⟨c, hcne, hc⟩
 
 /-- Repeated target shears remove every positive even `y`-degree from the
 first coordinate.  A nonzero constant Jacobian excludes degree zero, so the
