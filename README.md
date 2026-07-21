@@ -77,7 +77,9 @@ branch-curve topology gives the same two groups and narrows the local types:
   curve has a finite multibranch singularity; and
 - in the `A6` passport, every normalization collision consists of two smooth
   multiplicity-three branches, uses all six sheets, and is omitted by the
-  original affine map.
+  original affine map; moreover, the two jump units concentrate at a unique
+  local-degree-five point, whose branch is a `(2,5)` cusp when its source is
+  smooth.
 
 The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
 normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
@@ -373,6 +375,10 @@ optional Sage/GAP replay is an additional independent local cross-check.
 - [`docs/refined-six-sheet-budget.md`](docs/refined-six-sheet-budget.md)
   proves `sum(e*d+delta)=5`, eliminates `A5` and `S5` universally, and lists
   the exact surviving `A6`/`S6` ramified profiles.
+- [`docs/a6-one-dicritical-local.md`](docs/a6-one-dicritical-local.md)
+  rules out the `A6` jump partition `1+1`, proves the unique
+  local-degree-five point, and classifies its smooth-source branch as a
+  `(2,5)` cusp.
 - [`docs/newton-72-108-sparse.md`](docs/newton-72-108-sparse.md) gives the
   exact sparse-support obstruction in the separate residual coordinate-degree
   configurations.

@@ -1,6 +1,8 @@
 """Regression tests for the exact six-sheet transitive-group certificate."""
 
 from scripts.six_sheet_monodromy import (
+    A6_COLLISION_MERIDIAN,
+    A6_TORUS_2_5_LOCAL_GENERATORS,
     OREVKOV_FORBIDDEN_RAMIFICATION_INDEX,
     OREVKOV_ONE_DICRITICAL_TYPES,
     OREVKOV_SIX_SHEET_BUDGET,
@@ -9,6 +11,7 @@ from scripts.six_sheet_monodromy import (
     branch_inertia_realizations,
     candidate_ids,
     classify_six_sheet_groups,
+    compose,
     conjugacy_class,
     conjugacy_class_analyses,
     full_generating_inertia_pairs,
@@ -232,6 +235,34 @@ def test_refined_primitive_branch_profiles_leave_only_a6_and_s6() -> None:
         for profile in group_profiles
         for analysis in profile.branch_classes
     )
+
+
+def test_a6_torus_2_5_local_monodromy_is_a_hostile_survivor() -> None:
+    first, second = A6_TORUS_2_5_LOCAL_GENERATORS
+
+    def word(*letters: tuple[int, ...]) -> tuple[int, ...]:
+        result = tuple(range(6))
+        for letter in letters:
+            result = compose(result, letter)
+        return result
+
+    # Meridional Artin presentation of the T(2,5) knot group.
+    assert word(first, second, first, second, first) == word(
+        second,
+        first,
+        second,
+        first,
+        second,
+    )
+    local_group = generated_group(A6_TORUS_2_5_LOCAL_GENERATORS)
+    global_group = generated_group(
+        (*A6_TORUS_2_5_LOCAL_GENERATORS, A6_COLLISION_MERIDIAN)
+    )
+
+    assert len(local_group) == 60
+    assert permutation_orbit_sizes(local_group) == (5, 1)
+    assert len(global_group) == 360
+    assert global_group == generated_group(TRANSITIVE_GROUPS[14].generators)
 
 
 def test_one_dicritical_filter_keeps_distinct_same_cycle_type_classes() -> None:

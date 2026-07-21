@@ -393,6 +393,34 @@ branch, two distinct transposition branches, or distinct transposition and
 cost-compatible profiles and preserves the forbidden index-five classes as
 hostile fixtures before applying Orevkov's final remark.
 
+## 2026-07-21: the one-dicritical `A6` jump is unique
+
+Status: derived here and hostile-audited; conditional local theorem, not an
+elimination of `A6`.
+
+Orevkov's one-dicritical boundary is one linear `L_C-E` chain, so contraction
+creates at most one singular finite source point on the dicritical image.  At
+every smooth source point the local Jacobian divisor is twice the unique
+smooth ramification prime.  In rank one this forces every local degree to be
+odd.  In corank two, local degree four would give two coprime quadratic jets
+whose Wronskian is a doubled line, contradicting Riemann--Hurwitz for the
+induced degree-two map of `P1`.  Hence a smooth local-degree-four point is
+impossible.
+
+The `A6,(e,d)=(3,1)` defect partition `1+1` would require two such points, at
+least one smooth, and is therefore excluded.  There is a unique jump point of
+local degree five.  If its source is smooth, a second initial-form/blow-up
+argument rules out corank two; integration of the doubled Jacobian along the
+ramification curve then gives target valuations `(2,5)`.  The intrinsic
+singularity is a `(2,5)` cusp.
+
+This does not close the passport.  The exact permutations `(345)` and `(123)`
+satisfy the `T(2,5)` five-braid relation and generate local `A5`; adjoining
+the collision meridian `(456)` generates global `A6`.  The regression test
+locks this hostile stopping fixture.  The remaining dichotomy is a smooth
+`(2,5)` cusp source or the unique normal-surface singularity obtained by
+contracting `L_C`.
+
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 
 Status: derived here and exhaustively checked; finite sparsity theorem only.

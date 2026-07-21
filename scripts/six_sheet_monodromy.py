@@ -59,6 +59,17 @@ def _from_cycles(*cycles: tuple[int, ...]) -> Permutation:
     return tuple(image)
 
 
+# Hostile stopping fixture for the one-dicritical A6 local analysis.  The two
+# 3-cycles satisfy the meridional T(2,5) five-braid relation and generate A5 on
+# five sheets; adjoining the collision 3-cycle generates A6 on all six.  Thus
+# the forced local (2,5) cusp is not excluded by abstract monodromy alone.
+A6_TORUS_2_5_LOCAL_GENERATORS: Final[tuple[Permutation, Permutation]] = (
+    _from_cycles((3, 4, 5)),
+    _from_cycles((1, 2, 3)),
+)
+A6_COLLISION_MERIDIAN: Final[Permutation] = _from_cycles((4, 5, 6))
+
+
 def compose(left: Permutation, right: Permutation) -> Permutation:
     """Return ``left ∘ right``."""
 

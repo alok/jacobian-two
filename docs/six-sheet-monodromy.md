@@ -894,9 +894,12 @@ jump partitions: `(e,d)=(3,1)` with `6T15=A6`, or `(2,1)` with `6T16=S6`.
 The first is a particularly narrow next stratum. Its normalization `A1 -> B`
 must identify points; every collision consists of exactly two smooth local
 branches, exhausts all six sheets above an omitted target value, and consumes
-none of the remaining jump defect two. Eliminating this `A6` stratum would
-leave only the `S6` passport, but this repository does not yet claim that
-elimination.
+none of the remaining jump defect two.  The local analysis in
+[`a6-one-dicritical-local.md`](a6-one-dicritical-local.md) rules out splitting
+those two units as `1+1`: there is one unique local-degree-five point.  If its
+source is smooth, its target branch is a `(2,5)` cusp.  Eliminating this `A6`
+stratum would leave only the `S6` passport, but this repository does not yet
+claim that elimination.
 
 For the unrestricted six-sheet problem, configurations with several dicritical
 components must still be handled.  Section 7 reduces their monodromy to `A6`
