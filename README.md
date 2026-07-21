@@ -246,6 +246,18 @@ extra infinity and singularity hypotheses remain unproved for arbitrary
 Keller branches.  See the
 [A6 one-pair note](docs/a6-one-pair-infinity.md).
 
+The equality family is no longer generic.  Every conditional `(3,8)` curve is
+polynomially equivalent to
+`(t^2+t^3,alpha*t^5+beta*t^6+gamma*t^7+t^8)`.  Exact collision resultants split
+its valid parameter space into a generic five-node stratum, an ordinary-triple
+divisor, and a contact-two divisor.  Clean representatives of all three have
+complement group `Z`; each `40^3` single-3-cycle census has only 40 cyclic
+images.  Equisingular-family topology propagates those exclusions across the
+generic stratum and both codimension-one walls.  Any survivor is now confined
+to an explicit codimension-at-least-two locus of higher or simultaneous
+collision degenerations.  Those deeper strata remain open.  See the
+[A6 delta-five family note](docs/a6-delta-five-family.md).
+
 The first cubic-cover obstruction also survives an exact lift test.  In the
 natural spin double cover `2.A6`, the canonical order-three lifts of the
 forced `T(2,5)` cusp meridians satisfy the five-braid relation exactly, and

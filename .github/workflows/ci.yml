@@ -63,6 +63,8 @@ jobs:
         run: uv run --frozen python -m scripts.s6_width_five_curve
       - name: Check the conditional A6 one-pair infinity obstruction
         run: uv run --frozen python -m scripts.a6_one_pair_infinity
+      - name: Reduce the conditional A6 delta-five family
+        run: uv run --frozen python -m scripts.a6_delta_five_family
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts

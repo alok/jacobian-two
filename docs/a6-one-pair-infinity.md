@@ -296,8 +296,10 @@ Therefore the strongest conclusion of this audit is
 \]
 
 No plane curve or Keller map with this surviving data is constructed here.
-The next one-pair target is the global complement topology of the degree
-`(3,8)` family; multi-pair infinity remains outside this theorem.
+The generic and codimension-one topology of the degree-`(3,8)` family is now
+excluded in the [delta-five family note](a6-delta-five-family.md); only an
+explicit codimension-at-least-two collision locus remains.  Multi-pair
+infinity remains outside this theorem.
 
 ## Reproduction and source boundary
 

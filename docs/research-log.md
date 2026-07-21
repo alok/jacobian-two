@@ -993,6 +993,41 @@ to force the one-pair/finite-singularity hypotheses from the Keller
 compactification, or to attack the degree-`(3,8)` and multi-pair infinity
 frontiers directly.
 
+## 2026-07-21: the `A6` delta-five family reduces to codimension two
+
+Status: conditional exact family algebra plus computer-assisted topology; the
+deepest collision strata remain open.
+
+After a polynomial target shear, every conditional `(3,8)` curve has the
+three-parameter normal form
+
+```text
+P=t^2+t^3,
+Q=alpha*t^5+beta*t^6+gamma*t^7+t^8.
+```
+
+The collision quintic `H(s)` gives exact equations for every degeneration.
+The generic open has the forced cusp and five nodes.  Its two admissible
+codimension-one walls are an irreducible ordinary-triple divisor `T=0` and an
+irreducible contact-two divisor `G=0`; the other factors either destroy the
+`T(2,5)` cusp, create extra intrinsic ramification, or add a smooth preimage to
+the cusp image.
+
+A clean generic model `(alpha,beta,gamma)=(1,1,0)` has exactly one `T(2,5)`
+cusp, five transverse nodes, a `(5,8)` infinity pair, and genus accounting
+`2+5+14=21`.  Sage nevertheless gives affine complement `Z`.  Representatives
+of the ordinary-triple and contact-two walls also have complement `Z`.  For
+each of the three exact presentations, all `40^3` single-3-cycle assignments
+reduce to 40 cyclic images and never `A6`.
+
+Plane-curve equisingularity and proper Thom isotopy propagate the three
+representative computations across the generic open and both generic walls.
+Every valid survivor is therefore confined to
+`(Sing(G) union (G intersect T))` away from the explicitly invalid factors.
+This locus has codimension at least two and contains higher or simultaneous
+collision degenerations.  It has not yet been completely stratified, so the
+delta-five family is narrowed rather than eliminated.
+
 ## 2026-07-21: the forced `A6` relations survive the spin cover
 
 Status: exact hostile lift; no compactification or Keller map.
