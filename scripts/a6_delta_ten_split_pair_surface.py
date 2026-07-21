@@ -22,7 +22,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import cache
 
-from sympy import Expr, Rational, diff, expand, gcd, groebner
+from sympy import Expr, Poly, Rational, diff, expand, gcd, groebner
 
 from scripts.a6_delta_ten_generic import (
     KAPPA,
@@ -38,21 +38,38 @@ from scripts.a6_delta_ten_generic import (
 class SplitPairSurfaceCertificate:
     """Exact irreducibility, smoothness, and split-fiber identities."""
 
+    degree_in_product: int
     linear_content_gcd: Expr
     singular_ideal_basis: tuple[Expr, ...]
     exceptional_base_identity: Expr
     split_fiber_identities: tuple[Expr, ...]
     component_intersection_residuals: tuple[tuple[Expr, Expr], ...]
-    total_surface_irreducible: bool
-    total_surface_smooth: bool
-    flat_over_kappa: bool
+
+    @property
+    def total_surface_irreducible(self) -> bool:
+        """Whether Gauss's lemma makes the linear equation irreducible."""
+
+        return self.degree_in_product == 1 and self.linear_content_gcd == 1
+
+    @property
+    def total_surface_smooth(self) -> bool:
+        """Whether the hypersurface Jacobian ideal is the unit ideal."""
+
+        return self.singular_ideal_basis == (1,)
+
+    @property
+    def flat_over_kappa(self) -> bool:
+        """Whether the domain is torsion-free, hence flat, over ``QQ[k]``."""
+
+        return self.total_surface_irreducible
 
     @property
     def verified(self) -> bool:
         """Whether the total pair surface and all three fibers agree."""
 
         return bool(
-            self.linear_content_gcd == 1
+            self.degree_in_product == 1
+            and self.linear_content_gcd == 1
             and self.singular_ideal_basis == (1,)
             and self.exceptional_base_identity == 0
             and self.split_fiber_identities == (0, 0, 0)
@@ -108,6 +125,7 @@ def exact_split_pair_surface_certificate() -> SplitPairSurfaceCertificate:
         2 * R - S * (S - 1),
     )
     return SplitPairSurfaceCertificate(
+        degree_in_product=Poly(PAIR_INCIDENCE, R).degree(),
         linear_content_gcd=expand(gcd(PAIR_DENOMINATOR, constant_coefficient)),
         singular_ideal_basis=tuple(
             polynomial.as_expr() for polynomial in singular_basis.polys
@@ -131,9 +149,6 @@ def exact_split_pair_surface_certificate() -> SplitPairSurfaceCertificate:
                 strict=True,
             )
         ),
-        total_surface_irreducible=True,
-        total_surface_smooth=True,
-        flat_over_kappa=True,
     )
 
 

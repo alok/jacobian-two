@@ -8,6 +8,7 @@ from scripts.a6_delta_ten_split_pair_surface import (
 def test_total_pair_surface_is_smooth_irreducible_and_flat() -> None:
     certificate = exact_split_pair_surface_certificate()
 
+    assert certificate.degree_in_product == 1
     assert certificate.linear_content_gcd == 1
     assert certificate.singular_ideal_basis == (1,)
     assert certificate.total_surface_irreducible
