@@ -17,6 +17,8 @@ The Galois/frontier continuation is tracked by
 [ALOK-794](https://linear.app/aloksingh/issue/ALOK-794/audit-the-galois-frontier-and-determine-the-3d-maps-nonproper-value).
 The arbitrary-degree affine-coordinate continuation is tracked by
 [ALOK-795](https://linear.app/aloksingh/issue/ALOK-795/prove-the-arbitrary-degree-affine-coordinate-plane-keller-theorem).
+The constant-leading quadratic-coordinate continuation is tracked by
+[ALOK-798](https://linear.app/aloksingh/issue/ALOK-798/prove-the-constant-leading-quadratic-coordinate-keller-theorem).
 
 ## Exact input claim
 
@@ -294,6 +296,82 @@ Acceptance gate:
   unfinished-proof audit all pass; and
 - the literature note distinguishes mathematical coverage from any claim of
   historical novelty and states explicitly that this does not solve `JC(2)`.
+
+## Milestone 6: arbitrary degree with a constant-leading quadratic coordinate
+
+Take the first genuinely nonlinear second coordinate after Milestone 5:
+
+```text
+P in K[x,y] arbitrary,
+Q(x,y) = eps*y^2 + g(x)*y + f(x),
+eps in K^*.
+```
+
+Put
+
+```text
+s = 2*eps*y + g(x),
+Delta = g(x)^2 - 4*eps*f(x).
+```
+
+The identities
+
+```text
+s^2 - 4*eps*Q = Delta,
+J(s,Q) = Delta'/2
+```
+
+suggest the exact target theorem:
+
+> If `J(P,Q)=k` for `k in K^*`, then there are nonzero scalars `A` and
+> `lambda`, a scalar `B`, and `G in K[T]` such that
+>
+> ```text
+> Delta = A*x + B,
+> lambda*A/2 = k,
+> P = G(Q) + lambda*s.
+> ```
+
+Indeed, evaluate the Jacobian on the polynomial critical section
+`y=-g/(2*eps)`, where `Q_y=s=0`.  This gives
+
+```text
+P_y(x,-g/(2*eps)) * Delta'(x) = 4*eps*k.
+```
+
+Both factors are therefore units, so `Delta'=A` is a nonzero scalar.  The
+pair `(s,Q)` is then a polynomial coordinate system with inverse
+
+```text
+x = (s^2 - 4*eps*Q - B) / A,
+y = (s - g(x)) / (2*eps).
+```
+
+In these coordinates, the Jacobian equation says that the derivative of `P`
+with respect to `s` is the scalar `lambda=2*k/A`, yielding the normal form.
+For target coordinates `(u,v)`, the displayed inverse is
+
+```text
+s = (u - G(v)) / lambda,
+x = (s^2 - 4*eps*v - B) / A,
+y = (s - g(x)) / (2*eps).
+```
+
+Acceptance gate:
+
+- the result is hostile-audited for signs, characteristic, zero-slope, and
+  degree-drop edge cases before implementation;
+- Lean starts from the actual formal bivariate Jacobian and proves the affine
+  discriminant, coordinate-pair, normal-form, and two-sided-inverse theorems;
+- the proof reuses the bundled derivations and arbitrary-degree descent from
+  `AffineCoordinate.lean` rather than restating coefficient hypotheses;
+- an exact typed symbolic checker validates high-degree examples and a
+  perturbed non-Keller fixture;
+- the literature boundary is sourced before any novelty language is used;
+  absent such evidence, the result is presented only as a formalized
+  structural fragment; and
+- the repository continues to state that the unrestricted degree-six sheet
+  stratum and `JC(2)` remain open.
 
 ## Repository shape
 
