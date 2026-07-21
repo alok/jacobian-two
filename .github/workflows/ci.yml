@@ -103,8 +103,16 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_ten_double_contact
       - name: Audit the conditional A6 delta-ten contact-triple Cramer chart
         run: uv run --frozen python -m scripts.a6_delta_ten_contact_triple
+      - name: Exclude the conditional A6 delta-ten P-critical triple boundaries
+        run: uv run --frozen python -m scripts.a6_delta_ten_pcritical_triples
+      - name: Check the conditional A6 delta-ten split clean-witness ledger
+        run: uv run --frozen python -m scripts.a6_delta_ten_split_codim_two
+      - name: Exclude the remaining conditional A6 residual-rank threefolds
+        run: uv run --frozen python -m scripts.a6_delta_ten_residual_rank
       - name: Exclude the dominant conditional A6 delta-ten T112 stratum
         run: uv run --frozen python -m scripts.a6_delta_ten_t112
+      - name: Exclude the nonsplit conditional A6 delta-ten contact-four surface
+        run: uv run --frozen python -m scripts.a6_delta_ten_contact_four
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts
