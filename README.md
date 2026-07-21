@@ -97,7 +97,11 @@ branch-curve topology gives the same two groups and narrows the local types:
   type-3 leaf of augmented-canonical label `e`.  If its self-intersection is
   `-m`, its unique neighbor is type 2 with label `e*m-1`, and the path toward
   the original line at infinity necessarily crosses consecutive labels
-  `1--0--(-1)`.
+  `1--0--(-1)`.  Jointly minimizing the source and extended map forces
+  `m=1`, so the minimal `S6` and `A6` leaf edges are exactly `2--1` and
+  `3--2`.  Their determinant labels satisfy `d_E=d_A-1<0` with forced parity.
+  An exact hostile blowup family shows that these canonical-plus-determinant
+  constraints alone still admit infinitely many abstract trees.
 
 The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
 normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
@@ -389,6 +393,7 @@ uv run --frozen python -m scripts.affine_coordinate
 uv run --frozen python -m scripts.constant_leading_quadratic
 uv run --frozen python -m scripts.variable_leading_quadratic --depth 9
 uv run --frozen python -m scripts.six_sheet_monodromy
+uv run --frozen python -m scripts.canonical_leaf_graph
 uv run --frozen python -m scripts.newton_72_108
 uv run --frozen pytest
 uv run --frozen mypy
@@ -418,8 +423,9 @@ optional Sage/GAP replay is an additional independent local cross-check.
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.
 - [`docs/one-dicritical-leaf-labels.md`](docs/one-dicritical-leaf-labels.md)
-  fixes the adjacent canonical label `e*(-E^2)-1`, proves the neighbor is
-  type 2, and forces a `1--0--(-1)` transition toward the negative core.
+  fixes the adjacent canonical label `e*(-E^2)-1`, jointly minimizes the leaf
+  to `E^2=-1`, proves the neighbor is type 2, and forces a `1--0--(-1)`
+  transition toward the negative core.
 - [`docs/smooth-normalization-hostile-models.md`](docs/smooth-normalization-hostile-models.md)
   constructs explicit affine surface pairs realizing every smooth/Picard/
   canonical package above, thereby isolating the missing finite-cover data.

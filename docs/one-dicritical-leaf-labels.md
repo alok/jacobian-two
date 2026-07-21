@@ -25,7 +25,7 @@ Assume there is one dicritical component \(E\), its normal ramification index
 is \(e\ge 2\), and the relatively minimal constant chain has been eliminated
 as in
 [`one-dicritical-source-smoothness.md`](one-dicritical-source-smoothness.md).
-This note proves:
+On every such pure source-blowup resolution, this note proves:
 
 \[
 \boxed{
@@ -46,20 +46,30 @@ at infinity contains consecutive labels
 \boxed{1\;--\;0\;--\;(-1).} \tag{0.2}
 \]
 
-For the two surviving one-dicritical passports, the neighbor labels therefore
-lie in the exact progressions
+There is a safe further minimization.  Call the resolved triple jointly
+minimal if no boundary curve is at once exceptional for the source blowdown,
+contracted by the extended map, and a \((-1)\)-curve.  Every candidate admits
+such a model, and on it
 
 \[
-S_6:\quad 1,3,5,\ldots,
+\boxed{E^2=-1,\qquad \ell(A)=e-1.} \tag{0.3}
+\]
+
+Thus the two minimal corridors begin
+
+\[
+S_6:\quad 2\;--\;1,
 \qquad
-A_6:\quad 2,5,8,\ldots. \tag{0.3}
+A_6:\quad 3\;--\;2. \tag{0.4}
 \]
 
 This is a compactification-graph restriction, not an elimination of either
-passport.  Leafhood and the displayed self-intersection equation refer to
-Orevkov's original pure-blowup resolution.  Later target blowups and
-re-resolution can give the strict transform of \(E\) more neighbors and change
-its self-intersection.
+passport.  The general labels \(em-1\) for \(m>1\) are precisely the orbit
+created by unnecessary corner blowups along the leaf edge; they are not
+distinct minimal possibilities.  Leafhood and the displayed
+self-intersection equations refer to a pure source-blowup resolution.  Later
+target blowups and re-resolution can give the strict transform of \(E\) more
+neighbors and change its self-intersection.
 
 ## 1. Why the dicritical is a leaf
 
@@ -131,9 +141,60 @@ a\equiv-1\pmod e,
 \]
 
 For \(e=2\), (2.4) gives all positive odd labels.  For \(e=3\), it gives the
-positive labels congruent to two modulo three, proving (0.3).
+positive labels congruent to two modulo three.  Section 3 explains why joint
+minimality selects the first member of each progression.
 
-## 3. The neighbor is type 2
+## 3. Joint minimization forces \(E^2=-1\)
+
+Write \(\pi:Z\to\mathbb P^2\) for the source blowdown and
+\(F:Z\to\mathbb P^1\times\mathbb P^1\) for the resolved polynomial map.
+Suppose a boundary curve \(C\) is simultaneously \(\pi\)-exceptional,
+\(F\)-contracted, and satisfies \(C^2=-1\).  Its Castelnuovo contraction is a
+smooth point and can be taken as the next step in a boundary-blowdown
+factorization; the reduced boundary remains simple normal crossings.  Both
+\(\pi\) and \(F\) are constant on \(C\), so they descend across the contraction.
+
+Repeating lowers the Picard rank and terminates.  It changes neither affine
+plane, the target, the generic degree, the branch passport, nor the number of
+dicriticals.  It also cannot create a constant component over the affine
+target.  Thus joint minimality is a without-loss-of-generality condition, not
+an additional hypothesis.
+
+There is a short intrinsic proof on the jointly minimal model.  Choose the
+chronologically last-created boundary component \(P\) with positive
+augmented-canonical label.  Such a component exists because \(\ell(E)=e>0\).
+Borisov's label-tree theorem excludes an edge directly joining a positive
+vertex to a negative vertex, so every neighbor of \(P\) has nonnegative label.
+If a later blowup touched \(P\), a free blowup would create label
+\(\ell(P)+1>0\), while a corner blowup would create the sum of two labels, again
+positive.  Either contradicts the choice of \(P\).  Thus \(P\) is untouched
+after its creation and \(P^2=-1\).
+
+The curve \(P\) is exceptional for \(\pi\), because the original infinity line
+has label \(-2\).  It cannot be type 1, whose label is negative on this target;
+it cannot be type 2 by joint minimality; and it cannot be type 4 because
+\(L_C=\varnothing\).  Hence it is type 3.  The dicritical is unique, so \(P=E\)
+and \(E^2=-1\).  Leaf adjunction (2.4) now gives
+
+\[
+\boxed{E^2=-1,\qquad \ell(A)=e-1,} \tag{3.1}
+\]
+
+which proves (0.3)--(0.4).  Conversely, a corner blowup at \(E\cap A\)
+changes
+
+\[
+m\longmapsto m+1,
+\qquad
+em-1\longmapsto e(m+1)-1. \tag{3.2}
+\]
+
+This recovers the nonminimal progressions and shows exactly why they carry no
+extra graph information.  Equivalently, leafhood says that \(E\) was born by
+a free blowup from a parent of label \(e-1\); joint minimality prevents any
+later corner-blowup cluster from remaining above that edge.
+
+## 4. The neighbor is type 2
 
 Since \(A\) lies in \(L_\infty\), it is type 1 or type 2 in Borisov's
 terminology.  The target of Orevkov's original construction is
@@ -141,7 +202,7 @@ terminology.  The target of Orevkov's original construction is
 Hence
 
 \[
-K_Y+(Y\setminus\mathbb A^2)=-F_1-F_2, \tag{3.1}
+K_Y+(Y\setminus\mathbb A^2)=-F_1-F_2, \tag{4.1}
 \]
 
 so both target boundary curves have augmented-canonical label \(-1\).
@@ -150,14 +211,14 @@ normal degree times the target label.  Such a label is negative, while (2.5)
 makes \(\ell(A)\) positive.  Therefore
 
 \[
-\boxed{A\text{ is type 2}.} \tag{3.2}
+\boxed{A\text{ is type 2}.} \tag{4.2}
 \]
 
 The same sign argument shows that every positive-label vertex on the segment
 from \(A\) toward the negative core is type 2, as long as the graph remains in
 this original target model.
 
-## 4. A forced `1--0--(-1)` transition
+## 5. A forced `1--0--(-1)` transition
 
 The strict transform of the original line at infinity has label \(-2\).
 Borisov's canonical-label tree theorem says:
@@ -175,15 +236,65 @@ labels
 \]
 
 proving (0.2).  This is an existence statement along the path.  It does not
-say that \(A\) itself has label one, and it does not assert that the transition
-is unique.
+assert that the transition is unique.  In the jointly minimal \(S_6\) model,
+\(A\) does itself have label one; in the \(A_6\) model it has label two.
 
-## 5. Exact executable endpoint
+## 6. Determinant labels at the minimal leaf
+
+For a boundary component \(C\), let \(d_C\) be the determinant of the negative
+intersection matrix after deleting \(C\).  For an edge \(CD\), write
+\(d_{CD}\) for the corresponding edge-deletion determinant.  The determinant
+of the full negative boundary matrix is \(-1\): the boundary classes form a
+basis of \(\operatorname{Pic}(Z)\), and the intersection form is congruent to
+\(\operatorname{diag}(1,-1,\ldots,-1)\).
+
+The minimal leaf \(E\) was created by a free blowup on \(A\), and its edge was
+never touched.  Borisov's determinant blowup formula therefore gives
+
+\[
+\boxed{d_E=d_{EA}=d_A-1.} \tag{6.1}
+\]
+
+Moreover \(d_E<0\).  Indeed, for the ample target boundary
+\(H=F_1+F_2\), the divisor \(F^*H\) is supported on \(L-E\) and has positive
+square \(6H^2=12\).  The Hodge index theorem makes the determinant of the
+negative intersection form on \(L-E\) negative.  Finally, Borisov's content
+\(c_C=\ell(C)+d_C\) is always odd.  Consequently
+
+\[
+\begin{array}{c|c|c}
+&d_E&d_A\\ \hline
+S_6&-1,-3,-5,\ldots&0,-2,-4,\ldots\\
+A_6&-2,-4,-6,\ldots&-1,-3,-5,\ldots
+\end{array} \tag{6.2}
+\]
+
+These restrictions still do not make the graph list finite.  There is an
+explicit hostile family for every \(n\ge0\): start from the original infinity
+line of label \(-2\), use free blowups to create labels \(-1,0,1\), and then
+blow up the edge between the zero vertex and the nearest label-one vertex
+\(n\) times.  Attach the minimal \(S_6\) edge by one final free blowup, or the
+minimal \(A_6\) edge by two.  Every positive nondicritical vertex has
+self-intersection at most \(-2\), while
+
+\[
+\begin{aligned}
+S_6:&\quad d_E=-(n+1)(n+2)-1,\\
+A_6:&\quad d_E=-(n+1)(n+2)-2.
+\end{aligned} \tag{6.3}
+\]
+
+Thus canonical labels, self-intersections, determinant labels, and joint
+minimality alone admit infinitely many abstract trees.  These trees are not
+realized degree-six maps: they do not provide pullback matrices, type-1
+covering degrees, Belyi maps, or Keller coordinates.
+
+## 7. Exact executable endpoint
 
 The typed object
 [`DicriticalLeafLabelEndpoint`](../scripts/six_sheet_monodromy.py) records the
-arithmetic part of (2.4).  Its regression test checks the first six possible
-self-intersections in both passports:
+arithmetic part of (2.4).  Its regression test starts with the two jointly
+minimal endpoints and applies five corner blowups, recovering
 
 \[
 e=2:\quad(1,3,5,7,9,11),
@@ -192,8 +303,15 @@ e=3:\quad(2,5,8,11,14,17).
 \]
 
 As with the cyclic endpoint certificate, this does not formalize the
-geometric input: Orevkov's leaf theorem, Borisov's log-Keller coefficient, or
-the type/path assertions.
+geometric input: Orevkov's leaf theorem, the joint-contraction argument,
+Borisov's log-Keller coefficient, or the type/path assertions.
+
+The separate exact checker
+[`canonical_leaf_graph.py`](../scripts/canonical_leaf_graph.py) performs the
+blowups in the infinite hostile family, rebuilds every intersection matrix,
+and verifies (6.1)--(6.3) for arbitrary tested \(n\).  It certifies only the
+stated graph arithmetic and deliberately assigns, rather than realizes, the
+geometric component types.
 
 ## Model scope and next target
 
@@ -203,21 +321,22 @@ infinity and resolving again, \(\ell(E)=e\) remains a valuation invariant, but l
 \(E^2\), and the number of adjacent curves must be transformed rather than
 silently reused.
 
-Within the original model, every surviving one-dicritical graph must begin
-with the corridor
+On a jointly minimal pure source model, every surviving one-dicritical graph
+must begin with the corridor
 
 \[
 E_{\mathrm{type\ 3},\,\ell=e}
 \;--\;
-A_{\mathrm{type\ 2},\,\ell=em-1}
+A_{\mathrm{type\ 2},\,\ell=e-1}
 \;--\;\cdots\;--\;
 1\;--\;0\;--\;(-1)\;--\;\cdots\;--\;(-2).
 \]
 
 The remaining graph attack must combine this corridor with determinant
 labels, the \(A_6\) cusp/collision data or the exact \(S_6\) jump partition,
-and the degree-six pushforward/pullback equations.  The canonical labels alone are
-not yet contradictory and \(m\) is not bounded by this argument.
+and the degree-six pushforward/pullback equations.  Joint minimality removes
+the old unbounded \(m\), while the hostile family proves that the remaining
+canonical-plus-determinant data still do not give a finite enumeration.
 
 ## Primary sources
 
@@ -229,12 +348,13 @@ not yet contradictory and \(m\) is not bounded by this argument.
   [“Frameworks for two-dimensional Keller maps”](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v27i3p54/pdf/),
   *Electronic Journal of Combinatorics* 27(3) (2020), P3.54.  The log-Keller
   formula gives the type-3 coefficient `e`; the boundary adjunction
-  calculation and type-1 pullback rule give (2.4) and (3.2).
+  calculation and type-1 pullback rule give (2.4) and (4.2).
 - Alexander Borisov,
   [“On two invariants of divisorial valuations at infinity”](https://people.math.binghamton.edu/borisov/documents/papers/divisorialvaluations.pdf).
   Proposition 2.2 supplies connectivity of the negative region and the
-  `1--0--(-1)` transition rule.
+  `1--0--(-1)` transition rule; Lemma 3.7 gives (6.1), and Definition 4.1 with
+  Lemma 4.1 gives the parity in (6.2).
 
-The leaf-neighbor congruence and its application to the two surviving
-passports are derived in this repository.  No claim of historical priority is
-made.
+The leaf-neighbor congruence, the joint-minimality argument, and their
+application to the two surviving passports are derived in this repository.
+No claim of historical priority is made.

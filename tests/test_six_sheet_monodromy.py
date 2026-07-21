@@ -5,7 +5,7 @@ import pytest
 from scripts.six_sheet_monodromy import (
     A6_COLLISION_MERIDIAN,
     A6_CONTRACTED_SOURCE_ENDPOINTS,
-    A6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
+    A6_MINIMAL_DICRITICAL_LEAF_LABEL_ENDPOINT,
     A6_EXCEPTIONAL_PARITY_ENDPOINT,
     A6_TORUS_2_5_LOCAL_GENERATORS,
     OREVKOV_FORBIDDEN_RAMIFICATION_INDEX,
@@ -16,7 +16,7 @@ from scripts.six_sheet_monodromy import (
     OneDicriticalContractedSourceEndpoint,
     S6_TWO_CURVE_COLLISION_GENERATORS,
     S6_CONTRACTED_SOURCE_ENDPOINTS,
-    S6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
+    S6_MINIMAL_DICRITICAL_LEAF_LABEL_ENDPOINT,
     S6_SATURATED_CONTRACTED_SOURCE_ENDPOINTS,
     S6_TWO_CURVE_FIBER_PROFILES,
     TRANSITIVE_GROUPS,
@@ -358,24 +358,43 @@ def test_saturated_s6_contracts_neither_boundary_chain() -> None:
     )
 
 
-def test_one_dicritical_leaf_neighbor_label_progressions_are_exact() -> None:
-    assert tuple(
-        endpoint.neighbor_label
-        for endpoint in S6_DICRITICAL_LEAF_LABEL_ENDPOINTS
-    ) == (1, 3, 5, 7, 9, 11)
-    assert tuple(
-        endpoint.neighbor_label
-        for endpoint in A6_DICRITICAL_LEAF_LABEL_ENDPOINTS
-    ) == (2, 5, 8, 11, 14, 17)
+def test_joint_minimal_leaf_and_corner_blowup_orbits_are_exact() -> None:
+    s6_endpoint = S6_MINIMAL_DICRITICAL_LEAF_LABEL_ENDPOINT
+    a6_endpoint = A6_MINIMAL_DICRITICAL_LEAF_LABEL_ENDPOINT
+    assert (s6_endpoint.dicritical_label, s6_endpoint.neighbor_label) == (2, 1)
+    assert (a6_endpoint.dicritical_label, a6_endpoint.neighbor_label) == (3, 2)
+    assert s6_endpoint.is_jointly_minimal
+    assert a6_endpoint.is_jointly_minimal
+
+    s6_orbit = [s6_endpoint]
+    a6_orbit = [a6_endpoint]
+    for _ in range(5):
+        s6_orbit.append(s6_orbit[-1].corner_blowup())
+        a6_orbit.append(a6_orbit[-1].corner_blowup())
+    assert tuple(endpoint.neighbor_label for endpoint in s6_orbit) == (
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+    )
+    assert tuple(endpoint.neighbor_label for endpoint in a6_orbit) == (
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+    )
     assert all(
         endpoint.dicritical_label == endpoint.ramification_index
         and endpoint.neighbor_label > 0
         and endpoint.has_forced_congruence
-        for endpoint in (
-            *S6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
-            *A6_DICRITICAL_LEAF_LABEL_ENDPOINTS,
-        )
+        for endpoint in (*s6_orbit, *a6_orbit)
     )
+    assert not s6_orbit[1].is_jointly_minimal
+    assert not a6_orbit[1].is_jointly_minimal
     with pytest.raises(ValueError, match="index must be at least two"):
         DicriticalLeafLabelEndpoint(
             ramification_index=1,

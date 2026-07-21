@@ -913,8 +913,10 @@ type-2 vertex of label `e*m-1`.  The path toward the original infinity line
 must then cross `1--0--(-1)` before reaching label `-2`.  The proof and the
 essential warning about later target blowups are in
 [`one-dicritical-leaf-labels.md`](one-dicritical-leaf-labels.md).  This
-corridor is necessary but not yet contradictory because the argument does not
-bound `m`.
+corridor can be jointly minimized by contracting every boundary `(-1)`-curve
+collapsed by both the source blowdown and the resolved map.  Then `m=1`, so
+the minimal `S6` and `A6` leaf edges are `2--1` and `3--2`.  This is necessary
+but still not contradictory.
 
 The complementary local analysis in
 [`s6-one-dicritical-local.md`](s6-one-dicritical-local.md) gives all nine

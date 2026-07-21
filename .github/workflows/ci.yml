@@ -45,6 +45,8 @@ jobs:
         run: uv run --frozen python -m scripts.variable_leading_quadratic --depth 9
       - name: Check the exact six-sheet monodromy certificate
         run: uv run --frozen python -m scripts.six_sheet_monodromy
+      - name: Check the hostile canonical and determinant graph family
+        run: uv run --frozen python -m scripts.canonical_leaf_graph
       - name: Check the residual Newton-polygon sparse-support certificates
         run: uv run --frozen python -m scripts.newton_72_108
       - name: Run adversarial tests

@@ -583,6 +583,43 @@ also belongs to the original pure-blowup resolution: later target blowups and
 re-resolution can change the strict transform's self-intersection and
 adjacency, although its divisorial canonical label remains invariant.
 
+## 2026-07-21: joint minimality fixes the dicritical self-intersection
+
+Status: derived here and independently hostile-audited; a without-loss-of-
+generality sharpening of the canonical corridor, not an elimination.
+
+Simultaneously contract any boundary `(-1)`-curve which is exceptional for the
+source blowdown and contracted by the resolved Keller map.  Such a contraction
+preserves the smooth SNC source boundary and both maps descend; iteration
+terminates by Picard rank.  In the resulting jointly minimal model, the
+dicritical leaf cannot have been born at a boundary crossing, and a later
+touch of the leaf would leave a positive-label terminal `(-1)`-curve of type 2,
+contradicting joint minimality.  Therefore
+
+```text
+E^2 = -1,             label(neighbor(E)) = e-1.
+```
+
+The minimal leaf edge is consequently `2--1` in the `S6` passport and `3--2`
+in the `A6` passport.  A corner blowup changes `m` to `m+1` and the adjacent
+label from `e*m-1` to `e*(m+1)-1`, proving that the earlier unbounded
+progressions were nonminimal blowup orbits rather than genuine graph moduli.
+This fixes the first edge but still gives no canonical-label contradiction.
+
+Determinant labels sharpen the endpoint to `d_E=d_A-1<0`, with `d_E` odd for
+`S6` and even for `A6`.  An exact hostile blowup family nevertheless realizes
+
+```text
+S6: d_E = -(n+1)(n+2)-1,
+A6: d_E = -(n+1)(n+2)-2
+```
+
+for every `n>=0`, with no positive nondicritical `(-1)`-curve.  The checker
+`scripts/canonical_leaf_graph.py` rebuilds the intersection matrices and
+determinants.  Therefore the next graph attack needs degree-six pullback,
+type-1 covering, or Belyi data; canonical and determinant labels alone still
+leave an infinite hostile family.
+
 ## 2026-07-21: hostile surface models isolate the finite-algebra gap
 
 Status: explicit consistency models; they are not finite covers or Jacobian

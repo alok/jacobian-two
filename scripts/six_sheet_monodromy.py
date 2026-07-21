@@ -889,20 +889,32 @@ class DicriticalLeafLabelEndpoint:
 
         return (self.neighbor_label + 1) % self.ramification_index == 0
 
+    @property
+    def is_jointly_minimal(self) -> bool:
+        """Whether the endpoint is the joint-minimal ``(-1)`` leaf."""
 
-S6_DICRITICAL_LEAF_LABEL_ENDPOINTS: Final = tuple(
-    DicriticalLeafLabelEndpoint(
-        ramification_index=2,
-        negative_self_intersection=negative_self_intersection,
-    )
-    for negative_self_intersection in range(1, 7)
-)
-A6_DICRITICAL_LEAF_LABEL_ENDPOINTS: Final = tuple(
+        return self.negative_self_intersection == 1
+
+    def corner_blowup(self) -> DicriticalLeafLabelEndpoint:
+        """Return the arithmetic endpoint after blowing up the leaf edge."""
+
+        return DicriticalLeafLabelEndpoint(
+            ramification_index=self.ramification_index,
+            negative_self_intersection=self.negative_self_intersection + 1,
+        )
+
+
+A6_MINIMAL_DICRITICAL_LEAF_LABEL_ENDPOINT: Final = (
     DicriticalLeafLabelEndpoint(
         ramification_index=3,
-        negative_self_intersection=negative_self_intersection,
+        negative_self_intersection=1,
     )
-    for negative_self_intersection in range(1, 7)
+)
+S6_MINIMAL_DICRITICAL_LEAF_LABEL_ENDPOINT: Final = (
+    DicriticalLeafLabelEndpoint(
+        ramification_index=2,
+        negative_self_intersection=1,
+    )
 )
 
 
