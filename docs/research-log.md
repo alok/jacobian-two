@@ -191,6 +191,48 @@ of total degree 84.  Changing one coefficient of `f` makes the determinant
 doing real work.  This reaches arbitrary degree in the other coordinate but
 still assumes that the coefficient of `y^2` is a nonzero scalar.
 
+## 2026-07-21: variable-leading quadratic checkpoint
+
+Status: known theorem; independently derived direct proof; partially
+Lean-certified.
+
+For
+
+```text
+Q = a(x)*y^2 + g(x)*y + f(x),  a != 0,
+J(P,Q) = k != 0,
+```
+
+Moskowicz's Theorem 2.7 already proves that `(P,Q)` is an automorphism.  Its
+invariant is `gcd(2,deg_x(a))`, which is either `1` or the prime `2`, so the
+theorem matches an arbitrary characteristic-zero field and places no degree
+bound on `P`.  Simon--Weimann's coordinate criterion then gives the stronger
+corollaries that `a` is a nonzero scalar and `deg_x(g^2-4*a*f)=1`.  The exact
+theorem statement is therefore not novel.
+
+The repository nevertheless has a useful new certificate route.  From the
+actual bivariate Jacobian, Lean now proves the top-coefficient differential
+equation, all even target-shear steps needed to reach odd degree, the identity
+`p_n^2=c*a^n`, and the UFD consequence
+
+```text
+a=epsilon*h^2,  p_n=lambda*h^n.
+```
+
+Over any field, Lean also proves existence and uniqueness of
+
+```text
+R(U) = H(epsilon*U^2+F) + U*B(epsilon*U^2+F),
+```
+
+together with the exact degree and leading coefficient of `B` when `R` has
+odd degree.  The remaining formal boundary is to instantiate this over
+`K(x)`, transport the `x`-derivation at fixed `Q`, extract the recurrence, and
+formalize the denominator/valuation proof that first forces `h | g` and then
+forces `h` to be a unit.  Exact hostile fixtures distinguish rational from
+polynomial mates and exhibit the nonterminating odd coefficient tail for
+`Q=x+x^2*y^2`.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -205,11 +247,11 @@ still assumes that the coefficient of `y^2` is a nonzero scalar.
 
 ## Next research obligations
 
-1. Formalize the hostile-audited reduction from a variable leading coefficient
-   `a(x)` in `Q=a(x)y^2+g(x)y+f(x)` to the scalar-leading theorem above.  The
-   current algebraic argument first reduces the top `y`-degree of `P`, then uses
-   parity and valuation obstructions to force `a` to be a nonzero scalar; it is
-   not yet kernel-certified.
+1. Complete the direct variable-leading certificate.  The coefficient descent,
+   odd leading-square identity, UFD square shape, and abstract parity
+   decomposition are Lean-certified.  The remaining work is the fraction-field
+   coordinate transport, coefficient recurrence, and the two denominator
+   arguments forcing `h | g` and then `h` to be a unit.
 2. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 3. Connect broader plane ansätze to the known degree-pair restrictions,

@@ -1,13 +1,12 @@
 # A variable-leading quadratic coordinate
 
-Status: **DERIVED / FORMALIZATION TARGET.** The argument below has been
-algebraically and adversarially checked, but it is **not Lean-certified**.
-It is a proposed next formalization milestone, not a solution of the full
-plane Jacobian conjecture and not a claim of mathematical novelty. In
-particular, the conclusion belongs to the known low-degree positive territory;
-the purpose of this note is to make the reduction precise enough to formalize
-and to expose every place where a rational denominator could invalidate a
-naive proof.
+Status: **KNOWN THEOREM / PARTIAL LEAN FORMALIZATION.** Moskowicz's Theorem 2.7
+already proves the automorphy statement below.  The six-step proof in this note
+was independently derived as a direct certificate route.  Its leading-degree,
+UFD, and abstract parity-decomposition layers are Lean-certified; its
+fraction-field recurrence and denominator-clearing layers are not yet
+kernel-checked.  This is neither a solution of the full plane Jacobian
+conjecture nor a claim of mathematical novelty.
 
 ## Statement and conventions
 
@@ -26,17 +25,18 @@ Consider
   0\ne a\in K[x].
 \]
 
-The derived theorem is:
+The known theorem, together with the stronger structural conclusion targeted
+by the direct proof, is:
 
 > If `J(P,Q)=k` for some `k in K^times`, then `a in K^times`.
 > Consequently the constant-leading quadratic theorem applies, so `(P,Q)` is
 > a polynomial automorphism.
 
-Together with the already certified affine-coordinate theorem, this would
-show that a plane Keller map is invertible whenever one component has degree
-at most two in one of the variables, while the other component has arbitrary
-degree. Only the affine and constant-leading portions of that combined claim
-are currently Lean-certified; the reduction in this note is not.
+Together with the affine-coordinate case, Moskowicz's result shows that a plane
+Keller map is invertible whenever one component has degree at most two in one
+of the variables, while the other component has arbitrary degree.  The
+arbitrary-leading conclusion is source-checked but only partially
+Lean-certified here.
 
 ## Denominator ledger
 
@@ -566,9 +566,13 @@ intended certificate starts from the formal bivariate Jacobian and verifies:
 5. the specialization-at-`y=0` valuation contradiction forcing `h | g`; and
 6. the final divisibility argument forcing `h` to be a unit.
 
-Until those steps are kernel-checked, this document remains a derived proof
-target. It may guide experiments and formalization, but it must not be cited
-as a Lean theorem or as a new mathematical result.
+Steps 1 and 2 are now kernel-checked, including the simultaneous shape
+`a=epsilon*h^2` and `p_n=lambda*h^n`.  The abstract existence, uniqueness, and
+odd-degree control in the parity decomposition of step 3 are also
+kernel-checked over an arbitrary field.  The `K(x)` substitution and chain
+rule in step 3, and all of steps 4--6, remain open formalization obligations.
+This note may be cited as a direct derived proof and partial formalization, but
+not as a complete Lean theorem or as a new mathematical theorem.
 
 ## Literature and tracking boundary
 
@@ -576,15 +580,28 @@ Formalization of the variable-leading reduction is tracked in
 [ALOK-799](https://linear.app/aloksingh/issue/ALOK-799). That issue identifier
 is project tracking, not evidence for the theorem.
 
-Two primary sources already ground the adjacent positive territory in this
-repository:
+The exact antecedent is:
+
+- Vered Moskowicz, *A variation on Magnus' theorem and its generalizations*,
+  [arXiv:1810.08202v2](https://arxiv.org/abs/1810.08202), Theorem 2.7.  For
+  `Q=a(x)y^2+g(x)y+f(x)` with `a != 0`, the theorem's invariant is
+  `C=gcd(2,deg_x(a))`, hence `C` is `1` or the prime `2`; either value is in
+  the theorem's allowed set.  Its hypotheses are exactly an arbitrary
+  characteristic-zero field, an arbitrary mate `P`, and a nonzero constant
+  Jacobian.  The conclusion is that the induced endomorphism is an
+  automorphism.  This is an arXiv preprint and is cited as such.
+
+Two further primary sources locate the structural and neighboring results:
 
 - Denis Simon and Martin Weimann, *Plane Curves With Minimal Discriminant*,
   Journal of Commutative Algebra **10** (2018), 559--598,
   [DOI 10.1216/JCA-2018-10-4-559](https://doi.org/10.1216/JCA-2018-10-4-559)
-  and [arXiv:1507.01091](https://arxiv.org/abs/1507.01091). Their monic
-  minimal-discriminant theorem covers the constant-leading coordinate after
-  the reduction, not the rational-denominator argument of Steps 1--6.
+  and [arXiv:1507.01091](https://arxiv.org/abs/1507.01091).  Their Theorem 3.3
+  says, over an algebraically closed characteristic-zero field, that a
+  coordinate is monic in a variable and has minimal discriminant there.  Once
+  automorphy is known, it implies `a in K^times` and
+  `deg_x(g^2-4*a*f)=1`; it does not itself accept the Keller hypothesis as an
+  input or prove the denominator argument in Steps 1--6.
 - Marco Sabatini, *Global injectivity of planar non-singular maps that are
   polynomial in one variable*, Colloquium Mathematicum **175** (2024),
   137--151,
@@ -593,6 +610,8 @@ repository:
   results overlap important subcases, but they are not being quoted here as
   this field-uniform arbitrary-mate statement.
 
-Those overlaps are why this repository makes no novelty or priority claim.
-The proof in this note is independently derived, remains unformalized, and is
-presented only as the next certificate target.
+Moskowicz is a direct theorem-level antecedent, so the automorphy statement is
+unambiguously known.  The contribution pursued here is the independently
+derived direct proof, its explicit denominator ledger, hostile fixtures, and a
+machine-checked certificate.  That certificate remains partial at the exact
+boundary stated above.

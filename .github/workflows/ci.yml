@@ -41,6 +41,8 @@ jobs:
         run: uv run --frozen python -m scripts.affine_coordinate
       - name: Check the constant-leading quadratic-coordinate normal forms
         run: uv run --frozen python -m scripts.constant_leading_quadratic
+      - name: Check the variable-leading quadratic hostile fixtures
+        run: uv run --frozen python -m scripts.variable_leading_quadratic --depth 9
       - name: Run adversarial tests
         run: uv run --frozen pytest
       - name: Check Python types

@@ -10,6 +10,7 @@ import JacobianTwo.ConstantLeadingQuadratic
 import JacobianTwo.Counterexample
 import JacobianTwo.CubicFiber
 import JacobianTwo.QuadraticInOneVariable
+import JacobianTwo.VariableLeadingQuadratic
 
 /-!
 # Jacobian Two

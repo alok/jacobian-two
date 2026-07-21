@@ -19,6 +19,8 @@ The arbitrary-degree affine-coordinate continuation is tracked by
 [ALOK-795](https://linear.app/aloksingh/issue/ALOK-795/prove-the-arbitrary-degree-affine-coordinate-plane-keller-theorem).
 The constant-leading quadratic-coordinate continuation is tracked by
 [ALOK-798](https://linear.app/aloksingh/issue/ALOK-798/prove-the-constant-leading-quadratic-coordinate-keller-theorem).
+The variable-leading quadratic direct formalization is tracked by
+[ALOK-799](https://linear.app/aloksingh/issue/ALOK-799).
 
 ## Exact input claim
 
@@ -58,6 +60,8 @@ from floating-point samples or from the authority of the announcement.
 | Its nonproper-value set is exactly `V(Q)` | `DERIVED` | explicit escaping family and projective compactness argument |
 | A Keller map `(P,e(x)y+f(x))` with arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | actual bivariate Jacobian, degree descent, both explicit inverse charts |
 | A Keller map `(P,eps*y^2+g(x)y+f(x))` with `eps != 0` and arbitrary `P` is an automorphism | `LEAN-CERTIFIED` | affine discriminant, completed-square coordinates, normal form, and both explicit inverse laws |
+| A Keller map with one coordinate of `y`-degree at most two is an automorphism | `SOURCE-CHECKED / KNOWN` | Moskowicz, Theorem 2.7; the quadratic invariant is `gcd(2,deg_x(a)) in {1,2}` |
+| The direct reduction from variable-leading quadratic `Q` to the scalar-leading theorem | `DERIVED / PARTIALLY LEAN-CERTIFIED` | Lean certifies odd-degree descent, the leading square identity, its UFD shape, and unique parity decomposition; fraction-field recurrence and denominator clearing remain |
 | Historical novelty of the full fiber/nonproper theorem | `UNKNOWN` | derived here; same-day sources compared, priority not established |
 | Historical priority and the discovery account | `ANNOUNCED` | public posts are new and not a peer-reviewed historical record |
 
@@ -380,12 +384,61 @@ inverse, and proves both inverse laws.  The independent exact checker exercises
 a first coordinate of total degree 84 and rejects a one-coefficient
 perturbation whose determinant becomes `15-36*x`.
 
+## Milestone 7: direct certificate for a variable-leading quadratic coordinate
+
+Let
+
+```text
+P in K[x,y] arbitrary,
+Q(x,y) = a(x)*y^2 + g(x)*y + f(x),
+a != 0,
+J(P,Q) = k in K^*.
+```
+
+The automorphy conclusion is a known theorem, not a new open case.
+Moskowicz's Theorem 2.7 applies directly because the invariant attached to the
+leading `y`-coefficient is
+
+```text
+gcd(2, deg_x(a)) in {1,2}.
+```
+
+The repository's research target is a separate, elementary, machine-checked
+route that exposes why polynomiality rules out a variable leading coefficient:
+
+1. subtract scalar powers of `Q` until the remaining mate has odd `y`-degree
+   `n`;
+2. derive `p_n^2=c*a^n`, then use unique factorization to write
+   `a=eps*h^2` and `p_n=lambda*h^n`;
+3. over `K(x)`, put `U=h*y+g/(2*eps*h)` and split uniquely as
+   `P=H(Q)+U*B(Q)`;
+4. transport the Jacobian identity to derive the coefficient recurrence for
+   `B`;
+5. specialize at `y=0` and use irreducible-polynomial valuations to prove
+   `h | g`; and
+6. use the constant term of the recurrence to prove `h | k`, hence `h` is a
+   unit and `a` is a nonzero scalar.
+
+Current Lean status: steps 1 and 2 are certified from the actual bivariate
+Jacobian.  The abstract existence, uniqueness, degree, and leading-coefficient
+control for the parity decomposition in step 3 are also certified over an
+arbitrary field.  Steps 4--6, including the `K(x)` derivation wiring and the
+valuation argument, remain to be formalized.  A typed exact checker covers the
+rational-mate trap, the top equation, the central-binomial recurrence, and the
+forced infinite-tail obstruction.
+
+Simon--Weimann's coordinate criterion supplies a useful known corollary: after
+automorphy, the leading coefficient `a` is constant and
+`deg_x(g^2-4*a*f)=1`.  This is evidence for the statement, not a substitute for
+the unfinished direct Lean route.
+
 ## Repository shape
 
 ```text
 JacobianTwo/
   Counterexample.lean       # formal polynomial and collision certificate
   ConstantLeadingQuadratic.lean # arbitrary P, scalar-leading quadratic Q
+  VariableLeadingQuadratic.lean # partial direct arbitrary-leading reduction
   AffineInOneVariable.lean  # JC(2) obstruction theorem
   QuadraticInOneVariable.lean # quadratic-in-y normal form and inverse
   CubicFiber.lean           # cubic, discriminant, reconstruction, infinity algebra
@@ -394,15 +447,18 @@ scripts/
   verify.py                 # independent exact symbolic checker
   nonproper.py              # exact cubic-fiber/nonproper algebra
   constant_leading_quadratic.py # high-degree quadratic-coordinate checker
+  variable_leading_quadratic.py # denominator and infinite-tail fixtures
 tests/
   test_verify.py            # positive and adversarial fixtures
   test_nonproper.py         # discriminant, strata, and hostile fixtures
   test_constant_leading_quadratic.py # normal form and perturbation checks
+  test_variable_leading_quadratic.py # hostile arbitrary-leading fixtures
 docs/
   audit.md                  # readable derivation, provenance, claim boundary
   galois-frontier.md        # Galois theorem and first open sheet degree
   nonproper-set.md          # complete fiber/image/nonproper proof
   constant-leading-quadratic.md # proof and exact Lean declaration map
+  variable-leading-quadratic.md # known theorem and direct proof target
   research-log.md           # dated attempts and open obligations
 ```
 

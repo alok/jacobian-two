@@ -199,6 +199,29 @@ and the [proof, certificate map, and literature boundary](docs/constant-leading-
 This theorem has no degree bound on `P`; it does require the quadratic leading
 coefficient of `Q` to be a nonzero scalar.
 
+The scalar-leading hypothesis is not needed in the known mathematical theorem.
+If
+
+\[
+  Q=a(x)y^2+g(x)y+f(x),\qquad a\ne0,
+\]
+
+and `J(P,Q)` is a nonzero scalar, Moskowicz's Theorem 2.7 already implies that
+`(P,Q)` is an automorphism: its invariant
+`gcd(2, deg_x(a))` is either `1` or the prime `2`.  Simon--Weimann's coordinate
+criterion then implies, after scalar extension if necessary, that `a` is a
+nonzero scalar and that `deg_x(g^2-4*a*f)=1`.
+
+[`JacobianTwo/VariableLeadingQuadratic.lean`](JacobianTwo/VariableLeadingQuadratic.lean)
+develops an independent direct certificate for that known theorem.  Lean now
+certifies the top-coefficient equation, target-shear descent to an odd
+`y`-degree, the identity `p_n^2=c*a^n`, the UFD shape
+`a=epsilon*h^2, p_n=lambda*h^n`, and the unique even--odd decomposition over a
+field.  It does **not** yet certify the final fraction-field recurrence or the
+denominator argument forcing `h` to be a unit.  The complete proof target,
+hostile fixtures, and exact boundary are in
+[`docs/variable-leading-quadratic.md`](docs/variable-leading-quadratic.md).
+
 Two earlier bounded modules expose useful intermediate mechanisms.  First,
 
 \[
@@ -238,6 +261,7 @@ uv run --frozen python -m scripts.verify
 uv run --frozen python -m scripts.nonproper
 uv run --frozen python -m scripts.affine_coordinate
 uv run --frozen python -m scripts.constant_leading_quadratic
+uv run --frozen python -m scripts.variable_leading_quadratic --depth 9
 uv run --frozen pytest
 uv run --frozen mypy
 ```
@@ -258,6 +282,10 @@ the commands above and rejects unfinished proof declarations.
 - [`docs/constant-leading-quadratic.md`](docs/constant-leading-quadratic.md)
   proves the constant-leading quadratic-coordinate normal form and displays
   its polynomial inverse.
+- [`docs/variable-leading-quadratic.md`](docs/variable-leading-quadratic.md)
+  gives the known arbitrary-leading quadratic theorem, an independently
+  derived direct proof, the current partial Lean certificate, and every
+  remaining denominator obligation.
 - [`docs/audit.md`](docs/audit.md) gives a hand-checkable structural derivation
   of the original screenshot.
 - [`docs/research-log.md`](docs/research-log.md) records completed work,
@@ -269,6 +297,8 @@ the commands above and rejects unfinished proof declarations.
 - L. Andrew Campbell's [Galois-case theorem][campbell]
 - S. Yu. Orevkov's [three-sheet theorem][orevkov]
 - Henryk Żołądek's [result through generic degree five][zoladek]
+- Vered Moskowicz's [quadratic-coordinate antecedent][moskowicz]
+- Denis Simon and Martin Weimann's [coordinate/discriminant criterion][simon-weimann]
 - Marco Sabatini's [type-`(m,1)` triangular reduction][sabatini]
 - Zihan Zhang's [direct-consequences note][consequences]
 
@@ -280,6 +310,8 @@ symbolic certificates.
 [campbell]: https://doi.org/10.1007/BF01349234
 [orevkov]: https://doi.org/10.1070/IM1987v029n03ABEH000984
 [zoladek]: https://doi.org/10.1016/j.top.2008.04.001
+[moskowicz]: https://arxiv.org/abs/1810.08202
+[simon-weimann]: https://doi.org/10.1216/JCA-2018-10-4-559
 [sabatini]: https://doi.org/10.4064/cm9195-1-2024
 [consequences]: https://zzhang-iu.github.io/papers/direct-consequences-jacobian/index.html
 
