@@ -230,6 +230,18 @@ This kills a near-miss in the degree-minimal singular-one-pair slot, not all
 width-five `S6` curves.  See the
 [width-five near-miss note](docs/s6-width-five-near-miss.md).
 
+The full group at infinity now removes much more of that stratum.  Assume a
+polynomial normalization has degrees `m<n` and exactly one genuine singular
+pair at infinity.  Its affine link is `T(m,n)`, whose group surjects onto the
+global complement.  Requiring a transposition meridian and an exact `S6`
+quotient eliminates every width-compatible pair with `n<=11`; an exhaustive
+permutation census verifies the finite exceptional cases.  The bound is
+sharp: `(m,n)=(5,12)` has `720` valid `S6` images, including an explicit
+5-cycle/6-cycle witness.  Thus `(5,12)` is the first one-pair
+infinity-topology target, not a constructed cover or Keller map.  Multi-pair
+infinity remains open.  See the
+[S6 one-pair infinity note](docs/s6-one-pair-infinity.md).
+
 The explicit `A6` trace curve is globally dead as well: its affine complement
 group is `Z`, so single-3-cycle meridians cannot generate `A6`.  More broadly,
 under the additional hypotheses that the branch has one genuine Puiseux pair

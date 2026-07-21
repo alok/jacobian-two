@@ -946,6 +946,52 @@ This does not classify all width-five curves.  The remaining `S6` target is a
 different width-five curve with noncyclic complement, or a higher-width or
 multi-pair infinity configuration, coupled to the Keller compactification.
 
+## 2026-07-21: one-pair `S6` infinity starts at `(5,12)`
+
+Status: exact conditional stratum elimination and sharp group witness; not a
+solution of `JC(2)`.
+
+Assume the polynomial normalization degrees are `m<n` and there is exactly
+one genuine singular pair at infinity.  The projective pair is `(n-m,n)`,
+but the link on a large affine sphere is `T(m,n)`.  Leidy--Maxim's
+at-infinity epimorphism sends this torus-knot group onto the global affine
+complement.  In an `S6` quotient the common central power in
+
+```text
+<a,b | a^m=b^n>
+```
+
+dies.  A Bezout meridian `a^u*b^v`, with `n*u+m*v=1`, must map to a
+transposition.
+
+Width gives `m>=5`; a genuine singular pair gives `n-m>=2` and
+`gcd(m,n)=1`.  There are ten candidate degree pairs with `n<=11`.  Exact
+enumeration of all ordered `S6` images satisfying the two power constraints
+and the meridian constraint finds no generating pair.  The sole substantial
+near-miss is `T(5,8)`: its `735` compatible pairs give `15` groups of order
+two and `720` groups of order `120`, never `S6`.  Hand analysis explains the
+same result.  A transitive image would make `a` a 5-cycle fixing one sheet.
+If the meridian avoids that sheet the image fixes it; if it contains that
+sheet, the forced image of `b` is a 6-cycle and violates `b^8=1`.
+
+The obstruction is sharp.  For `(m,n)=(5,12)`, the census gives
+
+```text
+compatible pairs: 2175
+generated orders: 2:15, 120:1440, 720:720
+```
+
+One witness is
+
+```text
+a=(2 3 4 5 6), b=(1 2 5 3 6 4), a^-2*b^5=(1 2).
+```
+
+Conjugating `(1 2)` by the powers of `a` produces all five star
+transpositions, proving that the image is `S6`.  Hence `(5,12)` is the first
+one-pair infinity-group target.  This does not construct its branch curve or
+cover, and it does not touch multi-pair infinity.
+
 ## 2026-07-21: a one-pair `A6` branch needs collision delta at least five
 
 Status: conditional, computer-assisted exclusion; not a solution of `JC(2)`.

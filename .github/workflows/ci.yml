@@ -61,6 +61,8 @@ jobs:
         run: uv run --frozen python -m scripts.s6_trace_curve_topology
       - name: Exclude the smallest width-five S6 near-miss
         run: uv run --frozen python -m scripts.s6_width_five_curve
+      - name: Check the S6 one-pair infinity-group frontier
+        run: uv run --frozen python -m scripts.s6_one_pair_infinity
       - name: Check the conditional A6 one-pair infinity obstruction
         run: uv run --frozen python -m scripts.a6_one_pair_infinity
       - name: Reduce the conditional A6 delta-five family
