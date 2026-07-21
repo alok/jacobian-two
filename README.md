@@ -79,7 +79,10 @@ branch-curve topology gives the same two groups and narrows the local types:
   multiplicity-three branches, uses all six sheets, and is omitted by the
   original affine map; moreover, the two jump units concentrate at a unique
   local-degree-five point, whose branch is a `(2,5)` cusp when its source is
-  smooth.
+  smooth; and
+- in the `S6` passport, the complete nine-row fiber census is known, each jump
+  block has local group `S_(2+kappa)`, and every smooth-source jump is one of
+  `T(2,3)`, `T(3,4)`, or `T(4,5)`.
 
 The eliminated one-dicritical types `(2,2)` and `(4,1)` would have injective
 normalization.  Lin--Zaidenberg then makes the branch a monomial contractible
@@ -379,6 +382,9 @@ optional Sage/GAP replay is an additional independent local cross-check.
   rules out the `A6` jump partition `1+1`, proves the unique
   local-degree-five point, and classifies its smooth-source branch as a
   `(2,5)` cusp.
+- [`docs/s6-one-dicritical-local.md`](docs/s6-one-dicritical-local.md)
+  gives the complete `S6` fiber census, symmetric local blocks, jump
+  trichotomy, torus-knot types, and hostile analytic models.
 - [`docs/newton-72-108-sparse.md`](docs/newton-72-108-sparse.md) gives the
   exact sparse-support obstruction in the separate residual coordinate-degree
   configurations.

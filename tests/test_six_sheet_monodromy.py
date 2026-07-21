@@ -18,6 +18,7 @@ from scripts.six_sheet_monodromy import (
     generated_group,
     normally_generated_overgroups,
     one_dicritical_passports,
+    one_dicritical_s6_fiber_profiles,
     orevkov_budget_profiles,
     permutation_orbit_sizes,
     ramified_branch_profiles,
@@ -263,6 +264,30 @@ def test_a6_torus_2_5_local_monodromy_is_a_hostile_survivor() -> None:
     assert permutation_orbit_sizes(local_group) == (5, 1)
     assert len(global_group) == 360
     assert global_group == generated_group(TRANSITIVE_GROUPS[14].generators)
+
+
+def test_one_dicritical_s6_fiber_census_is_exhaustive() -> None:
+    profiles = one_dicritical_s6_fiber_profiles()
+
+    assert tuple(
+        (
+            profile.jumps,
+            profile.boundary_block_sizes,
+            profile.affine_fiber_size,
+            profile.is_omitted,
+        )
+        for profile in profiles
+    ) == (
+        ((0,), (2,), 4, False),
+        ((1,), (3,), 3, False),
+        ((2,), (4,), 2, False),
+        ((3,), (5,), 1, False),
+        ((0, 0), (2, 2), 2, False),
+        ((0, 1), (2, 3), 1, False),
+        ((0, 2), (2, 4), 0, True),
+        ((1, 1), (3, 3), 0, True),
+        ((0, 0, 0), (2, 2, 2), 0, True),
+    )
 
 
 def test_one_dicritical_filter_keeps_distinct_same_cycle_type_classes() -> None:

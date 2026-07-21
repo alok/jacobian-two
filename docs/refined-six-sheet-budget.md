@@ -336,6 +336,10 @@ cannot split into two excess-one points.  The proof and the forced smooth
 `(2,5)` cusp alternative are in
 [`a6-one-dicritical-local.md`](a6-one-dicritical-local.md).
 
+For the one-dicritical `S6` survivor, the complete local fiber census and
+smooth-source torus-knot classification are in
+[`s6-one-dicritical-local.md`](s6-one-dicritical-local.md).
+
 ## 7. Why this still does not finish degree six
 
 The surviving actions are primitive.  Their point stabilizers

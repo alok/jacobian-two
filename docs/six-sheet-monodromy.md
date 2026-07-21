@@ -901,6 +901,14 @@ source is smooth, its target branch is a `(2,5)` cusp.  Eliminating this `A6`
 stratum would leave only the `S6` passport, but this repository does not yet
 claim that elimination.
 
+The complementary local analysis in
+[`s6-one-dicritical-local.md`](s6-one-dicritical-local.md) gives all nine
+finite fiber rows for the `S6,(e,d)=(2,1)` passport.  A jump
+`kappa=mu-2` has local group `S_(2+kappa)`, and every jump away from the
+at-most-one contracted source singularity is exactly `T(2,3)`, `T(3,4)`, or
+`T(4,5)`.  Explicit local germs realize those rows, so this is again a sharp
+restriction rather than an elimination.
+
 For the unrestricted six-sheet problem, configurations with several dicritical
 components must still be handled.  Section 7 reduces their monodromy to `A6`
 or `S6`, but a combinatorial framework is still only necessary data: Borisov
