@@ -69,6 +69,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_five_family
       - name: Exhaust the conditional A6 delta-five residual
         run: uv run --frozen python -m scripts.a6_delta_five_residual
+      - name: Exclude the generic conditional A6 delta-seven stratum
+        run: uv run --frozen python -m scripts.a6_delta_seven_generic
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts

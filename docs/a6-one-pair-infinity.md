@@ -328,9 +328,13 @@ has zero suitable `A6` images.  At `Delta=7`, the three candidates are
   }
 \]
 
-No plane curve or Keller map with the surviving `(3,10)` data is constructed
-here.  Multi-pair infinity and branches violating the finite-singularity
-hypotheses remain outside this theorem.
+The [generic delta-seven audit](a6-delta-seven-generic.md) gives the complete
+four-parameter normal form and excludes its nondegenerate open by an exact
+cyclic-complement representative plus proper Whitney--Thom transport.  A
+conditional equality survivor must therefore lie on the repeated-collision
+or triple-image walls `G=0` or `T=0`.  No `A6` cover or Keller map is
+constructed.  Those walls, multi-pair infinity, and branches violating the
+finite-singularity hypotheses remain outside this theorem.
 
 ## Reproduction and source boundary
 
@@ -340,6 +344,7 @@ Run the dependency-free replay with:
 uv run python -m scripts.a6_one_pair_infinity
 uv run python -m scripts.a6_delta_five_family
 uv run python -m scripts.a6_delta_five_residual
+uv run python -m scripts.a6_delta_seven_generic
 ```
 
 Together these verify the genus candidates, symbolic family and residual
@@ -347,7 +352,9 @@ identities, all relevant torus-quotient censuses through delta seven, and all
 stored presentation censuses.  Extracting the presentations themselves uses
 Sage 10.8/Sirocco; reproduce that extraction with
 `sage tools/check_a6_one_pair_infinity.sage` and
-`sage tools/check_a6_delta_five_residual.sage`.  The large-link epimorphism is
+`sage tools/check_a6_delta_five_residual.sage`, and reproduce the generic
+delta-seven presentation with
+`sage tools/check_a6_delta_seven_generic.sage`.  The large-link epimorphism is
 the standard Zariski--Lefschetz theorem at infinity.  The family steps use
 proper Whitney--Thom isotopy, not mere constancy of singularity counts.  These
 topological dependencies are distinct from the exact symbolic and finite

@@ -1106,6 +1106,39 @@ group enumerations are exact; deriving the stored presentations and
 transporting representatives along strata remain the computer-assisted
 Zariski--van Kamp and Whitney--Thom layers.
 
+## 2026-07-21: the generic conditional `A6` delta-seven family is cyclic
+
+Status: exact four-parameter family algebra and finite permutation replay,
+plus computer-assisted Zariski--van Kamp extraction and equisingular topology;
+the collision walls remain open.
+
+At the next conditional equality, target shears give the complete normal form
+
+```text
+P=t^2+t^3,
+Q=alpha*t^5+beta*t^7+gamma*t^8+delta*t^9+t^10,
+alpha != 0.
+```
+
+The collision polynomial is septic.  Its discriminant is `C*G`, the endpoint
+resultant is `-alpha*L`, the tangent resultant is `-alpha*L*G`, and the
+triple-image resultant is `C^2*T`.  Thus the fully nondegenerate open is
+`alpha*L*C*T*G != 0`.
+
+The exact point `(alpha,beta,gamma,delta)=(2,0,0,0)` gives
+`Q=2*t^5+t^10`.  It has one `T(2,5)` cusp, seven distinct transverse nodes,
+and a `(7,10)` branch at infinity, with complete genus accounting
+`36=2+7+27`.  Sage simplifies its affine complement to `Z`.  The independent
+`40^3` replay finds exactly 40 satisfying single-3-cycle assignments, all
+with image `C3`, and no `A6` image.
+
+The nondegenerate open is connected.  After a finite base change labels the
+seven node sections, proper projective Whitney--Thom transport propagates the
+cyclic complement throughout it.  Consequently any conditional delta-seven
+survivor lies on `G=0` or `T=0`.  This does not classify those walls, derive
+the one-pair and finite-singularity hypotheses, construct an `A6` cover or
+Keller map, or prove the plane Jacobian conjecture.
+
 ## 2026-07-21: the forced `A6` relations survive the spin cover
 
 Status: exact hostile lift; no compactification or Keller map.

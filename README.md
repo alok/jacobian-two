@@ -261,8 +261,8 @@ this coarse stage.  The extra infinity and singularity hypotheses remain
 unproved for arbitrary Keller branches.  See the
 [A6 one-pair note](docs/a6-one-pair-infinity.md).
 
-The delta-five equality family is now fully exhausted.  Every conditional `(3,8)` curve is
-polynomially equivalent to
+The delta-five equality family is now fully exhausted.  Every conditional
+`(3,8)` curve is polynomially equivalent to
 `(t^2+t^3,alpha*t^5+beta*t^6+gamma*t^7+t^8)`.  Exact collision resultants split
 its valid parameter space into a generic five-node stratum, an ordinary-triple
 divisor, and a contact-two divisor.  Sage's presentation simplifier reports
@@ -276,6 +276,18 @@ the computer-assisted Zariski--van Kamp extraction and Whitney--Thom transport.
 Consequently `Delta=5` is conditionally impossible; this does not eliminate
 the unrestricted `A6` passport.  See the
 [A6 delta-five family note](docs/a6-delta-five-family.md).
+
+The next equality family is no longer wholly generic either.  Every
+conditional degree-`(3,10)` branch has the four-parameter normal form
+`(t^2+t^3, alpha*t^5+beta*t^7+gamma*t^8+delta*t^9+t^10)`.  The exact member
+`(t^2+t^3,2*t^5+t^10)` has the forced cusp, seven transverse nodes, a `(7,10)`
+infinity pair, and complete genus accounting, but its affine complement is
+`Z`; the exhaustive `40^3` replay has no `A6` image.  Proper Whitney--Thom
+transport excludes the connected nondegenerate four-parameter open.  Thus a
+conditional delta-seven survivor must lie on its repeated-collision or
+triple-image walls.  Those walls, the multi-pair case, and the unrestricted
+passport remain open.  See the
+[A6 delta-seven generic note](docs/a6-delta-seven-generic.md).
 
 The first cubic-cover obstruction also survives an exact lift test.  In the
 natural spin double cover `2.A6`, the canonical order-three lifts of the

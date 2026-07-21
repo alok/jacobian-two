@@ -632,8 +632,10 @@ pairs.  Therefore the full result of this conditional audit is
   } \tag{9.1}
 \]
 
-Passing the large-link test does not construct the degree-`(3,10)` branch,
-an `A6` cover, or a Keller map.  It merely names the next conditional family.
+The [generic delta-seven audit](a6-delta-seven-generic.md) constructs a clean
+degree-`(3,10)` branch and excludes the connected nondegenerate open of its
+complete four-parameter family.  It does not classify the collision walls,
+construct an `A6` cover, or construct a Keller map.
 
 ## Reproduction
 
