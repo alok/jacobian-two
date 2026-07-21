@@ -736,6 +736,47 @@ S6_TWO_CURVE_FIBER_PROFILES: Final[tuple[S6TwoCurveFiberProfile, ...]] = (
 )
 
 
+@dataclass(frozen=True)
+class A6ExceptionalParityEndpoint:
+    """Arithmetic endpoint of the exceptional-source contradiction.
+
+    Geometry outside this finite certificate forces the universal cyclic
+    cover to have order two, the lifted map to have degree ten, and the two
+    branches of one target coordinate to contribute ``2`` and ``2*r``.  Deck
+    invariance requires ``r`` to be odd.  This object records the final exact
+    incompatibility without pretending to certify the geometric premises.
+    """
+
+    local_degree: int = 5
+    cyclic_cover_order: int = 2
+    transverse_branch_contribution: int = 2
+
+    @property
+    def lifted_degree(self) -> int:
+        """Return the local degree after the cyclic quotient cover."""
+
+        return self.local_degree * self.cyclic_cover_order
+
+    @property
+    def forced_tangent_contact_order(self) -> int:
+        """Solve ``lifted_degree = 2 + 2*r`` for the contact order ``r``."""
+
+        residual = self.lifted_degree - self.transverse_branch_contribution
+        if residual % 2 != 0:
+            msg = "branch contributions do not determine an integral contact order"
+            raise ValueError(msg)
+        return residual // 2
+
+    @property
+    def contradicts_odd_deck_invariance(self) -> bool:
+        """Whether the forced contact order violates oddness under ``-I``."""
+
+        return self.forced_tangent_contact_order % 2 == 0
+
+
+A6_EXCEPTIONAL_PARITY_ENDPOINT: Final = A6ExceptionalParityEndpoint()
+
+
 def one_dicritical_s6_fiber_profiles() -> tuple[OneDicriticalS6FiberProfile, ...]:
     """Enumerate the complete finite fiber census for the ``S6`` passport.
 

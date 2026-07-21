@@ -417,9 +417,10 @@ singularity is a `(2,5)` cusp.
 This does not close the passport.  The exact permutations `(345)` and `(123)`
 satisfy the `T(2,5)` five-braid relation and generate local `A5`; adjoining
 the collision meridian `(456)` generates global `A6`.  The regression test
-locks this hostile stopping fixture.  The remaining dichotomy is a smooth
-`(2,5)` cusp source or the unique normal-surface singularity obtained by
-contracting `L_C`.
+locks this hostile stopping fixture.  This milestone initially left a
+dichotomy between the smooth `(2,5)` cusp source and the unique
+normal-surface singularity obtained by contracting `L_C`; the later
+Hirzebruch--Jung parity milestone below eliminates the latter.
 
 ## 2026-07-21: exact one-dicritical `S6` local passports
 
@@ -478,6 +479,27 @@ The disjoint local meridians `(123),(456),(14),(25)` nevertheless generate
 all of `S6`.  This hostile fixture proves that the new collision census stops
 at the global braid/splice/canonical realization problem rather than at a
 permutation contradiction.
+
+## 2026-07-21: the exceptional one-dicritical `A6` source is impossible
+
+Status: derived here and independently hostile-audited; eliminates one local
+alternative, not the smooth `(2,5)` passport.
+
+If the unique local-degree-five point came from contracting the linear
+constant chain, its normal source germ would be a Hirzebruch--Jung cyclic
+quotient.  Pulling the finite germ back to the universal quasi-etale cover
+gives a smooth-source map `h` of degree `5n` with ramification divisor twice
+one smooth lifted endpoint curvette.  Its quadratic jets have Wronskian a
+doubled line.  Riemann--Hurwitz and deck characters force the jets to be
+`x^2,xy`, the cyclic cover to have order two, and its involution to be `-I`.
+
+The lifted map is therefore even and has degree ten.  The curve `v=0` has two
+smooth transverse branches.  The Jacobian chain rule makes their exact
+intersection contributions `2` and `2r`, so local degree gives `r=4`.
+Invariance of the unique branch tangent to `x=0` makes its graphing series
+odd, forcing `r` odd: a contradiction.  Thus the degree-five source is
+necessarily smooth and the earlier analysis makes its target branch exactly
+the `(2,5)` cusp.
 
 ## 2026-07-21: sparse-interior obstruction for `(72,108)`
 

@@ -897,9 +897,12 @@ branches, exhausts all six sheets above an omitted target value, and consumes
 none of the remaining jump defect two.  The local analysis in
 [`a6-one-dicritical-local.md`](a6-one-dicritical-local.md) rules out splitting
 those two units as `1+1`: there is one unique local-degree-five point.  If its
-source is smooth, its target branch is a `(2,5)` cusp.  Eliminating this `A6`
-stratum would leave only the `S6` passport, but this repository does not yet
-claim that elimination.
+source is smooth, its target branch is a `(2,5)` cusp.  The cyclic-quotient
+lift and parity contradiction in
+[`a6-exceptional-source.md`](a6-exceptional-source.md) now prove that the
+source must be smooth.  Eliminating this surviving cusp stratum would leave
+only the `S6` passport, but this repository does not yet claim that
+elimination.
 
 The complementary local analysis in
 [`s6-one-dicritical-local.md`](s6-one-dicritical-local.md) gives all nine

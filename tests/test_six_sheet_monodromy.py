@@ -2,6 +2,7 @@
 
 from scripts.six_sheet_monodromy import (
     A6_COLLISION_MERIDIAN,
+    A6_EXCEPTIONAL_PARITY_ENDPOINT,
     A6_TORUS_2_5_LOCAL_GENERATORS,
     OREVKOV_FORBIDDEN_RAMIFICATION_INDEX,
     OREVKOV_ONE_DICRITICAL_TYPES,
@@ -266,6 +267,14 @@ def test_a6_torus_2_5_local_monodromy_is_a_hostile_survivor() -> None:
     assert permutation_orbit_sizes(local_group) == (5, 1)
     assert len(global_group) == 360
     assert global_group == generated_group(TRANSITIVE_GROUPS[14].generators)
+
+
+def test_a6_exceptional_source_parity_endpoint_is_inconsistent() -> None:
+    endpoint = A6_EXCEPTIONAL_PARITY_ENDPOINT
+
+    assert endpoint.lifted_degree == 10
+    assert endpoint.forced_tangent_contact_order == 4
+    assert endpoint.contradicts_odd_deck_invariance
 
 
 def test_one_dicritical_s6_fiber_census_is_exhaustive() -> None:

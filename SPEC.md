@@ -58,7 +58,7 @@ from floating-point samples or from the authority of the announcement.
 | Generic degree six is the first unresolved plane sheet degree | `SOURCE-CHECKED` | Campbell, Orevkov, Domrina, Żołądek, and Borisov literature audit |
 | A degree-six plane Keller counterexample must have monodromy `A6` or `S6` in its transitive degree-six action | `DERIVED / EXACTLY ENUMERATED` | affine fixed-sheet inertia leaves seven groups; the refined identity `sum(e*d+delta)=5`, exact class costs, and the irreducible-branch obstruction eliminate the other five |
 | A one-dicritical degree-six counterexample can only have `A6` with `(e,d)=(3,1)` or `S6` with `(2,1)`, and its branch normalization is noninjective | `DERIVED / EXACTLY ENUMERATED` | finite-normalization deck rigidity, local multiplicity, purity, Lin--Zaidenberg topology, and exact subgroup witnesses |
-| In the one-dicritical `A6` passport, the two jump units occur at one unique local-degree-five point; if its source is smooth, its branch has Puiseux pair `(2,5)` | `DERIVED / EXACT HOSTILE FIXTURE` | one-chain source topology, doubled ramification divisor, rank-one parity, corank-two initial-form obstruction, and exact `A5 -> A6` permutation fixture |
+| In the one-dicritical `A6` passport, the two jump units occur at one unique local-degree-five point; its source is necessarily smooth and its branch has Puiseux pair `(2,5)` | `DERIVED / HOSTILE-AUDITED` | one-chain source topology, Hirzebruch--Jung cyclic lift, quadratic-jet characters, exact local intersection parity, and the surviving `A5 -> A6` permutation fixture |
 | In the one-dicritical `S6` passport, the finite fiber has one of nine exact rows, every jump block has local group `S_(2+kappa)`, and every smooth-source jump is `T(2,3)`, `T(3,4)`, or `T(4,5)` | `DERIVED / EXACTLY ENUMERATED` | Orevkov's three-unit budget, constant multiplicity, transposition normal generation, simple ramification, and hostile analytic germs |
 | In the saturated two-curve `S6` transposition-plus-3-cycle passport, both branch normalizations self-collide; the exact collision rows are `3+3`, `2+2+1+1` or `2+2+2`, and cross-intersections are `2+3+1` | `DERIVED / EXACT HOSTILE FIXTURE` | Nguyen's singular-component theorem, zero excess, Orevkov's local embedding, constant multiplicity six, and four exact meridians generating `S6` |
 | The first residual transformed `(72,108)` Newton configuration needs at least three nonzero strict-interior coefficients, and the second needs at least four | `DERIVED / EXHAUSTIVELY CHECKED` | all `7504` first-case supports of size at most two and all `3683` second-case supports of size at most three have replayed exact certificates; the five zero-product exceptions have unit-ideal certificates |
@@ -524,9 +524,13 @@ point on the boundary.  At a smooth point the Jacobian divisor is twice the
 smooth ramification prime; rank-one parity and a corank-two quadratic-jet
 argument both rule out local degree four.  Hence the two jump units form one
 unique local degree five.  A smooth such point has rank one and a forced
-`(2,5)` cusp.  An exact hostile fixture verifies that its knot group can still
-map onto local `A5` and extend with a collision meridian to global `A6`, so
-this is a reduction rather than an elimination.
+`(2,5)` cusp.  Pulling the exceptional singular-source alternative to its
+Hirzebruch--Jung universal cyclic cover forces an `A1` quotient, then an exact
+intersection count forces an even contact order where deck invariance forces
+an odd one.  Thus the source is necessarily smooth.  An exact hostile fixture
+verifies that its knot group can still map onto local `A5` and extend with a
+collision meridian to global `A6`, so this remains a reduction rather than an
+elimination.
 
 For the one-dicritical `S6` survivor, writing `kappa(t)=mu_t-2` gives
 `sum kappa=3` and the exact fiber formula

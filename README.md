@@ -82,8 +82,8 @@ branch-curve topology gives the same two groups and narrows the local types:
 - in the `A6` passport, every normalization collision consists of two smooth
   multiplicity-three branches, uses all six sheets, and is omitted by the
   original affine map; moreover, the two jump units concentrate at a unique
-  local-degree-five point, whose branch is a `(2,5)` cusp when its source is
-  smooth; and
+  local-degree-five point; a cyclic-quotient lift and parity contradiction
+  force its source to be smooth, and its branch is a `(2,5)` cusp; and
 - in the `S6` passport, the complete nine-row fiber census is known, each jump
   block has local group `S_(2+kappa)`, and every smooth-source jump is one of
   `T(2,3)`, `T(3,4)`, or `T(4,5)`.
@@ -100,7 +100,9 @@ and `S6`.  The refined identity and universal elimination are proved in the
 geometric setup in the
 [six-sheet monodromy note](docs/six-sheet-monodromy.md).  The universal
 two-curve `S6` collision theorem is in the
-[two-curve collision note](docs/s6-two-curve-collisions.md).  The dependency-free
+[two-curve collision note](docs/s6-two-curve-collisions.md), and the
+exceptional `A6` source is removed in the
+[Hirzebruch--Jung parity note](docs/a6-exceptional-source.md).  The dependency-free
 [Python certificate](scripts/six_sheet_monodromy.py) rebuilds the exact groups,
 classes, normal closures, normalizers, deck groups, blocks, and local subgroup
 orbits; an optional [Sage/GAP checker](tools/check_six_sheet_gap.sage) verifies

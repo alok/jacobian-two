@@ -333,8 +333,11 @@ realizable.
 
 Under the additional one-dicritical hypothesis, the `A6` residual budget two
 cannot split into two excess-one points.  The proof and the forced smooth
-`(2,5)` cusp alternative are in
-[`a6-one-dicritical-local.md`](a6-one-dicritical-local.md).
+`(2,5)` cusp are in
+[`a6-one-dicritical-local.md`](a6-one-dicritical-local.md).  The
+Hirzebruch--Jung lift and parity argument in
+[`a6-exceptional-source.md`](a6-exceptional-source.md) eliminates the
+contracted singular-source alternative.
 
 For the one-dicritical `S6` survivor, the complete local fiber census and
 smooth-source torus-knot classification are in

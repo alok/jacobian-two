@@ -24,10 +24,12 @@ that they cannot split as `1+1`:
 \tag{0.1}
 \]
 
-If the finite-normalization source is smooth at `x_*`, the corresponding
-unibranch target singularity has Puiseux pair `(2,5)`.  The other possibility
-is that `x_*` is the unique surface singularity created by contracting the
-constant boundary chain.
+The companion
+[`a6-exceptional-source.md`](a6-exceptional-source.md) eliminates the only
+other apparent possibility, the normal-surface singularity created by
+contracting the constant boundary chain.  Consequently the source is smooth
+at `x_*`, and the corresponding unibranch target singularity has Puiseux pair
+`(2,5)`.
 
 This is a strict reduction, not an elimination of the `A6` passport.  An exact
 permutation fixture shows that the `(2,5)` knot group has the required local
@@ -293,13 +295,11 @@ but its singular critical curve `z^2=X^3`, parametrized by
 `(X,z)=(t^2,t^3)`, maps with orders `(2,15)`.  Section 1 is exactly what rules
 out this hostile germ in Orevkov's minimal one-chain model.
 
-The remaining local dichotomy is exact:
-
-1. `x_*` is a smooth source point and the intrinsic branch singularity is a
-   `(2,5)` cusp; or
-2. `x_*` is the unique singular point produced by contracting `L_C`, and the
-   corresponding degree-five local cover of a normal surface remains to be
-   classified.
+At this stage of the argument there are two formal alternatives: a smooth
+source with a `(2,5)` cusp, or the unique point produced by contracting
+`L_C`.  The Hirzebruch--Jung lift in
+[`a6-exceptional-source.md`](a6-exceptional-source.md) eliminates the second
+alternative.  Thus the smooth `(2,5)` case is mandatory.
 
 ## 6. Abstract monodromy does not eliminate the cusp
 
@@ -376,16 +376,14 @@ themselves.
 
 ## 8. The next exact target
 
-The one-dicritical `A6` problem has been reduced to one degree-five local
-`A5` point and at least one separate `3+3` collision.  The next attack must
-couple them through global data:
-
-- in the smooth subcase, the `(2,5)` cusp and the collision Kummer laws
-  (7.1);
-- in the exceptional subcase, the degree-five local cover whose source is the
-  unique cyclic-plumbing singularity from the contracted `L_C` chain;
-- in both cases, the Domrina--Orevkov splice equations or Borisov's canonical
-  and determinant labels on the compactification graph.
+The one-dicritical `A6` problem has been reduced to one smooth degree-five
+local `A5` point with a `(2,5)` target cusp and at least one separate `3+3`
+collision.  The exceptional cyclic-plumbing source is impossible by the
+Hirzebruch--Jung lift and parity argument in
+[`a6-exceptional-source.md`](a6-exceptional-source.md).  The next attack must
+couple the cusp and the collision Kummer laws (7.1) through the
+Domrina--Orevkov splice equations or Borisov's canonical and determinant
+labels on the compactification graph.
 
 None of the arguments in this note excludes the remaining `S6` passport.
 
@@ -398,5 +396,6 @@ None of the arguments in this note excludes the remaining `S6` passport.
   5.2 gives smooth local embeddings at zero-jump points.
 
 The local-degree-four exclusion, the unique-jump theorem, and the smooth
-`(2,5)` classification are derived in this repository.  No claim of
-historical priority is made.
+`(2,5)` classification are derived in this note.  The separate
+Hirzebruch--Jung argument proves that the smooth case is mandatory.  No claim
+of historical priority is made.
