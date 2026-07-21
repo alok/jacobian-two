@@ -9,12 +9,13 @@ the unordered-pair incidence is reducible at ``k = 0, +/-2``.  The genuine
 collision polynomials have degree splits ``2+8`` and ``4+6`` rather than the
 misleading cancellation powers in the specialized generic decic.
 
-This module gives an exact finite ledger for the six expected
+This module gives an exact generic-clean-witness ledger for the six expected
 codimension-two profiles on those true split charts.  It records:
 
 * the exact ``V/W`` component identities, intersections, diagonals, and
   cusp/critical boundaries;
-* every component-length allocation compatible with the split degree budget;
+* a generated finite enumeration of every component-length allocation
+  compatible with the split degree budget and the clean overlap rules;
 * exact coefficient-matrix ranks and clean algebraic witnesses for every
   allowed generic allocation at ``k=0`` and ``k=2``;
 * the involutive transport from ``k=2`` to ``k=-2``; and
@@ -22,17 +23,20 @@ codimension-two profiles on those true split charts.  It records:
   pair lies on both components and has local length two.
 
 The witnesses certify the incidence geometry and nonemptiness of the listed
-clean algebraic opens.  They do not compute affine complement groups or prove
-Whitney--Thom propagation.  Compatible residual coefficient-rank loci and
-the ``P``-critical triple fibers at ``k=+/-2`` remain deeper boundary audits;
-no plane Jacobian-conjecture claim is made here.
+clean algebraic opens.  They do not bound every component supported on a
+coefficient-rank-drop locus, compute affine complement groups, or prove
+Whitney--Thom propagation.  Compatible residual coefficient-rank loci remain
+a deeper split-boundary audit.  The ``P``-critical triple fibers are handled
+by the separate ``a6_delta_ten_pcritical_triples`` certificate and are not
+silently counted as part of this generic ledger.  No plane
+Jacobian-conjecture claim is made here.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import cache
-from itertools import combinations
+from itertools import combinations, combinations_with_replacement
 from typing import Final
 
 from sympy import (
@@ -54,6 +58,7 @@ from sympy import (
 from scripts.a6_delta_ten_generic import (
     ALPHA,
     BETA,
+    COLLISION_POLYNOMIAL,
     CUSP_IMAGE_FACTOR,
     DELTA,
     EXTRA_CRITICAL_FACTOR,
@@ -66,6 +71,7 @@ from scripts.a6_delta_ten_generic import (
     S,
     SECOND_DIVIDED_DIFFERENCE,
     T,
+    TANGENCY_POLYNOMIAL,
     ZERO_FIBER_GRAPH,
     ZERO_FIBER_VERTICAL,
     exceptional_graph,
@@ -76,6 +82,7 @@ PARAMETERS: Final = (ALPHA, BETA, GAMMA, DELTA)
 FIRST_ROOT: Final = Symbol("u_split")
 SECOND_ROOT: Final = Symbol("v_split")
 NODE_TARGET_X: Final = Symbol("x_split_node")
+COEFFICIENT_SIGN_FLIP: Final = {BETA: -BETA, DELTA: -DELTA}
 
 
 def split_vertical(kappa: int) -> Expr:
@@ -122,6 +129,114 @@ def graph_target_x(kappa: int) -> Expr:
         return -(S * (S - 1) ** 2 * (S - 2)) / 4
     msg = "the split parameter must be 0, +2, or -2"
     raise ValueError(msg)
+
+
+@dataclass(frozen=True, slots=True)
+class SplitPlusMinusTransportCertificate:
+    """Exact full-family transport from ``k=2`` to ``k=-2``.
+
+    The source and target involution is ``t |-> -t`` and ``y |-> -y``;
+    consequently the coefficient involution is
+    ``(a,b,c,d) |-> (a,-b,c,-d)``.  The component variable ``R=tu`` is fixed,
+    while ``S=t+u`` changes sign.
+    """
+
+    p_identity: Expr
+    q_identity: Expr
+    pair_identity: Expr
+    collision_identity: Expr
+    tangency_identity: Expr
+    vertical_component_identity: Expr
+    graph_component_identity: Expr
+    vertical_target_identity: Expr
+    graph_target_identity: Expr
+    cusp_factor_identity: Expr
+    extra_critical_factor_identity: Expr
+
+    @property
+    def verified(self) -> bool:
+        """Whether the full family and every clean-wall polynomial transport."""
+
+        return all(
+            identity == 0
+            for identity in (
+                self.p_identity,
+                self.q_identity,
+                self.pair_identity,
+                self.collision_identity,
+                self.tangency_identity,
+                self.vertical_component_identity,
+                self.graph_component_identity,
+                self.vertical_target_identity,
+                self.graph_target_identity,
+                self.cusp_factor_identity,
+                self.extra_critical_factor_identity,
+            )
+        )
+
+
+@cache
+def exact_split_plus_minus_transport_certificate() -> (
+    SplitPlusMinusTransportCertificate
+):
+    """Build the exact ``(t,y,b,d) |-> (-t,-y,-b,-d)`` certificate."""
+
+    return SplitPlusMinusTransportCertificate(
+        p_identity=expand(
+            FAMILY_P.subs(KAPPA, -2)
+            - FAMILY_P.subs({KAPPA: 2, T: -T}, simultaneous=True)
+        ),
+        q_identity=expand(
+            FAMILY_Q.subs(COEFFICIENT_SIGN_FLIP, simultaneous=True)
+            + FAMILY_Q.subs(T, -T)
+        ),
+        pair_identity=expand(
+            PAIR_INCIDENCE.subs(KAPPA, -2).subs(S, -S) + PAIR_INCIDENCE.subs(KAPPA, 2)
+        ),
+        collision_identity=expand(
+            COLLISION_POLYNOMIAL.subs(KAPPA, -2)
+            .subs(COEFFICIENT_SIGN_FLIP, simultaneous=True)
+            .subs(S, -S)
+            - COLLISION_POLYNOMIAL.subs(KAPPA, 2)
+        ),
+        tangency_identity=expand(
+            TANGENCY_POLYNOMIAL.subs(KAPPA, -2)
+            .subs(COEFFICIENT_SIGN_FLIP, simultaneous=True)
+            .subs(S, -S)
+            + TANGENCY_POLYNOMIAL.subs(KAPPA, 2)
+        ),
+        vertical_component_identity=expand(
+            exceptional_vertical(-1).subs(
+                COEFFICIENT_SIGN_FLIP,
+                simultaneous=True,
+            )
+            - exceptional_vertical(1)
+        ),
+        graph_component_identity=expand(
+            exceptional_graph(-1)
+            .subs(COEFFICIENT_SIGN_FLIP, simultaneous=True)
+            .subs(S, -S)
+            - exceptional_graph(1)
+        ),
+        vertical_target_identity=expand(vertical_target_x(-2) - vertical_target_x(2)),
+        graph_target_identity=expand(
+            graph_target_x(-2).subs(S, -S) - graph_target_x(2)
+        ),
+        cusp_factor_identity=expand(
+            CUSP_IMAGE_FACTOR.subs(KAPPA, -2).subs(
+                COEFFICIENT_SIGN_FLIP,
+                simultaneous=True,
+            )
+            - CUSP_IMAGE_FACTOR.subs(KAPPA, 2)
+        ),
+        extra_critical_factor_identity=expand(
+            EXTRA_CRITICAL_FACTOR.subs(KAPPA, -2).subs(
+                COEFFICIENT_SIGN_FLIP,
+                simultaneous=True,
+            )
+            - EXTRA_CRITICAL_FACTOR.subs(KAPPA, 2)
+        ),
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -319,6 +434,163 @@ def _allocation(
         graph_node_count=nodes[1],
         expected_dimension=2,
     )
+
+
+SIMPLE_EDGE_INCREMENTS: Final = {"V": (1, 0), "W": (0, 1)}
+CONTACT_EDGE_LENGTHS: Final = {"V": (2, 0), "W": (0, 2)}
+THIRD_ORDER_CONTACT_LENGTHS: Final = {"V": (3, 0), "W": (0, 3)}
+REGULAR_TRIPLE_EDGE_LENGTHS: Final = (1, 2)
+REGULAR_QUADRUPLE_EDGE_LENGTHS: Final = (2, 4)
+OVERLAP_CONTACT_LENGTHS: Final = (1, 1)
+SPLIT_COMPONENT_BUDGETS: Final = {
+    "k=0": (2, 8),
+    "k=+/-2": (4, 6),
+}
+
+
+def _add_edge_lengths(*lengths: tuple[int, int]) -> tuple[int, int]:
+    """Add vertical/graph local-length vectors."""
+
+    return (
+        sum(length[0] for length in lengths),
+        sum(length[1] for length in lengths),
+    )
+
+
+def _fits_component_budget(
+    special: tuple[int, int],
+    budget: tuple[int, int],
+) -> bool:
+    """Whether a special packet leaves nonnegative residual-node budgets."""
+
+    return special[0] <= budget[0] and special[1] <= budget[1]
+
+
+@cache
+def generated_split_allocations() -> tuple[SplitAllocation, ...]:
+    """Generate every clean generic allocation from edge-length rules.
+
+    Two ordinary contacts are required to occur at distinct pair roots;
+    ``combinations_with_replacement`` permits the two roots to lie on the
+    same component without identifying them.  At ``k=0`` there is one unique
+    component-intersection pair.  It may be used once as a length-two overlap
+    contact, or may acquire one additional order along exactly one component
+    to form ``C3``.  At ``k=+/-2`` the component intersection is the excluded
+    cusp-image wall, so it contributes no clean generic allocation.
+    """
+
+    generated: list[SplitAllocation] = []
+
+    def add_if_allowed(
+        profile: str,
+        split_class: str,
+        allocation: str,
+        special: tuple[int, int],
+    ) -> None:
+        budget = SPLIT_COMPONENT_BUDGETS[split_class]
+        if not _fits_component_budget(special, budget):
+            return
+        generated.append(
+            _allocation(
+                profile,
+                split_class,
+                allocation,
+                special,
+                (budget[0] - special[0], budget[1] - special[1]),
+            )
+        )
+
+    for split_class in ("k=0", "k=+/-2"):
+        # One third-order contact may lie on either component.  The V option
+        # is rejected automatically by the degree-two k=0 budget.
+        for component in ("V", "W"):
+            add_if_allowed(
+                "C3+7N",
+                split_class,
+                component,
+                THIRD_ORDER_CONTACT_LENGTHS[component],
+            )
+        if split_class == "k=0":
+            for component in ("V", "W"):
+                add_if_allowed(
+                    "C3+7N",
+                    split_class,
+                    f"overlap-{component}",
+                    _add_edge_lengths(
+                        OVERLAP_CONTACT_LENGTHS,
+                        SIMPLE_EDGE_INCREMENTS[component],
+                    ),
+                )
+
+        # Two contacts occur at distinct pair roots.  Their component labels
+        # are unordered, hence the combinations rather than a Cartesian
+        # product.
+        for first, second in combinations_with_replacement(("V", "W"), 2):
+            add_if_allowed(
+                "C2^2+6N",
+                split_class,
+                first + second,
+                _add_edge_lengths(
+                    CONTACT_EDGE_LENGTHS[first],
+                    CONTACT_EDGE_LENGTHS[second],
+                ),
+            )
+        if split_class == "k=0":
+            # The unique overlap contact is already one pair, so the second
+            # contact must be a distinct non-overlap V or W root.
+            for component in ("V", "W"):
+                add_if_allowed(
+                    "C2^2+6N",
+                    split_class,
+                    f"overlap+{component}",
+                    _add_edge_lengths(
+                        OVERLAP_CONTACT_LENGTHS,
+                        CONTACT_EDGE_LENGTHS[component],
+                    ),
+                )
+
+        # A regular three-source fiber has one V edge and two W edges.  A
+        # T112 point adds one order to its selected tangent edge; the mixed
+        # profile adds a separate length-two contact edge.
+        for component in ("V", "W"):
+            add_if_allowed(
+                "T112+6N",
+                split_class,
+                f"tangent-{component}",
+                _add_edge_lengths(
+                    REGULAR_TRIPLE_EDGE_LENGTHS,
+                    SIMPLE_EDGE_INCREMENTS[component],
+                ),
+            )
+            add_if_allowed(
+                "C2+T111+5N",
+                split_class,
+                f"contact-{component}",
+                _add_edge_lengths(
+                    REGULAR_TRIPLE_EDGE_LENGTHS,
+                    CONTACT_EDGE_LENGTHS[component],
+                ),
+            )
+
+        # A four-source fiber has all six pair edges, and each ordinary
+        # triple has one V plus two W edges.
+        add_if_allowed(
+            "Q0+4N",
+            split_class,
+            "2V+4W",
+            REGULAR_QUADRUPLE_EDGE_LENGTHS,
+        )
+        add_if_allowed(
+            "T111^2+4N",
+            split_class,
+            "2V+4W",
+            _add_edge_lengths(
+                REGULAR_TRIPLE_EDGE_LENGTHS,
+                REGULAR_TRIPLE_EDGE_LENGTHS,
+            ),
+        )
+
+    return tuple(generated)
 
 
 SPLIT_ALLOCATIONS: Final = (
@@ -1019,6 +1291,52 @@ def split_witness_specs() -> tuple[SplitWitnessSpec, ...]:
     return tuple(specs)
 
 
+@cache
+def minus_two_witness_specs() -> tuple[SplitWitnessSpec, ...]:
+    """Transport every ``k=2`` witness to an executable ``k=-2`` witness."""
+
+    transported: list[SplitWitnessSpec] = []
+    for spec in split_witness_specs():
+        if spec.kappa != 2:
+            continue
+        alpha, beta, gamma, delta = spec.coefficient_values
+        transported.append(
+            SplitWitnessSpec(
+                name=f"{spec.name}_transport_km2",
+                profile=spec.profile,
+                kappa=-2,
+                allocation=spec.allocation,
+                equations=tuple(
+                    expand(
+                        equation.subs(
+                            COEFFICIENT_SIGN_FLIP,
+                            simultaneous=True,
+                        )
+                    )
+                    for equation in spec.equations
+                ),
+                coefficient_values=(alpha, -beta, gamma, -delta),
+                base_dimension=spec.base_dimension,
+                expected_rank=spec.expected_rank,
+                node_count=spec.node_count,
+                roots=tuple(
+                    RootMultiplicity(
+                        component=root.component,
+                        root=root.root if root.component == "V" else expand(-root.root),
+                        multiplicity=root.multiplicity,
+                    )
+                    for root in spec.roots
+                ),
+                # P_{-2}(-t)=P_2(t), so every transported special target has
+                # the same first coordinate.
+                special_target_x_values=tuple(
+                    expand(value) for value in spec.special_target_x_values
+                ),
+            )
+        )
+    return tuple(transported)
+
+
 def _remove_prescribed_roots(
     polynomial: Expr,
     variable: Expr,
@@ -1139,12 +1457,13 @@ class SplitWitnessCertificate:
         )
 
 
-@cache
-def exact_split_witness_certificates() -> tuple[SplitWitnessCertificate, ...]:
-    """Build exact clean witnesses for all allowed split allocations."""
+def _build_split_witness_certificates(
+    specs: tuple[SplitWitnessSpec, ...],
+) -> tuple[SplitWitnessCertificate, ...]:
+    """Build exact clean-witness certificates for the supplied specifications."""
 
     certificates: list[SplitWitnessCertificate] = []
-    for spec in split_witness_specs():
+    for spec in specs:
         matrix, right_side = linear_eq_to_matrix(spec.equations, PARAMETERS)
         augmented = matrix.row_join(right_side)
         substitution = dict(zip(PARAMETERS, spec.coefficient_values, strict=True))
@@ -1237,6 +1556,20 @@ def exact_split_witness_certificates() -> tuple[SplitWitnessCertificate, ...]:
             )
         )
     return tuple(certificates)
+
+
+@cache
+def exact_split_witness_certificates() -> tuple[SplitWitnessCertificate, ...]:
+    """Build the representative ``k=0,2`` generic clean witnesses."""
+
+    return _build_split_witness_certificates(split_witness_specs())
+
+
+@cache
+def exact_minus_two_witness_certificates() -> tuple[SplitWitnessCertificate, ...]:
+    """Replay every clean-witness predicate on the transported ``k=-2`` data."""
+
+    return _build_split_witness_certificates(minus_two_witness_specs())
 
 
 @dataclass(frozen=True, slots=True)
@@ -1488,38 +1821,63 @@ def exact_split_rank_saturation_certificates() -> tuple[
 
 @dataclass(frozen=True, slots=True)
 class SplitCodimensionTwoCertificate:
-    """Aggregate finite ledger and exact witness certificate."""
+    """Aggregate generic allocation and clean-witness ledger.
+
+    ``verified`` deliberately means that the generated generic ledger and
+    its clean witnesses check.  It is not a claim that every determinantal
+    rank-drop sublocus has been classified or that the split boundary carries
+    no three-dimensional incidence component.
+    """
 
     charts: tuple[SplitChartCertificate, ...]
     allocations: tuple[SplitAllocation, ...]
+    generated_allocations: tuple[SplitAllocation, ...]
     forbidden_k0_allocations: tuple[tuple[str, str, str], ...]
     witnesses: tuple[SplitWitnessCertificate, ...]
+    minus_two_witnesses: tuple[SplitWitnessCertificate, ...]
+    plus_minus_transport: SplitPlusMinusTransportCertificate
     rank_boundaries: SplitRankBoundaryCertificate
     rank_saturations: tuple[PrincipalRankSaturationCertificate, ...]
+    generated_allocations_match_ledger: bool
     witness_keys_cover_allocations: bool
+    transported_witness_keys_cover_kpm_allocations: bool
     k0_profile_allocation_counts: tuple[tuple[str, int], ...]
     kpm_profile_allocation_counts: tuple[tuple[str, int], ...]
-    critical_triple_boundary_open: bool
+    global_rank_strata_classified: bool
     topology_not_computed: bool
 
     @property
-    def verified(self) -> bool:
-        """Whether every exact split-chart and finite-ledger check agrees."""
+    def generic_clean_witness_ledger_verified(self) -> bool:
+        """Whether every generated-allocation and clean-witness check agrees."""
 
         specs = split_witness_specs()
+        minus_two_specs = minus_two_witness_specs()
         return bool(
             all(chart.verified for chart in self.charts)
             and all(allocation.verified for allocation in self.allocations)
+            and all(allocation.verified for allocation in self.generated_allocations)
+            and self.generated_allocations_match_ledger
             and self.forbidden_k0_allocations == FORBIDDEN_K0_ALLOCATIONS
             and len(self.witnesses) == len(specs) == len(self.allocations)
             and all(
                 certificate.verified(spec)
                 for certificate, spec in zip(self.witnesses, specs, strict=True)
             )
+            and len(self.minus_two_witnesses) == len(minus_two_specs) == 11
+            and all(
+                certificate.verified(spec)
+                for certificate, spec in zip(
+                    self.minus_two_witnesses,
+                    minus_two_specs,
+                    strict=True,
+                )
+            )
+            and self.plus_minus_transport.verified
             and self.rank_boundaries.verified
             and len(self.rank_saturations) == 3
             and all(saturation.verified for saturation in self.rank_saturations)
             and self.witness_keys_cover_allocations
+            and self.transported_witness_keys_cover_kpm_allocations
             and self.k0_profile_allocation_counts
             == (
                 ("C2+T111+5N", 1),
@@ -1538,9 +1896,13 @@ class SplitCodimensionTwoCertificate:
                 ("T111^2+4N", 1),
                 ("T112+6N", 2),
             )
-            and self.critical_triple_boundary_open
-            and self.topology_not_computed
         )
+
+    @property
+    def verified(self) -> bool:
+        """Compatibility alias for the generic clean-witness-ledger result."""
+
+        return self.generic_clean_witness_ledger_verified
 
 
 def _profile_counts(split_class: str) -> tuple[tuple[str, int], ...]:
@@ -1554,9 +1916,10 @@ def _profile_counts(split_class: str) -> tuple[tuple[str, int], ...]:
 
 @cache
 def exact_split_codimension_two_certificate() -> SplitCodimensionTwoCertificate:
-    """Build the complete exact split-chart ledger."""
+    """Build the generated generic split-chart clean-witness ledger."""
 
     witnesses = exact_split_witness_certificates()
+    minus_two_witnesses = exact_minus_two_witness_certificates()
     witness_keys = {
         (
             witness.profile,
@@ -1569,31 +1932,51 @@ def exact_split_codimension_two_certificate() -> SplitCodimensionTwoCertificate:
         (allocation.profile, allocation.split_class, allocation.allocation)
         for allocation in SPLIT_ALLOCATIONS
     }
+    kpm_allocation_keys = {
+        (allocation.profile, allocation.allocation)
+        for allocation in SPLIT_ALLOCATIONS
+        if allocation.split_class == "k=+/-2"
+    }
+    minus_two_witness_keys = {
+        (witness.profile, witness.allocation) for witness in minus_two_witnesses
+    }
+    generated_allocations = generated_split_allocations()
     return SplitCodimensionTwoCertificate(
         charts=exact_split_chart_certificates(),
         allocations=SPLIT_ALLOCATIONS,
+        generated_allocations=generated_allocations,
         forbidden_k0_allocations=FORBIDDEN_K0_ALLOCATIONS,
         witnesses=witnesses,
+        minus_two_witnesses=minus_two_witnesses,
+        plus_minus_transport=exact_split_plus_minus_transport_certificate(),
         rank_boundaries=exact_split_rank_boundary_certificate(),
         rank_saturations=exact_split_rank_saturation_certificates(),
+        generated_allocations_match_ledger=(
+            set(generated_allocations) == set(SPLIT_ALLOCATIONS)
+        ),
         witness_keys_cover_allocations=witness_keys == allocation_keys,
+        transported_witness_keys_cover_kpm_allocations=(
+            minus_two_witness_keys == kpm_allocation_keys
+        ),
         k0_profile_allocation_counts=_profile_counts("k=0"),
         kpm_profile_allocation_counts=_profile_counts("k=+/-2"),
-        # At k=+/-2 a P-critical fiber can contain three distinct source
-        # points while the curve branch remains immersed if Q' is nonzero.
-        # Those lower-dimensional triple/fourth-root loci are not classified
-        # by the generic unramified allocation ledger above.
-        critical_triple_boundary_open=True,
+        # This metadata is intentionally not part of ``verified``: the three
+        # principal saturations above do not classify every remaining rank
+        # stratum.  A false gap flag must never be counted as positive proof.
+        global_rank_strata_classified=False,
         # This module proves algebraic incidence and clean witnesses only.
         topology_not_computed=True,
     )
 
 
 def main() -> int:
-    """Print the exact split-chart classification and honest residual gaps."""
+    """Print the generic clean-witness ledger and honest residual gaps."""
 
     certificate = exact_split_codimension_two_certificate()
-    print("delta-ten split codimension-two certificate:", certificate.verified)
+    print(
+        "delta-ten split generic clean-witness ledger:",
+        certificate.generic_clean_witness_ledger_verified,
+    )
     print(
         "split component degrees:",
         tuple(
@@ -1603,7 +1986,15 @@ def main() -> int:
     )
     print("k=0 allocation counts:", certificate.k0_profile_allocation_counts)
     print("k=+/-2 allocation counts:", certificate.kpm_profile_allocation_counts)
-    print("exact clean allocation witnesses:", len(certificate.witnesses))
+    print(
+        "generated allocation ledger matches checked rows:",
+        certificate.generated_allocations_match_ledger,
+    )
+    print("exact clean allocation witnesses at k=0,+2:", len(certificate.witnesses))
+    print(
+        "transported clean allocation witnesses at k=-2:",
+        len(certificate.minus_two_witnesses),
+    )
     print(
         "principal rank saturations:",
         tuple(
@@ -1613,8 +2004,12 @@ def main() -> int:
     )
     print("forbidden k=0 allocations:", certificate.forbidden_k0_allocations)
     print(
-        "remaining: P-critical triple/fourth-root loci, compatible residual-rank "
-        "subloci, component intersections beyond the k=0 overlap, and topology"
+        "P-critical triple/fourth-root loci: audited separately by "
+        "scripts.a6_delta_ten_pcritical_triples"
+    )
+    print(
+        "remaining here: compatible split rank-drop subloci, component "
+        "intersections beyond the checked k=0 overlap, and topology"
     )
     return 0 if certificate.verified else 1
 

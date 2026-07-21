@@ -16,11 +16,15 @@ from scripts.a6_delta_ten_split_codim_two import (
     PARAMETERS,
     SECOND_ROOT,
     SPLIT_ALLOCATIONS,
+    exact_minus_two_witness_certificates,
     exact_split_chart_certificates,
     exact_split_codimension_two_certificate,
+    exact_split_plus_minus_transport_certificate,
     exact_split_rank_boundary_certificate,
     exact_split_rank_saturation_certificates,
     exact_split_witness_certificates,
+    generated_split_allocations,
+    minus_two_witness_specs,
     split_witness_specs,
 )
 
@@ -58,7 +62,11 @@ def test_true_split_charts_have_exact_degrees_and_overlap_boundaries() -> None:
 
 
 def test_finite_allocation_ledger_fills_each_component_budget() -> None:
+    generated = generated_split_allocations()
+
     assert len(SPLIT_ALLOCATIONS) == 22
+    assert len(generated) == 22
+    assert set(generated) == set(SPLIT_ALLOCATIONS)
     assert sum(row.split_class == "k=0" for row in SPLIT_ALLOCATIONS) == 11
     assert sum(row.split_class == "k=+/-2" for row in SPLIT_ALLOCATIONS) == 11
     assert all(row.expected_dimension == 2 for row in SPLIT_ALLOCATIONS)
@@ -157,10 +165,43 @@ def test_every_allowed_allocation_has_a_clean_exact_witness() -> None:
         assert witness.overlap_clean
 
     aggregate = exact_split_codimension_two_certificate()
+    assert aggregate.generated_allocations_match_ledger
     assert aggregate.witness_keys_cover_allocations
-    assert aggregate.critical_triple_boundary_open
+    assert aggregate.transported_witness_keys_cover_kpm_allocations
+    assert not aggregate.global_rank_strata_classified
     assert aggregate.topology_not_computed
+    assert aggregate.generic_clean_witness_ledger_verified
     assert aggregate.verified
+
+
+def test_full_family_transport_replays_every_clean_kminus_two_witness() -> None:
+    transport = exact_split_plus_minus_transport_certificate()
+    specs = minus_two_witness_specs()
+    witnesses = exact_minus_two_witness_certificates()
+
+    assert transport.verified
+    assert len(specs) == len(witnesses) == 11
+    assert {spec.kappa for spec in specs} == {-2}
+    assert {(spec.profile, spec.allocation) for spec in specs} == {
+        (allocation.profile, allocation.allocation)
+        for allocation in SPLIT_ALLOCATIONS
+        if allocation.split_class == "k=+/-2"
+    }
+
+    for spec, witness in zip(specs, witnesses, strict=True):
+        assert witness.verified(spec), spec.name
+        assert witness.coefficient_rank == witness.augmented_rank
+        assert witness.incidence_dimension == 2
+        assert all(value == 0 for value in witness.equation_residuals)
+        assert witness.alpha_nonzero
+        assert witness.residual_squarefree == (True, True)
+        assert witness.node_targets_squarefree == (True, True)
+        assert witness.cross_node_target_gcd_degree == 0
+        assert witness.special_targets_distinct
+        assert witness.special_node_separations_nonzero
+        assert witness.cusp_image_nonzero
+        assert witness.extra_critical_nonzero
+        assert witness.overlap_clean
 
 
 def test_overlap_contacts_are_legitimate_but_boundary_candidates_are_rejected() -> None:
