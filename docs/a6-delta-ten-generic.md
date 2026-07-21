@@ -657,12 +657,15 @@ an explicit computer-assisted dependency.
 The other explicit dependency is the proper Whitney--Thom propagation in
 Section 8.  The four standing branch hypotheses remain assumptions.
 
-What remains at collision delta ten is the complement of `U` inside the valid
-five-parameter family: repeated pair roots, tangencies, coincident collision
-targets, triple or higher fibers, their intersections, and the corresponding
-finite endpoints.  The split equations `k=0,+2,-2` are not themselves walls;
-only degenerations detected within their two-component incidence formulas
-belong to this remaining audit.
+The follow-up [delta-ten wall audit](a6-delta-ten-walls.md) proves that the
+contact-two and ordinary-triple loci are the two irreducible dominant
+degeneration divisors and excludes their connected generic equisingular opens
+by exact cyclic-complement representatives.  What remains at collision delta
+ten is therefore lower-dimensional: deeper repeated roots, nonordinary
+multiple fibers, intersections of the two divisors, split-fiber degenerations,
+and finite endpoints.  The split equations `k=0,+2,-2` are not themselves
+walls; only degenerations detected within their two-component incidence
+formulas belong to this remaining audit.
 
 Even a complete audit of those walls would still be conditional on the four
 standing hypotheses and on the prescribed single-three-cycle `A6` passport.

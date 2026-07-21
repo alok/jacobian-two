@@ -549,8 +549,10 @@ has
 This section is a lower-bound and degree-filter statement.  The later
 [generic delta-ten audit](a6-delta-ten-generic.md) constructs the full
 normalized `(4,9)` family and excludes its clean locus by a cyclic-complement
-representative.  It does not construct a cover or Keller map; valid
-delta-ten degeneration walls remain separate strata.
+representative.  The later [delta-ten wall audit](a6-delta-ten-walls.md)
+also excludes the connected generic opens of its two dominant degeneration
+divisors.  It does not construct a cover or Keller map; lower-dimensional
+delta-ten strata remain.
 
 ## 8. What is exact and what remains theorem-dependent
 

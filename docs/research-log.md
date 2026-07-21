@@ -1280,11 +1280,11 @@ extractions remain trusted computer-assisted inputs.  Family-wide transport
 also depends on proper Whitney--Thom triviality, and the endpoint argument on
 Riemann existence and tame-inertia compatibility.
 
-No cover or Keller map is constructed at `(4,9)`.  The next checkpoint below
-constructs and excludes the clean branch-curve family, but its degeneration
-walls remain.  The four standing hypotheses are not derived for an arbitrary
-Keller branch, and the unrestricted `A6` passport, the `S6` passport, and
-therefore `JC(2)` remain open.
+No cover or Keller map is constructed at `(4,9)`.  The next two checkpoints
+exclude the clean branch-curve family and the generic opens of its two dominant
+degeneration walls; lower-dimensional strata remain.  The four standing
+hypotheses are not derived for an arbitrary Keller branch, and the unrestricted
+`A6` passport, the `S6` passport, and therefore `JC(2)` remain open.
 
 ## 2026-07-21: the clean conditional `A6` delta-ten family is excluded
 
@@ -1311,10 +1311,9 @@ simplifies it to `Z`.  The dependency-free replay checks all
 `40^4=2,560,000` single-three-cycle assignments: exactly 40 survive, all
 diagonal with image `C3`, and none generates `A6`.  The clean parameter locus
 is a nonempty Zariski-open subset of irreducible affine five-space, hence
-connected;
-proper projective Whitney--Thom triviality propagates the complement result
-through that locus.  Thus every remaining conditional delta-ten candidate
-lies on a degeneration wall.
+connected; proper projective Whitney--Thom triviality propagates the complement
+result through that locus.  Thus every remaining conditional delta-ten
+candidate lies on a degeneration wall.
 
 An independent hostile census prevents a false shortcut.  There are exactly
 720 qualifying `T(4,9) -> A6` pairs, forming two inner orbits of 360 fused by
@@ -1323,6 +1322,55 @@ odd sheet relabeling.  Every pair has a unique compatible forced
 spin lifts in `2.A6`.  Therefore the local, peripheral, orientation, and spin
 constraints do not eliminate the frontier; global complement topology is
 essential.
+
+## 2026-07-21: both dominant conditional delta-ten walls are excluded
+
+Status: exact incidence and component algebra, exhaustive finite-group replay,
+and computer-assisted topology under the same four standing hypotheses; not
+a complete wall audit and not a proof of the plane Jacobian conjecture.
+
+The valid contact incidence is `H=T=0` over pair-sum coordinates `(k,s)`.
+The gcd of the six coefficient minors in `(a,b,c,d)` is exactly
+
+```text
+s*(k+2*s)^3*(2*s^2+3*k*s+4).
+```
+
+After removing the denominator and diagonal factors, a Rabinowitsch
+localization of the residual minors is the unit ideal.  Thus the incidence is
+an affine two-plane bundle over an irreducible two-dimensional base and has
+one irreducible four-dimensional dominant image.  Every raw rank-drop
+component is separately identified as `a=0`, an extra critical point, a cusp
+image collision, or a `k=0,+2,-2` split-chart artifact.
+
+For ordinary triples, the elementary symmetric parameters of three source
+points lie on the irreducible surface
+
+```text
+sigma2^2 - sigma1*sigma3 - sigma2 = 0.
+```
+
+Both the four-column coefficient matrix and its five-column augmentation have
+localized minor ideal equal to one on the valid distinct-source open.  The
+ordinary-triple incidence is therefore another irreducible four-dimensional
+dominant component.
+
+Exact representatives on both components were certified.  The contact member
+has one `A3` contact and eight nodes; the triple member has one ordinary triple
+and seven nodes.  Both retain the forced `T(2,5)` cusp and `T(5,9)` infinity
+branch, and both close the genus budget at 28.  Checked Sage scripts
+independently regenerate their primitive implicit curves, primary
+decompositions, and four-generator raw van Kamp presentations.  Both
+complements simplify to `Z`; both exhaustive `40^4` replays leave exactly 40
+diagonal `C3` images and zero `A6` images.  Proper projective Whitney--Thom
+transport excludes the connected generic equisingular open of each divisor.
+
+The complete finite collision ledger has 35 non-node local contact-tree atoms
+and 145 global profiles.  Exactly two have expected codimension one—the two
+divisors just excluded.  The next layer has six expected codimension-two
+profiles; there are 38 expected endpoints and 55 overdetermined candidates
+that still require exact elimination.  Expected dimension is explicitly not
+used as an emptiness proof.
 
 ## Negative results and guarded boundaries
 
@@ -1344,10 +1392,13 @@ essential.
    try to force Orevkov's condition `(*)` or replace it with a determinant
    inequality stable under several noncontracted preimages; do not relabel the
    conditional two-pair theorem as a solution of the unrestricted conjecture.
-2. Formalize more of the projective simple-root/fiber correspondence if a
+2. Continue the conditional delta-ten elimination with the six exact
+   codimension-two collision profiles in `docs/a6-delta-ten-walls.md`, treating
+   target-fiber grouping and the split `k=0,+2,-2` incidences separately.
+3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
-3. Extend the exact support analysis beyond two interior coefficients in the
+4. Extend the exact support analysis beyond two interior coefficients in the
    residual `(72,108)` and `(108,72)` cases, using elimination only after the
    zero-product core is exhausted.
-4. Keep every claim tagged as certified, derived, announced, experimental, or
+5. Keep every claim tagged as certified, derived, announced, experimental, or
    open.

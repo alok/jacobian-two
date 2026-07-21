@@ -285,11 +285,24 @@ census also shows why local link data alone cannot finish the boundary: all
 720 admissible `T(4,9) -> A6` pairs have compatible cusp, collision,
 orientation, and `2.A6` spin data.
 
-Thus a conditional delta-ten survivor must lie on a valid degeneration wall.
+The two dominant degeneration divisors are now excluded as well.  Exact
+localized Gröbner calculations prove that the contact-two and ordinary-triple
+incidences each have one irreducible four-dimensional dominant component.
+Exact representatives on both components have cyclic complement; both raw
+`40^4` replays again have only 40 diagonal `C3` images.  Whitney--Thom
+transport excludes their connected generic equisingular opens.  Consequently
+any remaining conditional delta-ten survivor lies in a lower-dimensional
+degeneration stratum.
+
+The complete combinatorial ledger contains 145 candidate collision profiles.
+After the clean locus and the two divisors, the next worklist has six expected
+codimension-two profiles; 55 overdetermined profiles are deliberately retained
+until exact elimination proves them empty, invalid, or contained elsewhere.
 No `A6` cover or Keller map has been constructed, the four hypotheses remain
 unproved for arbitrary Keller branches, and this is not a proof of `JC(2)`.
-See the [A6 one-pair note](docs/a6-one-pair-infinity.md) and the
-[generic delta-ten audit](docs/a6-delta-ten-generic.md).
+See the [A6 one-pair note](docs/a6-one-pair-infinity.md), the
+[generic delta-ten audit](docs/a6-delta-ten-generic.md), and the
+[dominant delta-ten wall audit](docs/a6-delta-ten-walls.md).
 
 The delta-five equality family is now fully exhausted.  Every conditional
 `(3,8)` curve is polynomially equivalent to
@@ -652,6 +665,10 @@ optional Sage/GAP replay is an additional independent local cross-check.
   complete normalized `(4,9)` family, treats the exceptional pair-incidence
   charts honestly, and excludes its connected clean stratum by an exact
   cyclic-complement representative and exhaustive `40^4` replay.
+- [`docs/a6-delta-ten-walls.md`](docs/a6-delta-ten-walls.md) proves that the
+  contact-two and ordinary-triple incidences are the two irreducible dominant
+  wall components, excludes their generic equisingular opens, and gives the
+  exact 145-profile ledger for the deeper audit.
 - [`docs/one-dicritical-source-smoothness.md`](docs/one-dicritical-source-smoothness.md)
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.
