@@ -4,12 +4,14 @@
 
 This note starts the fourteen expected codimension-three profiles in the
 conditional one-dicritical `A6` delta-ten audit.  It treats the valid
-**nonsplit** unordered-pair charts of two selected profiles,
+**nonsplit** unordered-pair/fiber charts of three selected profiles,
 
 \[
  C_4+6N
+ \qquad
+ C_2+C_3+5N
  \qquad\text{and}\qquad
- C_2+C_3+5N.                                                       \tag{0.1}
+ C_2+Q_0+2N.                                                       \tag{0.1}
 \]
 
 Here `Cm` is a two-branch contact of intersection multiplicity `m`.
@@ -26,11 +28,20 @@ ideal, so that entire curve is inconsistent and hides no incidence.  The
 full-localizer singular-Jacobian saturation is also the unit ideal, proving
 that the compatibility surface is smooth on the valid chart.
 
-An exact rational member of each dominant surface has the prescribed
+For `C2+Q0+2N`, the augmented determinant separates a same-target boundary
+from one genuine irreducible compatibility quartic.  Its projective curve has
+arithmetic genus three and exactly two ordinary nodes, both on the removed
+split fibers, so the valid base is a smooth genus-one open times the fiber
+parameter.  Full-localizer saturation makes every coefficient and augmented
+rank-at-most-three ideal the unit ideal.  A Cramer chart and two independent
+coefficient-image tangent vectors prove that its image is a codimension-three
+surface rather than a collapsed curve.
+
+An exact rational member of each of the three dominant surfaces has the prescribed
 contacts and residual nodes, cyclic affine complement, and no required `A6`
 three-cycle quotient.  On precisely defined nonempty clean opens,
 finite-etale labeling, relative contact blowups, and proper Whitney--Thom
-isotopy propagate that complement topology.  Thus both dominant clean
+isotopy propagate that complement topology.  Thus all three dominant clean
 nonsplit surfaces are excluded.  Manual Sage 10.8 regenerates the incidence
 factorizations, implicit curves, singular schemes, and van Kamp
 presentations; it does not certify the propagation theorem.
@@ -441,41 +452,253 @@ cyclic complement and cannot realize the required `A6` passport.
 This transport makes no assertion about singular/equisingular or other
 removed boundary strata.
 
-## 10. Remaining boundary
+## 10. Contact two plus an ordinary quadruple
+
+Let `h` be the common `P`-value of four distinct source points and let
+`u` be the sum of a separate unordered source pair.  Write `r1,r2,r3`
+for the nonconstant coefficients of the remainder of `Q` modulo `P-h`.
+The five equations
+
+\[
+ r_1=r_2=r_3=H(u)=H'(u)=0                                      \tag{10.1}
+\]
+
+are affine-linear in `(a,b,c,d)`.  Their augmented determinant is
+
+\[
+ h^2(u^2+ku+1)A(k,u)G(k,h,u)^2,                                \tag{10.2}
+\]
+
+where
+
+\[
+\begin{aligned}
+A={}&k^3u+5k^2u^2+3k^2+4ku^3+16ku+12u^2+4,\\
+G={}&h(k+2u)^2+u(u+k)(u^2+ku+1)^2.
+\end{aligned}                                                   \tag{10.3}
+\]
+
+The factor `G=0` says exactly that the contact pair has `P`-value `h`;
+it is the profile-changing boundary where the pair lands on the quadruple
+target.  The genuine compatibility component is `A=0`.
+
+The full valid localizer used in the checker is
+
+\[
+\begin{aligned}
+L={}&k(k-2)(k+2)hu(k+2u)(u^2+ku+1)(2u^2+3ku+4)\\
+ &\quad\cdot
+ (256h^2+27hk^4-144hk^2+128h-4k^2+16)G.                        \tag{10.4}
+\end{aligned}
+\]
+
+The penultimate factor is the reduced discriminant of `P-h`; the complete
+quartic discriminant is `-h` times it.  Thus (10.4) removes the true split
+fibers, zero or singular quadruple fibers, invalid or diagonal contact pairs,
+and the same-target overlap.  These removed loci are named boundaries, not
+declared empty.
+
+Exact factorization makes `A` irreducible over `QQ`.  Its projective
+quartic has arithmetic genus three and exactly two ordinary nodes,
+`(-2:1:1)` and `(2:-1:1)`; both lie over the removed split fibers.
+There are no singularities at infinity.  Consequently the valid
+compatibility base is a smooth open of a geometrically irreducible genus-one
+curve times the open `h`-line.  The rational point
+
+\[
+ (k,h,u)=(-4,1,1)                                                \tag{10.5}
+\]
+
+has `(A_k,A_h,A_u)=(4,0,8)` and `L=-45563904`.  It both proves that the
+valid open is nonempty and supplies the smooth rational point needed to pass
+from `QQ`-irreducibility to geometric irreducibility.
+
+Expected rank is not used to dismiss hidden coefficient fibers.  Exact
+modular-reconstruction saturation by the complete `L` gives:
+
+| valid-chart ideal on `A=0` | result | exponent |
+|---|---:|---:|
+| singular ideal `(A,A_k,A_u)` | unit | `1` |
+| coefficient rank at most three | unit | `1` |
+| augmented rank at most three | unit | `1` |
+| coefficient rank at most two | unit before saturation | `0` |
+| augmented rank at most two | unit before saturation | `0` |
+
+Every valid compatible base therefore has coefficient and augmented rank
+exactly four and a unique coefficient vector.
+
+On the Cramer chart `(k+2u)(ku+2)!=0`, four rows solve explicitly for
+`(a,b,c,d)`; the fifth residual is
+
+\[
+ \frac{(u^2+ku+1)A(k,u)G(k,h,u)}{(k+2u)(ku+2)}.                 \tag{10.6}
+\]
+
+The chart-only factor `ku+2` is not inverted in the global saturation.
+At (10.5), the `h` tangent and the quartic tangent
+`(dk,du)=(2,-1)` map to
+
+\[
+ (0,7,-18,8,-1),\qquad(2,-4,16,-6,2)                           \tag{10.7}
+\]
+
+in `(k,a,b,c,d)`.  They are independent, so the coefficient image has
+dimension two and codimension three.  The compatibility incidence has not
+collapsed to a curve.
+
+## 11. An exact `C2+Q0+2N` member
+
+The unique coefficients over (10.5) are
+
+\[
+ (a,b,c,d)=(7,-19,13,-6),                                      \tag{11.1}
+\]
+
+so
+
+\[
+ P=t^4-4t^3+t^2,qquad
+ Q=t^9-6t^8+13t^7-19t^6+7t^5.                                 \tag{11.2}
+\]
+
+The quadruple fiber is `P=1`.  Its discriminant is `-4944`, and
+
+\[
+ Q+1=(P-1)(t^5-2t^4+4t^3-t^2-1).                              \tag{11.3}
+\]
+
+At a root of `P-1`, the last factor is the branch slope `dQ/dP`.  Its
+four values have eliminant
+
+\[
+ m^4-538m^3-3098m^2-5898m-3727
+\]
+
+with discriminant `-626582784`.  Thus the four immersed branches have
+distinct tangents and meet in one ordinary quadruple point at `(1,-1)`.
+
+The collision polynomial factors as
+
+\[
+\begin{aligned}
+H(s)={}&(s-1)^2(s^2-10s+7)\\
+ &\cdot(s^6-12s^5+50s^4-80s^3+37s^2-20s+16).                 \tag{11.4}
+\end{aligned}
+\]
+
+The sextic is exactly the six off-diagonal pair sums in the quadruple fiber.
+It is squarefree, has discriminant `56316985344`, and every one of its
+roots maps to `X=1`.  The contact pair is `t^2-t+1`, is disjoint from the
+quartic fiber with resultant `4`, and maps to `(3,-7)`.
+Its two branches have equal first graph derivative `dQ/dP=-4`; their
+second-derivative difference is `(2t-1)/98`, with norm `3/9604`.
+Hence the contact is exactly `C2`.
+
+The residual quadratic in (11.4) has discriminant `72` and supplies two
+nodes.  Their `X`-coordinates satisfy
+
+\[
+ X^2+564X-476=0,                                                 \tag{11.5}
+\]
+
+whose discriminant is `320000` and whose values at the cusp, quadruple,
+and contact targets `X=0,1,3` are `-476,89,1225`.  Thus all special
+targets are distinct.  The forced-cusp and extra-critical resultants are
+`-2` and `-311472`.
+
+Sage regenerates the primitive irreducible nonic and the affine Jacobian
+primary lengths
+
+```text
+((2,2), (9,1), (3,1), (4,1)).
+```
+
+They are respectively the two reduced nodes, the ordinary quadruple point,
+the `C2` point, and the forced `T(2,5)` cusp.  The Jacobian algebra has
+length `18` and radical length `5`.  The projective delta balance is
+
+\[
+ 2+2+6+2+16=28=p_a(\text{degree }9).                            \tag{11.6}
+\]
+
+The exact affine van Kamp presentation has four generators and nine
+relations and simplifies to `Z`.  The independent finite replay gives
+
+```text
+assignments:          2,560,000
+satisfying:           40
+generated orders:     {3: 40}
+A6 assignments:       0
+```
+
+## 12. Propagation on the compatibility surface
+
+Intersect the smooth geometrically irreducible valid surface from Section 10
+with the principal clean conditions checked by the sample: nonzero cusp and
+extra-critical factors, a reduced four-source fiber with four distinct
+slopes, an immersed exact contact pair at a separate target, two squarefree
+residual nodes, and separation of every labeled source and target section.
+The result is a nonempty irreducible complex surface and therefore
+analytically path-connected.
+
+After a finite-etale ordering cover, the four quadruple branches, two contact
+branches, and two nodes become labeled sections.  Resolve each node once.
+One relative blowup resolves the ordinary quadruple section because its four
+tangent directions are distinct; two relative blowups resolve the contact
+two section.  Together with the fixed cusp and infinity resolution
+sequences, the reduced total transform is a relative SNC divisor in a smooth
+proper projective family.  Proper Whitney--Thom isotopy transports the
+cyclic affine complement from (11.2) throughout this dense clean open.
+Consequently the dominant clean nonsplit `C2+Q0+2N` surface cannot carry
+the required connected six-sheet `A6` quotient.
+
+This transport does not include the split fibers, singular quadruple fibers,
+invalid contact charts, same-target overlap `G=0`, non-clean
+specializations, or deeper intersections.
+
+## 13. Remaining boundary
 
 The result currently removes the dominant clean nonsplit surfaces for
-`C4+6N` and `C2+C3+5N`.  It also bounds the `C4` residual determinant
-incidence below surface dimension.  It does not classify:
+`C4+6N`, `C2+C3+5N`, and `C2+Q0+2N`.  It also bounds the `C4`
+residual determinant incidence below surface dimension.  It does not
+classify:
 
 1. `C4+6N` on the true split pair charts `k=0,+2,-2`;
 2. the pair-denominator, cusp-pair, or diagonal charts;
 3. intersections of those loci with `F=0` or other collision walls;
 4. specializations where residual nodes merge or meet a contact or cusp
    target;
-5. non-clean equisingular specializations on the `C2+C3` compatibility
-   surface; or
-6. any of the other twelve codimension-three profiles.
+5. non-clean equisingular specializations on the `C2+C3` or `C2+Q0`
+   compatibility surfaces;
+6. the singular-fiber and same-target `C2+Q0` boundaries; or
+7. any of the other eleven codimension-three profiles.
 
-## 11. Reproduction
+## 14. Reproduction
 
 Run the exact Python certificate, tests, types, and lint with:
 
 ```bash
 uv run python -m scripts.a6_delta_ten_contact_four
 uv run python -m scripts.a6_delta_ten_contact_two_three
+uv run python -m scripts.a6_delta_ten_contact_quadruple
 uv run pytest -q \
   tests/test_a6_delta_ten_contact_four.py \
-  tests/test_a6_delta_ten_contact_two_three.py
+  tests/test_a6_delta_ten_contact_two_three.py \
+  tests/test_a6_delta_ten_contact_quadruple.py
 uv run mypy --no-incremental \
   scripts/a6_delta_ten_contact_four.py \
   scripts/a6_delta_ten_contact_two_three.py \
+  scripts/a6_delta_ten_contact_quadruple.py \
   tests/test_a6_delta_ten_contact_four.py \
-  tests/test_a6_delta_ten_contact_two_three.py
+  tests/test_a6_delta_ten_contact_two_three.py \
+  tests/test_a6_delta_ten_contact_quadruple.py
 uv run ruff check \
   scripts/a6_delta_ten_contact_four.py \
   scripts/a6_delta_ten_contact_two_three.py \
+  scripts/a6_delta_ten_contact_quadruple.py \
   tests/test_a6_delta_ten_contact_four.py \
-  tests/test_a6_delta_ten_contact_two_three.py
+  tests/test_a6_delta_ten_contact_two_three.py \
+  tests/test_a6_delta_ten_contact_quadruple.py
 ```
 
 Replay the determinantal saturations, primitive implicit curve, singular
@@ -484,6 +707,7 @@ scheme, raw presentation, and cyclic simplification with Sage 10.8:
 ```bash
 sage tools/check_a6_delta_ten_contact_four.sage
 sage tools/check_a6_delta_ten_contact_two_three.sage
+sage tools/check_a6_delta_ten_contact_quadruple.sage
 ```
 
 The Sage checker is manual; GitHub CI runs the Python certificate and test

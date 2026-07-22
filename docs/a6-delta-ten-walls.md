@@ -587,19 +587,23 @@ mixed boundaries have dimension at most two.  The split ledger generates all
 [codimension-two checkpoint](a6-delta-ten-codim-two.md) for the six distinct
 claim boundaries and reproduction commands.
 
-Two expected codimension-three profiles are now underway.  The
+Three expected codimension-three profiles are now underway.  The
 [codimension-three checkpoint](a6-delta-ten-codim-three.md) excludes the dense
 clean nonsplit `C4+6N` Cramer surface and the dense clean rank-four
-`C2+C3+5N` compatibility surface.  The `C4` residual determinant has only a
+`C2+C3+5N` and `C2+Q0+2N` compatibility surfaces.  The `C4` residual determinant has only a
 finite length-ten compatible base with rank-three affine-line fibers.  The
 `C2+C3` augmented determinant leaves one geometrically irreducible 409-term
 compatibility surface, certified by factorization over `QQ` and a smooth
 rational point.  A degree-thirty coefficient-rank-drop curve is entirely
 inconsistent because the localized augmented rank-at-most-three ideal is the
 unit ideal, and the full-localizer singular saturation proves that the valid
-compatibility surface is smooth.  Exact cyclic members propagate across both clean surfaces after
-their relative contact blowups.  Split charts and other omitted boundaries
-remain open.
+compatibility surface is smooth.  For `C2+Q0`, a genuine irreducible
+compatibility quartic remains after removing the same-target factor; its only
+projective singularities lie on split fibers, and exact full-localizer
+saturation proves rank four everywhere on the valid surface.  Exact cyclic
+members propagate across all three clean surfaces after their relative
+resolutions.  Split charts, singular fibers, same-target overlaps, and other
+omitted boundaries remain open.
 
 One useful coefficient-slice check makes the next elimination finite.  For
 fixed `k`, the collision-decic coefficients are affine-linear in
@@ -640,8 +644,9 @@ dependency.  Family-wide propagation separately depends on proper projective
 Whitney--Thom triviality.
 
 The next exact work package is the unresolved boundary of the six
-codimension-two profiles in Section 7, followed by the remaining twelve
-expected codimension-three profiles and the omitted `C4`/`C2+C3` charts.  A complete
+codimension-two profiles in Section 7, followed by the remaining eleven
+expected codimension-three profiles and the omitted
+`C4`/`C2+C3`/`C2+Q0` charts.  A complete
 audit must:
 
 1. determine complement topology for the three exceptional overlap

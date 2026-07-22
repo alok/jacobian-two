@@ -386,7 +386,7 @@ of the ordinary components, but those overlap points are outside the smooth
 rank-open argument above.  Their complement topology, and the finite
 rank-three affine-line fibers, remain open.
 
-## 8. Reuse for the nonsplit codimension-three contact surfaces
+## 8. Reuse for the nonsplit codimension-three contact/fiber surfaces
 
 The same argument applies to the first codimension-three profile on the
 determinant-nonzero `C4+6N` Cramer surface.  Its incidence is a principal open
@@ -421,6 +421,17 @@ separately proves that the coefficient-rank-drop curve is wholly
 inconsistent.  Removed pair-chart and non-clean equisingular boundaries lie
 outside the topology argument and remain open.
 
+The `C2+Q0+2N` component is a principal open of the product of a smooth
+genus-one compatibility curve with the quadruple-fiber parameter.  Its exact
+rational member proves that the clean open with four distinct quadruple
+slopes, an immersed exact contact pair, and two separated nodes is nonempty.
+On a finite-etale ordering cover, one relative blowup resolves the ordinary
+quadruple section, two resolve the contact-two section, and one resolves each
+node.  The same fixed cusp/infinity resolutions and proper Thom argument
+transport the cyclic complement throughout the connected clean surface.
+The split, singular-fiber, same-target, and non-clean boundaries are outside
+this argument.
+
 The full calculations and their omitted split, denominator, cusp-pair,
-diagonal, non-clean, and residual boundaries are recorded in
+diagonal, singular-fiber, same-target, non-clean, and residual boundaries are recorded in
 [the codimension-three checkpoint](a6-delta-ten-codim-three.md).

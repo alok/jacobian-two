@@ -125,6 +125,8 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_ten_contact_four
       - name: Exclude the dense conditional A6 delta-ten contact-two/contact-three surface
         run: uv run --frozen python -m scripts.a6_delta_ten_contact_two_three
+      - name: Exclude the dense conditional A6 delta-ten contact-two/quadruple surface
+        run: uv run --frozen python -m scripts.a6_delta_ten_contact_quadruple
       - name: Check the hostile A6 local multiplication fixtures
         run: uv run --frozen python -m scripts.a6_local_multiplication
       - name: Check the hostile 2.A6 spin lifts

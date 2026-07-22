@@ -332,7 +332,7 @@ five finite schemes in the representative ledger are involution-orbit
 representatives, not the literal all-fiber count.  Denominator,
 deeper-intersection, and profile-changing boundaries remain open.
 
-Two of the fourteen expected codimension-three profiles are now attacked as
+Three of the fourteen expected codimension-three profiles are now attacked as
 well.  For `C4+6N`, the determinant-nonzero nonsplit incidence is one rational
 surface.  Exact Sage saturation shows that its residual determinant curve
 has a finite length-ten compatibility scheme with rank-three affine-line
@@ -344,11 +344,18 @@ localized saturation finds a degree-thirty coefficient-rank-drop curve but
 makes the augmented rank-at-most-three ideal the unit ideal, so every point
 of that curve is inconsistent and no hidden coefficient fiber remains.  The
 full-localizer singular saturation is unit as well, so the valid
-compatibility surface is smooth.  Exact
-members of both surfaces have cyclic complement and no `A6` assignment.
-Relative contact blowups and proper Whitney--Thom transport exclude both
-dense clean surfaces.  The split, denominator, cusp-pair, diagonal,
-non-clean equisingular, and deeper boundary pieces remain open.
+compatibility surface is smooth.  For `C2+Q0+2N`, the augmented determinant
+isolates one irreducible
+compatibility quartic after removing the same-target boundary.  Its only
+projective singularities are two ordinary nodes on the split fibers, so the
+valid base is a smooth genus-one open times the quadruple-fiber parameter.
+Full-localizer saturation proves coefficient and augmented rank exactly four
+everywhere, and two exact projection tangents prove a genuine
+codimension-three coefficient image.  Exact members of all three surfaces
+have cyclic complement and no `A6` assignment.  Relative contact/fiber
+blowups and proper Whitney--Thom transport exclude all three dense clean
+surfaces.  The split, denominator, cusp-pair, diagonal, singular-fiber,
+same-target, non-clean equisingular, and deeper boundary pieces remain open.
 The complete combinatorial ledger still contains 145 candidate collision
 profiles, including 55 overdetermined profiles deliberately retained until
 exact saturation proves them empty, invalid, or contained elsewhere.  No

@@ -1660,6 +1660,51 @@ transport; the mixed subset consists of two representatives and three actual
 schemes.  These finite schemes, non-clean denominator charts, and deeper
 profile intersections remain separate.
 
+## 2026-07-21: the dense clean `C2+Q0+2N` surface excluded
+
+Status: exact incidence factorization, full-localizer singular and rank
+saturations, one exact rational member, computer-assisted van Kamp
+reconstruction, exhaustive finite replay, and conditional proper-isotopy
+transport.
+
+The three nonconstant remainder equations for `Q mod (P-h)`, together with
+`H(u)=H'(u)=0`, give an augmented determinant
+
+`h^2*(u^2+k*u+1)*A(k,u)*G(k,h,u)^2`.
+
+Here `G=0` is exactly the removed boundary where the contact pair lands on
+the quadruple target.  The genuine factor
+
+`A=k^3*u+5*k^2*u^2+3*k^2+4*k*u^3+16*k*u+12*u^2+4`
+
+is irreducible over `QQ).  Its projective quartic has arithmetic genus three
+and two ordinary nodes, both on `k=+/-2`, so the nonsplit valid base is a
+smooth geometrically irreducible genus-one open times the `h` parameter.
+Exact saturation by the complete split, fiber-discriminant, pair, diagonal,
+and same-target localizer makes the singular ideal and both rank-at-most-three
+ideals unit with exponent one.  The coefficient and augmented rank-at-most-two
+ideals are already unit.  Thus the coefficient solution is unique everywhere
+on the valid component.  A Cramer chart at `(k,h,u)=(-4,1,1)` has two
+independent coefficient-image tangent vectors, proving a genuine
+two-dimensional, codimension-three image.
+
+The corresponding member
+`(P,Q)=(t^4-4t^3+t^2,t^9-6t^8+13t^7-19t^6+7t^5)` has an ordinary
+quadruple point at `(1,-1)`, an exact contact two at `(3,-7)`, two
+residual nodes, the forced cusp, and the fixed infinity branch.  Sage gives
+Jacobian component lengths `((2,2),(9,1),(3,1),(4,1))`, total length
+`18`, and radical length `5`.  The delta budget is
+`2+2+6+2+16=28`.  Its four-generator, nine-relation affine presentation
+simplifies to `Z`; the exact `40^4` replay has 40 satisfying assignments,
+all of image order three, and none with image `A6`.
+
+Finite-etale labeling, one relative blowup of the ordinary quadruple section,
+two at the contact-two section, one at each node, and the fixed cusp/infinity
+resolution sequences transport the cyclic complement across the dense clean
+surface.  Split fibers, singular quadruple fibers, invalid pair charts,
+same-target overlap, non-clean specializations, and deeper intersections
+remain open.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -1685,8 +1730,9 @@ profile intersections remain separate.
    finite compatible orbit representatives (eight actual split rank-drop
    schemes), plus the non-clean denominator charts and deeper
    component intersections from `docs/a6-delta-ten-codim-two.md`; then audit
-   the remaining twelve codimension-three profiles and omitted `C4` and
-   `C2+C3` boundaries without using expected dimension as emptiness.
+   the remaining eleven codimension-three profiles and omitted `C4`,
+   `C2+C3`, and `C2+Q0` boundaries without using expected dimension as
+   emptiness.
 3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 4. Extend the exact support analysis beyond two interior coefficients in the
