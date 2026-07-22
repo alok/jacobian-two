@@ -15,8 +15,12 @@ is tangent to every fixed-``k`` pair fiber.  Away from its singular points,
 ``C=D(C)=D^2(C)=0`` is contact at least three.
 
 This coordinate-free system remains regular when the usual formula solving
-for ``p`` has denominator zero.  Exact row transformations identify its jets
-with the true vertical/graph component jets on:
+for ``p`` has denominator zero.  Interpreting these jets as branch-contact
+order additionally requires distinct source roots, a smooth fixed-``k`` pair
+fiber, immersed branches, and an unramified common first coordinate.  Those
+conditions are imposed by the clean localizers below.  Exact row
+transformations identify the jets with the true vertical/graph component
+jets on:
 
 * the three maximal-rank split ``C3`` charts; and
 * the five maximal-rank split ``C2^2`` charts.
@@ -30,10 +34,12 @@ irreducible global contact incidences as the existing cyclic samples.  The
 proper Whitney--Thom propagation already proved for those clean global
 components applies to these rank-open split loci.
 
-The result deliberately excludes the two ``C3`` overlap allocations, the
-``C2^2`` overlap-plus-contact allocation, and the finite compatible rank-three
-fibers on the three residual determinant charts.  Their incidence dimensions
-are already at most two, but their complement topology remains open.
+Exact rational arcs additionally prove that the two ``C3`` overlap
+allocations and the ``C2^2`` overlap-plus-contact allocation lie in the
+algebraic closures of the ordinary global components.  They remain outside
+the smooth proper-isotopy argument.  Their complement topology, together
+with the finite compatible rank-three fibers on the three residual
+determinant charts, remains open.
 """
 
 from __future__ import annotations

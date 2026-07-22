@@ -1471,11 +1471,13 @@ dimension two.  In the mixed profile the rank-at-most-two curve is only the
 pair denominator; its genuine split points either change profile or are
 inconsistent.  Neither critical chart supports a threefold.
 
-At the three split values, an actual finite generator produces all 22 generic
-allocations from the `2+8` and `4+6` component budgets.  Every row has an
-exact clean witness at `k=0,+2`, and all eleven `k=2` rows are replayed under
-the full family involution at `k=-2`.  This is a generic clean-witness ledger,
-not a global split exclusion: most determinantal rank-drop subloci remain.
+At the three split values, an actual finite generator produces 22 generic
+allocation orbit types from the `2+8` and `4+6` component budgets.  They
+represent 33 actual rows: every representative has an exact clean witness at
+`k=0,+2`, and all eleven `k=2` rows are replayed under the full family
+involution at `k=-2`.  This is a generic clean-witness ledger, not a global
+split exclusion: most determinantal rank-drop subloci remain at this stage of
+the chronology.
 
 ## 2026-07-21: the first codimension-three profile is excluded generically
 
@@ -1517,6 +1519,84 @@ transports the cyclic complement across the dense clean surface.  Split,
 pair-denominator, cusp-pair, diagonal, residual, and deeper boundary pieces
 remain open.
 
+## 2026-07-21: seven true-split rank strata cannot hide a threefold
+
+Status: exact true-component incidence derivation, typed SymPy replay,
+independent Sage determinantal saturation, and hostile boundary fixtures;
+two finite rank-three affine-line orbit representatives, representing three
+actual schemes after involutive transport, remain topologically open.
+
+At `k=0`, a labeled triple fiber is `(z,-z,w,-w)` on
+`z^2+w^2+1=0`; at `k=2` it is `(z,-1-z,w,-1-w)` on
+`z(z+1)+w(w+1)=0`.  Rebuilding the equations from the actual `V/W`
+collision factors gives four `T112` systems and three mixed
+`C2+T111` systems.  The derivation verifies the component value identities,
+the target-coordinate derivatives needed for tangency, and every
+same-target factor in the valid localizers.
+
+All four valid `T112` matrices have rank exactly three.  Their incidences are
+affine-line bundles over curves, of dimension two, with no valid rank-drop
+locus.  The three mixed systems have generic rank four.  Coefficient and
+augmented rank at most two saturate to the unit ideal.  Compatibility on the
+rank-three divisor is reduced of length four for `k=0/contact-W`, reduced of
+length four for `k=2/contact-V`, and empty for `k=2/contact-W`.  The surviving
+coefficient fibers are affine lines over finitely many points, so the largest
+residual incidence has dimension one.  None of the seven charts supports a
+threefold.
+
+The transport to `k=-2` checks the full polynomial family and every component
+value and derivative row under `t -> -t` and `(a,b,c,d)->(a,-b,c,-d)`.
+Seven compatible rank-two hostile fixtures all lie on an explicitly inverted
+repeated, critical, overlap, or same-target boundary.  Subsequent exact row
+transformations place all seven clean rank-open loci in the existing global
+incidences.  The two representative length-four exceptional affine-line
+schemes (three actual schemes), deeper intersections, and their split
+complement topology remain.
+
+## 2026-07-21: all 22 true-split orbit types classified
+
+Status: exact key-for-key aggregate of four focused rank certificates,
+independent Sage saturation on the contact systems, exact global-component
+row comparisons, and an explicit lower-dimensional topology boundary.
+
+The contact audit classifies all five `C3` and six `C2^2` allocation rows.
+Visible rank losses are cusp, diagonal, overlap, or repeated-contact
+boundaries.  The three genuine two-contact residual determinants have reduced
+compatible ordered bases of lengths `4,6,6`; every coefficient matrix has
+rank three there, so the fibers are affine lines and the residual incidences
+have dimension one.  The global-fiber audit separately proves rank three for
+every valid split ordinary quadruple and removes the two-triple residual as a
+same-target/cusp boundary or an incompatible scheme.
+
+Together with the seven triple/mixed representatives, the focused systems
+produce 22 distinct allocation keys with profile counts `(5,6,4,3,2,2)`,
+exactly equal to the generated ledger.  The eleven `k=+/-2` orbit types each
+instantiate twice, so these keys represent 33 actual rows.  Therefore no
+coefficient-rank stratum on a true split fiber supports an incidence
+component of dimension at least three.
+
+The topology comparison uses the smooth irreducible total pair surface and
+the tangent derivation `D=F_p*d/ds-F_s*d/dp`.  Exact invertible transformations
+identify its two- and three-contact jets with all eight maximal-rank split
+contact systems.  Flatness and an integral generic fiber make the ordered
+two-pair total base integral.  A separate primitive-linear total mixed base
+and the existing labeled-triple/global-fiber incidences treat the other clean
+rank-open rows.  Thus every clean rank-open split locus lies in an
+already-excluded global component.
+
+Exact Cramer arcs subsequently put the two fixed `C3` overlap allocations and
+the `C2^2` overlap-plus-contact surface in these algebraic component closures.
+One `C2^2` arc is independently regenerated in Sage and dominates the entire
+overlap-plus-contact incidence.  This is algebraic containment only: it does
+not identify the complement on the limiting fibers.
+
+This is therefore not a full split exclusion.  The three overlap allocations
+still need direct topology.  The contact residual affine lines have five
+orbit representatives, representing eight actual finite schemes after
+transport; the mixed subset consists of two representatives and three actual
+schemes.  These finite schemes, non-clean denominator charts, and deeper
+profile intersections remain separate.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -1537,11 +1617,13 @@ remain open.
    try to force Orevkov's condition `(*)` or replace it with a determinant
    inequality stable under several noncontracted preimages; do not relabel the
    conditional two-pair theorem as a solution of the unrestricted conjecture.
-2. Continue the conditional delta-ten elimination with the unresolved split
-   rank strata, denominator/overlap charts, and component intersections from
-   `docs/a6-delta-ten-codim-two.md`, then audit the remaining thirteen
-   codimension-three profiles and the omitted `C4` boundaries without using
-   expected dimension as emptiness.
+2. Continue the conditional delta-ten elimination with topology for the
+   three algebraically contained exceptional overlap allocations and five
+   finite compatible orbit representatives (eight actual split rank-drop
+   schemes), plus the non-clean denominator charts and deeper
+   component intersections from `docs/a6-delta-ten-codim-two.md`; then audit
+   the remaining thirteen codimension-three profiles and omitted `C4`
+   boundaries without using expected dimension as emptiness.
 3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 4. Extend the exact support analysis beyond two interior coefficients in the

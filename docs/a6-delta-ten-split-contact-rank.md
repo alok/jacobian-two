@@ -214,24 +214,104 @@ is compatible of rank three but simultaneously selects the component
 overlap and a diagonal pair.  It shows why raw compatibility before clean
 localization contains genuine points belonging to different profiles.
 
-## 7. Reproduction and boundary
+## 7. Rank-open component closure
+
+The rank calculation alone does not identify a split locus with the global
+component carrying the cyclic sample.  That comparison is supplied by the
+total unordered-pair surface
+
+\[
+ F=(2s+k)p-s(s^2+ks+1)=0.                           \tag{7.1}
+\]
+
+Let `C` be the coefficient of `t` in the remainder of `Q` modulo
+`t^2-s*t+p`, and define the fiber-tangent derivation
+
+\[
+ D=F_p\partial_s-F_s\partial_p.                     \tag{7.2}
+\]
+
+Then `C=D(C)=0` is the global contact-two system and
+`C=D(C)=D^2(C)=0` is the global contact-three system when the source roots
+are distinct, the fixed-`k` pair fiber is smooth, both branches are immersed,
+and the common first coordinate is unramified.  These are explicit clean-open
+conditions, not consequences of the row equations alone.  On the principal
+pair chart, the total rows are exactly a triangular transform of
+`(H,H',H'')`, with determinant `s^6/(2s+k)^9`; two ordered contact blocks have
+determinant `u^4*v^4/((2u+k)^7*(2v+k)^7)`.  Exact row transformations also
+identify them with the true component jets.  Their determinants on the three maximal-rank `C3` charts
+are
+
+```text
+k=0, W: s^3/512
+k=2, V: -8*r^3
+k=2, W: s^6*(s+1)^3/512.
+```
+
+On the five maximal-rank two-contact charts the corresponding four-row
+determinants are
+
+```text
+k=0, VW:  -u^4*v*(2u-1)/128
+k=0, WW:   u*v/16384
+k=2, VV:   4*u*v
+k=2, VW:  -u*v^4*(v+1)/64
+k=2, WW:   u^4*v^4*(u+1)*(v+1)/16384.
+```
+
+Every factor is a unit on the exact clean localizer.  Power-membership
+certificates prove this on the **entire** declared open; the stored clean
+witness is an additional nonemptiness check.  Thus the row comparisons hold
+universally there, including the pair-denominator vertical component at
+`k=2`.
+
+The total pair surface is geometrically integral and flat over the `k` line.
+Its ordered self-fiber-product is integral too.  Indeed its algebra is flat
+over `QQ[k]`, while its generic fiber is the tensor product of two independent
+primitive-linear pair algebras and is a domain.  A zero divisor would vanish
+after generic localization and hence create `QQ[k]`-torsion, contradicting
+flatness.  Its only singular points are the three double-overlap points where
+both ordered pairs equal the component intersection; the clean rank-open
+localizers remove them.  The clean rank-open incidence is therefore the same
+smooth irreducible global incidence that contains the exact cyclic sample.
+The separate finite-etale labeling, simultaneous-resolution, and proper
+Whitney--Thom argument in the propagation note excludes all eight rank-open
+split contact charts.
+
+Exact rational Cramer arcs now dominate both fixed `C3` overlap planes and
+the `C2^2` overlap-plus-contact incidence from the ordinary global
+components.  This proves algebraic containment of all three overlap
+allocations.  It does not prove that complement topology is unchanged at
+those boundary points.  The overlap topology and the rank-three affine-line
+fibers over the three representative residual ordered bases of total length
+`4+6+6=16` remain open.  Transport to `k=-2` turns the three representative
+schemes into five actual contact schemes of total ordered length `28`.
+
+## 8. Reproduction and boundary
 
 Run the dependency-free exact certificate and its tests with
 
 ```bash
 uv run python -m scripts.a6_delta_ten_split_contact_rank
 uv run pytest -q tests/test_a6_delta_ten_split_contact_rank.py
+uv run python -m scripts.a6_delta_ten_split_contact_closure
+uv run python -m scripts.a6_delta_ten_split_c22_overlap_closure
+uv run pytest -q tests/test_a6_delta_ten_split_contact_closure.py
+uv run pytest -q tests/test_a6_delta_ten_split_c22_overlap_closure.py
 ```
 
 Independently replay the saturations in Sage with
 
 ```bash
 sage tools/check_a6_delta_ten_split_contact_rank.sage
+sage tools/check_a6_delta_ten_split_c22_overlap_closure.sage
 ```
 
-The conclusion is deliberately narrow: every coefficient-rank-drop locus of
-the allowed split `C3` and `C2^2` allocations is now either an explicit
+The exact conclusion is deliberately bounded.  Every coefficient-rank-drop
+locus of the allowed split `C3` and `C2^2` allocations is either an explicit
 overlap/cusp/diagonal boundary or one of the finite rank-three residual bases
-above.  The calculation supplies dimensions and fibers, but no van Kamp
-group, topology propagation, global `A6` exclusion, or conclusion about
-`JC(2)`.
+above, and every clean maximal-rank locus lies in an already-excluded global
+component.  All three overlap incidences are also algebraically contained,
+but no complement calculation or proper-isotopy extension is yet supplied
+at those boundary points or on the affine-line fibers.  No conclusion about
+unrestricted `A6` or `JC(2)` is made.

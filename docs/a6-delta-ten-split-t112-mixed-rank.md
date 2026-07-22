@@ -255,8 +255,40 @@ Run the independent ideal calculation with Sage 10.8:
 sage tools/check_a6_delta_ten_split_t112_mixed_rank.sage
 ```
 
-The remaining split coefficient-rank work consists of the fifteen allocation
-rows belonging to `C3+7N`, `C2^2+6N`, `Q0+4N`, and `T111^2+4N`, together
-with deeper intersections and assignment of lower-dimensional compatible
-pieces to adjacent profiles.  Topology for the split surfaces is also not
-computed here.
+The focused module deliberately proves only these seven rank statements.
+The companion contact and global-fiber certificates now treat the other
+fifteen rows, while `a6_delta_ten_split_rank_all` checks exact key-for-key
+coverage of the generated 22-orbit-type ledger, representing 33 actual rows.
+
+There is also a separate component-closure certificate.  For the mixed
+profile, retain both the sum `s` and product `p` of the contact pair.  With
+triple coordinates `q,r`, put `n=r^2+q^2-q^3`.  The total source base is
+
+\[
+ (2qrs+n)p-s\bigl(qr(s^2+1)+ns\bigr)=0.             \tag{5.1}
+\]
+
+It is primitive and linear in `p`: its two coefficients have gcd one.  Hence
+the total base is geometrically irreducible and includes the `k=2` vertical
+pair-denominator chart instead of deleting it.  Exact invertible row
+transformations compare the total target/tangency rows with all three split
+mixed systems.  Analogous transformations identify all four split `T112`
+systems with restrictions of the existing irreducible labeled incidence.
+Independent Rabinowitsch saturations prove that all seven transformation
+determinants are units on their full valid split localizations; the stored
+clean witnesses separately prove nonemptiness.  The total mixed base is
+smooth after localizing by `q*r`, and an exact four-row diagonal bridge
+recovers the historical mixed Cramer system on its ordinary chart.
+Consequently every clean maximal-rank locus in these seven allocations lies
+in the same connected equisingular incidence as the cyclic sample, and the
+existing proper-isotopy exclusion applies.
+
+What remains here is smaller but real: the two reduced length-four compatible
+mixed orbit representatives have rank-three affine-line coefficient fibers
+whose topology has not been connected to the global graph.  The `k=2`
+representative transports to a third actual scheme at `k=-2`, so the actual
+mixed total length is twelve rather than the representative length eight.
+Deeper intersections and
+assignment of lower-dimensional compatible pieces to adjacent profiles also
+remain open.  Neither this note nor the aggregate rank theorem proves
+`JC(2)`.

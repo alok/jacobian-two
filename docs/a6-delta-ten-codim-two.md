@@ -36,12 +36,24 @@ residual divisor, the two-triple residual is incompatible after exact
 localization, and every two-contact residual incidence component has
 dimension at most two.  The removed `P`-critical triple charts for `T112` and
 the mixed profile likewise have dimension at most two when the critical
-branch is immersed.  A generated split-chart ledger now covers all 22 generic
-allocations and supplies exact clean witnesses at `k=0,+2` plus full
-transport to `k=-2`; it does **not** classify most coefficient-rank-drop
-subloci on those split charts.  Denominator charts, unresolved split rank
-strata, component intersections, lower-dimensional residual taxonomies, and
-deeper degenerations remain in the audit.
+branch is immersed.  A generated split-chart ledger now covers 22 generic
+allocation types—eleven at `k=0` and eleven `k=+/-2` involution-orbit
+types—representing 33 actual rows over all three split values.  It supplies
+exact clean witnesses at `k=0,+2` plus full transport to `k=-2`.  Focused audits of the
+[contact systems](a6-delta-ten-split-contact-rank.md), the
+[triple/mixed systems](a6-delta-ten-split-t112-mixed-rank.md), and the
+[global-fiber systems](a6-delta-ten-split-rank-strata.md) now classify every
+coefficient-rank stratum in every representative row.  None supports a threefold.  Exact
+total-pair and total-two-pair jet comparisons place the eight clean
+maximal-rank contact charts in their global excluded components; analogous
+labeled-triple, total mixed-base, and global-fiber arguments treat the other
+eleven clean split rows.  Exact dominant arcs additionally put the three
+prescribed overlap incidences in the algebraic closures of the ordinary
+components, but do not yet transport their complement topology.  Five finite
+rank-drop orbit representatives—eight actual schemes after `k=-2`
+transport—also still need topology.  Denominator
+charts, component intersections, lower-dimensional residual taxonomies, and
+deeper degenerations also remain in the audit.
 
 The topology conclusion also has two explicit computer-assisted inputs:
 
@@ -70,12 +82,12 @@ point.
 
 | profile | component proved to exist | topology conclusion on that component | boundary not covered |
 |---|---|---|---|
-| `C3 + 7N` | one irreducible threefold on the valid pair chart | generic clean component excluded | removed projection-chart and split pair-chart loci, including `s=0` and pair-denominator behavior, plus deeper intersections |
-| `C2^2 + 6N` | Cramer component dominating the full `(k,u,v)` ordered base, modulo the free swap | that dominant clean component excluded | residual factor has no threefold; unresolved split rank strata and component intersections remain |
-| `T112 + 6N` | irreducible labeled affine-line bundle on the displayed `P`-unramified chart and generically finite threefold image | generic clean dominant chart excluded | immersed `P`-critical boundary has no threefold; unresolved split rank strata and deeper intersections remain |
-| `C2 + T111 + 5N` | dense rational Cramer component on the displayed open | generic clean dominant chart excluded | residual and immersed `P`-critical factors have no threefold; split rank strata, overlap intersections, and lower-dimensional taxonomy remain |
-| `Q0 + 4N` | one irreducible threefold on the valid four-source fiber chart | generic clean component excluded | removed critical-fiber, non-clean, and deeper intersections |
-| `T111^2 + 4N` | rational threefold dominating the dense valid Cramer open | dense Cramer component excluded | valid residual factor is empty; unresolved split rank strata and intersections remain |
+| `C3 + 7N` | one irreducible threefold on the valid pair chart | generic component and all three clean split rank-open charts excluded | two fixed `k=0` overlap incidences are algebraically contained but their topology and deeper intersections remain open |
+| `C2^2 + 6N` | Cramer component dominating the full ordered base, modulo the free swap | dominant component and all five clean split rank-open charts excluded | `k=0` overlap-plus-contact is algebraically contained; its topology and finite residual affine-line fibers of representative ordered lengths `4,6,6` remain open |
+| `T112 + 6N` | irreducible labeled affine-line bundle and generically finite threefold image | dominant component and all four clean true-split tangent loci excluded | immersed `P`-critical and deeper intersections remain |
+| `C2 + T111 + 5N` | dense rational Cramer component on the displayed open | dominant component and all three clean split rank-open loci excluded | immersed `P`-critical boundary, two representative finite length-four affine-line schemes (three after transport), overlap intersections, and lower-dimensional taxonomy remain |
+| `Q0 + 4N` | one irreducible threefold on the valid four-source fiber chart | generic component and clean split fibers excluded | removed critical-fiber, non-clean, and deeper intersections remain |
+| `T111^2 + 4N` | rational threefold dominating the dense valid Cramer open | dense component and clean split fibers excluded | same-target, cusp-fiber, non-clean, and deeper intersections remain |
 
 “Excluded” means that the component's clean equisingular open cannot carry
 the required connected six-sheet `A6` quotient with single-three-cycle branch
@@ -456,7 +468,8 @@ collision degrees are
 A finite generator now constructs every generic allocation from these
 component budgets, the edge vectors for contacts/triples/quadruples, the
 distinct-contact rules, and the unique clean `k=0` overlap rule.  It produces
-exactly 22 rows: eleven at `k=0` and eleven allocation types at `k=+/-2`.
+exactly 22 orbit-type rows: eleven at `k=0` and eleven allocation types at
+`k=+/-2`.  Instantiating both signs gives 33 actual rows.
 Three tempting `k=0` rows are impossible:
 
 - a triple root on the monic quadratic `V` component;
@@ -471,7 +484,7 @@ the cusp, extra-critical, and unintended-overlap walls.  Exact full-family
 transport
 
 \[
- t\mapsto-t,qquad Y\mapsto-Y,qquad
+ t\mapsto-t,\qquad Y\mapsto-Y,\qquad
  (a,b,c,d)\mapsto(a,-b,c,-d)                           \tag{9.2}
 \]
 
@@ -484,18 +497,33 @@ Three principal rank-drop systems are globally saturated on their valid
 opens: `k=0` graph `C3`, `k=0` vertical/graph double contact, and `k=2`
 vertical/vertical double contact.  Their saturation exponents are `3,3,4`.
 
-This is a complete **generic clean-witness ledger**, not a complete split
-exclusion.  A maximal-rank witness proves a nonempty expected-rank open; it
-does not rule out a different component supported on a coefficient-rank-drop
-locus.  Most remaining split allocation systems still need determinantal and
-augmented-compatibility saturation with the bound
+The focused true-component audits then treat all 22 orbit types, with exact
+transport supplying the eleven additional `k=-2` rows.  Every
+valid `T112` matrix has rank exactly three.  The mixed residual compatibility
+schemes have reduced lengths four and four.  The three `C2^2` residual
+determinants have reduced compatible bases of ordered lengths `4,6,6`, with
+rank exactly three.  The ordinary-quadruple matrix has rank three on every
+valid split fiber, while the two-triple residual is either a same-target
+boundary or incompatible.  All other apparent rank drops lie on exact cusp,
+diagonal, repeated-root, overlap, or singular-fiber boundaries.  Hence every
+valid stratum satisfies
 
 \[
- \dim(\text{base rank locus})+4-\operatorname{rank}.                 \tag{9.3}
+ \dim(\text{base rank locus})+4-\operatorname{rank}\le 2.            \tag{9.3}
 \]
 
-No van Kamp calculation or topology transport is asserted for these
-dimension-two witnesses.
+The all-allocation aggregate compares exact keys with the generated ledger,
+so the conclusion is not inferred from the number 22.  Total-pair jet
+derivations and a flat integral ordered two-pair base identify the eight
+maximal-rank contact systems with restrictions of the global incidences.
+Analogous exact row transformations handle all seven `T112`/mixed systems,
+and the global-fiber argument handles the remaining four rows.  Proper
+isotopy therefore excludes every clean split rank-open locus.  Exact rational
+arcs dominate all three overlap allocation incidences from the ordinary
+components, proving algebraic containment but not boundary topology.  No
+topology is yet asserted for those overlaps or for the five finite compatible
+orbit representatives, which become eight actual schemes over all split
+values.
 
 ## 10. What the checkpoint changes
 
@@ -505,24 +533,27 @@ The conditional delta-ten filtration is now:
 |---|---:|---|
 | clean, dimension five | 1 | excluded |
 | codimension-one, dimension four | 2 | both generic components excluded |
-| expected codimension two, dimension three | 6 | all six displayed generic/dominant components excluded; all three residual and both immersed `P`-critical threefold threats closed; unresolved split/denominator/intersection rank strata remain |
+| expected codimension two, dimension three | 6 | all six displayed generic/dominant components excluded; all residual and immersed `P`-critical threefold threats closed; all 22 split orbit types (33 actual rows) classified; every clean rank-open split locus excluded; overlap incidences algebraically contained but their topology, finite rank-drop topology, and deeper boundaries remain |
 | expected codimension three, dimension two | 14 | nonsplit `C4+6N` dominant surface is the first audited profile; see the codimension-three note |
 | expected codimension at least four | 122 | not audited component by component |
 
 The 145-profile ledger remains an elimination ledger, not a list of proven
 components.  In particular, its 55 overdetermined profiles are not empty by
-dimension count alone.  The next exact work is to saturate and decompose:
+dimension count alone.  The next exact work is to:
 
-1. the unresolved determinantal rank strata for the remaining split
-   allocations at `k=0,+2,-2`;
-2. removed pair-denominator and overlap charts, plus intersections of the
-   now-bounded residual and `P`-critical pieces with other walls;
-3. assignment of the compatible lower-dimensional residual curves and
-   points to adjacent collision profiles;
-4. intersections and specializations of the six identified components;
-5. the remaining thirteen expected codimension-three profiles and the
+1. determine complement topology at the two `C3` overlap fibers and the
+   `C2^2` overlap-plus-contact surface, whose algebraic component closure is
+   now exact, and treat the five finite compatible orbit representatives
+   (eight actual schemes);
+2. classify removed pair-denominator and non-clean overlap charts, plus
+   intersections of the bounded residual and `P`-critical pieces with other
+   walls;
+3. assign every compatible lower-dimensional residual curve and point to an
+   adjacent collision profile or prove its clean topology directly;
+4. audit intersections and specializations of the six identified components;
+5. treat the remaining thirteen expected codimension-three profiles and the
    omitted boundaries of `C4+6N`; and
-6. the endpoint and overdetermined containment audit.
+6. finish the endpoint and overdetermined containment audit.
 
 Even a complete audit of that list would establish only the stated
 conditional one-pair, single-three-cycle `A6` result.  It would not settle

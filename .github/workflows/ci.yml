@@ -107,6 +107,16 @@ jobs:
         run: uv run --frozen python -m scripts.a6_delta_ten_pcritical_triples
       - name: Check the conditional A6 delta-ten split clean-witness ledger
         run: uv run --frozen python -m scripts.a6_delta_ten_split_codim_two
+      - name: Close the conditional A6 split contact rank strata
+        run: uv run --frozen python -m scripts.a6_delta_ten_split_contact_rank
+      - name: Close the conditional A6 split T112 and mixed rank strata
+        run: uv run --frozen python -m scripts.a6_delta_ten_split_t112_mixed_rank
+      - name: Check split component closure and all-allocation coverage
+        run: |
+          uv run --frozen python -m scripts.a6_delta_ten_split_contact_closure
+          uv run --frozen python -m scripts.a6_delta_ten_split_component_closure
+          uv run --frozen python -m scripts.a6_delta_ten_split_c22_overlap_closure
+          uv run --frozen python -m scripts.a6_delta_ten_split_rank_all
       - name: Exclude the remaining conditional A6 residual-rank threefolds
         run: uv run --frozen python -m scripts.a6_delta_ten_residual_rank
       - name: Exclude the dominant conditional A6 delta-ten T112 stratum

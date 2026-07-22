@@ -248,7 +248,145 @@ finite-etale residual scheme, labeled relative blowups, relative SNC divisor,
 properness, and stratumwise submersion are the hypotheses that make the
 topological transport valid.
 
-## 7. Reuse for the nonsplit contact-four surface
+## 7. Extension over the split-containing total bases
+
+The previous argument used solved source charts.  Passing from those charts
+to the total unordered-pair bases is not automatic: an equation-level
+restriction at one witness would prove neither universal containment nor a
+smooth base for isotopy.  The split closure certificates now supply the
+missing checks.
+
+### 7.1 Exact row bridges and regular source bases
+
+For one unordered source pair retain both its sum `s` and product `p` and use
+
+\[
+ F(k,s,p)=(2s+k)p-s(s^2+ks+1).                                  \tag{7.1}
+\]
+
+This surface is smooth and geometrically integral.  If `C` is the
+coefficient of `t` in `Q mod (t^2-st+p)` and
+
+\[
+ D=F_p\partial_s-F_s\partial_p,                                  \tag{7.2}
+\]
+
+then, on the principal chart
+
+\[
+ p=\frac{s(s^2+ks+1)}{2s+k},
+\]
+
+the old collision polynomial `H` satisfies
+
+\[
+ C=\frac{s^2}{(2s+k)^4}H,
+ \qquad D=(2s+k)\frac d{ds}.                                     \tag{7.3}
+\]
+
+Consequently `(C,D(C),D^2(C))` is an exact lower-triangular transform
+of `(H,H',H'')` with determinant
+
+\[
+ \frac{s^6}{(2s+k)^9}.                                           \tag{7.4}
+\]
+
+For two ordered contact pairs, the corresponding block determinant is
+
+\[
+ \frac{u^4v^4}{(2u+k)^7(2v+k)^7}.                                \tag{7.5}
+\]
+
+The certificates verify the full affine rows, including constant terms, and
+give explicit inverses in the relevant localizations.  They also prove by
+power-membership identities that all eight component-row determinants for
+the non-overlap split `C3` and `C2^2` allocations are units on their **full**
+declared clean opens, rather than merely nonzero at one witness.
+
+The ordered two-pair base is integral by geometric integrality of its generic
+pair curve, product integrality over `Qbar(k)`, flatness over `QQ[k]`, and
+torsion descent.  Its entire singular support consists of the three points
+
+\[
+\begin{array}{c|c|c}
+k&(s_1,p_1)&(s_2,p_2)\\ \hline
+0&(0,1/2)&(0,1/2)\\
+2&(-1,0)&(-1,0)\\
+-2&(1,0)&(1,0),
+\end{array}                                                       \tag{7.6}
+\]
+
+where both pairs are the same vertical/graph overlap.  Every clean
+maximal-rank two-contact allocation removes these points.
+
+For the mixed profile, retain the separate contact product as well.  With
+`n=r^2+q^2-q^3`, the total source base is
+
+\[
+ (2qrs+n)p-s\bigl(qr(s^2+1)+ns\bigr)=0.                          \tag{7.7}
+\]
+
+It is primitive linear in `p`, hence geometrically integral, and its
+singular ideal becomes the unit ideal after localizing by `qr`.  On the old
+ordinary chart, its four target rows are exactly the historical mixed rows
+under the diagonal transform
+
+\[
+ \operatorname{diag}\!\left(
+   \frac{(2s+k)^4}{s^2},
+   -\frac{(2s+k)^5}{s^2(s^2+ks+1)},
+   1,1
+ \right),                                                        \tag{7.8}
+\]
+
+whose determinant is a unit there.  Independent Rabinowitsch saturations
+prove that the four `T112` and three mixed component transforms remain units
+on every stated split clean localization.  Thus these are restrictions of
+the same global incidences carrying the cyclic samples, including the mixed
+vertical pair-denominator chart.
+
+The source-base primality, smoothness, singular-support, and determinant-unit
+claims are replayed independently by
+[`check_a6_delta_ten_split_component_closure.sage`](../tools/check_a6_delta_ten_split_component_closure.sage).
+
+### 7.2 Proper isotopy on the enlarged clean opens
+
+For each total incidence, now remove the closed loci where the coefficient
+rank drops, two distinguished pairs coincide, a source pair ceases to be
+etale or immersed, the exact contact-order jet vanishes, a residual collision
+ceases to be a transverse node, or two distinguished targets meet.  The
+exact split witnesses show that every required rank-open allocation has a
+point in this clean locus.  Sections 1--2 and the regularity checks above show
+that each resulting labeled incidence is a nonempty open of a smooth
+irreducible total incidence, hence its complex analytification is
+path-connected.
+
+After the finite-etale ordering cover of Section 3, every branch, residual
+node pair, and infinitely-near center is a global smooth section.  The local
+resolution sequences are constant: one blowup per node, two for each
+contact-two point, three for a contact-three point, the `T112` sequence from
+Section 4, and the fixed cusp and infinity sequences.  The highest required
+jet difference is a unit on the clean open, so the last exceptional
+directions remain distinct.  The centers for different target sections are
+disjoint.  These relative blowups therefore give a proper smooth family with
+a relative SNC total transform and constant labeled intersection graph.
+
+The Whitney stratification by divisor components and intersections maps
+submersively to the clean base.  Thom's first isotopy lemma applies exactly
+as in Section 5.  Therefore the cyclic complements on the old ordinary
+charts propagate over every clean maximal-rank split `C3`, `C2^2`, `T112`,
+and mixed locus.
+
+This conclusion deliberately does **not** manufacture topology from the row
+identities.  The row bridges prove algebraic containment; the preceding
+smoothness, finite-etale labeling, unit-jet, relative-SNC, properness, and
+submersion argument is the separate topology step.  Exact arcs also place
+all three prescribed overlap allocation incidences in the algebraic closures
+of the ordinary components, but those overlap points are outside the smooth
+rank-open argument above.  Their complement topology, and the finite
+rank-three affine-line fibers, remain open.
+
+## 8. Reuse for the nonsplit contact-four surface
 
 The same argument applies to the first codimension-three profile on the
 determinant-nonzero `C4+6N` Cramer surface.  Its incidence is a principal open

@@ -1,8 +1,9 @@
-"""Aggregate the exact rank audit for all 22 true-split allocations.
+"""Aggregate the exact rank audit for all 22 true-split allocation orbit types.
 
-The generic split ledger enumerates 22 allowed allocations across the six
-expected codimension-two delta-ten profiles.  Four focused certificates now
-cover that entire list:
+The generic split ledger enumerates 22 allowed allocation orbit types across
+the six expected codimension-two delta-ten profiles.  They represent 33
+actual rows after instantiating both signs of ``k=+/-2``.  Four focused
+certificates now cover that entire list:
 
 * ``C3+7N`` and ``C2^2+6N`` on their true component jets;
 * ``T112+6N`` and ``C2+T111+5N`` on labeled four-source fibers;
@@ -10,17 +11,17 @@ cover that entire list:
 * the full ``k=2`` to ``k=-2`` family involution.
 
 This module checks that the exact audited allocation keys equal the generated
-22-row ledger, rather than inferring completeness from a count.  The result
+22-key ledger, rather than inferring completeness from a count.  The result
 is a rank/dimension theorem: no true-split coefficient-rank stratum in these
 six profiles supports an incidence component of dimension at least three.
 
 It is not yet a full split exclusion.  The clean rank-open loci for ``C3``,
 ``C2^2``, ``T112``, and the mixed profile are now connected to their global
 components, while the global-fiber argument handles ``Q0`` and two triples.
-The prescribed overlap allocations and the exceptional compatible
-affine-line fibers on rank-drop bases still require topology or a closure
-proof.  Deeper profile intersections and removed non-clean boundaries remain
-open.
+All three prescribed overlap allocations are now algebraically contained by
+exact dominant arcs, but they and the exceptional compatible affine-line
+fibers on rank-drop bases still require topology.  Deeper profile
+intersections and removed non-clean boundaries remain open.
 """
 
 from __future__ import annotations
@@ -115,7 +116,7 @@ def _audited_keys() -> tuple[AllocationKey, ...]:
 
 @dataclass(frozen=True, slots=True)
 class AllSplitRankCertificate:
-    """Exact coverage and dimension certificate for the 22-row ledger."""
+    """Exact coverage and dimension certificate for the 22-key ledger."""
 
     expected_keys: tuple[AllocationKey, ...]
     audited_keys: tuple[AllocationKey, ...]

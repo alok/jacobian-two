@@ -995,7 +995,10 @@ def main() -> int:
             spec.residual_incidence_dimension_bound,
         )
     print("k=2 to k=-2 full-system transports:", len(certificate.transports))
-    print("remaining: other split allocations, deeper intersections, and topology")
+    print(
+        "remaining beyond the all-allocation aggregate: compatible affine-line "
+        "topology and deeper intersections"
+    )
     return 0 if certificate.verified else 1
 
 

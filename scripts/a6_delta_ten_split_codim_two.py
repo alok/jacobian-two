@@ -25,11 +25,15 @@ codimension-two profiles on those true split charts.  It records:
 The witnesses certify the incidence geometry and nonemptiness of the listed
 clean algebraic opens.  They do not bound every component supported on a
 coefficient-rank-drop locus, compute affine complement groups, or prove
-Whitney--Thom propagation.  Compatible residual coefficient-rank loci remain
-a deeper split-boundary audit.  The ``P``-critical triple fibers are handled
-by the separate ``a6_delta_ten_pcritical_triples`` certificate and are not
-silently counted as part of this generic ledger.  No plane
-Jacobian-conjecture claim is made here.
+Whitney--Thom propagation.  Separate focused certificates now close the rank
+strata for all 22 allocation orbit types, representing 33 actual rows, and
+``a6_delta_ten_split_rank_all`` checks exact key-for-key coverage.  Rank-open component-closure certificates also
+connect the four contact profiles to their already-excluded global
+incidences.  Exceptional overlap and finite rank-drop fibers still have open
+topology.  The ``P``-critical triple fibers are handled by the separate
+``a6_delta_ten_pcritical_triples`` certificate and are not silently counted
+as part of this generic ledger.  No plane Jacobian-conjecture claim is made
+here.
 """
 
 from __future__ import annotations
@@ -1960,9 +1964,10 @@ def exact_split_codimension_two_certificate() -> SplitCodimensionTwoCertificate:
         ),
         k0_profile_allocation_counts=_profile_counts("k=0"),
         kpm_profile_allocation_counts=_profile_counts("k=+/-2"),
-        # This metadata is intentionally not part of ``verified``: the three
-        # principal saturations above do not classify every remaining rank
-        # stratum.  A false gap flag must never be counted as positive proof.
+        # This metadata describes this generic-witness module alone and is
+        # intentionally not part of ``verified``.  The separate focused
+        # modules and aggregate checker close all 22 orbit types (33 actual
+        # rows) without introducing a circular import here.
         global_rank_strata_classified=False,
         # This module proves algebraic incidence and clean witnesses only.
         topology_not_computed=True,
@@ -2008,8 +2013,8 @@ def main() -> int:
         "scripts.a6_delta_ten_pcritical_triples"
     )
     print(
-        "remaining here: compatible split rank-drop subloci, component "
-        "intersections beyond the checked k=0 overlap, and topology"
+        "remaining beyond the aggregate rank theorem: exceptional overlap/"
+        "rank-drop topology and deeper component intersections"
     )
     return 0 if certificate.verified else 1
 

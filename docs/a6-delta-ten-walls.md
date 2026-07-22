@@ -42,12 +42,19 @@ excludes all six displayed generic or dominant components.  The separate
 connected-clean-open, simultaneous-resolution, and proper-isotopy steps for
 the `T112` and mixed contact-plus-triple charts.  All three exposed residual
 rank factors and both immersed `P`-critical same-profile threefold threats are
-now closed.  A generated 22-row split ledger proves every generic allocation
-has an exact clean witness, but it deliberately leaves most split rank-drop
-subloci open.  Thus denominator/overlap charts, split determinantal strata,
+now closed.  A generated 22-orbit-type split ledger, representing 33 actual
+rows over `k=0,+2,-2`, proves every generic allocation has an exact clean
+witness, and focused true-component saturations classify every corresponding
+coefficient-rank stratum.  None supports a threefold.
+Total-pair, ordered two-pair, labeled-triple, mixed-total-base, and
+global-fiber closure arguments also exclude every clean split rank-open
+locus.  Exact dominant arcs put all three prescribed overlap allocations in
+those algebraic component closures, but do not transport complement topology
+to them.  Five finite compatible orbit representatives (eight actual
+rank-drop schemes) likewise still have open topology.  Denominator/non-clean charts,
 component intersections, lower-dimensional residual taxonomy, and endpoints
-remain to be eliminated or checked.  The
-result is conditional and computer-assisted.  It does not derive the four
+remain to be eliminated or checked.  The result is conditional and
+computer-assisted.  It does not derive the four
 hypotheses, exclude unrestricted `A6` or `S6`, construct a Keller map, or
 prove the plane Jacobian conjecture.
 
@@ -630,10 +637,12 @@ codimension-two profiles in Section 7, followed by the remaining thirteen
 expected codimension-three profiles and the omitted `C4` charts.  A complete
 audit must:
 
-1. saturate every unresolved split allocation rank stratum at
-   `k=0,+2,-2`;
-2. determine the removed pair-denominator and overlap loci on appropriate
-   charts rather than declaring them invalid;
+1. determine complement topology for the three exceptional overlap
+   allocations, whose algebraic closure is already certified, and for five
+   finite compatible orbit representatives (eight actual split rank-drop
+   schemes);
+2. determine the removed pair-denominator and non-clean overlap loci on
+   appropriate charts rather than declaring them invalid;
 3. classify intersections of the bounded residual and `P`-critical pieces
    with split, cusp, and deeper collision walls, and assign the remaining
    curves and points to adjacent profiles;

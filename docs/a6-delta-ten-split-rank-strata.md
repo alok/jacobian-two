@@ -10,7 +10,8 @@ true reducible pair fibers
 \]
 
 of the conditional `(4,9)`, one-pair, single-three-cycle `A6` family.  It is
-the determinantal continuation of the 22-row generic clean-witness ledger in
+the determinantal continuation of the 22-orbit-type (33-actual-row) generic
+clean-witness ledger in
 [`a6-delta-ten-codim-two.md`](a6-delta-ten-codim-two.md).
 
 For each allowed allocation, let `B_r` denote the valid base on which the
@@ -140,11 +141,135 @@ It closes both the rank and topology obligations for the clean split
 `Q0+4N` and `T111^2+4N` rows; intersections with removed singular-fiber,
 cusp-fiber, same-target, or deeper-degeneration boundaries remain separate.
 
+## Contact-only profiles
+
+The five `C3+7N` and six `C2^2+6N` allocation systems are rebuilt from the
+true vertical and graph factors.  Every visible rank loss lies on an exact
+cusp, diagonal, overlap, or repeated-contact factor except for three
+irreducible two-contact residual determinants.  After valid localization,
+their compatible bases are reduced of ordered lengths
+
+```text
+k=0, WW: 4
+k=2, VW: 6
+k=2, WW: 6.
+```
+
+The coefficient rank is exactly three on all sixteen representative residual base points,
+so their affine-line fibers have incidence dimension one.  Rank at most two
+saturates to the unit ideal.  The sole compatible raw `C3` rank loss uses a
+pair containing the forced cusp source and has collision order at least four,
+so it is not a clean `C3` point.  This closes (1.1) for all eleven contact
+allocations.
+
+The rank-open topology is controlled by the total pair equation
+
+\[
+ F=(2s+k)p-s(s^2+ks+1)=0
+\]
+
+and its fiber-tangent derivation `D=F_p*d/ds-F_s*d/dp`.  Exact invertible row
+transformations compare `C,D(C),D^2(C)` with both the historical
+`H,H',H''` rows and the component contact jets.  Localized power-membership
+identities prove that every transformation determinant is a unit on the full
+declared clean chart.  The
+total pair surface is geometrically integral and flat over the `k` line; its
+ordered self-fiber-product is integral by flatness plus generic-fiber
+integrality, and its singular support is exactly the three removed
+double-overlap points.  Hence the three maximal-rank `C3` and five
+maximal-rank `C2^2` split loci lie in the already-excluded global incidences.
+Exact rational arcs prove that the two `C3` overlap allocations and the
+`C2^2` overlap-plus-contact allocation are algebraically contained in those
+components as well.  Their boundary topology and the sixteen representative
+ordered residual affine-line fibers remain open.
+
+The executable algebra and closure certificates are
+[`a6_delta_ten_split_contact_rank.py`](../scripts/a6_delta_ten_split_contact_rank.py)
+and
+[`a6_delta_ten_split_contact_closure.py`](../scripts/a6_delta_ten_split_contact_closure.py).
+
+## Triple and mixed profiles
+
+On the labeled split four-source curves
+
+\[
+ (z,-z,w,-w),\quad z^2+w^2+1=0
+\]
+
+at `k=0`, and
+
+\[
+ (z,-1-z,w,-1-w),\quad z(z+1)+w(w+1)=0
+\]
+
+at `k=2`, all four `T112` systems have rank exactly three with no valid rank
+drop.  The three mixed systems have generic rank four.  Their compatible
+rank-three bases have reduced lengths `4,4,0`; rank at most two is empty.
+Thus all seven generic split incidences have dimension two and every
+exceptional compatible mixed incidence has dimension one.
+
+For topology, the `T112` rows restrict from the existing irreducible labeled
+incidence by exact invertible transformations.  The mixed vertical boundary
+is captured by retaining contact sum and product simultaneously.  If
+`n=r^2+q^2-q^3`, its total base equation is
+
+\[
+ (2qrs+n)p-s\bigl(qr(s^2+1)+ns\bigr)=0.
+\]
+
+The two coefficients in `p` have gcd one, so this is geometrically
+irreducible; its singular ideal is empty after localizing by `q*r`.  An exact
+four-row diagonal bridge recovers the historical mixed Cramer system, and
+Rabinowitsch saturations prove that every split transformation determinant is
+a unit on its full valid localization.  All three maximal-rank mixed split
+loci are therefore in the same global Cramer component as the cyclic sample.
+Only the two representative length-four rank-three affine-line schemes—three
+after `k=-2` transport—remain topologically open.
+
+The executable certificates are
+[`a6_delta_ten_split_t112_mixed_rank.py`](../scripts/a6_delta_ten_split_t112_mixed_rank.py)
+and
+[`a6_delta_ten_split_component_closure.py`](../scripts/a6_delta_ten_split_component_closure.py).
+
+## Exact all-allocation coverage
+
+The aggregate
+[`a6_delta_ten_split_rank_all.py`](../scripts/a6_delta_ten_split_rank_all.py)
+derives allocation keys from the focused systems and compares them with the
+generated ledger.  There are exactly 22 distinct involution-orbit keys, with
+profile counts
+
+```text
+C3+7N:          5
+C2^2+6N:        6
+T112+6N:        4
+C2+T111+5N:     3
+Q0+4N:          2
+T111^2+4N:      2.
+```
+
+The eleven `k=+/-2` keys each represent two instantiated rows, so the audit
+covers 33 actual rows over `k=0,+2,-2`.  The sets agree exactly.  Therefore every true-split rank stratum in the six
+displayed codimension-two profiles satisfies (1.1); this is not inferred
+from a count or expected dimension.
+
+Singular independently checks that the total pair, ordered two-pair, and
+total mixed base ideals are prime of dimensions `2,3,3`:
+
+```bash
+sage tools/check_a6_delta_ten_split_component_closure.sage
+```
+
 ## Completion boundary
 
-Closing (1.1) for all 22 allocations proves that the true split fibers hide
+Closing (1.1) for all 22 orbit types, hence all 33 actual rows, proves that the true split fibers hide
 no incidence component of dimension at least three in these six displayed
-codimension-two profiles.  It does **not** compute their affine complement
-groups, prove Whitney--Thom transport, classify intersections with removed
-denominator or overlap charts, finish the remaining delta-ten profiles, or
-settle generic degree six or `JC(2)`.
+codimension-two profiles.  Every clean rank-open split locus is also connected
+to an already-excluded global incidence.  All three prescribed overlap
+incidences are algebraically contained too, but the result does **not** yet
+exclude their boundary topology or the five finite compatible orbit
+representatives (eight actual rank-three schemes); those require topology.
+It
+also does not classify removed non-clean denominator/intersection charts,
+finish the remaining delta-ten profiles, or settle generic degree six or
+`JC(2)`.

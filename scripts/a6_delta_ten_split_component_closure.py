@@ -28,7 +28,9 @@ Exact row transformations then place the rank-four parts of all three mixed
 split allocations in the same irreducible Cramer graph as the nonsplit
 cyclic sample.
 
-This closes topology only on the clean maximal-rank split loci.  The two
+The exact row algebra proves component containment.  Topology on the clean
+maximal-rank split loci uses the separate smooth-total-base and proper
+Whitney--Thom isotopy argument recorded in the propagation note.  The two
 compatible rank-three schemes found by the focused rank audit have affine
 line coefficient fibers.  Those lower-dimensional exceptional fibers still
 require a closure or direct complement calculation; this module deliberately

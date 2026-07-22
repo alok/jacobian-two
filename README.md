@@ -315,11 +315,22 @@ level: the mixed factor has rank exactly three on its valid divisor, the
 two-triple residual is empty after localization, and all two-contact residual
 incidences have dimension at most two.  The immersed `P`-critical `T112` and
 mixed boundaries likewise have dimension at most two.  On the true split
-charts, a generated 22-row allocation ledger has exact clean witnesses at
-`k=0,+2` and full replay under transport to `k=-2`.  That ledger is not a
-global split exclusion: most coefficient-rank-drop subloci, denominator and
-overlap charts, component intersections, and the lower-dimensional residual
-taxonomy remain open.
+charts, a generated 22-type allocation ledger has exact clean witnesses at
+`k=0,+2` and full replay under transport to `k=-2`.  These are 33 actual rows
+over `k=0,+2,-2`, with eleven `k=-2` rows obtained by the checked involution.
+Exact true-component saturations classify every coefficient-rank stratum.  The
+only compatible residual bases are finite and have rank-three affine-line
+fibers, so no true-split stratum hides an incidence component of dimension at
+least three.  Global total-pair and total-two-pair models then place every
+clean maximal-rank `C3`, `C2^2`, `T112`, and mixed split locus in the same
+irreducible incidence as its already-excluded cyclic sample; global fiber
+models do the same for `Q0` and two triples.  This is still not a complete
+split exclusion: exact dominant arcs place all three prescribed overlap
+allocation incidences in those algebraic closures, but their topology and the
+eight actual finite exceptional affine-line schemes still need work.  The
+five finite schemes in the representative ledger are involution-orbit
+representatives, not the literal all-fiber count.  Denominator,
+deeper-intersection, and profile-changing boundaries remain open.
 
 The first of the fourteen expected codimension-three profiles is now attacked
 as well.  For `C4+6N`, the determinant-nonzero nonsplit incidence is one
@@ -338,7 +349,10 @@ unproved for arbitrary Keller branches, and this is not a proof of `JC(2)`.
 See the [A6 one-pair note](docs/a6-one-pair-infinity.md), the
 [generic delta-ten audit](docs/a6-delta-ten-generic.md), the
 [dominant delta-ten wall audit](docs/a6-delta-ten-walls.md), and the
-[codimension-two checkpoint](docs/a6-delta-ten-codim-two.md), and the
+[codimension-two checkpoint](docs/a6-delta-ten-codim-two.md), the focused
+[split contact-rank audit](docs/a6-delta-ten-split-contact-rank.md), the
+[split triple/mixed audit](docs/a6-delta-ten-split-t112-mixed-rank.md), the
+[all-allocation split checkpoint](docs/a6-delta-ten-split-rank-strata.md), and the
 [codimension-three checkpoint](docs/a6-delta-ten-codim-three.md).
 
 The delta-five equality family is now fully exhausted.  Every conditional
@@ -707,14 +721,30 @@ optional Sage/GAP replay is an additional independent local cross-check.
   wall components, excludes their generic equisingular opens, and gives the
   exact 145-profile ledger for the deeper audit.
 - [`docs/a6-delta-ten-codim-two.md`](docs/a6-delta-ten-codim-two.md) excludes
-  all six displayed generic or dominant components, while retaining the
-  residual-rank, split-chart, removed
-  `P`-projection/critical-fiber, and deeper-intersection loci as explicit open
-  obligations.
+  all six displayed generic or dominant components and closes every
+  true-split rank stratum, while retaining exceptional overlap/rank-drop,
+  removed `P`-projection/critical-fiber, and deeper-intersection loci as
+  explicit open obligations.
 - [`docs/a6-delta-ten-propagation.md`](docs/a6-delta-ten-propagation.md)
   verifies the connected-clean-open, finite-etale labeling, simultaneous
   embedded-resolution, and proper-isotopy steps for the `T112` and mixed
   contact-plus-triple dominant charts.
+- [`docs/a6-delta-ten-split-t112-mixed-rank.md`](docs/a6-delta-ten-split-t112-mixed-rank.md)
+  derives the seven true-component split incidence systems, saturates their
+  coefficient and augmented rank strata, and proves that none supports a
+  threefold; its rank-open loci are subsequently connected to the global
+  incidences, leaving two representative compatible mixed schemes (three
+  after `k=-2` transport) topologically open.
+- [`docs/a6-delta-ten-split-contact-rank.md`](docs/a6-delta-ten-split-contact-rank.md)
+  classifies every `C3` and `C2^2` true-split rank stratum, including reduced
+  residual bases of lengths `4,6,6`; total-pair jet comparisons connect all
+  eight maximal-rank charts to the excluded global components, while exact
+  arcs prove algebraic containment of all three overlap allocations.
+- [`docs/a6-delta-ten-split-rank-strata.md`](docs/a6-delta-ten-split-rank-strata.md)
+  aggregates exact key-for-key coverage of all 22 involution-orbit types
+  representing 33 actual split rows, the
+  component-closure theorems, and the remaining overlap/exceptional topology
+  boundary.
 - [`docs/a6-delta-ten-codim-three.md`](docs/a6-delta-ten-codim-three.md)
   excludes the dense clean nonsplit `C4+6N` Cramer surface, including an exact
   residual-rank saturation, contact-four singular scheme, cyclic complement,
