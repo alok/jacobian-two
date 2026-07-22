@@ -534,7 +534,7 @@ The conditional delta-ten filtration is now:
 | clean, dimension five | 1 | excluded |
 | codimension-one, dimension four | 2 | both generic components excluded |
 | expected codimension two, dimension three | 6 | all six displayed generic/dominant components excluded; all residual and immersed `P`-critical threefold threats closed; all 22 split orbit types (33 actual rows) classified; every clean rank-open split locus excluded; overlap incidences algebraically contained but their topology, finite rank-drop topology, and deeper boundaries remain |
-| expected codimension three, dimension two | 14 | dense clean nonsplit surfaces for `C4+6N`, `C2+C3+5N`, and `C2+Q0+2N` are audited; the `C4` residual is bounded below surface dimension, the `C2+C3` coefficient-rank-drop curve is exactly inconsistent, and the `C2+Q0` component has full valid rank four; omitted pair, singular-fiber, same-target, and non-clean loci remain; see the codimension-three note |
+| expected codimension three, dimension two | 14 | dense clean nonsplit surfaces for `C4+6N`, `C2+C3+5N`, `C2+Q0+2N`, and `C3+T111+4N` are audited; the `C4` residual is bounded below surface dimension, both contact compatibility rank-drop curves are exactly inconsistent, and the `C2+Q0` component has full valid rank four; omitted pair, singular-fiber, same-target, and non-clean loci remain; see the codimension-three note |
 | expected codimension at least four | 122 | not audited component by component |
 
 The 145-profile ledger remains an elimination ledger, not a list of proven
@@ -551,8 +551,9 @@ dimension count alone.  The next exact work is to:
 3. assign every compatible lower-dimensional residual curve and point to an
    adjacent collision profile or prove its clean topology directly;
 4. audit intersections and specializations of the six identified components;
-5. treat the remaining eleven expected codimension-three profiles and the
-   omitted boundaries of `C4+6N`, `C2+C3+5N`, and `C2+Q0+2N`; and
+5. treat the remaining ten expected codimension-three profiles and the
+   omitted boundaries of `C4+6N`, `C2+C3+5N`, `C2+Q0+2N`, and
+   `C3+T111+4N`; and
 6. finish the endpoint and overdetermined containment audit.
 
 Even a complete audit of that list would establish only the stated

@@ -432,6 +432,18 @@ transport the cyclic complement throughout the connected clean surface.
 The split, singular-fiber, same-target, and non-clean boundaries are outside
 this argument.
 
+The `C3+T111+4N` compatibility surface is likewise geometrically
+irreducible and smooth on its full declared valid chart.  A smooth rational
+point and two independent coefficient-image tangents make its clean
+rank-four open a genuine nonempty surface.  After finite-etale labeling, one
+relative blowup resolves the ordinary triple section, three resolve the
+contact-three section, and one resolves each of the four node sections.  The
+fixed cusp and infinity sequences then complete a relative SNC divisor in a
+smooth proper family.  Proper Thom isotopy transports the cyclic complement
+throughout this connected clean open.  Split fibers, singular four-point
+fibers, pair/triple overlap and same-target factors, non-clean slope or node
+collisions, and deeper intersections remain outside the transport theorem.
+
 The full calculations and their omitted split, denominator, cusp-pair,
 diagonal, singular-fiber, same-target, non-clean, and residual boundaries are recorded in
 [the codimension-three checkpoint](a6-delta-ten-codim-three.md).

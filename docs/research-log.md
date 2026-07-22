@@ -1677,7 +1677,7 @@ the quadruple target.  The genuine factor
 
 `A=k^3*u+5*k^2*u^2+3*k^2+4*k*u^3+16*k*u+12*u^2+4`
 
-is irreducible over `QQ).  Its projective quartic has arithmetic genus three
+is irreducible over `QQ`.  Its projective quartic has arithmetic genus three
 and two ordinary nodes, both on `k=+/-2`, so the nonsplit valid base is a
 smooth geometrically irreducible genus-one open times the `h` parameter.
 Exact saturation by the complete split, fiber-discriminant, pair, diagonal,
@@ -1705,6 +1705,65 @@ surface.  Split fibers, singular quadruple fibers, invalid pair charts,
 same-target overlap, non-clean specializations, and deeper intersections
 remain open.
 
+## 2026-07-21: the dense clean `C3+T111+4N` surface excluded
+
+Status: exact incidence factorization, full-localizer singular and rank
+saturations, one exact rational member, corrected ordinary-triple tangent
+audit, computer-assisted van Kamp reconstruction, exhaustive finite replay,
+and conditional proper-isotopy transport.
+
+A hostile attempt at the neighboring `C2^3+4N` profile first rejected two
+tempting rational compatibility surfaces: one contains the forbidden
+cusp-pair quadratic, while the other makes the three nominal pair quadratics
+overlap on only three sources.  A full-core `k=1` saturation nevertheless
+left a degree-twenty-five residual curve with Hilbert polynomial `25t-46`;
+reductions modulo `11`, `101`, and `103` were radical.  Its characteristic-zero
+reducedness and generic continuation are unresolved, so no exclusion was
+claimed.  The work moved to `C3+T111+4N`, whose rank geometry is tractable.
+
+Let `e` be the fourth, omitted root of a four-point `P`-fiber and `w` the
+contact-three pair sum.  Three contact jets and the two nonconstant
+coefficients of `Q mod ((P-P(e))/(t-e))` give five affine-linear equations in
+`(a,b,c,d)`.  Their augmented determinant is
+
+`2*(e^2+k*e+1)^2*(w^2+k*w+1)^3*O(k,e,w)^3*R(k,e,w)`.
+
+The genuine residual `R` is irreducible over `QQ`, has 62 terms and total
+degree nine.  The full valid localizer includes the split factors, contact
+denominator/cusp-pair/diagonal factors, the reduced triple-fiber
+discriminant, the omitted-root critical factor, and both exact
+contact/triple source-overlap and same-target factors.  Exact saturation
+makes the singular ideal unit with exponent one.  The coefficient-rank-at-
+most-three ideal is a degree-fourteen curve with Hilbert polynomial
+`14t-21`, but the augmented-rank-at-most-three saturation is unit; both
+rank-two saturations are unit as well.  Thus every valid compatible base has
+one coefficient vector.
+
+At `(k,e,w)=(-4,-1/2,1)`, the compatibility gradient is `(-84,-112,0)`
+and the coefficient solution is
+`(39/2,-409/8,109/4,-31/4)`.  Two exact incidence tangents map to independent
+directions in `(k,a,b,c,d)`, proving a genuine codimension-three surface.
+The corresponding curve, with target coordinates `X=P` and `Y=8Q`, has one
+exact contact three, one ordinary triple point, four nodes, the forced cusp,
+and the fixed infinity branch.
+
+The ordinary-triple audit corrected an exploratory shortcut.  If
+`Q-Q0=C_e*W` and `P-P0=C_e*(t-e)`, the tangent slope is `W(r)/(r-e)`, not
+`W(r)`.  The corrected primitive slope cubic has discriminant
+`-89062908728555597524369408000000`, so the three slopes remain distinct.
+Sage regenerates Jacobian component lengths
+`((4,4),(4,1),(5,1),(4,1))`, total length `17`, radical length `7`, and the
+delta budget `4+3+3+2+16=28`.
+
+The four-generator, ten-relation affine van Kamp presentation simplifies to
+`Z`, with all four meridians mapping to its generator.  The exact `40^4`
+replay has 40 satisfying assignments, all of image order three and none with
+image `A6`.  Finite-etale labeling, one relative triple-point blowup, three
+relative contact blowups, four node blowups, and the fixed cusp/infinity
+sequences transport this cyclic complement across the dense clean surface.
+Split, singular-fiber, overlap/same-target, non-clean, and deeper boundaries
+remain open.
+
 ## Negative results and guarded boundaries
 
 - Freezing `z` and selecting two outputs does not inherit a constant plane
@@ -1730,9 +1789,9 @@ remain open.
    finite compatible orbit representatives (eight actual split rank-drop
    schemes), plus the non-clean denominator charts and deeper
    component intersections from `docs/a6-delta-ten-codim-two.md`; then audit
-   the remaining eleven codimension-three profiles and omitted `C4`,
-   `C2+C3`, and `C2+Q0` boundaries without using expected dimension as
-   emptiness.
+   the remaining ten codimension-three profiles and omitted `C4`,
+   `C2+C3`, `C2+Q0`, and `C3+T111` boundaries without using expected
+   dimension as emptiness.
 3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 4. Extend the exact support analysis beyond two interior coefficients in the

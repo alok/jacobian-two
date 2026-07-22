@@ -587,10 +587,10 @@ mixed boundaries have dimension at most two.  The split ledger generates all
 [codimension-two checkpoint](a6-delta-ten-codim-two.md) for the six distinct
 claim boundaries and reproduction commands.
 
-Three expected codimension-three profiles are now underway.  The
+Four expected codimension-three profiles are now underway.  The
 [codimension-three checkpoint](a6-delta-ten-codim-three.md) excludes the dense
 clean nonsplit `C4+6N` Cramer surface and the dense clean rank-four
-`C2+C3+5N` and `C2+Q0+2N` compatibility surfaces.  The `C4` residual determinant has only a
+`C2+C3+5N`, `C2+Q0+2N`, and `C3+T111+4N` compatibility surfaces.  The `C4` residual determinant has only a
 finite length-ten compatible base with rank-three affine-line fibers.  The
 `C2+C3` augmented determinant leaves one geometrically irreducible 409-term
 compatibility surface, certified by factorization over `QQ` and a smooth
@@ -600,8 +600,11 @@ unit ideal, and the full-localizer singular saturation proves that the valid
 compatibility surface is smooth.  For `C2+Q0`, a genuine irreducible
 compatibility quartic remains after removing the same-target factor; its only
 projective singularities lie on split fibers, and exact full-localizer
-saturation proves rank four everywhere on the valid surface.  Exact cyclic
-members propagate across all three clean surfaces after their relative
+saturation proves rank four everywhere on the valid surface.  For
+`C3+T111`, the irreducible 62-term compatibility residual is smooth on
+the valid chart; a degree-fourteen coefficient-rank-drop curve is exactly
+inconsistent, and two image tangents prove a surface.  Exact cyclic
+members propagate across all four clean surfaces after their relative
 resolutions.  Split charts, singular fibers, same-target overlaps, and other
 omitted boundaries remain open.
 
@@ -627,26 +630,28 @@ are present:
 - the contact and triple incidence equations;
 - all gcd, Gröbner, Rabinowitsch-localization, factor, discriminant, and
   resultant identities;
-- the exact geometry and genus accounting of both rational representatives;
+- the exact geometry and genus accounting of the original contact and triple
+  divisor representatives;
 - the 35-atom and 145-profile combinatorial ledger;
 - the coefficient-slice rank calculation; and
-- both exhaustive `40^4` finite-group replays.
+- the exhaustive `40^4` finite-group replays stored by the certificates.
 
-The checked Sage sources independently regenerate:
+The topology-bearing checked Sage sources independently regenerate, for each
+representative they cover:
 
-- both primitive implicit equations;
-- both affine singular-scheme primary decompositions;
-- both four-generator raw van Kamp presentations; and
-- both cyclic simplification maps and sections.
+- its primitive implicit equation;
+- its affine singular-scheme primary decomposition;
+- its raw van Kamp presentation; and
+- its cyclic simplification map and section.
 
 Sage's Zariski--van Kamp implementation remains a computer-assisted
 dependency.  Family-wide propagation separately depends on proper projective
 Whitney--Thom triviality.
 
 The next exact work package is the unresolved boundary of the six
-codimension-two profiles in Section 7, followed by the remaining eleven
-expected codimension-three profiles and the omitted
-`C4`/`C2+C3`/`C2+Q0` charts.  A complete
+codimension-two profiles in Section 7, followed by the remaining ten
+expected codimension-three profiles and the omitted boundary loci of the
+audited `C4`/`C2+C3`/`C2+Q0`/`C3+T111` charts.  A complete
 audit must:
 
 1. determine complement topology for the three exceptional overlap
@@ -688,6 +693,9 @@ uv run python -m scripts.a6_delta_ten_pcritical_triples
 uv run python -m scripts.a6_delta_ten_split_codim_two
 uv run python -m scripts.a6_delta_ten_residual_rank
 uv run python -m scripts.a6_delta_ten_contact_four
+uv run python -m scripts.a6_delta_ten_contact_two_three
+uv run python -m scripts.a6_delta_ten_contact_quadruple
+uv run python -m scripts.a6_delta_ten_contact_three_triple
 
 uv run pytest -q \
   tests/test_a6_delta_ten_contact_wall.py \
@@ -703,13 +711,16 @@ uv run pytest -q \
   tests/test_a6_delta_ten_pcritical_triples.py \
   tests/test_a6_delta_ten_split_codim_two.py \
   tests/test_a6_delta_ten_residual_rank.py \
-  tests/test_a6_delta_ten_contact_four.py
+  tests/test_a6_delta_ten_contact_four.py \
+  tests/test_a6_delta_ten_contact_two_three.py \
+  tests/test_a6_delta_ten_contact_quadruple.py \
+  tests/test_a6_delta_ten_contact_three_triple.py
 
 uv run mypy --no-incremental
 ```
 
-Regenerate both exact curves, singular schemes, and presentations with Sage
-10.8:
+Regenerate the exact elimination, singular-scheme, and topology artifacts with
+Sage 10.8:
 
 ```bash
 sage tools/check_a6_delta_ten_contact_wall.sage
@@ -723,6 +734,9 @@ sage tools/check_a6_delta_ten_double_triple.sage
 sage tools/check_a6_delta_ten_pcritical_triples.sage
 sage tools/check_a6_delta_ten_contact_triple_residual.sage
 sage tools/check_a6_delta_ten_contact_four.sage
+sage tools/check_a6_delta_ten_contact_two_three.sage
+sage tools/check_a6_delta_ten_contact_quadruple.sage
+sage tools/check_a6_delta_ten_contact_three_triple.sage </dev/null
 ```
 
 The Sage commands are manual checkers.  GitHub CI runs the Python

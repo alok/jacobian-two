@@ -4,14 +4,16 @@
 
 This note starts the fourteen expected codimension-three profiles in the
 conditional one-dicritical `A6` delta-ten audit.  It treats the valid
-**nonsplit** unordered-pair/fiber charts of three selected profiles,
+**nonsplit** unordered-pair/fiber charts of four selected profiles,
 
 \[
  C_4+6N
  \qquad
  C_2+C_3+5N
+ \qquad
+ C_2+Q_0+2N
  \qquad\text{and}\qquad
- C_2+Q_0+2N.                                                       \tag{0.1}
+ C_3+T_{111}+4N.                                                   \tag{0.1}
 \]
 
 Here `Cm` is a two-branch contact of intersection multiplicity `m`.
@@ -37,11 +39,21 @@ rank-at-most-three ideal the unit ideal.  A Cramer chart and two independent
 coefficient-image tangent vectors prove that its image is a codimension-three
 surface rather than a collapsed curve.
 
-An exact rational member of each of the three dominant surfaces has the prescribed
+For `C3+T111+4N`, three contact jets and two ordinary-triple remainder
+equations give a five-by-five augmented determinant.  After removing the
+explicit singular-fiber and contact/triple overlap factors, one irreducible
+62-term degree-nine compatibility polynomial remains.  Its full-valid
+singular saturation is the unit ideal.  The coefficient-rank-at-most-three
+ideal is a degree-fourteen curve, but the augmented-rank-at-most-three ideal
+is the unit ideal, so every point of that curve is inconsistent.  Two exact
+coefficient-image tangent vectors prove that the rank-four incidence maps to
+a genuine codimension-three surface.
+
+An exact rational member of each of the four dominant surfaces has the prescribed
 contacts and residual nodes, cyclic affine complement, and no required `A6`
 three-cycle quotient.  On precisely defined nonempty clean opens,
 finite-etale labeling, relative contact blowups, and proper Whitney--Thom
-isotopy propagate that complement topology.  Thus all three dominant clean
+isotopy propagate that complement topology.  Thus all four dominant clean
 nonsplit surfaces are excluded.  Manual Sage 10.8 regenerates the incidence
 factorizations, implicit curves, singular schemes, and van Kamp
 presentations; it does not certify the propagation theorem.
@@ -656,10 +668,282 @@ This transport does not include the split fibers, singular quadruple fibers,
 invalid contact charts, same-target overlap `G=0`, non-clean
 specializations, or deeper intersections.
 
-## 13. Remaining boundary
+## 13. Contact three plus an ordinary triple
+
+Choose the fourth, omitted root `e` of a four-point `P`-fiber.  The cubic
+containing the other three roots is
+
+\[
+ C_e(t)=\frac{P(t)-P(e)}{t-e}
+ =t^3+(e+k)t^2+(e^2+ke+1)t+e(e^2+ke+1).             \tag{13.1}
+\]
+
+The linear and quadratic coefficients of `Q mod C_e` vanish exactly when
+those three roots have one common `Q`-value.  If `w` is the unordered-pair
+sum of a separate contact-three event, the full incidence equations are
+
+\[
+ H(w)=H'(w)=H''(w)=0,
+ \qquad
+ [t](Q\bmod C_e)=[t^2](Q\bmod C_e)=0.               \tag{13.2}
+\]
+
+They are affine-linear in `(a,b,c,d)`.  With the right-hand-side convention
+used by the certificate, the augmented determinant is
+
+\[
+ 2(e^2+ke+1)^2(w^2+kw+1)^3O(k,e,w)^3R(k,e,w),        \tag{13.3}
+\]
+
+where
+
+\[
+\begin{aligned}
+O={}&e^2k+2e^2w+ek^2+3ekw+2ew^2\\
+   &+k^2w+2kw^2+k+w^3+w.                             \tag{13.4}
+\end{aligned}
+\]
+
+The residual `R` has 62 terms, total degree nine, and variable degrees
+`(6,3,7)` in `(k,e,w)`.  Sage factors it as one exponent-one factor over
+`QQ`.  The separate factor
+
+\[
+ B=e^2k+2e^2w-ekw-2ew^2+kw^2+w^3+w                 \tag{13.5}
+\]
+
+is also a required removed boundary.  Indeed, the exact source and target
+identities are
+
+\[
+ \operatorname{Res}_t(C_e,S_w)=B O^2,
+ \qquad
+ P(e)D_w-N_w=B O,                                   \tag{13.6}
+\]
+
+where `S_w` is the cleared contact-pair quadratic and `N_w/D_w` its target
+`X`-coordinate.  Thus `B=0` or `O=0` makes the prescribed contact and triple
+events overlap in source or target data; neither is silently counted as a
+clean separate-event profile.
+
+The complete base localizer used in the rank and smoothness audit is
+
+\[
+\begin{aligned}
+L={}&k(k-2)(k+2)e w(k+2w)(w^2+kw+1)(2w^2+3kw+4)\\
+ &\cdot(e^2+ke+1)(4e^2+3ke+2)\,T_D\,B\,O,             \tag{13.7}\\
+T_D={}&16e^4+8e^3k-5e^2k^2+16e^2+3ek^3-12ek-k^2+4.
+\end{aligned}
+\]
+
+Here
+
+\[
+ \operatorname{Disc}(C_e)=-(e^2+ke+1)T_D,
+ \qquad P'(e)=e(4e^2+3ke+2),                          \tag{13.8}
+\]
+
+so every factor in (13.7) has an explicit fiber, pair, or overlap meaning.
+
+Exact full-localizer saturation gives:
+
+1. `(R,R_k,R_e,R_w):L^infinity=(1)`, with saturation exponent one;
+2. the coefficient-rank-at-most-three ideal is a curve with Hilbert
+   polynomial `14t-21`, also at exponent one;
+3. the augmented-rank-at-most-three saturation is `(1)`, at exponent one;
+4. both coefficient and augmented rank-at-most-two saturations are `(1)`,
+   again at exponent one.
+
+Therefore the valid compatibility surface is smooth, and every compatible
+base has coefficient and augmented rank exactly four.  The degree-fourteen
+coefficient-rank-drop curve is entirely inconsistent rather than a hidden
+positive-dimensional coefficient fiber.
+
+At
+
+\[
+ (k,e,w)=(-4,-1/2,1),                                 \tag{13.9}
+\]
+
+the compatibility gradient is `(-84,-112,0)`, the localizer is `7223580`,
+and the unique coefficients are
+
+\[
+ (a,b,c,d)=\left(\frac{39}{2},-\frac{409}{8},
+                  \frac{109}{4},-\frac{31}{4}\right). \tag{13.10}
+\]
+
+The two compatibility-surface tangent directions in base coordinates
+
+\[
+ (4,-3,0),\qquad(0,0,1)                               \tag{13.11}
+\]
+
+lift to coefficient derivatives
+
+\[
+\begin{aligned}
+&\left(\frac{4147}{14},-\frac{20431}{28},337,-\frac{571}{14}\right),\\
+&\left(\frac{7293}{28},-\frac{4686}{7},297,-\frac{1023}{28}\right).
+\end{aligned}                                          \tag{13.12}
+\]
+
+Their images in `(k,a,b,c,d)` are independent.  Hence the coefficient image
+has tangent dimension two at this point and is genuinely a codimension-three
+surface, not a collapsed curve.
+
+## 14. An exact `C3+T111+4N` member
+
+Use target coordinates `X=P` and `Y=8Q`.  The sample is
+
+\[
+\begin{aligned}
+X(t)&=t^4-4t^3+t^2,\\
+Y(t)&=8t^9-62t^8+218t^7-409t^6+156t^5.                \tag{14.1}
+\end{aligned}
+\]
+
+The ordinary-triple cubic is
+
+\[
+ C_e=t^3-\frac92t^2+\frac{13}{4}t-\frac{13}{8},
+ \qquad \operatorname{Disc}(C_e)=-\frac{637}{4}.       \tag{14.2}
+\]
+
+Its three sources map to
+
+\[
+ (X,Y)=\left(\frac{13}{16},-\frac{2197}{128}\right).   \tag{14.3}
+\]
+
+The omitted fourth source has `Q`-value differing by `63/128`, so it does
+not join the triple target.  For the slope calculation we use the unscaled
+second coordinate `Q`; multiplication by eight does not affect whether the
+slopes are distinct.  Writing
+
+\[
+ Q-Q_0=C_eW,
+\]
+
+gives
+
+\[
+ W=t^6-\frac{13}{4}t^5+\frac{75}{8}t^4+\frac{13}{4}t^3
+   -\frac{13}{8}t^2-\frac{169}{64}t-\frac{169}{128}.   \tag{14.4}
+\]
+
+The tangent slope at a root `r` of `C_e` is **not** merely `W(r)`; because
+`X-X_0=C_e(t)(t-e)`, it is `W(r)/(r-e)`.  Eliminating `r` from the corrected
+slope equation gives the primitive cubic
+
+\[
+ 1179648m^3-643069952m^2-6362836480m-15599304175,      \tag{14.5}
+\]
+
+whose discriminant is
+
+\[
+ -89062908728555597524369408000000\ne0.                \tag{14.6}
+\]
+
+Thus the three branches are smooth with distinct tangent directions: this
+is an ordinary triple point.
+
+The contact pair is `t^2-t+1`.  Both sources map to `(X,Y)=(3,-199)`, its
+`P'` resultant is `84`, and the first two branch-graph jet differences
+vanish.  The third is
+
+\[
+ \frac{165}{5488}t-\frac{165}{10976},
+\]
+
+with norm `81675/120472576`, so the contact is exactly `C3`.
+
+The collision and tangency polynomials factor as
+
+\[
+\begin{aligned}
+H={}&\frac12(s-1)^3
+ (2s^3-18s^2+47s-26)
+ (s^4-12s^3+24s^2+7s+24),\\
+T={}&2(s-1)^2
+ (18s^9-432s^8+4033s^7-18938s^6+47963s^5\\
+ &\qquad-64986s^4+47578s^3-31966s^2+21980s-6240).
+                                                               \tag{14.7}
+\end{aligned}
+\]
+
+Their gcd is `(s-1)^2`.  The cubic pair-sum factor is the three pairs inside
+the ordinary triple; its `X`-eliminant is `36(16X-13)^3`.  The residual
+quartic gives four nodes, with primitive `X`-polynomial
+
+\[
+ 16X^4+9324X^3-60343X^2+117047X-60306,                \tag{14.8}
+\]
+
+whose discriminant is `-4321892177659568`.  It is nonzero at the cusp,
+contact, and triple targets.
+
+The primitive implicit equation has 18 terms and is irreducible over `QQ`.
+Sage regenerates its affine Jacobian algebra with length `17` and radical
+length `7`.  Its primary-component `(length, radical length)` pairs are
+
+\[
+ (4,4),\quad(4,1),\quad(5,1),\quad(4,1),               \tag{14.9}
+\]
+
+corresponding respectively to four nodes, the ordinary triple, the `C3`
+point, and the forced cusp.  The projective delta balance is
+
+\[
+ 4+3+3+2+16=28=p_a(9),                                \tag{14.10}
+\]
+
+including the fixed `T(5,9)` branch at infinity.
+
+Sage's raw affine van Kamp presentation has four generators and ten
+relations.  Its checked simplification has one generator and no relations,
+and every original meridian maps to that generator.  Thus
+
+\[
+ \pi_1(\mathbb C^2\setminus C)\cong\mathbb Z.          \tag{14.11}
+\]
+
+The dependency-free replay of the stored raw words reports
+
+```text
+assignments:          2560000
+satisfying:           40
+generated orders:     {3: 40}
+A6 assignments:       0
+```
+
+## 15. Propagation on the new compatibility surface
+
+Intersect the smooth geometrically irreducible valid surface from Section 13
+with the open conditions checked by the sample: squarefree triple cubic,
+three distinct triple slopes, an exact immersed contact three, four reduced
+nodes, nonzero cusp and extra-critical factors, and separation of every
+labeled source and target section.  This is a nonempty irreducible complex
+surface, hence analytically path-connected.
+
+After a finite-etale labeling cover, resolve each node once and the ordinary
+triple section once.  Three relative blowups resolve the contact-three
+section: after two the strict branches are transverse, while the third
+removes the resulting triple crossing with the newest exceptional divisor.
+Together with the fixed cusp and infinity sequences, the reduced total
+transform is a relative SNC divisor in a smooth proper projective family.
+Proper Whitney--Thom isotopy therefore transports the cyclic affine
+complement from (14.1) through this dense clean open.  It cannot carry the
+required connected six-sheet `A6` quotient.
+
+This transport excludes neither the split fibers nor the removed
+singular-fiber, overlap/same-target, non-clean, and deeper boundary charts.
+
+## 16. Remaining boundary
 
 The result currently removes the dominant clean nonsplit surfaces for
-`C4+6N`, `C2+C3+5N`, and `C2+Q0+2N`.  It also bounds the `C4`
+`C4+6N`, `C2+C3+5N`, `C2+Q0+2N`, and `C3+T111+4N`.  It also bounds the `C4`
 residual determinant incidence below surface dimension.  It does not
 classify:
 
@@ -670,10 +954,12 @@ classify:
    target;
 5. non-clean equisingular specializations on the `C2+C3` or `C2+Q0`
    compatibility surfaces;
-6. the singular-fiber and same-target `C2+Q0` boundaries; or
-7. any of the other eleven codimension-three profiles.
+6. the singular-fiber and same-target `C2+Q0` boundaries;
+7. the singular-fiber, overlap/same-target, and non-clean
+   `C3+T111` boundaries; or
+8. any of the other ten codimension-three profiles.
 
-## 14. Reproduction
+## 17. Reproduction
 
 Run the exact Python certificate, tests, types, and lint with:
 
@@ -681,24 +967,30 @@ Run the exact Python certificate, tests, types, and lint with:
 uv run python -m scripts.a6_delta_ten_contact_four
 uv run python -m scripts.a6_delta_ten_contact_two_three
 uv run python -m scripts.a6_delta_ten_contact_quadruple
+uv run python -m scripts.a6_delta_ten_contact_three_triple
 uv run pytest -q \
   tests/test_a6_delta_ten_contact_four.py \
   tests/test_a6_delta_ten_contact_two_three.py \
-  tests/test_a6_delta_ten_contact_quadruple.py
+  tests/test_a6_delta_ten_contact_quadruple.py \
+  tests/test_a6_delta_ten_contact_three_triple.py
 uv run mypy --no-incremental \
   scripts/a6_delta_ten_contact_four.py \
   scripts/a6_delta_ten_contact_two_three.py \
   scripts/a6_delta_ten_contact_quadruple.py \
+  scripts/a6_delta_ten_contact_three_triple.py \
   tests/test_a6_delta_ten_contact_four.py \
   tests/test_a6_delta_ten_contact_two_three.py \
-  tests/test_a6_delta_ten_contact_quadruple.py
+  tests/test_a6_delta_ten_contact_quadruple.py \
+  tests/test_a6_delta_ten_contact_three_triple.py
 uv run ruff check \
   scripts/a6_delta_ten_contact_four.py \
   scripts/a6_delta_ten_contact_two_three.py \
   scripts/a6_delta_ten_contact_quadruple.py \
+  scripts/a6_delta_ten_contact_three_triple.py \
   tests/test_a6_delta_ten_contact_four.py \
   tests/test_a6_delta_ten_contact_two_three.py \
-  tests/test_a6_delta_ten_contact_quadruple.py
+  tests/test_a6_delta_ten_contact_quadruple.py \
+  tests/test_a6_delta_ten_contact_three_triple.py
 ```
 
 Replay the determinantal saturations, primitive implicit curve, singular
@@ -708,7 +1000,8 @@ scheme, raw presentation, and cyclic simplification with Sage 10.8:
 sage tools/check_a6_delta_ten_contact_four.sage
 sage tools/check_a6_delta_ten_contact_two_three.sage
 sage tools/check_a6_delta_ten_contact_quadruple.sage
+sage tools/check_a6_delta_ten_contact_three_triple.sage </dev/null
 ```
 
-The Sage checker is manual; GitHub CI runs the Python certificate and test
+The Sage checkers are manual; GitHub CI runs the Python certificates and test
 suite.
