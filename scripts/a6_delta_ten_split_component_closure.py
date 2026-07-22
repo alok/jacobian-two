@@ -55,16 +55,24 @@ from sympy import (
 )
 
 from scripts.a6_delta_ten_contact_triple import (
+    COMBINED_EQUATIONS,
+    CONTACT_SUM,
     KAPPA_NUMERATOR,
     KAPPA_PARAMETERIZATION,
+    TRIPLE_CUBIC,
+    TRIPLE_PARAMETERIZATION,
     TRIPLE_PAIR_SUM,
     TRIPLE_PRODUCT,
+    exact_delta_ten_contact_triple_certificate,
 )
 from scripts.a6_delta_ten_generic import (
+    COLLISION_POLYNOMIAL,
     FAMILY_P,
     FAMILY_Q,
     KAPPA,
+    S,
     T,
+    TANGENCY_POLYNOMIAL,
 )
 from scripts.a6_delta_ten_split_codim_two import (
     K0_FIBER_ONE,
@@ -80,6 +88,7 @@ from scripts.a6_delta_ten_split_t112_mixed_rank import (
     SplitIncidenceSpec,
     split_incidence_equations,
     split_triple_geometry,
+    valid_base_localizer,
 )
 from scripts.a6_delta_ten_t112 import exact_delta_ten_t112_certificate
 
@@ -101,6 +110,53 @@ TOTAL_MIXED_BASE_EQUATION: Final = expand(
     + TOTAL_PAIR_CONSTANT_COEFFICIENT
 )
 
+# Global affine-linear rows on the total unordered contact-pair surface.  The
+# first row is the coefficient of t in Q modulo the pair quadratic.  The
+# second is the determinant of the two derivative remainders, hence equality
+# of branch slopes wherever the pair is unramified.  Keeping the product
+# coordinate makes these rows regular on the true vertical split components.
+TOTAL_CONTACT_PAIR_POLYNOMIAL: Final = (
+    T**2 - CONTACT_SUM_TOTAL * T + CONTACT_PRODUCT_TOTAL
+)
+TOTAL_CONTACT_Q_REMAINDER: Final = rem(
+    FAMILY_Q,
+    TOTAL_CONTACT_PAIR_POLYNOMIAL,
+    T,
+)
+TOTAL_CONTACT_TARGET_ROW: Final = Poly(
+    TOTAL_CONTACT_Q_REMAINDER,
+    T,
+).coeff_monomial(T)
+TOTAL_CONTACT_P_DERIVATIVE_REMAINDER: Final = rem(
+    diff(FAMILY_P, T),
+    TOTAL_CONTACT_PAIR_POLYNOMIAL,
+    T,
+)
+TOTAL_CONTACT_Q_DERIVATIVE_REMAINDER: Final = rem(
+    diff(FAMILY_Q, T),
+    TOTAL_CONTACT_PAIR_POLYNOMIAL,
+    T,
+)
+TOTAL_CONTACT_TANGENT_ROW: Final = expand(
+    Poly(TOTAL_CONTACT_Q_DERIVATIVE_REMAINDER, T).coeff_monomial(T)
+    * Poly(TOTAL_CONTACT_P_DERIVATIVE_REMAINDER, T).coeff_monomial(1)
+    - Poly(TOTAL_CONTACT_Q_DERIVATIVE_REMAINDER, T).coeff_monomial(1)
+    * Poly(TOTAL_CONTACT_P_DERIVATIVE_REMAINDER, T).coeff_monomial(T)
+)
+
+# Derive the two triple-target rows independently from the cubic remainder.
+# They are compared below with the historical COMBINED_EQUATIONS rather than
+# silently assuming that the two presentations use the same rows.
+TOTAL_TRIPLE_Q_REMAINDER: Final = expand(rem(FAMILY_Q, TRIPLE_CUBIC, T))
+TOTAL_TRIPLE_EQUALITY_ROWS: Final = tuple(
+    cancel(
+        Poly(TOTAL_TRIPLE_Q_REMAINDER, T)
+        .coeff_monomial(T**degree)
+        .subs(TRIPLE_PARAMETERIZATION)
+    )
+    for degree in (2, 1)
+)
+
 Component = Literal["V", "W"]
 
 
@@ -116,34 +172,20 @@ def _reduce_on_split_base(expression: Expr, constraint: Expr) -> Expr:
 
 
 def _pair_target_tangent_rows(
-    kappa: int,
+    kappa: Expr,
     pair_sum: Expr,
     pair_product: Expr,
 ) -> tuple[Expr, Expr]:
     """Return symmetric target-equality and slope-equality rows for a pair."""
 
-    pair_polynomial = T**2 - CONTACT_SUM_TOTAL * T + CONTACT_PRODUCT_TOTAL
-    q_remainder = rem(FAMILY_Q, pair_polynomial, T)
-    target_row = Poly(q_remainder, T).coeff_monomial(T)
-
-    p_derivative_remainder = rem(
-        diff(FAMILY_P.subs(KAPPA, kappa), T),
-        pair_polynomial,
-        T,
-    )
-    q_derivative_remainder = rem(diff(FAMILY_Q, T), pair_polynomial, T)
-    p_linear = Poly(p_derivative_remainder, T).coeff_monomial(T)
-    p_constant = Poly(p_derivative_remainder, T).coeff_monomial(1)
-    q_linear = Poly(q_derivative_remainder, T).coeff_monomial(T)
-    q_constant = Poly(q_derivative_remainder, T).coeff_monomial(1)
-    tangent_row = expand(q_linear * p_constant - q_constant * p_linear)
     substitution = {
+        KAPPA: kappa,
         CONTACT_SUM_TOTAL: pair_sum,
         CONTACT_PRODUCT_TOTAL: pair_product,
     }
     return (
-        expand(target_row.subs(substitution)),
-        expand(tangent_row.subs(substitution)),
+        expand(TOTAL_CONTACT_TARGET_ROW.subs(substitution)),
+        expand(TOTAL_CONTACT_TANGENT_ROW.subs(substitution)),
     )
 
 
@@ -237,6 +279,69 @@ class TotalMixedBaseCertificate:
         )
 
 
+SAGE_TOTAL_MIXED_SINGULAR_QR_SATURATION: Final = (2, True)
+SAGE_ORDERED_TWO_PAIR_SINGULAR_RADICAL: Final = (0, 3, True)
+ORDERED_TWO_PAIR_SINGULAR_POINTS: Final = (
+    (Rational(0), Rational(0), Rational(1, 2), Rational(0), Rational(1, 2)),
+    (Rational(2), Rational(-1), Rational(0), Rational(-1), Rational(0)),
+    (Rational(-2), Rational(1), Rational(0), Rational(1), Rational(0)),
+)
+
+
+@dataclass(frozen=True, slots=True)
+class TotalSourceBaseRegularityCertificate:
+    """Independent singular-locus metadata for the total source bases."""
+
+    mixed_singular_qr_saturation: tuple[int, bool]
+    ordered_two_pair_singular_radical: tuple[int, int, bool]
+    ordered_two_pair_singular_points: tuple[
+        tuple[Rational, Rational, Rational, Rational, Rational], ...
+    ]
+
+    @property
+    def ordered_singular_points_are_double_overlaps(self) -> bool:
+        """Whether every singular point lies on the removed pair diagonal."""
+
+        return all(
+            first_sum == second_sum and first_product == second_product
+            for (
+                _kappa,
+                first_sum,
+                first_product,
+                second_sum,
+                second_product,
+            ) in self.ordered_two_pair_singular_points
+        )
+
+    @property
+    def verified(self) -> bool:
+        """Whether the ordinary mixed base is smooth and pair singularities known."""
+
+        return bool(
+            self.mixed_singular_qr_saturation == SAGE_TOTAL_MIXED_SINGULAR_QR_SATURATION
+            and self.mixed_singular_qr_saturation[1]
+            and self.ordered_two_pair_singular_radical
+            == SAGE_ORDERED_TWO_PAIR_SINGULAR_RADICAL
+            and self.ordered_two_pair_singular_radical[2]
+            and self.ordered_two_pair_singular_points
+            == ORDERED_TWO_PAIR_SINGULAR_POINTS
+            and self.ordered_singular_points_are_double_overlaps
+        )
+
+
+@cache
+def exact_total_source_base_regularity_certificate() -> (
+    TotalSourceBaseRegularityCertificate
+):
+    """Return the metadata replayed by the independent Sage checker."""
+
+    return TotalSourceBaseRegularityCertificate(
+        mixed_singular_qr_saturation=SAGE_TOTAL_MIXED_SINGULAR_QR_SATURATION,
+        ordered_two_pair_singular_radical=SAGE_ORDERED_TWO_PAIR_SINGULAR_RADICAL,
+        ordered_two_pair_singular_points=ORDERED_TWO_PAIR_SINGULAR_POINTS,
+    )
+
+
 @cache
 def exact_total_mixed_base_certificate() -> TotalMixedBaseCertificate:
     """Build the exact primitive-linear total-base certificate."""
@@ -265,6 +370,132 @@ def exact_total_mixed_base_certificate() -> TotalMixedBaseCertificate:
 
 
 @dataclass(frozen=True, slots=True)
+class MixedOrdinaryRowComparisonCertificate:
+    """Exact comparison with the historical mixed incidence rows.
+
+    The total contact rows are regular in the pair product.  On the ordinary
+    chart, solving the total base equation for that product recovers the old
+    collision-polynomial rows up to the displayed diagonal unit.  The two
+    triple rows are independently regenerated from the cubic Q remainder.
+    """
+
+    row_residuals: tuple[Expr, Expr, Expr, Expr]
+    transformation_diagonal: tuple[Expr, Expr, Expr, Expr]
+    transformation_determinant: Expr
+    ordinary_chart_unit_factors: tuple[Expr, Expr, Expr, Expr, Expr]
+
+    @property
+    def transformation_is_unit_on_ordinary_chart(self) -> bool:
+        """Whether the determinant is a Laurent monomial in inverted factors."""
+
+        contact_denominator = 2 * CONTACT_SUM + KAPPA_PARAMETERIZATION
+        contact_quadratic = CONTACT_SUM**2 + KAPPA_PARAMETERIZATION * CONTACT_SUM + 1
+        expected = -(contact_denominator**9) / (CONTACT_SUM**4 * contact_quadratic)
+        return bool(cancel(self.transformation_determinant - expected) == 0)
+
+    @property
+    def verified(self) -> bool:
+        """Whether all four full affine rows agree by an invertible transform."""
+
+        expected_factors = (
+            TRIPLE_PAIR_SUM,
+            TRIPLE_PRODUCT,
+            CONTACT_SUM,
+            2 * CONTACT_SUM + KAPPA_PARAMETERIZATION,
+            CONTACT_SUM**2 + KAPPA_PARAMETERIZATION * CONTACT_SUM + 1,
+        )
+        return bool(
+            all(residual == 0 for residual in self.row_residuals)
+            and self.ordinary_chart_unit_factors == expected_factors
+            and self.transformation_is_unit_on_ordinary_chart
+        )
+
+
+@cache
+def exact_mixed_ordinary_row_comparison_certificate() -> (
+    MixedOrdinaryRowComparisonCertificate
+):
+    """Compare total mixed rows with ``COMBINED_EQUATIONS`` exactly."""
+
+    generic_contact_product = cancel(
+        CONTACT_SUM_TOTAL
+        * (CONTACT_SUM_TOTAL**2 + KAPPA * CONTACT_SUM_TOTAL + 1)
+        / (2 * CONTACT_SUM_TOTAL + KAPPA)
+    )
+    generic_contact_rows = tuple(
+        cancel(row.subs(CONTACT_PRODUCT_TOTAL, generic_contact_product))
+        for row in (TOTAL_CONTACT_TARGET_ROW, TOTAL_CONTACT_TANGENT_ROW)
+    )
+    generic_old_contact_rows = (
+        COLLISION_POLYNOMIAL.subs(S, CONTACT_SUM_TOTAL),
+        TANGENCY_POLYNOMIAL.subs(S, CONTACT_SUM_TOTAL),
+    )
+    generic_contact_denominator = 2 * CONTACT_SUM_TOTAL + KAPPA
+    generic_contact_quadratic = CONTACT_SUM_TOTAL**2 + KAPPA * CONTACT_SUM_TOTAL + 1
+    generic_diagonal = (
+        generic_contact_denominator**4 / CONTACT_SUM_TOTAL**2,
+        -(generic_contact_denominator**5)
+        / (CONTACT_SUM_TOTAL**2 * generic_contact_quadratic),
+    )
+    # Proving the contact identities before substituting k=n/(q*r) avoids a
+    # large rational-function normalization and is strictly stronger.
+    generic_contact_residuals = tuple(
+        cancel(old - multiplier * total)
+        for old, multiplier, total in zip(
+            generic_old_contact_rows,
+            generic_diagonal,
+            generic_contact_rows,
+            strict=True,
+        )
+    )
+    contact_denominator = 2 * CONTACT_SUM + KAPPA_PARAMETERIZATION
+    contact_quadratic = CONTACT_SUM**2 + KAPPA_PARAMETERIZATION * CONTACT_SUM + 1
+    diagonal = (
+        contact_denominator**4 / CONTACT_SUM**2,
+        -(contact_denominator**5) / (CONTACT_SUM**2 * contact_quadratic),
+        Rational(1),
+        Rational(1),
+    )
+    residuals = (
+        *generic_contact_residuals,
+        *tuple(
+            cancel(old - total)
+            for old, total in zip(
+                COMBINED_EQUATIONS[2:],
+                TOTAL_TRIPLE_EQUALITY_ROWS,
+                strict=True,
+            )
+        ),
+    )
+    return MixedOrdinaryRowComparisonCertificate(
+        row_residuals=residuals,
+        transformation_diagonal=diagonal,
+        transformation_determinant=cancel(
+            diagonal[0] * diagonal[1] * diagonal[2] * diagonal[3]
+        ),
+        ordinary_chart_unit_factors=(
+            TRIPLE_PAIR_SUM,
+            TRIPLE_PRODUCT,
+            CONTACT_SUM,
+            contact_denominator,
+            contact_quadratic,
+        ),
+    )
+
+
+SAGE_TRANSFORMATION_UNIT_SATURATIONS: Final = {
+    # (saturation exponent, unit ideal) from the independent Sage checker.
+    "t112_k0_v": (10, True),
+    "t112_k0_w": (4, True),
+    "t112_k2_v": (2, True),
+    "t112_k2_w": (4, True),
+    "mixed_k0_w": (4, True),
+    "mixed_k2_v": (2, True),
+    "mixed_k2_w": (5, True),
+}
+
+
+@dataclass(frozen=True, slots=True)
 class SplitComponentEmbeddingCertificate:
     """Exact restriction of one split system from a global incidence chart."""
 
@@ -275,16 +506,22 @@ class SplitComponentEmbeddingCertificate:
     total_base_identity: Expr
     kappa_identity: Expr
     transformation_determinant: Expr
+    valid_base_localizer: Expr
+    sage_transformation_unit_saturation: tuple[int, bool]
     witness_transformation_determinant: Expr
     witness_base_gradient: tuple[Expr, Expr, Expr, Expr]
     clean_witness_verified: bool
 
     @property
-    def transformation_is_generically_invertible(self) -> bool:
-        """Whether the split and global row systems agree on a dense open."""
+    def transformation_is_unit_on_valid_base(self) -> bool:
+        """Whether the determinant has no zero on the valid split chart."""
 
         return bool(
             self.transformation_determinant != 0
+            and self.valid_base_localizer != 0
+            and self.sage_transformation_unit_saturation
+            == SAGE_TRANSFORMATION_UNIT_SATURATIONS[self.name]
+            and self.sage_transformation_unit_saturation[1]
             and self.witness_transformation_determinant != 0
         )
 
@@ -296,7 +533,7 @@ class SplitComponentEmbeddingCertificate:
             all(residual == 0 for residual in self.global_row_residuals)
             and self.total_base_identity == 0
             and self.kappa_identity == 0
-            and self.transformation_is_generically_invertible
+            and self.transformation_is_unit_on_valid_base
             and any(value != 0 for value in self.witness_base_gradient)
             and self.clean_witness_verified
         )
@@ -474,6 +711,10 @@ def exact_split_component_embedding_certificates() -> tuple[
                     transform_determinant,
                     constraint,
                 ),
+                valid_base_localizer=valid_base_localizer(spec),
+                sage_transformation_unit_saturation=(
+                    SAGE_TRANSFORMATION_UNIT_SATURATIONS[spec.name]
+                ),
                 witness_transformation_determinant=expand(
                     transform_determinant.subs(witness_substitution)
                 ),
@@ -489,25 +730,41 @@ class SplitComponentClosureCertificate:
     """Aggregate component-containment and clean-topology conclusion."""
 
     total_mixed_base: TotalMixedBaseCertificate
+    total_base_regularity: TotalSourceBaseRegularityCertificate
+    mixed_ordinary_rows: MixedOrdinaryRowComparisonCertificate
     embeddings: tuple[SplitComponentEmbeddingCertificate, ...]
     t112_global_incidence_excluded: bool
+    mixed_global_incidence_excluded: bool
+    proper_isotopy_extension_recorded: bool
     representative_exceptional_rank_three_base_length: int
     exceptional_rank_three_fiber_topology_open: bool
 
     @property
-    def maximal_rank_split_topology_closed(self) -> bool:
-        """Whether all seven clean maximal-rank split loci are already covered."""
+    def maximal_rank_split_algebraically_contained(self) -> bool:
+        """Whether all seven clean split loci lie in the global incidences."""
 
         t112 = tuple(item for item in self.embeddings if item.profile == "T112+6N")
         mixed = tuple(item for item in self.embeddings if item.profile == "C2+T111+5N")
         return bool(
             self.total_mixed_base.verified
+            and self.total_base_regularity.verified
+            and self.mixed_ordinary_rows.verified
             and len(t112) == 4
             and len(mixed) == 3
             and all(item.verified for item in self.embeddings)
             and all(item.expected_rank == 3 for item in t112)
             and all(item.expected_rank == 4 for item in mixed)
+        )
+
+    @property
+    def maximal_rank_split_topology_closed(self) -> bool:
+        """Add the cyclic samples and proper-isotopy theorem to containment."""
+
+        return bool(
+            self.maximal_rank_split_algebraically_contained
             and self.t112_global_incidence_excluded
+            and self.mixed_global_incidence_excluded
+            and self.proper_isotopy_extension_recorded
         )
 
     @property
@@ -526,10 +783,19 @@ def exact_split_component_closure_certificate() -> SplitComponentClosureCertific
     """Build the exact clean-split component comparison."""
 
     t112 = exact_delta_ten_t112_certificate()
+    mixed = exact_delta_ten_contact_triple_certificate()
     return SplitComponentClosureCertificate(
         total_mixed_base=exact_total_mixed_base_certificate(),
+        total_base_regularity=exact_total_source_base_regularity_certificate(),
+        mixed_ordinary_rows=exact_mixed_ordinary_row_comparison_certificate(),
         embeddings=exact_split_component_embedding_certificates(),
         t112_global_incidence_excluded=t112.conditional_generic_exclusion_supported,
+        mixed_global_incidence_excluded=(
+            mixed.verified and mixed.sage_cyclic_simplification == (1, 0, True)
+        ),
+        # The proper simultaneous-resolution extension is a theorem input,
+        # recorded separately from the exact row algebra below.
+        proper_isotopy_extension_recorded=True,
         # The k=0 contact-W and k=2 contact-V schemes each have length four.
         representative_exceptional_rank_three_base_length=8,
         exceptional_rank_three_fiber_topology_open=True,
@@ -542,7 +808,11 @@ def main() -> int:
     certificate = exact_split_component_closure_certificate()
     print("total mixed base irreducible:", certificate.total_mixed_base.irreducible)
     print(
-        "clean maximal-rank split topology closed:",
+        "clean maximal-rank split algebraically contained:",
+        certificate.maximal_rank_split_algebraically_contained,
+    )
+    print(
+        "proper-isotopy topology closed:",
         certificate.maximal_rank_split_topology_closed,
     )
     print(
