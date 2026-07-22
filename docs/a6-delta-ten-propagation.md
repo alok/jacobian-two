@@ -386,7 +386,7 @@ of the ordinary components, but those overlap points are outside the smooth
 rank-open argument above.  Their complement topology, and the finite
 rank-three affine-line fibers, remain open.
 
-## 8. Reuse for the nonsplit contact-four surface
+## 8. Reuse for the nonsplit codimension-three contact surfaces
 
 The same argument applies to the first codimension-three profile on the
 determinant-nonzero `C4+6N` Cramer surface.  Its incidence is a principal open
@@ -405,6 +405,22 @@ etale cover, all four centers are algebraic sections with nonzero defining
 jets.  Proper Thom isotopy therefore transports the cyclic complement over
 the clean Cramer open exactly as in Sections 3--5.
 
-The full calculation and its omitted split, denominator, cusp-pair,
-diagonal, and residual boundaries are recorded in
+The `C2+C3+5N` compatibility surface uses the same mechanism on its smooth
+rank-four clean open.  Sage derives an irreducible compatibility
+hypersurface over `QQ`; a smooth rational point proves geometric
+irreducibility and shows that the clean open is nonempty.  Exact saturation
+also proves that the hypersurface is smooth on the full declared valid chart.
+After a
+finite-etale cover, the two branches at each contact target and the five
+nodes are disjoint labeled sections.  Two relative blowups resolve the
+contact-two section and three resolve the contact-three section.  Along with
+the fixed node, cusp, and infinity resolutions, these centers give a relative
+SNC divisor in a smooth proper family.  Proper Thom isotopy thus transports
+the cyclic sample throughout this dense clean surface.  Exact saturation
+separately proves that the coefficient-rank-drop curve is wholly
+inconsistent.  Removed pair-chart and non-clean equisingular boundaries lie
+outside the topology argument and remain open.
+
+The full calculations and their omitted split, denominator, cusp-pair,
+diagonal, non-clean, and residual boundaries are recorded in
 [the codimension-three checkpoint](a6-delta-ten-codim-three.md).

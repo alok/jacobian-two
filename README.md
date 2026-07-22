@@ -332,16 +332,24 @@ five finite schemes in the representative ledger are involution-orbit
 representatives, not the literal all-fiber count.  Denominator,
 deeper-intersection, and profile-changing boundaries remain open.
 
-The first of the fourteen expected codimension-three profiles is now attacked
-as well.  For `C4+6N`, the determinant-nonzero nonsplit incidence is one
-rational surface.  Exact Sage saturation shows that its residual determinant
-curve has a finite length-ten compatibility scheme with rank-three
-affine-line fibers, so it hides no second surface.  An exact member has one
-contact-four point, six nodes, cyclic complement, and no `A6` assignment.
-Four relative contact blowups and proper Whitney--Thom transport exclude the
-dense clean Cramer surface.  The split, denominator, cusp-pair, diagonal, and
-residual boundary pieces remain open.  The complete combinatorial ledger
-still contains 145 candidate collision
+Two of the fourteen expected codimension-three profiles are now attacked as
+well.  For `C4+6N`, the determinant-nonzero nonsplit incidence is one rational
+surface.  Exact Sage saturation shows that its residual determinant curve
+has a finite length-ten compatibility scheme with rank-three affine-line
+fibers, so it hides no second surface.  For `C2+C3+5N`, the augmented
+determinant leaves a 409-term compatibility polynomial in `(k,u,v)`; Sage
+derives and factors it over `QQ`, and a smooth rational rank-four point proves
+that its compatibility surface is geometrically irreducible.  Exact
+localized saturation finds a degree-thirty coefficient-rank-drop curve but
+makes the augmented rank-at-most-three ideal the unit ideal, so every point
+of that curve is inconsistent and no hidden coefficient fiber remains.  The
+full-localizer singular saturation is unit as well, so the valid
+compatibility surface is smooth.  Exact
+members of both surfaces have cyclic complement and no `A6` assignment.
+Relative contact blowups and proper Whitney--Thom transport exclude both
+dense clean surfaces.  The split, denominator, cusp-pair, diagonal,
+non-clean equisingular, and deeper boundary pieces remain open.
+The complete combinatorial ledger still contains 145 candidate collision
 profiles, including 55 overdetermined profiles deliberately retained until
 exact saturation proves them empty, invalid, or contained elsewhere.  No
 `A6` cover or Keller map has been constructed, the four hypotheses remain
@@ -746,9 +754,11 @@ optional Sage/GAP replay is an additional independent local cross-check.
   component-closure theorems, and the remaining overlap/exceptional topology
   boundary.
 - [`docs/a6-delta-ten-codim-three.md`](docs/a6-delta-ten-codim-three.md)
-  excludes the dense clean nonsplit `C4+6N` Cramer surface, including an exact
-  residual-rank saturation, contact-four singular scheme, cyclic complement,
-  and four-blowup topology transport, while retaining every omitted boundary.
+  excludes the dense clean nonsplit `C4+6N` Cramer surface and dense clean
+  rank-four `C2+C3+5N` compatibility surface.  Exact Sage checkers regenerate
+  both singular schemes and cyclic complements; the `C4` residual is fully
+  rank-bounded; non-clean equisingular and other omitted boundaries remain
+  open.
 - [`docs/one-dicritical-source-smoothness.md`](docs/one-dicritical-source-smoothness.md)
   eliminates the complete contracted constant chain in both surviving
   one-dicritical passports and derives the smooth finite-flat normalization.

@@ -1519,6 +1519,69 @@ transports the cyclic complement across the dense clean surface.  Split,
 pair-denominator, cusp-pair, diagonal, residual, and deeper boundary pieces
 remain open.
 
+## 2026-07-21: the dominant contact-two/contact-three surface is excluded
+
+Status: exact compatibility factorization, localized coefficient/augmented
+rank saturation, a smooth rational rank-four point, manual Sage singular
+scheme and van Kamp presentation, exhaustive finite-group replay, and
+theorem-level topology transport; omitted pair-chart and non-clean
+equisingular boundaries remain open.
+
+For `C2+C3+5N`, impose
+
+```text
+H(u)=H'(u)=H(v)=H'(v)=H''(v)=0.
+```
+
+The `5 x 5` augmented determinant is
+
+```text
+-2*(u-v)^6*(u^2+k*u+1)*(v^2+k*v+1)^3*R(k,u,v).
+```
+
+The independent Sage checker derives `R` directly.  It has 409 terms, total
+degree 18, variable degrees `(13,9,10)`, and one irreducible factor over
+`QQ`.  The point `(k,u,v)=(2/3,1,-1)` lies on `R`, has nonzero gradient and
+coefficient rank four, and avoids the declared split, denominator,
+cusp-pair, diagonal, source-overlap, and same-target factors.  A smooth
+rational point on a `QQ`-irreducible hypersurface rules out a splitting into
+distinct Galois-conjugate geometric components.  Hence the dominant
+compatibility surface is geometrically irreducible.  The all-`4 x 4`-minor
+coefficient rank-drop locus is a genuine curve with projective Hilbert
+polynomial `30*t-51`, but augmented rank at most three saturates to the unit
+ideal.  Thus every point of that degree-thirty curve is inconsistent and no
+hidden affine coefficient fiber remains.  Redundant coefficient and
+augmented rank-at-most-two saturations are unit ideals too.
+
+The raw singular locus of `R` is one-dimensional, but exact
+modular-reconstruction saturation of `(R,R_k,R_u,R_v)` by the full valid
+localizer is the unit ideal with exponent two.  Thus every singular point is
+on a named removed boundary; the valid compatibility surface is smooth.
+
+The unique coefficient solution is
+
+```text
+k=2/3, (a,b,c,d)=(3,1,3,0).
+```
+
+Its collision polynomial is `(s-1)^2*(s+1)^3` times a squarefree residual
+quintic.  The contact pairs `t^2-t+1` and `t^2+t+1` map, after scaling
+`X=3P`, to `(-5,3)` and `(-1,-1)` and have exact local intersection
+multiplicities two and three.  Sage regenerates Jacobian components
+`((5,5),(5,1),(3,1),(4,1))`: five reduced nodes, the contact three, the
+contact two, and the forced cusp.  The delta balance is
+`2+2+3+5+16=28`.
+
+The exact raw four-generator, ten-relation presentation simplifies to `Z`.
+All `40^4` three-cycle assignments leave exactly forty diagonal `C3` images
+and no `A6` image.  The smooth rank-four clean locus is a nonempty open of a
+geometrically irreducible surface.  After finite-etale labeling, two relative
+blowups at the contact two, three at the contact three, and the fixed
+node/cusp/infinity resolutions give a relative SNC projective family.
+Proper Thom isotopy transports the cyclic complement across that dense clean
+surface.  Split, denominator, cusp-pair, diagonal, overlap, same-target,
+non-clean equisingular, and deeper boundaries remain open.
+
 ## 2026-07-21: seven true-split rank strata cannot hide a threefold
 
 Status: exact true-component incidence derivation, typed SymPy replay,
@@ -1622,8 +1685,8 @@ profile intersections remain separate.
    finite compatible orbit representatives (eight actual split rank-drop
    schemes), plus the non-clean denominator charts and deeper
    component intersections from `docs/a6-delta-ten-codim-two.md`; then audit
-   the remaining thirteen codimension-three profiles and omitted `C4`
-   boundaries without using expected dimension as emptiness.
+   the remaining twelve codimension-three profiles and omitted `C4` and
+   `C2+C3` boundaries without using expected dimension as emptiness.
 3. Formalize more of the projective simple-root/fiber correspondence if a
    useful reusable algebraic-geometry interface is available in mathlib.
 4. Extend the exact support analysis beyond two interior coefficients in the

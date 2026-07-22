@@ -587,12 +587,19 @@ mixed boundaries have dimension at most two.  The split ledger generates all
 [codimension-two checkpoint](a6-delta-ten-codim-two.md) for the six distinct
 claim boundaries and reproduction commands.
 
-The first expected codimension-three profile is now underway.  The
+Two expected codimension-three profiles are now underway.  The
 [codimension-three checkpoint](a6-delta-ten-codim-three.md) excludes the dense
-clean nonsplit `C4+6N` Cramer surface.  Its residual determinant has only a
-finite length-ten compatible base with rank-three affine-line fibers, and its
-exact cyclic member propagates across the clean surface after four relative
-contact blowups.  Split and other omitted boundaries remain open.
+clean nonsplit `C4+6N` Cramer surface and the dense clean rank-four
+`C2+C3+5N` compatibility surface.  The `C4` residual determinant has only a
+finite length-ten compatible base with rank-three affine-line fibers.  The
+`C2+C3` augmented determinant leaves one geometrically irreducible 409-term
+compatibility surface, certified by factorization over `QQ` and a smooth
+rational point.  A degree-thirty coefficient-rank-drop curve is entirely
+inconsistent because the localized augmented rank-at-most-three ideal is the
+unit ideal, and the full-localizer singular saturation proves that the valid
+compatibility surface is smooth.  Exact cyclic members propagate across both clean surfaces after
+their relative contact blowups.  Split charts and other omitted boundaries
+remain open.
 
 One useful coefficient-slice check makes the next elimination finite.  For
 fixed `k`, the collision-decic coefficients are affine-linear in
@@ -633,8 +640,8 @@ dependency.  Family-wide propagation separately depends on proper projective
 Whitney--Thom triviality.
 
 The next exact work package is the unresolved boundary of the six
-codimension-two profiles in Section 7, followed by the remaining thirteen
-expected codimension-three profiles and the omitted `C4` charts.  A complete
+codimension-two profiles in Section 7, followed by the remaining twelve
+expected codimension-three profiles and the omitted `C4`/`C2+C3` charts.  A complete
 audit must:
 
 1. determine complement topology for the three exceptional overlap
